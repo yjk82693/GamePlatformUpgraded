@@ -1,0 +1,211 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ─────────────────────────────────────────────
+// Cluster 1 — Identity, structure, RBAC
+// ─────────────────────────────────────────────
+
+enum AccountStatus {
+  ACTIVE
+  SUSPENDED
+  KICKED
+}
+
+enum AppStatus {
+  DRAFT
+  PUBLISHED
+  MAINTENANCE
+}
+
+enum Visibility {
+  PUBLIC
+  FRIENDS
+  PRIVATE
+}
+
+enum RoleLevel {
+  ORG
+  PROJECT
+  SERVICE
+}
+
+enum Action {
+  CREATE
+  READ
+  UPDATE
+  DELETE
+  INVITE
+  GRANT_ROLE
+  REVOKE_ROLE
+  REVOKE_MEMBER
+  SUSPEND_MEMBER
+  UNSUSPEND_MEMBER
+  RESET_PASSWORD
+  REQUEST
+  APPROVE
+  REJECT
+  CANCEL
+  REFUND
+  PUBLISH
+  EXPORT
+  LOGIN
+  LOGOUT
+}
+
+enum Target {
+  ORG
+  PROJECT
+  APP_SERVICE
+  APP
+  PRODUCT
+  MEMBER
+  ROLE
+  SECRET_KEY
+  SETTING
+  PAYMENT_PROJECT
+  MERCHANT
+  PAYMENT_METHOD
+  PAYMENT_SERVICE
+  TRANSACTION
+  SETTLEMENT
+  ANALYTICS
+  UI_GUIDE
+  NOTIFICATION_SETTING
+  CATEGORY
+  WEBSHOP_SCREEN
+  AUTH_IDP
+  AUTH_API
+  WEBSHOP_SETTING
+}
+
+model Account {
+  id           String        @id @default(cuid())
+  email        String        @unique
+  passwordHash String?
+  status       AccountStatus @default(ACTIVE)
+  createdAt    DateTime      @default(now())
+
+  playerProfile PlayerProfile?
+  sessions      Session[]
+  memberships   Member[]
+  accountApps   AccountApp[]
+}
+
+model Org {
+  id       String    @id @default(cuid())
+  name     String
+  projects Project[]
+  apps     App[]
+  members  Member[]
+}
+
+model Project {
+  id       String       @id @default(cuid())
+  orgId    String
+  org      Org          @relation(fields: [orgId], references: [id])
+  services AppService[]
+  members  Member[]
+}
+
+model AppService {
+  id        String   @id @default(cuid())
+  projectId String
+  project   Project  @relation(fields: [projectId], references: [id])
+  members   Member[]
+}
+
+model App {
+  id          String       @id @default(cuid())
+  name        String
+  status      AppStatus    @default(DRAFT)
+  releaseDate DateTime?
+  ownerOrgId  String
+  ownerOrg    Org          @relation(fields: [ownerOrgId], references: [id])
+  accountApps AccountApp[]
+}
+
+model AccountApp {
+  accountId String
+  appId     String
+  account   Account @relation(fields: [accountId], references: [id])
+  app       App     @relation(fields: [appId], references: [id])
+
+  @@id([accountId, appId])
+}
+
+model Session {
+  id        String   @id @default(cuid())
+  accountId String
+  account   Account  @relation(fields: [accountId], references: [id])
+  token     String   @unique
+  issuedAt  DateTime @default(now())
+  expiresAt DateTime
+}
+
+model PlayerProfile {
+  accountId         String        @id
+  account           Account       @relation(fields: [accountId], references: [id])
+  displayName       String
+  avatarRef         String?
+  visibility        Visibility    @default(PUBLIC)
+  friendCode        String        @unique
+  selectedPersonaId String?
+  status            AccountStatus @default(ACTIVE)
+}
+
+model Member {
+  id           String       @id @default(cuid())
+  accountId    String
+  account      Account      @relation(fields: [accountId], references: [id])
+  orgId        String?
+  org          Org?         @relation(fields: [orgId], references: [id])
+  projectId    String?
+  project      Project?     @relation(fields: [projectId], references: [id])
+  appServiceId String?
+  appService   AppService?  @relation(fields: [appServiceId], references: [id])
+  roles        MemberRole[]
+}
+
+model Role {
+  id          String       @id @default(cuid())
+  name        String
+  level       RoleLevel
+  permissions Permission[]
+  memberRoles MemberRole[]
+}
+
+model MemberRole {
+  memberId String
+  roleId   String
+  member   Member @relation(fields: [memberId], references: [id])
+  role     Role   @relation(fields: [roleId], references: [id])
+
+  @@id([memberId, roleId])
+}
+
+model Permission {
+  id         String @id @default(cuid())
+  roleId     String
+  role       Role   @relation(fields: [roleId], references: [id])
+  action     Action
+  targetType Target
+}
+
+model SecretKey {
+  id        String   @id @default(cuid())
+  appId     String
+  keyHash   String
+  createdAt DateTime @default(now())
+}
+
+model Setting {
+  id    String @id @default(cuid())
+  scope String
+  key   String
+  value String
+}
