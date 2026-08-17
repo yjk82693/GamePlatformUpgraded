@@ -1,3 +1,6 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
 generator client {
   provider = "prisma-client-js"
 }
@@ -7,7 +10,7 @@ datasource db {
 }
 
 // ─────────────────────────────────────────────
-// Cluster 1 — Identity, structure, RBAC
+// Enums
 // ─────────────────────────────────────────────
 
 enum AccountStatus {
@@ -83,6 +86,64 @@ enum Target {
   WEBSHOP_SETTING
 }
 
+enum TxnState {
+  PAID
+  REFUND_PENDING
+  REFUNDED
+}
+
+enum FriendStatus {
+  PENDING
+  ACCEPTED
+}
+
+enum BoardScope {
+  GLOBAL
+  FRIENDS
+}
+
+enum GameType {
+  SOLO
+  MULTI
+}
+
+enum WidgetMode {
+  DEFAULT
+  EXPLORE
+}
+
+enum ChatKind {
+  PLAYER_DIRECT
+  STAFF_DIRECT
+  GROUP
+  SUPPORT
+}
+
+enum TicketStatus {
+  OPEN
+  SOLVED
+}
+
+enum TaskPriority {
+  LOW
+  MEDIUM
+  HIGH
+}
+
+enum CalScope {
+  COMPANY
+  PERSONAL
+}
+
+enum RollbackStatus {
+  PENDING
+  APPROVED
+}
+
+// ─────────────────────────────────────────────
+// Cluster 1 — Identity, structure, RBAC
+// ─────────────────────────────────────────────
+
 model Account {
   id           String        @id @default(cuid())
   email        String        @unique
@@ -94,6 +155,38 @@ model Account {
   sessions      Session[]
   memberships   Member[]
   accountApps   AccountApp[]
+
+  // Cluster 2
+  wallet             Wallet?
+  coinLedger         CoinLedger[]
+  transactions       Transaction[]
+  reviews            Review[]
+  demoParticipations DemoParticipation[]
+  redeemGrants       RedeemGrant[]
+  entitlements       Entitlement[]
+
+  // Cluster 3
+  friendshipsSent     Friendship[] @relation("FriendshipRequester")
+  friendshipsReceived Friendship[] @relation("FriendshipAddressee")
+  scores              Score[]
+  achievementUnlocks  AchievementUnlock[]
+  gameStatuses        GameStatus[]
+
+  // Cluster 4
+  notificationSettings NotificationSetting[]
+  reminders            Reminder[]
+  consents             Consent[]
+  auditLogs            AuditLog[]
+
+  // Cluster 5
+  chatParticipations ChatParticipant[]
+  sentMessages       ChatMessage[]
+  assignedTickets    TicketMeta[]
+  calendarEvents     CalendarEvent[]
+  tasks              Task[]
+  documentVersions   DocumentVersion[]
+  documentShares     DocumentShare[]
+  rollbackRequests   RollbackRequest[]
 }
 
 model Org {
@@ -127,6 +220,17 @@ model App {
   ownerOrgId  String
   ownerOrg    Org          @relation(fields: [ownerOrgId], references: [id])
   accountApps AccountApp[]
+
+  // Cluster 2
+  builds Build[]
+
+  // Cluster 3
+  leaderboards Leaderboard[]
+  gameStatuses GameStatus[]
+
+  // Cluster 4
+  notices    Notice[]
+  liveEvents LiveEvent[]
 }
 
 model AccountApp {
@@ -208,4 +312,452 @@ model Setting {
   scope String
   key   String
   value String
+}
+
+// ─────────────────────────────────────────────
+// Cluster 2 — Commerce & wallet
+// ─────────────────────────────────────────────
+
+model Wallet {
+  accountId String  @id
+  account   Account @relation(fields: [accountId], references: [id])
+  cashCents BigInt  @default(0)
+  coinUnits BigInt  @default(0)
+}
+
+model CoinLedger {
+  id        String   @id @default(cuid())
+  accountId String
+  account   Account  @relation(fields: [accountId], references: [id])
+  delta     BigInt
+  reason    String
+  createdAt DateTime @default(now())
+}
+
+model Category {
+  id       String    @id @default(cuid())
+  name     String
+  products Product[]
+}
+
+model Product {
+  id           String        @id @default(cuid())
+  name         String
+  enabled      Boolean       @default(false)
+  priceCents   Int?
+  priceCoins   Int?
+  categoryId   String?
+  category     Category?     @relation(fields: [categoryId], references: [id])
+  items        Item[]
+  transactions Transaction[]
+  entitlements Entitlement[]
+  reviews      Review[]
+}
+
+model Item {
+  id        String  @id @default(cuid())
+  productId String
+  product   Product @relation(fields: [productId], references: [id])
+  name      String
+  enabled   Boolean @default(true)
+}
+
+model Transaction {
+  id         String   @id @default(cuid())
+  accountId  String
+  account    Account  @relation(fields: [accountId], references: [id])
+  productId  String
+  product    Product  @relation(fields: [productId], references: [id])
+  receiptId  String   @unique
+  state      TxnState @default(PAID)
+  occurredAt DateTime @default(now())
+}
+
+model Merchant {
+  id             String          @id @default(cuid())
+  name           String
+  config         Json?
+  paymentMethods PaymentMethod[]
+}
+
+model PaymentMethod {
+  id         String   @id @default(cuid())
+  merchantId String
+  merchant   Merchant @relation(fields: [merchantId], references: [id])
+  type       String
+}
+
+model PaymentService {
+  id     String @id @default(cuid())
+  name   String
+  config Json?
+}
+
+model Settlement {
+  id        String   @id @default(cuid())
+  period    String
+  payload   Json?
+  createdAt DateTime @default(now())
+}
+
+model Payout {
+  id        String   @id @default(cuid())
+  period    String
+  amount    BigInt
+  createdAt DateTime @default(now())
+}
+
+model Review {
+  id        String  @id @default(cuid())
+  accountId String
+  account   Account @relation(fields: [accountId], references: [id])
+  productId String
+  product   Product @relation(fields: [productId], references: [id])
+  rating    Int
+  body      String?
+}
+
+model Demo {
+  id              String              @id @default(cuid())
+  surveyQuestions Json
+  participations  DemoParticipation[]
+}
+
+model DemoParticipation {
+  demoId    String
+  accountId String
+  demo      Demo    @relation(fields: [demoId], references: [id])
+  account   Account @relation(fields: [accountId], references: [id])
+  answers   Json
+
+  @@id([demoId, accountId])
+}
+
+model RedeemCode {
+  id       String        @id @default(cuid())
+  code     String        @unique
+  reward   Json
+  usesLeft Int
+  expiry   DateTime?
+  grants   RedeemGrant[]
+}
+
+model RedeemGrant {
+  codeId    String
+  accountId String
+  code      RedeemCode @relation(fields: [codeId], references: [id])
+  account   Account    @relation(fields: [accountId], references: [id])
+
+  @@id([codeId, accountId])
+}
+
+model Build {
+  id        String  @id @default(cuid())
+  appId     String
+  app       App     @relation(fields: [appId], references: [id])
+  version   String
+  checksum  String
+  published Boolean @default(false)
+}
+
+model Entitlement {
+  accountId String
+  productId String
+  account   Account @relation(fields: [accountId], references: [id])
+  product   Product @relation(fields: [productId], references: [id])
+
+  @@id([accountId, productId])
+}
+
+// ─────────────────────────────────────────────
+// Cluster 3 — Game profile, social, ranking
+// ─────────────────────────────────────────────
+
+model Friendship {
+  id          String       @id @default(cuid())
+  requesterId String
+  addresseeId String
+  requester   Account      @relation("FriendshipRequester", fields: [requesterId], references: [id])
+  addressee   Account      @relation("FriendshipAddressee", fields: [addresseeId], references: [id])
+  status      FriendStatus @default(PENDING)
+
+  @@unique([requesterId, addresseeId])
+}
+
+model Leaderboard {
+  id     String  @id @default(cuid())
+  appId  String
+  app    App     @relation(fields: [appId], references: [id])
+  name   String
+  season Int     @default(1)
+  closed Boolean @default(false)
+  scores Score[]
+}
+
+model Score {
+  id          String      @id @default(cuid())
+  boardId     String
+  board       Leaderboard @relation(fields: [boardId], references: [id])
+  accountId   String
+  account     Account     @relation(fields: [accountId], references: [id])
+  value       Int
+  submittedAt DateTime    @default(now())
+
+  @@unique([boardId, accountId])
+}
+
+model AchievementGroup {
+  id           String        @id @default(cuid())
+  name         String
+  achievements Achievement[]
+}
+
+model Achievement {
+  id      String              @id @default(cuid())
+  groupId String
+  group   AchievementGroup    @relation(fields: [groupId], references: [id])
+  name    String
+  unlocks AchievementUnlock[]
+}
+
+model AchievementUnlock {
+  achievementId String
+  accountId     String
+  achievement   Achievement @relation(fields: [achievementId], references: [id])
+  account       Account     @relation(fields: [accountId], references: [id])
+  unlockedAt    DateTime    @default(now())
+
+  @@id([achievementId, accountId])
+}
+
+model GameStatus {
+  accountId String
+  appId     String
+  account   Account  @relation(fields: [accountId], references: [id])
+  app       App      @relation(fields: [appId], references: [id])
+  gameType  GameType
+  data      Json
+
+  @@id([accountId, appId])
+}
+
+// ─────────────────────────────────────────────
+// Cluster 4 — Console-domain, engagement, support, legal
+// ─────────────────────────────────────────────
+
+model Analytics {
+  id      String   @id @default(cuid())
+  name    String
+  metrics Metric[]
+}
+
+model Metric {
+  id          String    @id @default(cuid())
+  analyticsId String
+  analytics   Analytics @relation(fields: [analyticsId], references: [id])
+  key         String
+  value       Json
+}
+
+model Dashboard {
+  id         String   @id @default(cuid())
+  ownerScope String
+  widgets    Widget[]
+}
+
+model Widget {
+  id          String     @id @default(cuid())
+  dashboardId String
+  dashboard   Dashboard  @relation(fields: [dashboardId], references: [id])
+  mode        WidgetMode @default(DEFAULT)
+  type        String
+  xAxis       String
+  yAxis       String
+  query       Json
+  position    Int
+}
+
+model NotificationSetting {
+  id        String  @id @default(cuid())
+  accountId String
+  account   Account @relation(fields: [accountId], references: [id])
+  channel   String
+  enabled   Boolean @default(true)
+}
+
+model Notice {
+  id        String    @id @default(cuid())
+  appId     String
+  app       App       @relation(fields: [appId], references: [id])
+  content   String
+  audience  String
+  schedule  DateTime?
+  createdAt DateTime  @default(now())
+}
+
+model Announcement {
+  id        String   @id @default(cuid())
+  title     String
+  body      String
+  createdAt DateTime @default(now())
+}
+
+model LiveEvent {
+  id       String   @id @default(cuid())
+  appId    String
+  app      App      @relation(fields: [appId], references: [id])
+  config   Json
+  startsAt DateTime
+  endsAt   DateTime
+}
+
+model Reminder {
+  id        String   @id @default(cuid())
+  accountId String
+  account   Account  @relation(fields: [accountId], references: [id])
+  source    String
+  dueAt     DateTime
+}
+
+model Terms {
+  id            String    @id @default(cuid())
+  version       String    @unique
+  content       String
+  effectiveDate DateTime
+  active        Boolean   @default(false)
+  consents      Consent[]
+}
+
+model Consent {
+  accountId   String
+  termsId     String
+  account     Account  @relation(fields: [accountId], references: [id])
+  terms       Terms    @relation(fields: [termsId], references: [id])
+  consentedAt DateTime @default(now())
+
+  @@id([accountId, termsId])
+}
+
+model AuditLog {
+  id         String   @id @default(cuid())
+  actorId    String
+  actor      Account  @relation(fields: [actorId], references: [id])
+  action     Action
+  targetType Target
+  targetId   String
+  payload    Json?
+  occurredAt DateTime @default(now())
+  success    Boolean
+}
+
+model DeadLetter {
+  id       String   @id @default(cuid())
+  original Json
+  reason   String
+  failedAt DateTime @default(now())
+}
+
+// ─────────────────────────────────────────────
+// Cluster 5 — Chat spine & co-op
+// ─────────────────────────────────────────────
+
+model ChatThread {
+  id           String            @id @default(cuid())
+  kind         ChatKind
+  scope        String?
+  participants ChatParticipant[]
+  messages     ChatMessage[]
+  ticketMeta   TicketMeta?
+}
+
+model ChatParticipant {
+  threadId  String
+  accountId String
+  thread    ChatThread @relation(fields: [threadId], references: [id])
+  account   Account    @relation(fields: [accountId], references: [id])
+
+  @@id([threadId, accountId])
+}
+
+model ChatMessage {
+  id        String     @id @default(cuid())
+  threadId  String
+  thread    ChatThread @relation(fields: [threadId], references: [id])
+  senderId  String
+  sender    Account    @relation(fields: [senderId], references: [id])
+  body      String
+  createdAt DateTime   @default(now())
+}
+
+model TicketMeta {
+  threadId   String       @id
+  thread     ChatThread   @relation(fields: [threadId], references: [id])
+  status     TicketStatus @default(OPEN)
+  assigneeId String?
+  assignee   Account?     @relation(fields: [assigneeId], references: [id])
+}
+
+model CalendarEvent {
+  id      String   @id @default(cuid())
+  scope   CalScope
+  title   String
+  start   DateTime
+  end     DateTime
+  ownerId String
+  owner   Account  @relation(fields: [ownerId], references: [id])
+  tasks   Task[]
+}
+
+model Task {
+  id              String         @id @default(cuid())
+  scope           String
+  title           String
+  assigneeId      String?
+  assignee        Account?       @relation(fields: [assigneeId], references: [id])
+  priority        TaskPriority   @default(MEDIUM)
+  dueDate         DateTime?
+  calendarEventId String?
+  calendarEvent   CalendarEvent? @relation(fields: [calendarEventId], references: [id])
+}
+
+model Document {
+  id             String            @id @default(cuid())
+  workspaceId    String
+  path           String
+  currentVersion Int               @default(1)
+  versions       DocumentVersion[]
+  shares         DocumentShare[]
+  rollbacks      RollbackRequest[]
+}
+
+model DocumentVersion {
+  documentId String
+  version    Int
+  document   Document @relation(fields: [documentId], references: [id])
+  blobRef    String
+  authorId   String
+  author     Account  @relation(fields: [authorId], references: [id])
+  createdAt  DateTime @default(now())
+
+  @@id([documentId, version])
+}
+
+model DocumentShare {
+  docId    String
+  memberId String
+  doc      Document @relation(fields: [docId], references: [id])
+  member   Account  @relation(fields: [memberId], references: [id])
+  access   String
+
+  @@id([docId, memberId])
+}
+
+model RollbackRequest {
+  id            String         @id @default(cuid())
+  docId         String
+  doc           Document       @relation(fields: [docId], references: [id])
+  targetVersion Int
+  byId          String
+  by            Account        @relation(fields: [byId], references: [id])
+  status        RollbackStatus @default(PENDING)
 }
