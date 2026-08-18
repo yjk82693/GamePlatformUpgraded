@@ -3,6 +3,7 @@
 
 generator client {
   provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
 }
 
 datasource db {
@@ -166,8 +167,8 @@ model Account {
   entitlements       Entitlement[]
 
   // Cluster 3
-  friendshipsSent     Friendship[] @relation("FriendshipRequester")
-  friendshipsReceived Friendship[] @relation("FriendshipAddressee")
+  friendshipsSent     Friendship[]        @relation("FriendshipRequester")
+  friendshipsReceived Friendship[]        @relation("FriendshipAddressee")
   scores              Score[]
   achievementUnlocks  AchievementUnlock[]
   gameStatuses        GameStatus[]
