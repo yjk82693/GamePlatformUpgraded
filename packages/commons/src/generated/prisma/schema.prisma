@@ -188,6 +188,11 @@ model Account {
   documentVersions   DocumentVersion[]
   documentShares     DocumentShare[]
   rollbackRequests   RollbackRequest[]
+
+  authProvider       AuthProvider @default(MANUAL)
+  externalId         String?      @unique
+  resetCode          String?
+  resetCodeExpiresAt DateTime?
 }
 
 model Org {
@@ -761,4 +766,10 @@ model RollbackRequest {
   byId          String
   by            Account        @relation(fields: [byId], references: [id])
   status        RollbackStatus @default(PENDING)
+}
+
+enum AuthProvider {
+  MANUAL
+  GOOGLE
+  APPLE
 }

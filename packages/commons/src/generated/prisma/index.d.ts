@@ -502,6 +502,15 @@ export const RollbackStatus: {
 
 export type RollbackStatus = (typeof RollbackStatus)[keyof typeof RollbackStatus]
 
+
+export const AuthProvider: {
+  MANUAL: 'MANUAL',
+  GOOGLE: 'GOOGLE',
+  APPLE: 'APPLE'
+};
+
+export type AuthProvider = (typeof AuthProvider)[keyof typeof AuthProvider]
+
 }
 
 export type AccountStatus = $Enums.AccountStatus
@@ -567,6 +576,10 @@ export const CalScope: typeof $Enums.CalScope
 export type RollbackStatus = $Enums.RollbackStatus
 
 export const RollbackStatus: typeof $Enums.RollbackStatus
+
+export type AuthProvider = $Enums.AuthProvider
+
+export const AuthProvider: typeof $Enums.AuthProvider
 
 /**
  * ##  Prisma Client ʲˢ
@@ -7715,6 +7728,10 @@ export namespace Prisma {
     passwordHash: string | null
     status: $Enums.AccountStatus | null
     createdAt: Date | null
+    authProvider: $Enums.AuthProvider | null
+    externalId: string | null
+    resetCode: string | null
+    resetCodeExpiresAt: Date | null
   }
 
   export type AccountMaxAggregateOutputType = {
@@ -7723,6 +7740,10 @@ export namespace Prisma {
     passwordHash: string | null
     status: $Enums.AccountStatus | null
     createdAt: Date | null
+    authProvider: $Enums.AuthProvider | null
+    externalId: string | null
+    resetCode: string | null
+    resetCodeExpiresAt: Date | null
   }
 
   export type AccountCountAggregateOutputType = {
@@ -7731,6 +7752,10 @@ export namespace Prisma {
     passwordHash: number
     status: number
     createdAt: number
+    authProvider: number
+    externalId: number
+    resetCode: number
+    resetCodeExpiresAt: number
     _all: number
   }
 
@@ -7741,6 +7766,10 @@ export namespace Prisma {
     passwordHash?: true
     status?: true
     createdAt?: true
+    authProvider?: true
+    externalId?: true
+    resetCode?: true
+    resetCodeExpiresAt?: true
   }
 
   export type AccountMaxAggregateInputType = {
@@ -7749,6 +7778,10 @@ export namespace Prisma {
     passwordHash?: true
     status?: true
     createdAt?: true
+    authProvider?: true
+    externalId?: true
+    resetCode?: true
+    resetCodeExpiresAt?: true
   }
 
   export type AccountCountAggregateInputType = {
@@ -7757,6 +7790,10 @@ export namespace Prisma {
     passwordHash?: true
     status?: true
     createdAt?: true
+    authProvider?: true
+    externalId?: true
+    resetCode?: true
+    resetCodeExpiresAt?: true
     _all?: true
   }
 
@@ -7838,6 +7875,10 @@ export namespace Prisma {
     passwordHash: string | null
     status: $Enums.AccountStatus
     createdAt: Date
+    authProvider: $Enums.AuthProvider
+    externalId: string | null
+    resetCode: string | null
+    resetCodeExpiresAt: Date | null
     _count: AccountCountAggregateOutputType | null
     _min: AccountMinAggregateOutputType | null
     _max: AccountMaxAggregateOutputType | null
@@ -7863,6 +7904,10 @@ export namespace Prisma {
     passwordHash?: boolean
     status?: boolean
     createdAt?: boolean
+    authProvider?: boolean
+    externalId?: boolean
+    resetCode?: boolean
+    resetCodeExpiresAt?: boolean
     playerProfile?: boolean | Account$playerProfileArgs<ExtArgs>
     sessions?: boolean | Account$sessionsArgs<ExtArgs>
     memberships?: boolean | Account$membershipsArgs<ExtArgs>
@@ -7900,6 +7945,10 @@ export namespace Prisma {
     passwordHash?: boolean
     status?: boolean
     createdAt?: boolean
+    authProvider?: boolean
+    externalId?: boolean
+    resetCode?: boolean
+    resetCodeExpiresAt?: boolean
   }, ExtArgs["result"]["account"]>
 
   export type AccountSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -7908,6 +7957,10 @@ export namespace Prisma {
     passwordHash?: boolean
     status?: boolean
     createdAt?: boolean
+    authProvider?: boolean
+    externalId?: boolean
+    resetCode?: boolean
+    resetCodeExpiresAt?: boolean
   }, ExtArgs["result"]["account"]>
 
   export type AccountSelectScalar = {
@@ -7916,9 +7969,13 @@ export namespace Prisma {
     passwordHash?: boolean
     status?: boolean
     createdAt?: boolean
+    authProvider?: boolean
+    externalId?: boolean
+    resetCode?: boolean
+    resetCodeExpiresAt?: boolean
   }
 
-  export type AccountOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "passwordHash" | "status" | "createdAt", ExtArgs["result"]["account"]>
+  export type AccountOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "passwordHash" | "status" | "createdAt" | "authProvider" | "externalId" | "resetCode" | "resetCodeExpiresAt", ExtArgs["result"]["account"]>
   export type AccountInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     playerProfile?: boolean | Account$playerProfileArgs<ExtArgs>
     sessions?: boolean | Account$sessionsArgs<ExtArgs>
@@ -7991,6 +8048,10 @@ export namespace Prisma {
       passwordHash: string | null
       status: $Enums.AccountStatus
       createdAt: Date
+      authProvider: $Enums.AuthProvider
+      externalId: string | null
+      resetCode: string | null
+      resetCodeExpiresAt: Date | null
     }, ExtArgs["result"]["account"]>
     composites: {}
   }
@@ -8447,6 +8508,10 @@ export namespace Prisma {
     readonly passwordHash: FieldRef<"Account", 'String'>
     readonly status: FieldRef<"Account", 'AccountStatus'>
     readonly createdAt: FieldRef<"Account", 'DateTime'>
+    readonly authProvider: FieldRef<"Account", 'AuthProvider'>
+    readonly externalId: FieldRef<"Account", 'String'>
+    readonly resetCode: FieldRef<"Account", 'String'>
+    readonly resetCodeExpiresAt: FieldRef<"Account", 'DateTime'>
   }
     
 
@@ -74626,7 +74691,11 @@ export namespace Prisma {
     email: 'email',
     passwordHash: 'passwordHash',
     status: 'status',
-    createdAt: 'createdAt'
+    createdAt: 'createdAt',
+    authProvider: 'authProvider',
+    externalId: 'externalId',
+    resetCode: 'resetCode',
+    resetCodeExpiresAt: 'resetCodeExpiresAt'
   };
 
   export type AccountScalarFieldEnum = (typeof AccountScalarFieldEnum)[keyof typeof AccountScalarFieldEnum]
@@ -75336,6 +75405,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'AuthProvider'
+   */
+  export type EnumAuthProviderFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AuthProvider'>
+    
+
+
+  /**
+   * Reference to a field of type 'AuthProvider[]'
+   */
+  export type ListEnumAuthProviderFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AuthProvider[]'>
+    
+
+
+  /**
    * Reference to a field of type 'AppStatus'
    */
   export type EnumAppStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AppStatus'>
@@ -75606,6 +75689,10 @@ export namespace Prisma {
     passwordHash?: StringNullableFilter<"Account"> | string | null
     status?: EnumAccountStatusFilter<"Account"> | $Enums.AccountStatus
     createdAt?: DateTimeFilter<"Account"> | Date | string
+    authProvider?: EnumAuthProviderFilter<"Account"> | $Enums.AuthProvider
+    externalId?: StringNullableFilter<"Account"> | string | null
+    resetCode?: StringNullableFilter<"Account"> | string | null
+    resetCodeExpiresAt?: DateTimeNullableFilter<"Account"> | Date | string | null
     playerProfile?: XOR<PlayerProfileNullableScalarRelationFilter, PlayerProfileWhereInput> | null
     sessions?: SessionListRelationFilter
     memberships?: MemberListRelationFilter
@@ -75642,6 +75729,10 @@ export namespace Prisma {
     passwordHash?: SortOrderInput | SortOrder
     status?: SortOrder
     createdAt?: SortOrder
+    authProvider?: SortOrder
+    externalId?: SortOrderInput | SortOrder
+    resetCode?: SortOrderInput | SortOrder
+    resetCodeExpiresAt?: SortOrderInput | SortOrder
     playerProfile?: PlayerProfileOrderByWithRelationInput
     sessions?: SessionOrderByRelationAggregateInput
     memberships?: MemberOrderByRelationAggregateInput
@@ -75675,12 +75766,16 @@ export namespace Prisma {
   export type AccountWhereUniqueInput = Prisma.AtLeast<{
     id?: string
     email?: string
+    externalId?: string
     AND?: AccountWhereInput | AccountWhereInput[]
     OR?: AccountWhereInput[]
     NOT?: AccountWhereInput | AccountWhereInput[]
     passwordHash?: StringNullableFilter<"Account"> | string | null
     status?: EnumAccountStatusFilter<"Account"> | $Enums.AccountStatus
     createdAt?: DateTimeFilter<"Account"> | Date | string
+    authProvider?: EnumAuthProviderFilter<"Account"> | $Enums.AuthProvider
+    resetCode?: StringNullableFilter<"Account"> | string | null
+    resetCodeExpiresAt?: DateTimeNullableFilter<"Account"> | Date | string | null
     playerProfile?: XOR<PlayerProfileNullableScalarRelationFilter, PlayerProfileWhereInput> | null
     sessions?: SessionListRelationFilter
     memberships?: MemberListRelationFilter
@@ -75709,7 +75804,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionListRelationFilter
     documentShares?: DocumentShareListRelationFilter
     rollbackRequests?: RollbackRequestListRelationFilter
-  }, "id" | "email">
+  }, "id" | "email" | "externalId">
 
   export type AccountOrderByWithAggregationInput = {
     id?: SortOrder
@@ -75717,6 +75812,10 @@ export namespace Prisma {
     passwordHash?: SortOrderInput | SortOrder
     status?: SortOrder
     createdAt?: SortOrder
+    authProvider?: SortOrder
+    externalId?: SortOrderInput | SortOrder
+    resetCode?: SortOrderInput | SortOrder
+    resetCodeExpiresAt?: SortOrderInput | SortOrder
     _count?: AccountCountOrderByAggregateInput
     _max?: AccountMaxOrderByAggregateInput
     _min?: AccountMinOrderByAggregateInput
@@ -75731,6 +75830,10 @@ export namespace Prisma {
     passwordHash?: StringNullableWithAggregatesFilter<"Account"> | string | null
     status?: EnumAccountStatusWithAggregatesFilter<"Account"> | $Enums.AccountStatus
     createdAt?: DateTimeWithAggregatesFilter<"Account"> | Date | string
+    authProvider?: EnumAuthProviderWithAggregatesFilter<"Account"> | $Enums.AuthProvider
+    externalId?: StringNullableWithAggregatesFilter<"Account"> | string | null
+    resetCode?: StringNullableWithAggregatesFilter<"Account"> | string | null
+    resetCodeExpiresAt?: DateTimeNullableWithAggregatesFilter<"Account"> | Date | string | null
   }
 
   export type OrgWhereInput = {
@@ -78933,6 +79036,10 @@ export namespace Prisma {
     passwordHash?: string | null
     status?: $Enums.AccountStatus
     createdAt?: Date | string
+    authProvider?: $Enums.AuthProvider
+    externalId?: string | null
+    resetCode?: string | null
+    resetCodeExpiresAt?: Date | string | null
     playerProfile?: PlayerProfileCreateNestedOneWithoutAccountInput
     sessions?: SessionCreateNestedManyWithoutAccountInput
     memberships?: MemberCreateNestedManyWithoutAccountInput
@@ -78969,6 +79076,10 @@ export namespace Prisma {
     passwordHash?: string | null
     status?: $Enums.AccountStatus
     createdAt?: Date | string
+    authProvider?: $Enums.AuthProvider
+    externalId?: string | null
+    resetCode?: string | null
+    resetCodeExpiresAt?: Date | string | null
     playerProfile?: PlayerProfileUncheckedCreateNestedOneWithoutAccountInput
     sessions?: SessionUncheckedCreateNestedManyWithoutAccountInput
     memberships?: MemberUncheckedCreateNestedManyWithoutAccountInput
@@ -79005,6 +79116,10 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    authProvider?: EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
+    externalId?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCode?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCodeExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     playerProfile?: PlayerProfileUpdateOneWithoutAccountNestedInput
     sessions?: SessionUpdateManyWithoutAccountNestedInput
     memberships?: MemberUpdateManyWithoutAccountNestedInput
@@ -79041,6 +79156,10 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    authProvider?: EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
+    externalId?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCode?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCodeExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     playerProfile?: PlayerProfileUncheckedUpdateOneWithoutAccountNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutAccountNestedInput
     memberships?: MemberUncheckedUpdateManyWithoutAccountNestedInput
@@ -79077,6 +79196,10 @@ export namespace Prisma {
     passwordHash?: string | null
     status?: $Enums.AccountStatus
     createdAt?: Date | string
+    authProvider?: $Enums.AuthProvider
+    externalId?: string | null
+    resetCode?: string | null
+    resetCodeExpiresAt?: Date | string | null
   }
 
   export type AccountUpdateManyMutationInput = {
@@ -79085,6 +79208,10 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    authProvider?: EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
+    externalId?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCode?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCodeExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type AccountUncheckedUpdateManyInput = {
@@ -79093,6 +79220,10 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    authProvider?: EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
+    externalId?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCode?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCodeExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type OrgCreateInput = {
@@ -82203,6 +82334,24 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
+  export type EnumAuthProviderFilter<$PrismaModel = never> = {
+    equals?: $Enums.AuthProvider | EnumAuthProviderFieldRefInput<$PrismaModel>
+    in?: $Enums.AuthProvider[] | ListEnumAuthProviderFieldRefInput<$PrismaModel>
+    notIn?: $Enums.AuthProvider[] | ListEnumAuthProviderFieldRefInput<$PrismaModel>
+    not?: NestedEnumAuthProviderFilter<$PrismaModel> | $Enums.AuthProvider
+  }
+
+  export type DateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
   export type PlayerProfileNullableScalarRelationFilter = {
     is?: PlayerProfileWhereInput | null
     isNot?: PlayerProfileWhereInput | null
@@ -82474,6 +82623,10 @@ export namespace Prisma {
     passwordHash?: SortOrder
     status?: SortOrder
     createdAt?: SortOrder
+    authProvider?: SortOrder
+    externalId?: SortOrder
+    resetCode?: SortOrder
+    resetCodeExpiresAt?: SortOrder
   }
 
   export type AccountMaxOrderByAggregateInput = {
@@ -82482,6 +82635,10 @@ export namespace Prisma {
     passwordHash?: SortOrder
     status?: SortOrder
     createdAt?: SortOrder
+    authProvider?: SortOrder
+    externalId?: SortOrder
+    resetCode?: SortOrder
+    resetCodeExpiresAt?: SortOrder
   }
 
   export type AccountMinOrderByAggregateInput = {
@@ -82490,6 +82647,10 @@ export namespace Prisma {
     passwordHash?: SortOrder
     status?: SortOrder
     createdAt?: SortOrder
+    authProvider?: SortOrder
+    externalId?: SortOrder
+    resetCode?: SortOrder
+    resetCodeExpiresAt?: SortOrder
   }
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
@@ -82550,6 +82711,30 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type EnumAuthProviderWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.AuthProvider | EnumAuthProviderFieldRefInput<$PrismaModel>
+    in?: $Enums.AuthProvider[] | ListEnumAuthProviderFieldRefInput<$PrismaModel>
+    notIn?: $Enums.AuthProvider[] | ListEnumAuthProviderFieldRefInput<$PrismaModel>
+    not?: NestedEnumAuthProviderWithAggregatesFilter<$PrismaModel> | $Enums.AuthProvider
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumAuthProviderFilter<$PrismaModel>
+    _max?: NestedEnumAuthProviderFilter<$PrismaModel>
+  }
+
+  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
   export type ProjectListRelationFilter = {
@@ -82644,17 +82829,6 @@ export namespace Prisma {
     not?: NestedEnumAppStatusFilter<$PrismaModel> | $Enums.AppStatus
   }
 
-  export type DateTimeNullableFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
-  }
-
   export type BuildListRelationFilter = {
     every?: BuildWhereInput
     some?: BuildWhereInput
@@ -82727,20 +82901,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumAppStatusFilter<$PrismaModel>
     _max?: NestedEnumAppStatusFilter<$PrismaModel>
-  }
-
-  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedDateTimeNullableFilter<$PrismaModel>
-    _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
   export type AccountScalarRelationFilter = {
@@ -85102,6 +85262,14 @@ export namespace Prisma {
     set?: Date | string
   }
 
+  export type EnumAuthProviderFieldUpdateOperationsInput = {
+    set?: $Enums.AuthProvider
+  }
+
+  export type NullableDateTimeFieldUpdateOperationsInput = {
+    set?: Date | string | null
+  }
+
   export type PlayerProfileUpdateOneWithoutAccountNestedInput = {
     create?: XOR<PlayerProfileCreateWithoutAccountInput, PlayerProfileUncheckedCreateWithoutAccountInput>
     connectOrCreate?: PlayerProfileCreateOrConnectWithoutAccountInput
@@ -86242,10 +86410,6 @@ export namespace Prisma {
 
   export type EnumAppStatusFieldUpdateOperationsInput = {
     set?: $Enums.AppStatus
-  }
-
-  export type NullableDateTimeFieldUpdateOperationsInput = {
-    set?: Date | string | null
   }
 
   export type OrgUpdateOneRequiredWithoutAppsNestedInput = {
@@ -88416,6 +88580,24 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
+  export type NestedEnumAuthProviderFilter<$PrismaModel = never> = {
+    equals?: $Enums.AuthProvider | EnumAuthProviderFieldRefInput<$PrismaModel>
+    in?: $Enums.AuthProvider[] | ListEnumAuthProviderFieldRefInput<$PrismaModel>
+    notIn?: $Enums.AuthProvider[] | ListEnumAuthProviderFieldRefInput<$PrismaModel>
+    not?: NestedEnumAuthProviderFilter<$PrismaModel> | $Enums.AuthProvider
+  }
+
+  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
   export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -88496,32 +88678,14 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
-  export type NestedEnumAppStatusFilter<$PrismaModel = never> = {
-    equals?: $Enums.AppStatus | EnumAppStatusFieldRefInput<$PrismaModel>
-    in?: $Enums.AppStatus[] | ListEnumAppStatusFieldRefInput<$PrismaModel>
-    notIn?: $Enums.AppStatus[] | ListEnumAppStatusFieldRefInput<$PrismaModel>
-    not?: NestedEnumAppStatusFilter<$PrismaModel> | $Enums.AppStatus
-  }
-
-  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
-  }
-
-  export type NestedEnumAppStatusWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.AppStatus | EnumAppStatusFieldRefInput<$PrismaModel>
-    in?: $Enums.AppStatus[] | ListEnumAppStatusFieldRefInput<$PrismaModel>
-    notIn?: $Enums.AppStatus[] | ListEnumAppStatusFieldRefInput<$PrismaModel>
-    not?: NestedEnumAppStatusWithAggregatesFilter<$PrismaModel> | $Enums.AppStatus
+  export type NestedEnumAuthProviderWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.AuthProvider | EnumAuthProviderFieldRefInput<$PrismaModel>
+    in?: $Enums.AuthProvider[] | ListEnumAuthProviderFieldRefInput<$PrismaModel>
+    notIn?: $Enums.AuthProvider[] | ListEnumAuthProviderFieldRefInput<$PrismaModel>
+    not?: NestedEnumAuthProviderWithAggregatesFilter<$PrismaModel> | $Enums.AuthProvider
     _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumAppStatusFilter<$PrismaModel>
-    _max?: NestedEnumAppStatusFilter<$PrismaModel>
+    _min?: NestedEnumAuthProviderFilter<$PrismaModel>
+    _max?: NestedEnumAuthProviderFilter<$PrismaModel>
   }
 
   export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -88536,6 +88700,23 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedDateTimeNullableFilter<$PrismaModel>
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type NestedEnumAppStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.AppStatus | EnumAppStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.AppStatus[] | ListEnumAppStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.AppStatus[] | ListEnumAppStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumAppStatusFilter<$PrismaModel> | $Enums.AppStatus
+  }
+
+  export type NestedEnumAppStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.AppStatus | EnumAppStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.AppStatus[] | ListEnumAppStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.AppStatus[] | ListEnumAppStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumAppStatusWithAggregatesFilter<$PrismaModel> | $Enums.AppStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumAppStatusFilter<$PrismaModel>
+    _max?: NestedEnumAppStatusFilter<$PrismaModel>
   }
 
   export type NestedEnumVisibilityFilter<$PrismaModel = never> = {
@@ -90941,6 +91122,10 @@ export namespace Prisma {
     passwordHash?: string | null
     status?: $Enums.AccountStatus
     createdAt?: Date | string
+    authProvider?: $Enums.AuthProvider
+    externalId?: string | null
+    resetCode?: string | null
+    resetCodeExpiresAt?: Date | string | null
     playerProfile?: PlayerProfileCreateNestedOneWithoutAccountInput
     sessions?: SessionCreateNestedManyWithoutAccountInput
     memberships?: MemberCreateNestedManyWithoutAccountInput
@@ -90976,6 +91161,10 @@ export namespace Prisma {
     passwordHash?: string | null
     status?: $Enums.AccountStatus
     createdAt?: Date | string
+    authProvider?: $Enums.AuthProvider
+    externalId?: string | null
+    resetCode?: string | null
+    resetCodeExpiresAt?: Date | string | null
     playerProfile?: PlayerProfileUncheckedCreateNestedOneWithoutAccountInput
     sessions?: SessionUncheckedCreateNestedManyWithoutAccountInput
     memberships?: MemberUncheckedCreateNestedManyWithoutAccountInput
@@ -91058,6 +91247,10 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    authProvider?: EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
+    externalId?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCode?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCodeExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     playerProfile?: PlayerProfileUpdateOneWithoutAccountNestedInput
     sessions?: SessionUpdateManyWithoutAccountNestedInput
     memberships?: MemberUpdateManyWithoutAccountNestedInput
@@ -91093,6 +91286,10 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    authProvider?: EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
+    externalId?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCode?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCodeExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     playerProfile?: PlayerProfileUncheckedUpdateOneWithoutAccountNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutAccountNestedInput
     memberships?: MemberUncheckedUpdateManyWithoutAccountNestedInput
@@ -91165,6 +91362,10 @@ export namespace Prisma {
     passwordHash?: string | null
     status?: $Enums.AccountStatus
     createdAt?: Date | string
+    authProvider?: $Enums.AuthProvider
+    externalId?: string | null
+    resetCode?: string | null
+    resetCodeExpiresAt?: Date | string | null
     playerProfile?: PlayerProfileCreateNestedOneWithoutAccountInput
     memberships?: MemberCreateNestedManyWithoutAccountInput
     accountApps?: AccountAppCreateNestedManyWithoutAccountInput
@@ -91200,6 +91401,10 @@ export namespace Prisma {
     passwordHash?: string | null
     status?: $Enums.AccountStatus
     createdAt?: Date | string
+    authProvider?: $Enums.AuthProvider
+    externalId?: string | null
+    resetCode?: string | null
+    resetCodeExpiresAt?: Date | string | null
     playerProfile?: PlayerProfileUncheckedCreateNestedOneWithoutAccountInput
     memberships?: MemberUncheckedCreateNestedManyWithoutAccountInput
     accountApps?: AccountAppUncheckedCreateNestedManyWithoutAccountInput
@@ -91251,6 +91456,10 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    authProvider?: EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
+    externalId?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCode?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCodeExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     playerProfile?: PlayerProfileUpdateOneWithoutAccountNestedInput
     memberships?: MemberUpdateManyWithoutAccountNestedInput
     accountApps?: AccountAppUpdateManyWithoutAccountNestedInput
@@ -91286,6 +91495,10 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    authProvider?: EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
+    externalId?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCode?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCodeExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     playerProfile?: PlayerProfileUncheckedUpdateOneWithoutAccountNestedInput
     memberships?: MemberUncheckedUpdateManyWithoutAccountNestedInput
     accountApps?: AccountAppUncheckedUpdateManyWithoutAccountNestedInput
@@ -91321,6 +91534,10 @@ export namespace Prisma {
     passwordHash?: string | null
     status?: $Enums.AccountStatus
     createdAt?: Date | string
+    authProvider?: $Enums.AuthProvider
+    externalId?: string | null
+    resetCode?: string | null
+    resetCodeExpiresAt?: Date | string | null
     sessions?: SessionCreateNestedManyWithoutAccountInput
     memberships?: MemberCreateNestedManyWithoutAccountInput
     accountApps?: AccountAppCreateNestedManyWithoutAccountInput
@@ -91356,6 +91573,10 @@ export namespace Prisma {
     passwordHash?: string | null
     status?: $Enums.AccountStatus
     createdAt?: Date | string
+    authProvider?: $Enums.AuthProvider
+    externalId?: string | null
+    resetCode?: string | null
+    resetCodeExpiresAt?: Date | string | null
     sessions?: SessionUncheckedCreateNestedManyWithoutAccountInput
     memberships?: MemberUncheckedCreateNestedManyWithoutAccountInput
     accountApps?: AccountAppUncheckedCreateNestedManyWithoutAccountInput
@@ -91407,6 +91628,10 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    authProvider?: EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
+    externalId?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCode?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCodeExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     sessions?: SessionUpdateManyWithoutAccountNestedInput
     memberships?: MemberUpdateManyWithoutAccountNestedInput
     accountApps?: AccountAppUpdateManyWithoutAccountNestedInput
@@ -91442,6 +91667,10 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    authProvider?: EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
+    externalId?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCode?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCodeExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     sessions?: SessionUncheckedUpdateManyWithoutAccountNestedInput
     memberships?: MemberUncheckedUpdateManyWithoutAccountNestedInput
     accountApps?: AccountAppUncheckedUpdateManyWithoutAccountNestedInput
@@ -91477,6 +91706,10 @@ export namespace Prisma {
     passwordHash?: string | null
     status?: $Enums.AccountStatus
     createdAt?: Date | string
+    authProvider?: $Enums.AuthProvider
+    externalId?: string | null
+    resetCode?: string | null
+    resetCodeExpiresAt?: Date | string | null
     playerProfile?: PlayerProfileCreateNestedOneWithoutAccountInput
     sessions?: SessionCreateNestedManyWithoutAccountInput
     accountApps?: AccountAppCreateNestedManyWithoutAccountInput
@@ -91512,6 +91745,10 @@ export namespace Prisma {
     passwordHash?: string | null
     status?: $Enums.AccountStatus
     createdAt?: Date | string
+    authProvider?: $Enums.AuthProvider
+    externalId?: string | null
+    resetCode?: string | null
+    resetCodeExpiresAt?: Date | string | null
     playerProfile?: PlayerProfileUncheckedCreateNestedOneWithoutAccountInput
     sessions?: SessionUncheckedCreateNestedManyWithoutAccountInput
     accountApps?: AccountAppUncheckedCreateNestedManyWithoutAccountInput
@@ -91632,6 +91869,10 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    authProvider?: EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
+    externalId?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCode?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCodeExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     playerProfile?: PlayerProfileUpdateOneWithoutAccountNestedInput
     sessions?: SessionUpdateManyWithoutAccountNestedInput
     accountApps?: AccountAppUpdateManyWithoutAccountNestedInput
@@ -91667,6 +91908,10 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    authProvider?: EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
+    externalId?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCode?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCodeExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     playerProfile?: PlayerProfileUncheckedUpdateOneWithoutAccountNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutAccountNestedInput
     accountApps?: AccountAppUncheckedUpdateManyWithoutAccountNestedInput
@@ -92013,6 +92258,10 @@ export namespace Prisma {
     passwordHash?: string | null
     status?: $Enums.AccountStatus
     createdAt?: Date | string
+    authProvider?: $Enums.AuthProvider
+    externalId?: string | null
+    resetCode?: string | null
+    resetCodeExpiresAt?: Date | string | null
     playerProfile?: PlayerProfileCreateNestedOneWithoutAccountInput
     sessions?: SessionCreateNestedManyWithoutAccountInput
     memberships?: MemberCreateNestedManyWithoutAccountInput
@@ -92048,6 +92297,10 @@ export namespace Prisma {
     passwordHash?: string | null
     status?: $Enums.AccountStatus
     createdAt?: Date | string
+    authProvider?: $Enums.AuthProvider
+    externalId?: string | null
+    resetCode?: string | null
+    resetCodeExpiresAt?: Date | string | null
     playerProfile?: PlayerProfileUncheckedCreateNestedOneWithoutAccountInput
     sessions?: SessionUncheckedCreateNestedManyWithoutAccountInput
     memberships?: MemberUncheckedCreateNestedManyWithoutAccountInput
@@ -92099,6 +92352,10 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    authProvider?: EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
+    externalId?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCode?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCodeExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     playerProfile?: PlayerProfileUpdateOneWithoutAccountNestedInput
     sessions?: SessionUpdateManyWithoutAccountNestedInput
     memberships?: MemberUpdateManyWithoutAccountNestedInput
@@ -92134,6 +92391,10 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    authProvider?: EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
+    externalId?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCode?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCodeExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     playerProfile?: PlayerProfileUncheckedUpdateOneWithoutAccountNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutAccountNestedInput
     memberships?: MemberUncheckedUpdateManyWithoutAccountNestedInput
@@ -92169,6 +92430,10 @@ export namespace Prisma {
     passwordHash?: string | null
     status?: $Enums.AccountStatus
     createdAt?: Date | string
+    authProvider?: $Enums.AuthProvider
+    externalId?: string | null
+    resetCode?: string | null
+    resetCodeExpiresAt?: Date | string | null
     playerProfile?: PlayerProfileCreateNestedOneWithoutAccountInput
     sessions?: SessionCreateNestedManyWithoutAccountInput
     memberships?: MemberCreateNestedManyWithoutAccountInput
@@ -92204,6 +92469,10 @@ export namespace Prisma {
     passwordHash?: string | null
     status?: $Enums.AccountStatus
     createdAt?: Date | string
+    authProvider?: $Enums.AuthProvider
+    externalId?: string | null
+    resetCode?: string | null
+    resetCodeExpiresAt?: Date | string | null
     playerProfile?: PlayerProfileUncheckedCreateNestedOneWithoutAccountInput
     sessions?: SessionUncheckedCreateNestedManyWithoutAccountInput
     memberships?: MemberUncheckedCreateNestedManyWithoutAccountInput
@@ -92255,6 +92524,10 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    authProvider?: EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
+    externalId?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCode?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCodeExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     playerProfile?: PlayerProfileUpdateOneWithoutAccountNestedInput
     sessions?: SessionUpdateManyWithoutAccountNestedInput
     memberships?: MemberUpdateManyWithoutAccountNestedInput
@@ -92290,6 +92563,10 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    authProvider?: EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
+    externalId?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCode?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCodeExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     playerProfile?: PlayerProfileUncheckedUpdateOneWithoutAccountNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutAccountNestedInput
     memberships?: MemberUncheckedUpdateManyWithoutAccountNestedInput
@@ -92651,6 +92928,10 @@ export namespace Prisma {
     passwordHash?: string | null
     status?: $Enums.AccountStatus
     createdAt?: Date | string
+    authProvider?: $Enums.AuthProvider
+    externalId?: string | null
+    resetCode?: string | null
+    resetCodeExpiresAt?: Date | string | null
     playerProfile?: PlayerProfileCreateNestedOneWithoutAccountInput
     sessions?: SessionCreateNestedManyWithoutAccountInput
     memberships?: MemberCreateNestedManyWithoutAccountInput
@@ -92686,6 +92967,10 @@ export namespace Prisma {
     passwordHash?: string | null
     status?: $Enums.AccountStatus
     createdAt?: Date | string
+    authProvider?: $Enums.AuthProvider
+    externalId?: string | null
+    resetCode?: string | null
+    resetCodeExpiresAt?: Date | string | null
     playerProfile?: PlayerProfileUncheckedCreateNestedOneWithoutAccountInput
     sessions?: SessionUncheckedCreateNestedManyWithoutAccountInput
     memberships?: MemberUncheckedCreateNestedManyWithoutAccountInput
@@ -92766,6 +93051,10 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    authProvider?: EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
+    externalId?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCode?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCodeExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     playerProfile?: PlayerProfileUpdateOneWithoutAccountNestedInput
     sessions?: SessionUpdateManyWithoutAccountNestedInput
     memberships?: MemberUpdateManyWithoutAccountNestedInput
@@ -92801,6 +93090,10 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    authProvider?: EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
+    externalId?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCode?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCodeExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     playerProfile?: PlayerProfileUncheckedUpdateOneWithoutAccountNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutAccountNestedInput
     memberships?: MemberUncheckedUpdateManyWithoutAccountNestedInput
@@ -92956,6 +93249,10 @@ export namespace Prisma {
     passwordHash?: string | null
     status?: $Enums.AccountStatus
     createdAt?: Date | string
+    authProvider?: $Enums.AuthProvider
+    externalId?: string | null
+    resetCode?: string | null
+    resetCodeExpiresAt?: Date | string | null
     playerProfile?: PlayerProfileCreateNestedOneWithoutAccountInput
     sessions?: SessionCreateNestedManyWithoutAccountInput
     memberships?: MemberCreateNestedManyWithoutAccountInput
@@ -92991,6 +93288,10 @@ export namespace Prisma {
     passwordHash?: string | null
     status?: $Enums.AccountStatus
     createdAt?: Date | string
+    authProvider?: $Enums.AuthProvider
+    externalId?: string | null
+    resetCode?: string | null
+    resetCodeExpiresAt?: Date | string | null
     playerProfile?: PlayerProfileUncheckedCreateNestedOneWithoutAccountInput
     sessions?: SessionUncheckedCreateNestedManyWithoutAccountInput
     memberships?: MemberUncheckedCreateNestedManyWithoutAccountInput
@@ -93071,6 +93372,10 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    authProvider?: EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
+    externalId?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCode?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCodeExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     playerProfile?: PlayerProfileUpdateOneWithoutAccountNestedInput
     sessions?: SessionUpdateManyWithoutAccountNestedInput
     memberships?: MemberUpdateManyWithoutAccountNestedInput
@@ -93106,6 +93411,10 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    authProvider?: EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
+    externalId?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCode?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCodeExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     playerProfile?: PlayerProfileUncheckedUpdateOneWithoutAccountNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutAccountNestedInput
     memberships?: MemberUncheckedUpdateManyWithoutAccountNestedInput
@@ -93227,6 +93536,10 @@ export namespace Prisma {
     passwordHash?: string | null
     status?: $Enums.AccountStatus
     createdAt?: Date | string
+    authProvider?: $Enums.AuthProvider
+    externalId?: string | null
+    resetCode?: string | null
+    resetCodeExpiresAt?: Date | string | null
     playerProfile?: PlayerProfileCreateNestedOneWithoutAccountInput
     sessions?: SessionCreateNestedManyWithoutAccountInput
     memberships?: MemberCreateNestedManyWithoutAccountInput
@@ -93262,6 +93575,10 @@ export namespace Prisma {
     passwordHash?: string | null
     status?: $Enums.AccountStatus
     createdAt?: Date | string
+    authProvider?: $Enums.AuthProvider
+    externalId?: string | null
+    resetCode?: string | null
+    resetCodeExpiresAt?: Date | string | null
     playerProfile?: PlayerProfileUncheckedCreateNestedOneWithoutAccountInput
     sessions?: SessionUncheckedCreateNestedManyWithoutAccountInput
     memberships?: MemberUncheckedCreateNestedManyWithoutAccountInput
@@ -93334,6 +93651,10 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    authProvider?: EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
+    externalId?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCode?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCodeExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     playerProfile?: PlayerProfileUpdateOneWithoutAccountNestedInput
     sessions?: SessionUpdateManyWithoutAccountNestedInput
     memberships?: MemberUpdateManyWithoutAccountNestedInput
@@ -93369,6 +93690,10 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    authProvider?: EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
+    externalId?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCode?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCodeExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     playerProfile?: PlayerProfileUncheckedUpdateOneWithoutAccountNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutAccountNestedInput
     memberships?: MemberUncheckedUpdateManyWithoutAccountNestedInput
@@ -93459,6 +93784,10 @@ export namespace Prisma {
     passwordHash?: string | null
     status?: $Enums.AccountStatus
     createdAt?: Date | string
+    authProvider?: $Enums.AuthProvider
+    externalId?: string | null
+    resetCode?: string | null
+    resetCodeExpiresAt?: Date | string | null
     playerProfile?: PlayerProfileCreateNestedOneWithoutAccountInput
     sessions?: SessionCreateNestedManyWithoutAccountInput
     memberships?: MemberCreateNestedManyWithoutAccountInput
@@ -93494,6 +93823,10 @@ export namespace Prisma {
     passwordHash?: string | null
     status?: $Enums.AccountStatus
     createdAt?: Date | string
+    authProvider?: $Enums.AuthProvider
+    externalId?: string | null
+    resetCode?: string | null
+    resetCodeExpiresAt?: Date | string | null
     playerProfile?: PlayerProfileUncheckedCreateNestedOneWithoutAccountInput
     sessions?: SessionUncheckedCreateNestedManyWithoutAccountInput
     memberships?: MemberUncheckedCreateNestedManyWithoutAccountInput
@@ -93572,6 +93905,10 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    authProvider?: EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
+    externalId?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCode?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCodeExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     playerProfile?: PlayerProfileUpdateOneWithoutAccountNestedInput
     sessions?: SessionUpdateManyWithoutAccountNestedInput
     memberships?: MemberUpdateManyWithoutAccountNestedInput
@@ -93607,6 +93944,10 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    authProvider?: EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
+    externalId?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCode?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCodeExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     playerProfile?: PlayerProfileUncheckedUpdateOneWithoutAccountNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutAccountNestedInput
     memberships?: MemberUncheckedUpdateManyWithoutAccountNestedInput
@@ -93710,6 +94051,10 @@ export namespace Prisma {
     passwordHash?: string | null
     status?: $Enums.AccountStatus
     createdAt?: Date | string
+    authProvider?: $Enums.AuthProvider
+    externalId?: string | null
+    resetCode?: string | null
+    resetCodeExpiresAt?: Date | string | null
     playerProfile?: PlayerProfileCreateNestedOneWithoutAccountInput
     sessions?: SessionCreateNestedManyWithoutAccountInput
     memberships?: MemberCreateNestedManyWithoutAccountInput
@@ -93745,6 +94090,10 @@ export namespace Prisma {
     passwordHash?: string | null
     status?: $Enums.AccountStatus
     createdAt?: Date | string
+    authProvider?: $Enums.AuthProvider
+    externalId?: string | null
+    resetCode?: string | null
+    resetCodeExpiresAt?: Date | string | null
     playerProfile?: PlayerProfileUncheckedCreateNestedOneWithoutAccountInput
     sessions?: SessionUncheckedCreateNestedManyWithoutAccountInput
     memberships?: MemberUncheckedCreateNestedManyWithoutAccountInput
@@ -93825,6 +94174,10 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    authProvider?: EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
+    externalId?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCode?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCodeExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     playerProfile?: PlayerProfileUpdateOneWithoutAccountNestedInput
     sessions?: SessionUpdateManyWithoutAccountNestedInput
     memberships?: MemberUpdateManyWithoutAccountNestedInput
@@ -93860,6 +94213,10 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    authProvider?: EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
+    externalId?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCode?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCodeExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     playerProfile?: PlayerProfileUncheckedUpdateOneWithoutAccountNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutAccountNestedInput
     memberships?: MemberUncheckedUpdateManyWithoutAccountNestedInput
@@ -93930,6 +94287,10 @@ export namespace Prisma {
     passwordHash?: string | null
     status?: $Enums.AccountStatus
     createdAt?: Date | string
+    authProvider?: $Enums.AuthProvider
+    externalId?: string | null
+    resetCode?: string | null
+    resetCodeExpiresAt?: Date | string | null
     playerProfile?: PlayerProfileCreateNestedOneWithoutAccountInput
     sessions?: SessionCreateNestedManyWithoutAccountInput
     memberships?: MemberCreateNestedManyWithoutAccountInput
@@ -93965,6 +94326,10 @@ export namespace Prisma {
     passwordHash?: string | null
     status?: $Enums.AccountStatus
     createdAt?: Date | string
+    authProvider?: $Enums.AuthProvider
+    externalId?: string | null
+    resetCode?: string | null
+    resetCodeExpiresAt?: Date | string | null
     playerProfile?: PlayerProfileUncheckedCreateNestedOneWithoutAccountInput
     sessions?: SessionUncheckedCreateNestedManyWithoutAccountInput
     memberships?: MemberUncheckedCreateNestedManyWithoutAccountInput
@@ -94005,6 +94370,10 @@ export namespace Prisma {
     passwordHash?: string | null
     status?: $Enums.AccountStatus
     createdAt?: Date | string
+    authProvider?: $Enums.AuthProvider
+    externalId?: string | null
+    resetCode?: string | null
+    resetCodeExpiresAt?: Date | string | null
     playerProfile?: PlayerProfileCreateNestedOneWithoutAccountInput
     sessions?: SessionCreateNestedManyWithoutAccountInput
     memberships?: MemberCreateNestedManyWithoutAccountInput
@@ -94040,6 +94409,10 @@ export namespace Prisma {
     passwordHash?: string | null
     status?: $Enums.AccountStatus
     createdAt?: Date | string
+    authProvider?: $Enums.AuthProvider
+    externalId?: string | null
+    resetCode?: string | null
+    resetCodeExpiresAt?: Date | string | null
     playerProfile?: PlayerProfileUncheckedCreateNestedOneWithoutAccountInput
     sessions?: SessionUncheckedCreateNestedManyWithoutAccountInput
     memberships?: MemberUncheckedCreateNestedManyWithoutAccountInput
@@ -94091,6 +94464,10 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    authProvider?: EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
+    externalId?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCode?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCodeExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     playerProfile?: PlayerProfileUpdateOneWithoutAccountNestedInput
     sessions?: SessionUpdateManyWithoutAccountNestedInput
     memberships?: MemberUpdateManyWithoutAccountNestedInput
@@ -94126,6 +94503,10 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    authProvider?: EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
+    externalId?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCode?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCodeExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     playerProfile?: PlayerProfileUncheckedUpdateOneWithoutAccountNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutAccountNestedInput
     memberships?: MemberUncheckedUpdateManyWithoutAccountNestedInput
@@ -94172,6 +94553,10 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    authProvider?: EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
+    externalId?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCode?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCodeExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     playerProfile?: PlayerProfileUpdateOneWithoutAccountNestedInput
     sessions?: SessionUpdateManyWithoutAccountNestedInput
     memberships?: MemberUpdateManyWithoutAccountNestedInput
@@ -94207,6 +94592,10 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    authProvider?: EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
+    externalId?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCode?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCodeExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     playerProfile?: PlayerProfileUncheckedUpdateOneWithoutAccountNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutAccountNestedInput
     memberships?: MemberUncheckedUpdateManyWithoutAccountNestedInput
@@ -94371,6 +94760,10 @@ export namespace Prisma {
     passwordHash?: string | null
     status?: $Enums.AccountStatus
     createdAt?: Date | string
+    authProvider?: $Enums.AuthProvider
+    externalId?: string | null
+    resetCode?: string | null
+    resetCodeExpiresAt?: Date | string | null
     playerProfile?: PlayerProfileCreateNestedOneWithoutAccountInput
     sessions?: SessionCreateNestedManyWithoutAccountInput
     memberships?: MemberCreateNestedManyWithoutAccountInput
@@ -94406,6 +94799,10 @@ export namespace Prisma {
     passwordHash?: string | null
     status?: $Enums.AccountStatus
     createdAt?: Date | string
+    authProvider?: $Enums.AuthProvider
+    externalId?: string | null
+    resetCode?: string | null
+    resetCodeExpiresAt?: Date | string | null
     playerProfile?: PlayerProfileUncheckedCreateNestedOneWithoutAccountInput
     sessions?: SessionUncheckedCreateNestedManyWithoutAccountInput
     memberships?: MemberUncheckedCreateNestedManyWithoutAccountInput
@@ -94484,6 +94881,10 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    authProvider?: EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
+    externalId?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCode?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCodeExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     playerProfile?: PlayerProfileUpdateOneWithoutAccountNestedInput
     sessions?: SessionUpdateManyWithoutAccountNestedInput
     memberships?: MemberUpdateManyWithoutAccountNestedInput
@@ -94519,6 +94920,10 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    authProvider?: EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
+    externalId?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCode?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCodeExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     playerProfile?: PlayerProfileUncheckedUpdateOneWithoutAccountNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutAccountNestedInput
     memberships?: MemberUncheckedUpdateManyWithoutAccountNestedInput
@@ -94690,6 +95095,10 @@ export namespace Prisma {
     passwordHash?: string | null
     status?: $Enums.AccountStatus
     createdAt?: Date | string
+    authProvider?: $Enums.AuthProvider
+    externalId?: string | null
+    resetCode?: string | null
+    resetCodeExpiresAt?: Date | string | null
     playerProfile?: PlayerProfileCreateNestedOneWithoutAccountInput
     sessions?: SessionCreateNestedManyWithoutAccountInput
     memberships?: MemberCreateNestedManyWithoutAccountInput
@@ -94725,6 +95134,10 @@ export namespace Prisma {
     passwordHash?: string | null
     status?: $Enums.AccountStatus
     createdAt?: Date | string
+    authProvider?: $Enums.AuthProvider
+    externalId?: string | null
+    resetCode?: string | null
+    resetCodeExpiresAt?: Date | string | null
     playerProfile?: PlayerProfileUncheckedCreateNestedOneWithoutAccountInput
     sessions?: SessionUncheckedCreateNestedManyWithoutAccountInput
     memberships?: MemberUncheckedCreateNestedManyWithoutAccountInput
@@ -94799,6 +95212,10 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    authProvider?: EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
+    externalId?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCode?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCodeExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     playerProfile?: PlayerProfileUpdateOneWithoutAccountNestedInput
     sessions?: SessionUpdateManyWithoutAccountNestedInput
     memberships?: MemberUpdateManyWithoutAccountNestedInput
@@ -94834,6 +95251,10 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    authProvider?: EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
+    externalId?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCode?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCodeExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     playerProfile?: PlayerProfileUncheckedUpdateOneWithoutAccountNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutAccountNestedInput
     memberships?: MemberUncheckedUpdateManyWithoutAccountNestedInput
@@ -94869,6 +95290,10 @@ export namespace Prisma {
     passwordHash?: string | null
     status?: $Enums.AccountStatus
     createdAt?: Date | string
+    authProvider?: $Enums.AuthProvider
+    externalId?: string | null
+    resetCode?: string | null
+    resetCodeExpiresAt?: Date | string | null
     playerProfile?: PlayerProfileCreateNestedOneWithoutAccountInput
     sessions?: SessionCreateNestedManyWithoutAccountInput
     memberships?: MemberCreateNestedManyWithoutAccountInput
@@ -94904,6 +95329,10 @@ export namespace Prisma {
     passwordHash?: string | null
     status?: $Enums.AccountStatus
     createdAt?: Date | string
+    authProvider?: $Enums.AuthProvider
+    externalId?: string | null
+    resetCode?: string | null
+    resetCodeExpiresAt?: Date | string | null
     playerProfile?: PlayerProfileUncheckedCreateNestedOneWithoutAccountInput
     sessions?: SessionUncheckedCreateNestedManyWithoutAccountInput
     memberships?: MemberUncheckedCreateNestedManyWithoutAccountInput
@@ -94986,6 +95415,10 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    authProvider?: EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
+    externalId?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCode?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCodeExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     playerProfile?: PlayerProfileUpdateOneWithoutAccountNestedInput
     sessions?: SessionUpdateManyWithoutAccountNestedInput
     memberships?: MemberUpdateManyWithoutAccountNestedInput
@@ -95021,6 +95454,10 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    authProvider?: EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
+    externalId?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCode?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCodeExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     playerProfile?: PlayerProfileUncheckedUpdateOneWithoutAccountNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutAccountNestedInput
     memberships?: MemberUncheckedUpdateManyWithoutAccountNestedInput
@@ -95273,6 +95710,10 @@ export namespace Prisma {
     passwordHash?: string | null
     status?: $Enums.AccountStatus
     createdAt?: Date | string
+    authProvider?: $Enums.AuthProvider
+    externalId?: string | null
+    resetCode?: string | null
+    resetCodeExpiresAt?: Date | string | null
     playerProfile?: PlayerProfileCreateNestedOneWithoutAccountInput
     sessions?: SessionCreateNestedManyWithoutAccountInput
     memberships?: MemberCreateNestedManyWithoutAccountInput
@@ -95308,6 +95749,10 @@ export namespace Prisma {
     passwordHash?: string | null
     status?: $Enums.AccountStatus
     createdAt?: Date | string
+    authProvider?: $Enums.AuthProvider
+    externalId?: string | null
+    resetCode?: string | null
+    resetCodeExpiresAt?: Date | string | null
     playerProfile?: PlayerProfileUncheckedCreateNestedOneWithoutAccountInput
     sessions?: SessionUncheckedCreateNestedManyWithoutAccountInput
     memberships?: MemberUncheckedCreateNestedManyWithoutAccountInput
@@ -95359,6 +95804,10 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    authProvider?: EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
+    externalId?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCode?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCodeExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     playerProfile?: PlayerProfileUpdateOneWithoutAccountNestedInput
     sessions?: SessionUpdateManyWithoutAccountNestedInput
     memberships?: MemberUpdateManyWithoutAccountNestedInput
@@ -95394,6 +95843,10 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    authProvider?: EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
+    externalId?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCode?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCodeExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     playerProfile?: PlayerProfileUncheckedUpdateOneWithoutAccountNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutAccountNestedInput
     memberships?: MemberUncheckedUpdateManyWithoutAccountNestedInput
@@ -95565,6 +96018,10 @@ export namespace Prisma {
     passwordHash?: string | null
     status?: $Enums.AccountStatus
     createdAt?: Date | string
+    authProvider?: $Enums.AuthProvider
+    externalId?: string | null
+    resetCode?: string | null
+    resetCodeExpiresAt?: Date | string | null
     playerProfile?: PlayerProfileCreateNestedOneWithoutAccountInput
     sessions?: SessionCreateNestedManyWithoutAccountInput
     memberships?: MemberCreateNestedManyWithoutAccountInput
@@ -95600,6 +96057,10 @@ export namespace Prisma {
     passwordHash?: string | null
     status?: $Enums.AccountStatus
     createdAt?: Date | string
+    authProvider?: $Enums.AuthProvider
+    externalId?: string | null
+    resetCode?: string | null
+    resetCodeExpiresAt?: Date | string | null
     playerProfile?: PlayerProfileUncheckedCreateNestedOneWithoutAccountInput
     sessions?: SessionUncheckedCreateNestedManyWithoutAccountInput
     memberships?: MemberUncheckedCreateNestedManyWithoutAccountInput
@@ -95651,6 +96112,10 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    authProvider?: EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
+    externalId?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCode?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCodeExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     playerProfile?: PlayerProfileUpdateOneWithoutAccountNestedInput
     sessions?: SessionUpdateManyWithoutAccountNestedInput
     memberships?: MemberUpdateManyWithoutAccountNestedInput
@@ -95686,6 +96151,10 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    authProvider?: EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
+    externalId?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCode?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCodeExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     playerProfile?: PlayerProfileUncheckedUpdateOneWithoutAccountNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutAccountNestedInput
     memberships?: MemberUncheckedUpdateManyWithoutAccountNestedInput
@@ -95757,6 +96226,10 @@ export namespace Prisma {
     passwordHash?: string | null
     status?: $Enums.AccountStatus
     createdAt?: Date | string
+    authProvider?: $Enums.AuthProvider
+    externalId?: string | null
+    resetCode?: string | null
+    resetCodeExpiresAt?: Date | string | null
     playerProfile?: PlayerProfileCreateNestedOneWithoutAccountInput
     sessions?: SessionCreateNestedManyWithoutAccountInput
     memberships?: MemberCreateNestedManyWithoutAccountInput
@@ -95792,6 +96265,10 @@ export namespace Prisma {
     passwordHash?: string | null
     status?: $Enums.AccountStatus
     createdAt?: Date | string
+    authProvider?: $Enums.AuthProvider
+    externalId?: string | null
+    resetCode?: string | null
+    resetCodeExpiresAt?: Date | string | null
     playerProfile?: PlayerProfileUncheckedCreateNestedOneWithoutAccountInput
     sessions?: SessionUncheckedCreateNestedManyWithoutAccountInput
     memberships?: MemberUncheckedCreateNestedManyWithoutAccountInput
@@ -95864,6 +96341,10 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    authProvider?: EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
+    externalId?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCode?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCodeExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     playerProfile?: PlayerProfileUpdateOneWithoutAccountNestedInput
     sessions?: SessionUpdateManyWithoutAccountNestedInput
     memberships?: MemberUpdateManyWithoutAccountNestedInput
@@ -95899,6 +96380,10 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    authProvider?: EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
+    externalId?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCode?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCodeExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     playerProfile?: PlayerProfileUncheckedUpdateOneWithoutAccountNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutAccountNestedInput
     memberships?: MemberUncheckedUpdateManyWithoutAccountNestedInput
@@ -95961,6 +96446,10 @@ export namespace Prisma {
     passwordHash?: string | null
     status?: $Enums.AccountStatus
     createdAt?: Date | string
+    authProvider?: $Enums.AuthProvider
+    externalId?: string | null
+    resetCode?: string | null
+    resetCodeExpiresAt?: Date | string | null
     playerProfile?: PlayerProfileCreateNestedOneWithoutAccountInput
     sessions?: SessionCreateNestedManyWithoutAccountInput
     memberships?: MemberCreateNestedManyWithoutAccountInput
@@ -95996,6 +96485,10 @@ export namespace Prisma {
     passwordHash?: string | null
     status?: $Enums.AccountStatus
     createdAt?: Date | string
+    authProvider?: $Enums.AuthProvider
+    externalId?: string | null
+    resetCode?: string | null
+    resetCodeExpiresAt?: Date | string | null
     playerProfile?: PlayerProfileUncheckedCreateNestedOneWithoutAccountInput
     sessions?: SessionUncheckedCreateNestedManyWithoutAccountInput
     memberships?: MemberUncheckedCreateNestedManyWithoutAccountInput
@@ -96047,6 +96540,10 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    authProvider?: EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
+    externalId?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCode?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCodeExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     playerProfile?: PlayerProfileUpdateOneWithoutAccountNestedInput
     sessions?: SessionUpdateManyWithoutAccountNestedInput
     memberships?: MemberUpdateManyWithoutAccountNestedInput
@@ -96082,6 +96579,10 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    authProvider?: EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
+    externalId?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCode?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCodeExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     playerProfile?: PlayerProfileUncheckedUpdateOneWithoutAccountNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutAccountNestedInput
     memberships?: MemberUncheckedUpdateManyWithoutAccountNestedInput
@@ -96248,6 +96749,10 @@ export namespace Prisma {
     passwordHash?: string | null
     status?: $Enums.AccountStatus
     createdAt?: Date | string
+    authProvider?: $Enums.AuthProvider
+    externalId?: string | null
+    resetCode?: string | null
+    resetCodeExpiresAt?: Date | string | null
     playerProfile?: PlayerProfileCreateNestedOneWithoutAccountInput
     sessions?: SessionCreateNestedManyWithoutAccountInput
     memberships?: MemberCreateNestedManyWithoutAccountInput
@@ -96283,6 +96788,10 @@ export namespace Prisma {
     passwordHash?: string | null
     status?: $Enums.AccountStatus
     createdAt?: Date | string
+    authProvider?: $Enums.AuthProvider
+    externalId?: string | null
+    resetCode?: string | null
+    resetCodeExpiresAt?: Date | string | null
     playerProfile?: PlayerProfileUncheckedCreateNestedOneWithoutAccountInput
     sessions?: SessionUncheckedCreateNestedManyWithoutAccountInput
     memberships?: MemberUncheckedCreateNestedManyWithoutAccountInput
@@ -96361,6 +96870,10 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    authProvider?: EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
+    externalId?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCode?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCodeExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     playerProfile?: PlayerProfileUpdateOneWithoutAccountNestedInput
     sessions?: SessionUpdateManyWithoutAccountNestedInput
     memberships?: MemberUpdateManyWithoutAccountNestedInput
@@ -96396,6 +96909,10 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    authProvider?: EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
+    externalId?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCode?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCodeExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     playerProfile?: PlayerProfileUncheckedUpdateOneWithoutAccountNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutAccountNestedInput
     memberships?: MemberUncheckedUpdateManyWithoutAccountNestedInput
@@ -96452,6 +96969,10 @@ export namespace Prisma {
     passwordHash?: string | null
     status?: $Enums.AccountStatus
     createdAt?: Date | string
+    authProvider?: $Enums.AuthProvider
+    externalId?: string | null
+    resetCode?: string | null
+    resetCodeExpiresAt?: Date | string | null
     playerProfile?: PlayerProfileCreateNestedOneWithoutAccountInput
     sessions?: SessionCreateNestedManyWithoutAccountInput
     memberships?: MemberCreateNestedManyWithoutAccountInput
@@ -96487,6 +97008,10 @@ export namespace Prisma {
     passwordHash?: string | null
     status?: $Enums.AccountStatus
     createdAt?: Date | string
+    authProvider?: $Enums.AuthProvider
+    externalId?: string | null
+    resetCode?: string | null
+    resetCodeExpiresAt?: Date | string | null
     playerProfile?: PlayerProfileUncheckedCreateNestedOneWithoutAccountInput
     sessions?: SessionUncheckedCreateNestedManyWithoutAccountInput
     memberships?: MemberUncheckedCreateNestedManyWithoutAccountInput
@@ -96565,6 +97090,10 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    authProvider?: EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
+    externalId?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCode?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCodeExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     playerProfile?: PlayerProfileUpdateOneWithoutAccountNestedInput
     sessions?: SessionUpdateManyWithoutAccountNestedInput
     memberships?: MemberUpdateManyWithoutAccountNestedInput
@@ -96600,6 +97129,10 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    authProvider?: EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
+    externalId?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCode?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCodeExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     playerProfile?: PlayerProfileUncheckedUpdateOneWithoutAccountNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutAccountNestedInput
     memberships?: MemberUncheckedUpdateManyWithoutAccountNestedInput
@@ -96656,6 +97189,10 @@ export namespace Prisma {
     passwordHash?: string | null
     status?: $Enums.AccountStatus
     createdAt?: Date | string
+    authProvider?: $Enums.AuthProvider
+    externalId?: string | null
+    resetCode?: string | null
+    resetCodeExpiresAt?: Date | string | null
     playerProfile?: PlayerProfileCreateNestedOneWithoutAccountInput
     sessions?: SessionCreateNestedManyWithoutAccountInput
     memberships?: MemberCreateNestedManyWithoutAccountInput
@@ -96691,6 +97228,10 @@ export namespace Prisma {
     passwordHash?: string | null
     status?: $Enums.AccountStatus
     createdAt?: Date | string
+    authProvider?: $Enums.AuthProvider
+    externalId?: string | null
+    resetCode?: string | null
+    resetCodeExpiresAt?: Date | string | null
     playerProfile?: PlayerProfileUncheckedCreateNestedOneWithoutAccountInput
     sessions?: SessionUncheckedCreateNestedManyWithoutAccountInput
     memberships?: MemberUncheckedCreateNestedManyWithoutAccountInput
@@ -96769,6 +97310,10 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    authProvider?: EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
+    externalId?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCode?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCodeExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     playerProfile?: PlayerProfileUpdateOneWithoutAccountNestedInput
     sessions?: SessionUpdateManyWithoutAccountNestedInput
     memberships?: MemberUpdateManyWithoutAccountNestedInput
@@ -96804,6 +97349,10 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    authProvider?: EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
+    externalId?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCode?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCodeExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     playerProfile?: PlayerProfileUncheckedUpdateOneWithoutAccountNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutAccountNestedInput
     memberships?: MemberUncheckedUpdateManyWithoutAccountNestedInput
@@ -96839,6 +97388,10 @@ export namespace Prisma {
     passwordHash?: string | null
     status?: $Enums.AccountStatus
     createdAt?: Date | string
+    authProvider?: $Enums.AuthProvider
+    externalId?: string | null
+    resetCode?: string | null
+    resetCodeExpiresAt?: Date | string | null
     playerProfile?: PlayerProfileCreateNestedOneWithoutAccountInput
     sessions?: SessionCreateNestedManyWithoutAccountInput
     memberships?: MemberCreateNestedManyWithoutAccountInput
@@ -96874,6 +97427,10 @@ export namespace Prisma {
     passwordHash?: string | null
     status?: $Enums.AccountStatus
     createdAt?: Date | string
+    authProvider?: $Enums.AuthProvider
+    externalId?: string | null
+    resetCode?: string | null
+    resetCodeExpiresAt?: Date | string | null
     playerProfile?: PlayerProfileUncheckedCreateNestedOneWithoutAccountInput
     sessions?: SessionUncheckedCreateNestedManyWithoutAccountInput
     memberships?: MemberUncheckedCreateNestedManyWithoutAccountInput
@@ -96953,6 +97510,10 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    authProvider?: EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
+    externalId?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCode?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCodeExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     playerProfile?: PlayerProfileUpdateOneWithoutAccountNestedInput
     sessions?: SessionUpdateManyWithoutAccountNestedInput
     memberships?: MemberUpdateManyWithoutAccountNestedInput
@@ -96988,6 +97549,10 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    authProvider?: EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
+    externalId?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCode?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCodeExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     playerProfile?: PlayerProfileUncheckedUpdateOneWithoutAccountNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutAccountNestedInput
     memberships?: MemberUncheckedUpdateManyWithoutAccountNestedInput
@@ -97039,6 +97604,10 @@ export namespace Prisma {
     passwordHash?: string | null
     status?: $Enums.AccountStatus
     createdAt?: Date | string
+    authProvider?: $Enums.AuthProvider
+    externalId?: string | null
+    resetCode?: string | null
+    resetCodeExpiresAt?: Date | string | null
     playerProfile?: PlayerProfileCreateNestedOneWithoutAccountInput
     sessions?: SessionCreateNestedManyWithoutAccountInput
     memberships?: MemberCreateNestedManyWithoutAccountInput
@@ -97074,6 +97643,10 @@ export namespace Prisma {
     passwordHash?: string | null
     status?: $Enums.AccountStatus
     createdAt?: Date | string
+    authProvider?: $Enums.AuthProvider
+    externalId?: string | null
+    resetCode?: string | null
+    resetCodeExpiresAt?: Date | string | null
     playerProfile?: PlayerProfileUncheckedCreateNestedOneWithoutAccountInput
     sessions?: SessionUncheckedCreateNestedManyWithoutAccountInput
     memberships?: MemberUncheckedCreateNestedManyWithoutAccountInput
@@ -97148,6 +97721,10 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    authProvider?: EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
+    externalId?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCode?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCodeExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     playerProfile?: PlayerProfileUpdateOneWithoutAccountNestedInput
     sessions?: SessionUpdateManyWithoutAccountNestedInput
     memberships?: MemberUpdateManyWithoutAccountNestedInput
@@ -97183,6 +97760,10 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    authProvider?: EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
+    externalId?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCode?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCodeExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     playerProfile?: PlayerProfileUncheckedUpdateOneWithoutAccountNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutAccountNestedInput
     memberships?: MemberUncheckedUpdateManyWithoutAccountNestedInput
@@ -97386,6 +97967,10 @@ export namespace Prisma {
     passwordHash?: string | null
     status?: $Enums.AccountStatus
     createdAt?: Date | string
+    authProvider?: $Enums.AuthProvider
+    externalId?: string | null
+    resetCode?: string | null
+    resetCodeExpiresAt?: Date | string | null
     playerProfile?: PlayerProfileCreateNestedOneWithoutAccountInput
     sessions?: SessionCreateNestedManyWithoutAccountInput
     memberships?: MemberCreateNestedManyWithoutAccountInput
@@ -97421,6 +98006,10 @@ export namespace Prisma {
     passwordHash?: string | null
     status?: $Enums.AccountStatus
     createdAt?: Date | string
+    authProvider?: $Enums.AuthProvider
+    externalId?: string | null
+    resetCode?: string | null
+    resetCodeExpiresAt?: Date | string | null
     playerProfile?: PlayerProfileUncheckedCreateNestedOneWithoutAccountInput
     sessions?: SessionUncheckedCreateNestedManyWithoutAccountInput
     memberships?: MemberUncheckedCreateNestedManyWithoutAccountInput
@@ -97501,6 +98090,10 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    authProvider?: EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
+    externalId?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCode?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCodeExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     playerProfile?: PlayerProfileUpdateOneWithoutAccountNestedInput
     sessions?: SessionUpdateManyWithoutAccountNestedInput
     memberships?: MemberUpdateManyWithoutAccountNestedInput
@@ -97536,6 +98129,10 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    authProvider?: EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
+    externalId?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCode?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCodeExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     playerProfile?: PlayerProfileUncheckedUpdateOneWithoutAccountNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutAccountNestedInput
     memberships?: MemberUncheckedUpdateManyWithoutAccountNestedInput
@@ -97594,6 +98191,10 @@ export namespace Prisma {
     passwordHash?: string | null
     status?: $Enums.AccountStatus
     createdAt?: Date | string
+    authProvider?: $Enums.AuthProvider
+    externalId?: string | null
+    resetCode?: string | null
+    resetCodeExpiresAt?: Date | string | null
     playerProfile?: PlayerProfileCreateNestedOneWithoutAccountInput
     sessions?: SessionCreateNestedManyWithoutAccountInput
     memberships?: MemberCreateNestedManyWithoutAccountInput
@@ -97629,6 +98230,10 @@ export namespace Prisma {
     passwordHash?: string | null
     status?: $Enums.AccountStatus
     createdAt?: Date | string
+    authProvider?: $Enums.AuthProvider
+    externalId?: string | null
+    resetCode?: string | null
+    resetCodeExpiresAt?: Date | string | null
     playerProfile?: PlayerProfileUncheckedCreateNestedOneWithoutAccountInput
     sessions?: SessionUncheckedCreateNestedManyWithoutAccountInput
     memberships?: MemberUncheckedCreateNestedManyWithoutAccountInput
@@ -97709,6 +98314,10 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    authProvider?: EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
+    externalId?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCode?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCodeExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     playerProfile?: PlayerProfileUpdateOneWithoutAccountNestedInput
     sessions?: SessionUpdateManyWithoutAccountNestedInput
     memberships?: MemberUpdateManyWithoutAccountNestedInput
@@ -97744,6 +98353,10 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    authProvider?: EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
+    externalId?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCode?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCodeExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     playerProfile?: PlayerProfileUncheckedUpdateOneWithoutAccountNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutAccountNestedInput
     memberships?: MemberUncheckedUpdateManyWithoutAccountNestedInput
@@ -97802,6 +98415,10 @@ export namespace Prisma {
     passwordHash?: string | null
     status?: $Enums.AccountStatus
     createdAt?: Date | string
+    authProvider?: $Enums.AuthProvider
+    externalId?: string | null
+    resetCode?: string | null
+    resetCodeExpiresAt?: Date | string | null
     playerProfile?: PlayerProfileCreateNestedOneWithoutAccountInput
     sessions?: SessionCreateNestedManyWithoutAccountInput
     memberships?: MemberCreateNestedManyWithoutAccountInput
@@ -97837,6 +98454,10 @@ export namespace Prisma {
     passwordHash?: string | null
     status?: $Enums.AccountStatus
     createdAt?: Date | string
+    authProvider?: $Enums.AuthProvider
+    externalId?: string | null
+    resetCode?: string | null
+    resetCodeExpiresAt?: Date | string | null
     playerProfile?: PlayerProfileUncheckedCreateNestedOneWithoutAccountInput
     sessions?: SessionUncheckedCreateNestedManyWithoutAccountInput
     memberships?: MemberUncheckedCreateNestedManyWithoutAccountInput
@@ -97917,6 +98538,10 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    authProvider?: EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
+    externalId?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCode?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCodeExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     playerProfile?: PlayerProfileUpdateOneWithoutAccountNestedInput
     sessions?: SessionUpdateManyWithoutAccountNestedInput
     memberships?: MemberUpdateManyWithoutAccountNestedInput
@@ -97952,6 +98577,10 @@ export namespace Prisma {
     passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    authProvider?: EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
+    externalId?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCode?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCodeExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     playerProfile?: PlayerProfileUncheckedUpdateOneWithoutAccountNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutAccountNestedInput
     memberships?: MemberUncheckedUpdateManyWithoutAccountNestedInput

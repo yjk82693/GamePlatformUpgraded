@@ -125,7 +125,11 @@ exports.Prisma.AccountScalarFieldEnum = {
   email: 'email',
   passwordHash: 'passwordHash',
   status: 'status',
-  createdAt: 'createdAt'
+  createdAt: 'createdAt',
+  authProvider: 'authProvider',
+  externalId: 'externalId',
+  resetCode: 'resetCode',
+  resetCodeExpiresAt: 'resetCodeExpiresAt'
 };
 
 exports.Prisma.OrgScalarFieldEnum = {
@@ -586,6 +590,12 @@ exports.AccountStatus = exports.$Enums.AccountStatus = {
   ACTIVE: 'ACTIVE',
   SUSPENDED: 'SUSPENDED',
   KICKED: 'KICKED'
+};
+
+exports.AuthProvider = exports.$Enums.AuthProvider = {
+  MANUAL: 'MANUAL',
+  GOOGLE: 'GOOGLE',
+  APPLE: 'APPLE'
 };
 
 exports.AppStatus = exports.$Enums.AppStatus = {
