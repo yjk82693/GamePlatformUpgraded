@@ -5,7 +5,7 @@
   "description": "",
   "main": "dist/index.js",
   "scripts": {
-    "build": "tsc && cp -r src/generated dist/generated"
+    "build": "tsc && rm -rf dist/generated && cp -r src/generated dist/generated"
   },
   "keywords": [],
   "author": "",

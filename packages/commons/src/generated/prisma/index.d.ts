@@ -7080,6 +7080,7 @@ export namespace Prisma {
   export type AppCountOutputType = {
     accountApps: number
     builds: number
+    products: number
     leaderboards: number
     gameStatuses: number
     notices: number
@@ -7089,6 +7090,7 @@ export namespace Prisma {
   export type AppCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     accountApps?: boolean | AppCountOutputTypeCountAccountAppsArgs
     builds?: boolean | AppCountOutputTypeCountBuildsArgs
+    products?: boolean | AppCountOutputTypeCountProductsArgs
     leaderboards?: boolean | AppCountOutputTypeCountLeaderboardsArgs
     gameStatuses?: boolean | AppCountOutputTypeCountGameStatusesArgs
     notices?: boolean | AppCountOutputTypeCountNoticesArgs
@@ -7118,6 +7120,13 @@ export namespace Prisma {
    */
   export type AppCountOutputTypeCountBuildsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: BuildWhereInput
+  }
+
+  /**
+   * AppCountOutputType without action
+   */
+  export type AppCountOutputTypeCountProductsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ProductWhereInput
   }
 
   /**
@@ -12980,6 +12989,7 @@ export namespace Prisma {
     ownerOrg?: boolean | OrgDefaultArgs<ExtArgs>
     accountApps?: boolean | App$accountAppsArgs<ExtArgs>
     builds?: boolean | App$buildsArgs<ExtArgs>
+    products?: boolean | App$productsArgs<ExtArgs>
     leaderboards?: boolean | App$leaderboardsArgs<ExtArgs>
     gameStatuses?: boolean | App$gameStatusesArgs<ExtArgs>
     notices?: boolean | App$noticesArgs<ExtArgs>
@@ -13018,6 +13028,7 @@ export namespace Prisma {
     ownerOrg?: boolean | OrgDefaultArgs<ExtArgs>
     accountApps?: boolean | App$accountAppsArgs<ExtArgs>
     builds?: boolean | App$buildsArgs<ExtArgs>
+    products?: boolean | App$productsArgs<ExtArgs>
     leaderboards?: boolean | App$leaderboardsArgs<ExtArgs>
     gameStatuses?: boolean | App$gameStatusesArgs<ExtArgs>
     notices?: boolean | App$noticesArgs<ExtArgs>
@@ -13037,6 +13048,7 @@ export namespace Prisma {
       ownerOrg: Prisma.$OrgPayload<ExtArgs>
       accountApps: Prisma.$AccountAppPayload<ExtArgs>[]
       builds: Prisma.$BuildPayload<ExtArgs>[]
+      products: Prisma.$ProductPayload<ExtArgs>[]
       leaderboards: Prisma.$LeaderboardPayload<ExtArgs>[]
       gameStatuses: Prisma.$GameStatusPayload<ExtArgs>[]
       notices: Prisma.$NoticePayload<ExtArgs>[]
@@ -13445,6 +13457,7 @@ export namespace Prisma {
     ownerOrg<T extends OrgDefaultArgs<ExtArgs> = {}>(args?: Subset<T, OrgDefaultArgs<ExtArgs>>): Prisma__OrgClient<$Result.GetResult<Prisma.$OrgPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     accountApps<T extends App$accountAppsArgs<ExtArgs> = {}>(args?: Subset<T, App$accountAppsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AccountAppPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     builds<T extends App$buildsArgs<ExtArgs> = {}>(args?: Subset<T, App$buildsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BuildPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    products<T extends App$productsArgs<ExtArgs> = {}>(args?: Subset<T, App$productsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     leaderboards<T extends App$leaderboardsArgs<ExtArgs> = {}>(args?: Subset<T, App$leaderboardsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LeaderboardPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     gameStatuses<T extends App$gameStatusesArgs<ExtArgs> = {}>(args?: Subset<T, App$gameStatusesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GameStatusPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     notices<T extends App$noticesArgs<ExtArgs> = {}>(args?: Subset<T, App$noticesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NoticePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -13929,6 +13942,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: BuildScalarFieldEnum | BuildScalarFieldEnum[]
+  }
+
+  /**
+   * App.products
+   */
+  export type App$productsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Product
+     */
+    select?: ProductSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Product
+     */
+    omit?: ProductOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductInclude<ExtArgs> | null
+    where?: ProductWhereInput
+    orderBy?: ProductOrderByWithRelationInput | ProductOrderByWithRelationInput[]
+    cursor?: ProductWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ProductScalarFieldEnum | ProductScalarFieldEnum[]
   }
 
   /**
@@ -26769,6 +26806,7 @@ export namespace Prisma {
 
   export type ProductMinAggregateOutputType = {
     id: string | null
+    appId: string | null
     name: string | null
     enabled: boolean | null
     priceCents: number | null
@@ -26778,6 +26816,7 @@ export namespace Prisma {
 
   export type ProductMaxAggregateOutputType = {
     id: string | null
+    appId: string | null
     name: string | null
     enabled: boolean | null
     priceCents: number | null
@@ -26787,6 +26826,7 @@ export namespace Prisma {
 
   export type ProductCountAggregateOutputType = {
     id: number
+    appId: number
     name: number
     enabled: number
     priceCents: number
@@ -26808,6 +26848,7 @@ export namespace Prisma {
 
   export type ProductMinAggregateInputType = {
     id?: true
+    appId?: true
     name?: true
     enabled?: true
     priceCents?: true
@@ -26817,6 +26858,7 @@ export namespace Prisma {
 
   export type ProductMaxAggregateInputType = {
     id?: true
+    appId?: true
     name?: true
     enabled?: true
     priceCents?: true
@@ -26826,6 +26868,7 @@ export namespace Prisma {
 
   export type ProductCountAggregateInputType = {
     id?: true
+    appId?: true
     name?: true
     enabled?: true
     priceCents?: true
@@ -26922,6 +26965,7 @@ export namespace Prisma {
 
   export type ProductGroupByOutputType = {
     id: string
+    appId: string
     name: string
     enabled: boolean
     priceCents: number | null
@@ -26950,11 +26994,13 @@ export namespace Prisma {
 
   export type ProductSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    appId?: boolean
     name?: boolean
     enabled?: boolean
     priceCents?: boolean
     priceCoins?: boolean
     categoryId?: boolean
+    app?: boolean | AppDefaultArgs<ExtArgs>
     category?: boolean | Product$categoryArgs<ExtArgs>
     items?: boolean | Product$itemsArgs<ExtArgs>
     transactions?: boolean | Product$transactionsArgs<ExtArgs>
@@ -26965,26 +27011,31 @@ export namespace Prisma {
 
   export type ProductSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    appId?: boolean
     name?: boolean
     enabled?: boolean
     priceCents?: boolean
     priceCoins?: boolean
     categoryId?: boolean
+    app?: boolean | AppDefaultArgs<ExtArgs>
     category?: boolean | Product$categoryArgs<ExtArgs>
   }, ExtArgs["result"]["product"]>
 
   export type ProductSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    appId?: boolean
     name?: boolean
     enabled?: boolean
     priceCents?: boolean
     priceCoins?: boolean
     categoryId?: boolean
+    app?: boolean | AppDefaultArgs<ExtArgs>
     category?: boolean | Product$categoryArgs<ExtArgs>
   }, ExtArgs["result"]["product"]>
 
   export type ProductSelectScalar = {
     id?: boolean
+    appId?: boolean
     name?: boolean
     enabled?: boolean
     priceCents?: boolean
@@ -26992,8 +27043,9 @@ export namespace Prisma {
     categoryId?: boolean
   }
 
-  export type ProductOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "enabled" | "priceCents" | "priceCoins" | "categoryId", ExtArgs["result"]["product"]>
+  export type ProductOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "appId" | "name" | "enabled" | "priceCents" | "priceCoins" | "categoryId", ExtArgs["result"]["product"]>
   export type ProductInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    app?: boolean | AppDefaultArgs<ExtArgs>
     category?: boolean | Product$categoryArgs<ExtArgs>
     items?: boolean | Product$itemsArgs<ExtArgs>
     transactions?: boolean | Product$transactionsArgs<ExtArgs>
@@ -27002,15 +27054,18 @@ export namespace Prisma {
     _count?: boolean | ProductCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ProductIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    app?: boolean | AppDefaultArgs<ExtArgs>
     category?: boolean | Product$categoryArgs<ExtArgs>
   }
   export type ProductIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    app?: boolean | AppDefaultArgs<ExtArgs>
     category?: boolean | Product$categoryArgs<ExtArgs>
   }
 
   export type $ProductPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Product"
     objects: {
+      app: Prisma.$AppPayload<ExtArgs>
       category: Prisma.$CategoryPayload<ExtArgs> | null
       items: Prisma.$ItemPayload<ExtArgs>[]
       transactions: Prisma.$TransactionPayload<ExtArgs>[]
@@ -27019,6 +27074,7 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
+      appId: string
       name: string
       enabled: boolean
       priceCents: number | null
@@ -27418,6 +27474,7 @@ export namespace Prisma {
    */
   export interface Prisma__ProductClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    app<T extends AppDefaultArgs<ExtArgs> = {}>(args?: Subset<T, AppDefaultArgs<ExtArgs>>): Prisma__AppClient<$Result.GetResult<Prisma.$AppPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     category<T extends Product$categoryArgs<ExtArgs> = {}>(args?: Subset<T, Product$categoryArgs<ExtArgs>>): Prisma__CategoryClient<$Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     items<T extends Product$itemsArgs<ExtArgs> = {}>(args?: Subset<T, Product$itemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     transactions<T extends Product$transactionsArgs<ExtArgs> = {}>(args?: Subset<T, Product$transactionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TransactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -27453,6 +27510,7 @@ export namespace Prisma {
    */
   interface ProductFieldRefs {
     readonly id: FieldRef<"Product", 'String'>
+    readonly appId: FieldRef<"Product", 'String'>
     readonly name: FieldRef<"Product", 'String'>
     readonly enabled: FieldRef<"Product", 'Boolean'>
     readonly priceCents: FieldRef<"Product", 'Int'>
@@ -74856,6 +74914,7 @@ export namespace Prisma {
 
   export const ProductScalarFieldEnum: {
     id: 'id',
+    appId: 'appId',
     name: 'name',
     enabled: 'enabled',
     priceCents: 'priceCents',
@@ -75983,6 +76042,7 @@ export namespace Prisma {
     ownerOrg?: XOR<OrgScalarRelationFilter, OrgWhereInput>
     accountApps?: AccountAppListRelationFilter
     builds?: BuildListRelationFilter
+    products?: ProductListRelationFilter
     leaderboards?: LeaderboardListRelationFilter
     gameStatuses?: GameStatusListRelationFilter
     notices?: NoticeListRelationFilter
@@ -75998,6 +76058,7 @@ export namespace Prisma {
     ownerOrg?: OrgOrderByWithRelationInput
     accountApps?: AccountAppOrderByRelationAggregateInput
     builds?: BuildOrderByRelationAggregateInput
+    products?: ProductOrderByRelationAggregateInput
     leaderboards?: LeaderboardOrderByRelationAggregateInput
     gameStatuses?: GameStatusOrderByRelationAggregateInput
     notices?: NoticeOrderByRelationAggregateInput
@@ -76016,6 +76077,7 @@ export namespace Prisma {
     ownerOrg?: XOR<OrgScalarRelationFilter, OrgWhereInput>
     accountApps?: AccountAppListRelationFilter
     builds?: BuildListRelationFilter
+    products?: ProductListRelationFilter
     leaderboards?: LeaderboardListRelationFilter
     gameStatuses?: GameStatusListRelationFilter
     notices?: NoticeListRelationFilter
@@ -76660,11 +76722,13 @@ export namespace Prisma {
     OR?: ProductWhereInput[]
     NOT?: ProductWhereInput | ProductWhereInput[]
     id?: StringFilter<"Product"> | string
+    appId?: StringFilter<"Product"> | string
     name?: StringFilter<"Product"> | string
     enabled?: BoolFilter<"Product"> | boolean
     priceCents?: IntNullableFilter<"Product"> | number | null
     priceCoins?: IntNullableFilter<"Product"> | number | null
     categoryId?: StringNullableFilter<"Product"> | string | null
+    app?: XOR<AppScalarRelationFilter, AppWhereInput>
     category?: XOR<CategoryNullableScalarRelationFilter, CategoryWhereInput> | null
     items?: ItemListRelationFilter
     transactions?: TransactionListRelationFilter
@@ -76674,11 +76738,13 @@ export namespace Prisma {
 
   export type ProductOrderByWithRelationInput = {
     id?: SortOrder
+    appId?: SortOrder
     name?: SortOrder
     enabled?: SortOrder
     priceCents?: SortOrderInput | SortOrder
     priceCoins?: SortOrderInput | SortOrder
     categoryId?: SortOrderInput | SortOrder
+    app?: AppOrderByWithRelationInput
     category?: CategoryOrderByWithRelationInput
     items?: ItemOrderByRelationAggregateInput
     transactions?: TransactionOrderByRelationAggregateInput
@@ -76691,11 +76757,13 @@ export namespace Prisma {
     AND?: ProductWhereInput | ProductWhereInput[]
     OR?: ProductWhereInput[]
     NOT?: ProductWhereInput | ProductWhereInput[]
+    appId?: StringFilter<"Product"> | string
     name?: StringFilter<"Product"> | string
     enabled?: BoolFilter<"Product"> | boolean
     priceCents?: IntNullableFilter<"Product"> | number | null
     priceCoins?: IntNullableFilter<"Product"> | number | null
     categoryId?: StringNullableFilter<"Product"> | string | null
+    app?: XOR<AppScalarRelationFilter, AppWhereInput>
     category?: XOR<CategoryNullableScalarRelationFilter, CategoryWhereInput> | null
     items?: ItemListRelationFilter
     transactions?: TransactionListRelationFilter
@@ -76705,6 +76773,7 @@ export namespace Prisma {
 
   export type ProductOrderByWithAggregationInput = {
     id?: SortOrder
+    appId?: SortOrder
     name?: SortOrder
     enabled?: SortOrder
     priceCents?: SortOrderInput | SortOrder
@@ -76722,6 +76791,7 @@ export namespace Prisma {
     OR?: ProductScalarWhereWithAggregatesInput[]
     NOT?: ProductScalarWhereWithAggregatesInput | ProductScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Product"> | string
+    appId?: StringWithAggregatesFilter<"Product"> | string
     name?: StringWithAggregatesFilter<"Product"> | string
     enabled?: BoolWithAggregatesFilter<"Product"> | boolean
     priceCents?: IntNullableWithAggregatesFilter<"Product"> | number | null
@@ -77095,6 +77165,7 @@ export namespace Prisma {
 
   export type ReviewWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    accountId_productId?: ReviewAccountIdProductIdCompoundUniqueInput
     AND?: ReviewWhereInput | ReviewWhereInput[]
     OR?: ReviewWhereInput[]
     NOT?: ReviewWhereInput | ReviewWhereInput[]
@@ -77104,7 +77175,7 @@ export namespace Prisma {
     body?: StringNullableFilter<"Review"> | string | null
     account?: XOR<AccountScalarRelationFilter, AccountWhereInput>
     product?: XOR<ProductScalarRelationFilter, ProductWhereInput>
-  }, "id">
+  }, "id" | "accountId_productId">
 
   export type ReviewOrderByWithAggregationInput = {
     id?: SortOrder
@@ -79361,6 +79432,7 @@ export namespace Prisma {
     ownerOrg: OrgCreateNestedOneWithoutAppsInput
     accountApps?: AccountAppCreateNestedManyWithoutAppInput
     builds?: BuildCreateNestedManyWithoutAppInput
+    products?: ProductCreateNestedManyWithoutAppInput
     leaderboards?: LeaderboardCreateNestedManyWithoutAppInput
     gameStatuses?: GameStatusCreateNestedManyWithoutAppInput
     notices?: NoticeCreateNestedManyWithoutAppInput
@@ -79375,6 +79447,7 @@ export namespace Prisma {
     ownerOrgId: string
     accountApps?: AccountAppUncheckedCreateNestedManyWithoutAppInput
     builds?: BuildUncheckedCreateNestedManyWithoutAppInput
+    products?: ProductUncheckedCreateNestedManyWithoutAppInput
     leaderboards?: LeaderboardUncheckedCreateNestedManyWithoutAppInput
     gameStatuses?: GameStatusUncheckedCreateNestedManyWithoutAppInput
     notices?: NoticeUncheckedCreateNestedManyWithoutAppInput
@@ -79389,6 +79462,7 @@ export namespace Prisma {
     ownerOrg?: OrgUpdateOneRequiredWithoutAppsNestedInput
     accountApps?: AccountAppUpdateManyWithoutAppNestedInput
     builds?: BuildUpdateManyWithoutAppNestedInput
+    products?: ProductUpdateManyWithoutAppNestedInput
     leaderboards?: LeaderboardUpdateManyWithoutAppNestedInput
     gameStatuses?: GameStatusUpdateManyWithoutAppNestedInput
     notices?: NoticeUpdateManyWithoutAppNestedInput
@@ -79403,6 +79477,7 @@ export namespace Prisma {
     ownerOrgId?: StringFieldUpdateOperationsInput | string
     accountApps?: AccountAppUncheckedUpdateManyWithoutAppNestedInput
     builds?: BuildUncheckedUpdateManyWithoutAppNestedInput
+    products?: ProductUncheckedUpdateManyWithoutAppNestedInput
     leaderboards?: LeaderboardUncheckedUpdateManyWithoutAppNestedInput
     gameStatuses?: GameStatusUncheckedUpdateManyWithoutAppNestedInput
     notices?: NoticeUncheckedUpdateManyWithoutAppNestedInput
@@ -80017,6 +80092,7 @@ export namespace Prisma {
     enabled?: boolean
     priceCents?: number | null
     priceCoins?: number | null
+    app: AppCreateNestedOneWithoutProductsInput
     category?: CategoryCreateNestedOneWithoutProductsInput
     items?: ItemCreateNestedManyWithoutProductInput
     transactions?: TransactionCreateNestedManyWithoutProductInput
@@ -80026,6 +80102,7 @@ export namespace Prisma {
 
   export type ProductUncheckedCreateInput = {
     id?: string
+    appId: string
     name: string
     enabled?: boolean
     priceCents?: number | null
@@ -80043,6 +80120,7 @@ export namespace Prisma {
     enabled?: BoolFieldUpdateOperationsInput | boolean
     priceCents?: NullableIntFieldUpdateOperationsInput | number | null
     priceCoins?: NullableIntFieldUpdateOperationsInput | number | null
+    app?: AppUpdateOneRequiredWithoutProductsNestedInput
     category?: CategoryUpdateOneWithoutProductsNestedInput
     items?: ItemUpdateManyWithoutProductNestedInput
     transactions?: TransactionUpdateManyWithoutProductNestedInput
@@ -80052,6 +80130,7 @@ export namespace Prisma {
 
   export type ProductUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    appId?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     enabled?: BoolFieldUpdateOperationsInput | boolean
     priceCents?: NullableIntFieldUpdateOperationsInput | number | null
@@ -80065,6 +80144,7 @@ export namespace Prisma {
 
   export type ProductCreateManyInput = {
     id?: string
+    appId: string
     name: string
     enabled?: boolean
     priceCents?: number | null
@@ -80082,6 +80162,7 @@ export namespace Prisma {
 
   export type ProductUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
+    appId?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     enabled?: BoolFieldUpdateOperationsInput | boolean
     priceCents?: NullableIntFieldUpdateOperationsInput | number | null
@@ -82835,6 +82916,12 @@ export namespace Prisma {
     none?: BuildWhereInput
   }
 
+  export type ProductListRelationFilter = {
+    every?: ProductWhereInput
+    some?: ProductWhereInput
+    none?: ProductWhereInput
+  }
+
   export type LeaderboardListRelationFilter = {
     every?: LeaderboardWhereInput
     some?: LeaderboardWhereInput
@@ -82854,6 +82941,10 @@ export namespace Prisma {
   }
 
   export type BuildOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ProductOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -83312,16 +83403,6 @@ export namespace Prisma {
     delta?: SortOrder
   }
 
-  export type ProductListRelationFilter = {
-    every?: ProductWhereInput
-    some?: ProductWhereInput
-    none?: ProductWhereInput
-  }
-
-  export type ProductOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
   export type CategoryCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
@@ -83370,6 +83451,7 @@ export namespace Prisma {
 
   export type ProductCountOrderByAggregateInput = {
     id?: SortOrder
+    appId?: SortOrder
     name?: SortOrder
     enabled?: SortOrder
     priceCents?: SortOrder
@@ -83384,6 +83466,7 @@ export namespace Prisma {
 
   export type ProductMaxOrderByAggregateInput = {
     id?: SortOrder
+    appId?: SortOrder
     name?: SortOrder
     enabled?: SortOrder
     priceCents?: SortOrder
@@ -83393,6 +83476,7 @@ export namespace Prisma {
 
   export type ProductMinOrderByAggregateInput = {
     id?: SortOrder
+    appId?: SortOrder
     name?: SortOrder
     enabled?: SortOrder
     priceCents?: SortOrder
@@ -83670,6 +83754,11 @@ export namespace Prisma {
     gt?: number | IntFieldRefInput<$PrismaModel>
     gte?: number | IntFieldRefInput<$PrismaModel>
     not?: NestedIntFilter<$PrismaModel> | number
+  }
+
+  export type ReviewAccountIdProductIdCompoundUniqueInput = {
+    accountId: string
+    productId: string
   }
 
   export type ReviewCountOrderByAggregateInput = {
@@ -86338,6 +86427,13 @@ export namespace Prisma {
     connect?: BuildWhereUniqueInput | BuildWhereUniqueInput[]
   }
 
+  export type ProductCreateNestedManyWithoutAppInput = {
+    create?: XOR<ProductCreateWithoutAppInput, ProductUncheckedCreateWithoutAppInput> | ProductCreateWithoutAppInput[] | ProductUncheckedCreateWithoutAppInput[]
+    connectOrCreate?: ProductCreateOrConnectWithoutAppInput | ProductCreateOrConnectWithoutAppInput[]
+    createMany?: ProductCreateManyAppInputEnvelope
+    connect?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
+  }
+
   export type LeaderboardCreateNestedManyWithoutAppInput = {
     create?: XOR<LeaderboardCreateWithoutAppInput, LeaderboardUncheckedCreateWithoutAppInput> | LeaderboardCreateWithoutAppInput[] | LeaderboardUncheckedCreateWithoutAppInput[]
     connectOrCreate?: LeaderboardCreateOrConnectWithoutAppInput | LeaderboardCreateOrConnectWithoutAppInput[]
@@ -86378,6 +86474,13 @@ export namespace Prisma {
     connectOrCreate?: BuildCreateOrConnectWithoutAppInput | BuildCreateOrConnectWithoutAppInput[]
     createMany?: BuildCreateManyAppInputEnvelope
     connect?: BuildWhereUniqueInput | BuildWhereUniqueInput[]
+  }
+
+  export type ProductUncheckedCreateNestedManyWithoutAppInput = {
+    create?: XOR<ProductCreateWithoutAppInput, ProductUncheckedCreateWithoutAppInput> | ProductCreateWithoutAppInput[] | ProductUncheckedCreateWithoutAppInput[]
+    connectOrCreate?: ProductCreateOrConnectWithoutAppInput | ProductCreateOrConnectWithoutAppInput[]
+    createMany?: ProductCreateManyAppInputEnvelope
+    connect?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
   }
 
   export type LeaderboardUncheckedCreateNestedManyWithoutAppInput = {
@@ -86446,6 +86549,20 @@ export namespace Prisma {
     update?: BuildUpdateWithWhereUniqueWithoutAppInput | BuildUpdateWithWhereUniqueWithoutAppInput[]
     updateMany?: BuildUpdateManyWithWhereWithoutAppInput | BuildUpdateManyWithWhereWithoutAppInput[]
     deleteMany?: BuildScalarWhereInput | BuildScalarWhereInput[]
+  }
+
+  export type ProductUpdateManyWithoutAppNestedInput = {
+    create?: XOR<ProductCreateWithoutAppInput, ProductUncheckedCreateWithoutAppInput> | ProductCreateWithoutAppInput[] | ProductUncheckedCreateWithoutAppInput[]
+    connectOrCreate?: ProductCreateOrConnectWithoutAppInput | ProductCreateOrConnectWithoutAppInput[]
+    upsert?: ProductUpsertWithWhereUniqueWithoutAppInput | ProductUpsertWithWhereUniqueWithoutAppInput[]
+    createMany?: ProductCreateManyAppInputEnvelope
+    set?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
+    disconnect?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
+    delete?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
+    connect?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
+    update?: ProductUpdateWithWhereUniqueWithoutAppInput | ProductUpdateWithWhereUniqueWithoutAppInput[]
+    updateMany?: ProductUpdateManyWithWhereWithoutAppInput | ProductUpdateManyWithWhereWithoutAppInput[]
+    deleteMany?: ProductScalarWhereInput | ProductScalarWhereInput[]
   }
 
   export type LeaderboardUpdateManyWithoutAppNestedInput = {
@@ -86530,6 +86647,20 @@ export namespace Prisma {
     update?: BuildUpdateWithWhereUniqueWithoutAppInput | BuildUpdateWithWhereUniqueWithoutAppInput[]
     updateMany?: BuildUpdateManyWithWhereWithoutAppInput | BuildUpdateManyWithWhereWithoutAppInput[]
     deleteMany?: BuildScalarWhereInput | BuildScalarWhereInput[]
+  }
+
+  export type ProductUncheckedUpdateManyWithoutAppNestedInput = {
+    create?: XOR<ProductCreateWithoutAppInput, ProductUncheckedCreateWithoutAppInput> | ProductCreateWithoutAppInput[] | ProductUncheckedCreateWithoutAppInput[]
+    connectOrCreate?: ProductCreateOrConnectWithoutAppInput | ProductCreateOrConnectWithoutAppInput[]
+    upsert?: ProductUpsertWithWhereUniqueWithoutAppInput | ProductUpsertWithWhereUniqueWithoutAppInput[]
+    createMany?: ProductCreateManyAppInputEnvelope
+    set?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
+    disconnect?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
+    delete?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
+    connect?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
+    update?: ProductUpdateWithWhereUniqueWithoutAppInput | ProductUpdateWithWhereUniqueWithoutAppInput[]
+    updateMany?: ProductUpdateManyWithWhereWithoutAppInput | ProductUpdateManyWithWhereWithoutAppInput[]
+    deleteMany?: ProductScalarWhereInput | ProductScalarWhereInput[]
   }
 
   export type LeaderboardUncheckedUpdateManyWithoutAppNestedInput = {
@@ -86968,6 +87099,12 @@ export namespace Prisma {
     deleteMany?: ProductScalarWhereInput | ProductScalarWhereInput[]
   }
 
+  export type AppCreateNestedOneWithoutProductsInput = {
+    create?: XOR<AppCreateWithoutProductsInput, AppUncheckedCreateWithoutProductsInput>
+    connectOrCreate?: AppCreateOrConnectWithoutProductsInput
+    connect?: AppWhereUniqueInput
+  }
+
   export type CategoryCreateNestedOneWithoutProductsInput = {
     create?: XOR<CategoryCreateWithoutProductsInput, CategoryUncheckedCreateWithoutProductsInput>
     connectOrCreate?: CategoryCreateOrConnectWithoutProductsInput
@@ -87040,6 +87177,14 @@ export namespace Prisma {
     decrement?: number
     multiply?: number
     divide?: number
+  }
+
+  export type AppUpdateOneRequiredWithoutProductsNestedInput = {
+    create?: XOR<AppCreateWithoutProductsInput, AppUncheckedCreateWithoutProductsInput>
+    connectOrCreate?: AppCreateOrConnectWithoutProductsInput
+    upsert?: AppUpsertWithoutProductsInput
+    connect?: AppWhereUniqueInput
+    update?: XOR<XOR<AppUpdateToOneWithWhereWithoutProductsInput, AppUpdateWithoutProductsInput>, AppUncheckedUpdateWithoutProductsInput>
   }
 
   export type CategoryUpdateOneWithoutProductsNestedInput = {
@@ -90457,6 +90602,7 @@ export namespace Prisma {
     releaseDate?: Date | string | null
     accountApps?: AccountAppCreateNestedManyWithoutAppInput
     builds?: BuildCreateNestedManyWithoutAppInput
+    products?: ProductCreateNestedManyWithoutAppInput
     leaderboards?: LeaderboardCreateNestedManyWithoutAppInput
     gameStatuses?: GameStatusCreateNestedManyWithoutAppInput
     notices?: NoticeCreateNestedManyWithoutAppInput
@@ -90470,6 +90616,7 @@ export namespace Prisma {
     releaseDate?: Date | string | null
     accountApps?: AccountAppUncheckedCreateNestedManyWithoutAppInput
     builds?: BuildUncheckedCreateNestedManyWithoutAppInput
+    products?: ProductUncheckedCreateNestedManyWithoutAppInput
     leaderboards?: LeaderboardUncheckedCreateNestedManyWithoutAppInput
     gameStatuses?: GameStatusUncheckedCreateNestedManyWithoutAppInput
     notices?: NoticeUncheckedCreateNestedManyWithoutAppInput
@@ -90852,6 +90999,42 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type ProductCreateWithoutAppInput = {
+    id?: string
+    name: string
+    enabled?: boolean
+    priceCents?: number | null
+    priceCoins?: number | null
+    category?: CategoryCreateNestedOneWithoutProductsInput
+    items?: ItemCreateNestedManyWithoutProductInput
+    transactions?: TransactionCreateNestedManyWithoutProductInput
+    entitlements?: EntitlementCreateNestedManyWithoutProductInput
+    reviews?: ReviewCreateNestedManyWithoutProductInput
+  }
+
+  export type ProductUncheckedCreateWithoutAppInput = {
+    id?: string
+    name: string
+    enabled?: boolean
+    priceCents?: number | null
+    priceCoins?: number | null
+    categoryId?: string | null
+    items?: ItemUncheckedCreateNestedManyWithoutProductInput
+    transactions?: TransactionUncheckedCreateNestedManyWithoutProductInput
+    entitlements?: EntitlementUncheckedCreateNestedManyWithoutProductInput
+    reviews?: ReviewUncheckedCreateNestedManyWithoutProductInput
+  }
+
+  export type ProductCreateOrConnectWithoutAppInput = {
+    where: ProductWhereUniqueInput
+    create: XOR<ProductCreateWithoutAppInput, ProductUncheckedCreateWithoutAppInput>
+  }
+
+  export type ProductCreateManyAppInputEnvelope = {
+    data: ProductCreateManyAppInput | ProductCreateManyAppInput[]
+    skipDuplicates?: boolean
+  }
+
   export type LeaderboardCreateWithoutAppInput = {
     id?: string
     name: string
@@ -91016,6 +91199,35 @@ export namespace Prisma {
     version?: StringFilter<"Build"> | string
     checksum?: StringFilter<"Build"> | string
     published?: BoolFilter<"Build"> | boolean
+  }
+
+  export type ProductUpsertWithWhereUniqueWithoutAppInput = {
+    where: ProductWhereUniqueInput
+    update: XOR<ProductUpdateWithoutAppInput, ProductUncheckedUpdateWithoutAppInput>
+    create: XOR<ProductCreateWithoutAppInput, ProductUncheckedCreateWithoutAppInput>
+  }
+
+  export type ProductUpdateWithWhereUniqueWithoutAppInput = {
+    where: ProductWhereUniqueInput
+    data: XOR<ProductUpdateWithoutAppInput, ProductUncheckedUpdateWithoutAppInput>
+  }
+
+  export type ProductUpdateManyWithWhereWithoutAppInput = {
+    where: ProductScalarWhereInput
+    data: XOR<ProductUpdateManyMutationInput, ProductUncheckedUpdateManyWithoutAppInput>
+  }
+
+  export type ProductScalarWhereInput = {
+    AND?: ProductScalarWhereInput | ProductScalarWhereInput[]
+    OR?: ProductScalarWhereInput[]
+    NOT?: ProductScalarWhereInput | ProductScalarWhereInput[]
+    id?: StringFilter<"Product"> | string
+    appId?: StringFilter<"Product"> | string
+    name?: StringFilter<"Product"> | string
+    enabled?: BoolFilter<"Product"> | boolean
+    priceCents?: IntNullableFilter<"Product"> | number | null
+    priceCoins?: IntNullableFilter<"Product"> | number | null
+    categoryId?: StringNullableFilter<"Product"> | string | null
   }
 
   export type LeaderboardUpsertWithWhereUniqueWithoutAppInput = {
@@ -91206,6 +91418,7 @@ export namespace Prisma {
     releaseDate?: Date | string | null
     ownerOrg: OrgCreateNestedOneWithoutAppsInput
     builds?: BuildCreateNestedManyWithoutAppInput
+    products?: ProductCreateNestedManyWithoutAppInput
     leaderboards?: LeaderboardCreateNestedManyWithoutAppInput
     gameStatuses?: GameStatusCreateNestedManyWithoutAppInput
     notices?: NoticeCreateNestedManyWithoutAppInput
@@ -91219,6 +91432,7 @@ export namespace Prisma {
     releaseDate?: Date | string | null
     ownerOrgId: string
     builds?: BuildUncheckedCreateNestedManyWithoutAppInput
+    products?: ProductUncheckedCreateNestedManyWithoutAppInput
     leaderboards?: LeaderboardUncheckedCreateNestedManyWithoutAppInput
     gameStatuses?: GameStatusUncheckedCreateNestedManyWithoutAppInput
     notices?: NoticeUncheckedCreateNestedManyWithoutAppInput
@@ -91337,6 +91551,7 @@ export namespace Prisma {
     releaseDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     ownerOrg?: OrgUpdateOneRequiredWithoutAppsNestedInput
     builds?: BuildUpdateManyWithoutAppNestedInput
+    products?: ProductUpdateManyWithoutAppNestedInput
     leaderboards?: LeaderboardUpdateManyWithoutAppNestedInput
     gameStatuses?: GameStatusUpdateManyWithoutAppNestedInput
     notices?: NoticeUpdateManyWithoutAppNestedInput
@@ -91350,6 +91565,7 @@ export namespace Prisma {
     releaseDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     ownerOrgId?: StringFieldUpdateOperationsInput | string
     builds?: BuildUncheckedUpdateManyWithoutAppNestedInput
+    products?: ProductUncheckedUpdateManyWithoutAppNestedInput
     leaderboards?: LeaderboardUncheckedUpdateManyWithoutAppNestedInput
     gameStatuses?: GameStatusUncheckedUpdateManyWithoutAppNestedInput
     notices?: NoticeUncheckedUpdateManyWithoutAppNestedInput
@@ -92602,6 +92818,7 @@ export namespace Prisma {
     enabled?: boolean
     priceCents?: number | null
     priceCoins?: number | null
+    app: AppCreateNestedOneWithoutProductsInput
     items?: ItemCreateNestedManyWithoutProductInput
     transactions?: TransactionCreateNestedManyWithoutProductInput
     entitlements?: EntitlementCreateNestedManyWithoutProductInput
@@ -92610,6 +92827,7 @@ export namespace Prisma {
 
   export type ProductUncheckedCreateWithoutCategoryInput = {
     id?: string
+    appId: string
     name: string
     enabled?: boolean
     priceCents?: number | null
@@ -92646,16 +92864,37 @@ export namespace Prisma {
     data: XOR<ProductUpdateManyMutationInput, ProductUncheckedUpdateManyWithoutCategoryInput>
   }
 
-  export type ProductScalarWhereInput = {
-    AND?: ProductScalarWhereInput | ProductScalarWhereInput[]
-    OR?: ProductScalarWhereInput[]
-    NOT?: ProductScalarWhereInput | ProductScalarWhereInput[]
-    id?: StringFilter<"Product"> | string
-    name?: StringFilter<"Product"> | string
-    enabled?: BoolFilter<"Product"> | boolean
-    priceCents?: IntNullableFilter<"Product"> | number | null
-    priceCoins?: IntNullableFilter<"Product"> | number | null
-    categoryId?: StringNullableFilter<"Product"> | string | null
+  export type AppCreateWithoutProductsInput = {
+    id?: string
+    name: string
+    status?: $Enums.AppStatus
+    releaseDate?: Date | string | null
+    ownerOrg: OrgCreateNestedOneWithoutAppsInput
+    accountApps?: AccountAppCreateNestedManyWithoutAppInput
+    builds?: BuildCreateNestedManyWithoutAppInput
+    leaderboards?: LeaderboardCreateNestedManyWithoutAppInput
+    gameStatuses?: GameStatusCreateNestedManyWithoutAppInput
+    notices?: NoticeCreateNestedManyWithoutAppInput
+    liveEvents?: LiveEventCreateNestedManyWithoutAppInput
+  }
+
+  export type AppUncheckedCreateWithoutProductsInput = {
+    id?: string
+    name: string
+    status?: $Enums.AppStatus
+    releaseDate?: Date | string | null
+    ownerOrgId: string
+    accountApps?: AccountAppUncheckedCreateNestedManyWithoutAppInput
+    builds?: BuildUncheckedCreateNestedManyWithoutAppInput
+    leaderboards?: LeaderboardUncheckedCreateNestedManyWithoutAppInput
+    gameStatuses?: GameStatusUncheckedCreateNestedManyWithoutAppInput
+    notices?: NoticeUncheckedCreateNestedManyWithoutAppInput
+    liveEvents?: LiveEventUncheckedCreateNestedManyWithoutAppInput
+  }
+
+  export type AppCreateOrConnectWithoutProductsInput = {
+    where: AppWhereUniqueInput
+    create: XOR<AppCreateWithoutProductsInput, AppUncheckedCreateWithoutProductsInput>
   }
 
   export type CategoryCreateWithoutProductsInput = {
@@ -92763,6 +93002,45 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type AppUpsertWithoutProductsInput = {
+    update: XOR<AppUpdateWithoutProductsInput, AppUncheckedUpdateWithoutProductsInput>
+    create: XOR<AppCreateWithoutProductsInput, AppUncheckedCreateWithoutProductsInput>
+    where?: AppWhereInput
+  }
+
+  export type AppUpdateToOneWithWhereWithoutProductsInput = {
+    where?: AppWhereInput
+    data: XOR<AppUpdateWithoutProductsInput, AppUncheckedUpdateWithoutProductsInput>
+  }
+
+  export type AppUpdateWithoutProductsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    status?: EnumAppStatusFieldUpdateOperationsInput | $Enums.AppStatus
+    releaseDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    ownerOrg?: OrgUpdateOneRequiredWithoutAppsNestedInput
+    accountApps?: AccountAppUpdateManyWithoutAppNestedInput
+    builds?: BuildUpdateManyWithoutAppNestedInput
+    leaderboards?: LeaderboardUpdateManyWithoutAppNestedInput
+    gameStatuses?: GameStatusUpdateManyWithoutAppNestedInput
+    notices?: NoticeUpdateManyWithoutAppNestedInput
+    liveEvents?: LiveEventUpdateManyWithoutAppNestedInput
+  }
+
+  export type AppUncheckedUpdateWithoutProductsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    status?: EnumAppStatusFieldUpdateOperationsInput | $Enums.AppStatus
+    releaseDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    ownerOrgId?: StringFieldUpdateOperationsInput | string
+    accountApps?: AccountAppUncheckedUpdateManyWithoutAppNestedInput
+    builds?: BuildUncheckedUpdateManyWithoutAppNestedInput
+    leaderboards?: LeaderboardUncheckedUpdateManyWithoutAppNestedInput
+    gameStatuses?: GameStatusUncheckedUpdateManyWithoutAppNestedInput
+    notices?: NoticeUncheckedUpdateManyWithoutAppNestedInput
+    liveEvents?: LiveEventUncheckedUpdateManyWithoutAppNestedInput
+  }
+
   export type CategoryUpsertWithoutProductsInput = {
     update: XOR<CategoryUpdateWithoutProductsInput, CategoryUncheckedUpdateWithoutProductsInput>
     create: XOR<CategoryCreateWithoutProductsInput, CategoryUncheckedCreateWithoutProductsInput>
@@ -92864,6 +93142,7 @@ export namespace Prisma {
     enabled?: boolean
     priceCents?: number | null
     priceCoins?: number | null
+    app: AppCreateNestedOneWithoutProductsInput
     category?: CategoryCreateNestedOneWithoutProductsInput
     transactions?: TransactionCreateNestedManyWithoutProductInput
     entitlements?: EntitlementCreateNestedManyWithoutProductInput
@@ -92872,6 +93151,7 @@ export namespace Prisma {
 
   export type ProductUncheckedCreateWithoutItemsInput = {
     id?: string
+    appId: string
     name: string
     enabled?: boolean
     priceCents?: number | null
@@ -92904,6 +93184,7 @@ export namespace Prisma {
     enabled?: BoolFieldUpdateOperationsInput | boolean
     priceCents?: NullableIntFieldUpdateOperationsInput | number | null
     priceCoins?: NullableIntFieldUpdateOperationsInput | number | null
+    app?: AppUpdateOneRequiredWithoutProductsNestedInput
     category?: CategoryUpdateOneWithoutProductsNestedInput
     transactions?: TransactionUpdateManyWithoutProductNestedInput
     entitlements?: EntitlementUpdateManyWithoutProductNestedInput
@@ -92912,6 +93193,7 @@ export namespace Prisma {
 
   export type ProductUncheckedUpdateWithoutItemsInput = {
     id?: StringFieldUpdateOperationsInput | string
+    appId?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     enabled?: BoolFieldUpdateOperationsInput | boolean
     priceCents?: NullableIntFieldUpdateOperationsInput | number | null
@@ -93011,6 +93293,7 @@ export namespace Prisma {
     enabled?: boolean
     priceCents?: number | null
     priceCoins?: number | null
+    app: AppCreateNestedOneWithoutProductsInput
     category?: CategoryCreateNestedOneWithoutProductsInput
     items?: ItemCreateNestedManyWithoutProductInput
     entitlements?: EntitlementCreateNestedManyWithoutProductInput
@@ -93019,6 +93302,7 @@ export namespace Prisma {
 
   export type ProductUncheckedCreateWithoutTransactionsInput = {
     id?: string
+    appId: string
     name: string
     enabled?: boolean
     priceCents?: number | null
@@ -93140,6 +93424,7 @@ export namespace Prisma {
     enabled?: BoolFieldUpdateOperationsInput | boolean
     priceCents?: NullableIntFieldUpdateOperationsInput | number | null
     priceCoins?: NullableIntFieldUpdateOperationsInput | number | null
+    app?: AppUpdateOneRequiredWithoutProductsNestedInput
     category?: CategoryUpdateOneWithoutProductsNestedInput
     items?: ItemUpdateManyWithoutProductNestedInput
     entitlements?: EntitlementUpdateManyWithoutProductNestedInput
@@ -93148,6 +93433,7 @@ export namespace Prisma {
 
   export type ProductUncheckedUpdateWithoutTransactionsInput = {
     id?: StringFieldUpdateOperationsInput | string
+    appId?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     enabled?: BoolFieldUpdateOperationsInput | boolean
     priceCents?: NullableIntFieldUpdateOperationsInput | number | null
@@ -93332,6 +93618,7 @@ export namespace Prisma {
     enabled?: boolean
     priceCents?: number | null
     priceCoins?: number | null
+    app: AppCreateNestedOneWithoutProductsInput
     category?: CategoryCreateNestedOneWithoutProductsInput
     items?: ItemCreateNestedManyWithoutProductInput
     transactions?: TransactionCreateNestedManyWithoutProductInput
@@ -93340,6 +93627,7 @@ export namespace Prisma {
 
   export type ProductUncheckedCreateWithoutReviewsInput = {
     id?: string
+    appId: string
     name: string
     enabled?: boolean
     priceCents?: number | null
@@ -93461,6 +93749,7 @@ export namespace Prisma {
     enabled?: BoolFieldUpdateOperationsInput | boolean
     priceCents?: NullableIntFieldUpdateOperationsInput | number | null
     priceCoins?: NullableIntFieldUpdateOperationsInput | number | null
+    app?: AppUpdateOneRequiredWithoutProductsNestedInput
     category?: CategoryUpdateOneWithoutProductsNestedInput
     items?: ItemUpdateManyWithoutProductNestedInput
     transactions?: TransactionUpdateManyWithoutProductNestedInput
@@ -93469,6 +93758,7 @@ export namespace Prisma {
 
   export type ProductUncheckedUpdateWithoutReviewsInput = {
     id?: StringFieldUpdateOperationsInput | string
+    appId?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     enabled?: BoolFieldUpdateOperationsInput | boolean
     priceCents?: NullableIntFieldUpdateOperationsInput | number | null
@@ -93984,6 +94274,7 @@ export namespace Prisma {
     releaseDate?: Date | string | null
     ownerOrg: OrgCreateNestedOneWithoutAppsInput
     accountApps?: AccountAppCreateNestedManyWithoutAppInput
+    products?: ProductCreateNestedManyWithoutAppInput
     leaderboards?: LeaderboardCreateNestedManyWithoutAppInput
     gameStatuses?: GameStatusCreateNestedManyWithoutAppInput
     notices?: NoticeCreateNestedManyWithoutAppInput
@@ -93997,6 +94288,7 @@ export namespace Prisma {
     releaseDate?: Date | string | null
     ownerOrgId: string
     accountApps?: AccountAppUncheckedCreateNestedManyWithoutAppInput
+    products?: ProductUncheckedCreateNestedManyWithoutAppInput
     leaderboards?: LeaderboardUncheckedCreateNestedManyWithoutAppInput
     gameStatuses?: GameStatusUncheckedCreateNestedManyWithoutAppInput
     notices?: NoticeUncheckedCreateNestedManyWithoutAppInput
@@ -94026,6 +94318,7 @@ export namespace Prisma {
     releaseDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     ownerOrg?: OrgUpdateOneRequiredWithoutAppsNestedInput
     accountApps?: AccountAppUpdateManyWithoutAppNestedInput
+    products?: ProductUpdateManyWithoutAppNestedInput
     leaderboards?: LeaderboardUpdateManyWithoutAppNestedInput
     gameStatuses?: GameStatusUpdateManyWithoutAppNestedInput
     notices?: NoticeUpdateManyWithoutAppNestedInput
@@ -94039,6 +94332,7 @@ export namespace Prisma {
     releaseDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     ownerOrgId?: StringFieldUpdateOperationsInput | string
     accountApps?: AccountAppUncheckedUpdateManyWithoutAppNestedInput
+    products?: ProductUncheckedUpdateManyWithoutAppNestedInput
     leaderboards?: LeaderboardUncheckedUpdateManyWithoutAppNestedInput
     gameStatuses?: GameStatusUncheckedUpdateManyWithoutAppNestedInput
     notices?: NoticeUncheckedUpdateManyWithoutAppNestedInput
@@ -94134,6 +94428,7 @@ export namespace Prisma {
     enabled?: boolean
     priceCents?: number | null
     priceCoins?: number | null
+    app: AppCreateNestedOneWithoutProductsInput
     category?: CategoryCreateNestedOneWithoutProductsInput
     items?: ItemCreateNestedManyWithoutProductInput
     transactions?: TransactionCreateNestedManyWithoutProductInput
@@ -94142,6 +94437,7 @@ export namespace Prisma {
 
   export type ProductUncheckedCreateWithoutEntitlementsInput = {
     id?: string
+    appId: string
     name: string
     enabled?: boolean
     priceCents?: number | null
@@ -94263,6 +94559,7 @@ export namespace Prisma {
     enabled?: BoolFieldUpdateOperationsInput | boolean
     priceCents?: NullableIntFieldUpdateOperationsInput | number | null
     priceCoins?: NullableIntFieldUpdateOperationsInput | number | null
+    app?: AppUpdateOneRequiredWithoutProductsNestedInput
     category?: CategoryUpdateOneWithoutProductsNestedInput
     items?: ItemUpdateManyWithoutProductNestedInput
     transactions?: TransactionUpdateManyWithoutProductNestedInput
@@ -94271,6 +94568,7 @@ export namespace Prisma {
 
   export type ProductUncheckedUpdateWithoutEntitlementsInput = {
     id?: StringFieldUpdateOperationsInput | string
+    appId?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     enabled?: BoolFieldUpdateOperationsInput | boolean
     priceCents?: NullableIntFieldUpdateOperationsInput | number | null
@@ -94633,6 +94931,7 @@ export namespace Prisma {
     ownerOrg: OrgCreateNestedOneWithoutAppsInput
     accountApps?: AccountAppCreateNestedManyWithoutAppInput
     builds?: BuildCreateNestedManyWithoutAppInput
+    products?: ProductCreateNestedManyWithoutAppInput
     gameStatuses?: GameStatusCreateNestedManyWithoutAppInput
     notices?: NoticeCreateNestedManyWithoutAppInput
     liveEvents?: LiveEventCreateNestedManyWithoutAppInput
@@ -94646,6 +94945,7 @@ export namespace Prisma {
     ownerOrgId: string
     accountApps?: AccountAppUncheckedCreateNestedManyWithoutAppInput
     builds?: BuildUncheckedCreateNestedManyWithoutAppInput
+    products?: ProductUncheckedCreateNestedManyWithoutAppInput
     gameStatuses?: GameStatusUncheckedCreateNestedManyWithoutAppInput
     notices?: NoticeUncheckedCreateNestedManyWithoutAppInput
     liveEvents?: LiveEventUncheckedCreateNestedManyWithoutAppInput
@@ -94699,6 +94999,7 @@ export namespace Prisma {
     ownerOrg?: OrgUpdateOneRequiredWithoutAppsNestedInput
     accountApps?: AccountAppUpdateManyWithoutAppNestedInput
     builds?: BuildUpdateManyWithoutAppNestedInput
+    products?: ProductUpdateManyWithoutAppNestedInput
     gameStatuses?: GameStatusUpdateManyWithoutAppNestedInput
     notices?: NoticeUpdateManyWithoutAppNestedInput
     liveEvents?: LiveEventUpdateManyWithoutAppNestedInput
@@ -94712,6 +95013,7 @@ export namespace Prisma {
     ownerOrgId?: StringFieldUpdateOperationsInput | string
     accountApps?: AccountAppUncheckedUpdateManyWithoutAppNestedInput
     builds?: BuildUncheckedUpdateManyWithoutAppNestedInput
+    products?: ProductUncheckedUpdateManyWithoutAppNestedInput
     gameStatuses?: GameStatusUncheckedUpdateManyWithoutAppNestedInput
     notices?: NoticeUncheckedUpdateManyWithoutAppNestedInput
     liveEvents?: LiveEventUncheckedUpdateManyWithoutAppNestedInput
@@ -95375,6 +95677,7 @@ export namespace Prisma {
     ownerOrg: OrgCreateNestedOneWithoutAppsInput
     accountApps?: AccountAppCreateNestedManyWithoutAppInput
     builds?: BuildCreateNestedManyWithoutAppInput
+    products?: ProductCreateNestedManyWithoutAppInput
     leaderboards?: LeaderboardCreateNestedManyWithoutAppInput
     notices?: NoticeCreateNestedManyWithoutAppInput
     liveEvents?: LiveEventCreateNestedManyWithoutAppInput
@@ -95388,6 +95691,7 @@ export namespace Prisma {
     ownerOrgId: string
     accountApps?: AccountAppUncheckedCreateNestedManyWithoutAppInput
     builds?: BuildUncheckedCreateNestedManyWithoutAppInput
+    products?: ProductUncheckedCreateNestedManyWithoutAppInput
     leaderboards?: LeaderboardUncheckedCreateNestedManyWithoutAppInput
     notices?: NoticeUncheckedCreateNestedManyWithoutAppInput
     liveEvents?: LiveEventUncheckedCreateNestedManyWithoutAppInput
@@ -95506,6 +95810,7 @@ export namespace Prisma {
     ownerOrg?: OrgUpdateOneRequiredWithoutAppsNestedInput
     accountApps?: AccountAppUpdateManyWithoutAppNestedInput
     builds?: BuildUpdateManyWithoutAppNestedInput
+    products?: ProductUpdateManyWithoutAppNestedInput
     leaderboards?: LeaderboardUpdateManyWithoutAppNestedInput
     notices?: NoticeUpdateManyWithoutAppNestedInput
     liveEvents?: LiveEventUpdateManyWithoutAppNestedInput
@@ -95519,6 +95824,7 @@ export namespace Prisma {
     ownerOrgId?: StringFieldUpdateOperationsInput | string
     accountApps?: AccountAppUncheckedUpdateManyWithoutAppNestedInput
     builds?: BuildUncheckedUpdateManyWithoutAppNestedInput
+    products?: ProductUncheckedUpdateManyWithoutAppNestedInput
     leaderboards?: LeaderboardUncheckedUpdateManyWithoutAppNestedInput
     notices?: NoticeUncheckedUpdateManyWithoutAppNestedInput
     liveEvents?: LiveEventUncheckedUpdateManyWithoutAppNestedInput
@@ -95884,6 +96190,7 @@ export namespace Prisma {
     ownerOrg: OrgCreateNestedOneWithoutAppsInput
     accountApps?: AccountAppCreateNestedManyWithoutAppInput
     builds?: BuildCreateNestedManyWithoutAppInput
+    products?: ProductCreateNestedManyWithoutAppInput
     leaderboards?: LeaderboardCreateNestedManyWithoutAppInput
     gameStatuses?: GameStatusCreateNestedManyWithoutAppInput
     liveEvents?: LiveEventCreateNestedManyWithoutAppInput
@@ -95897,6 +96204,7 @@ export namespace Prisma {
     ownerOrgId: string
     accountApps?: AccountAppUncheckedCreateNestedManyWithoutAppInput
     builds?: BuildUncheckedCreateNestedManyWithoutAppInput
+    products?: ProductUncheckedCreateNestedManyWithoutAppInput
     leaderboards?: LeaderboardUncheckedCreateNestedManyWithoutAppInput
     gameStatuses?: GameStatusUncheckedCreateNestedManyWithoutAppInput
     liveEvents?: LiveEventUncheckedCreateNestedManyWithoutAppInput
@@ -95926,6 +96234,7 @@ export namespace Prisma {
     ownerOrg?: OrgUpdateOneRequiredWithoutAppsNestedInput
     accountApps?: AccountAppUpdateManyWithoutAppNestedInput
     builds?: BuildUpdateManyWithoutAppNestedInput
+    products?: ProductUpdateManyWithoutAppNestedInput
     leaderboards?: LeaderboardUpdateManyWithoutAppNestedInput
     gameStatuses?: GameStatusUpdateManyWithoutAppNestedInput
     liveEvents?: LiveEventUpdateManyWithoutAppNestedInput
@@ -95939,6 +96248,7 @@ export namespace Prisma {
     ownerOrgId?: StringFieldUpdateOperationsInput | string
     accountApps?: AccountAppUncheckedUpdateManyWithoutAppNestedInput
     builds?: BuildUncheckedUpdateManyWithoutAppNestedInput
+    products?: ProductUncheckedUpdateManyWithoutAppNestedInput
     leaderboards?: LeaderboardUncheckedUpdateManyWithoutAppNestedInput
     gameStatuses?: GameStatusUncheckedUpdateManyWithoutAppNestedInput
     liveEvents?: LiveEventUncheckedUpdateManyWithoutAppNestedInput
@@ -95952,6 +96262,7 @@ export namespace Prisma {
     ownerOrg: OrgCreateNestedOneWithoutAppsInput
     accountApps?: AccountAppCreateNestedManyWithoutAppInput
     builds?: BuildCreateNestedManyWithoutAppInput
+    products?: ProductCreateNestedManyWithoutAppInput
     leaderboards?: LeaderboardCreateNestedManyWithoutAppInput
     gameStatuses?: GameStatusCreateNestedManyWithoutAppInput
     notices?: NoticeCreateNestedManyWithoutAppInput
@@ -95965,6 +96276,7 @@ export namespace Prisma {
     ownerOrgId: string
     accountApps?: AccountAppUncheckedCreateNestedManyWithoutAppInput
     builds?: BuildUncheckedCreateNestedManyWithoutAppInput
+    products?: ProductUncheckedCreateNestedManyWithoutAppInput
     leaderboards?: LeaderboardUncheckedCreateNestedManyWithoutAppInput
     gameStatuses?: GameStatusUncheckedCreateNestedManyWithoutAppInput
     notices?: NoticeUncheckedCreateNestedManyWithoutAppInput
@@ -95994,6 +96306,7 @@ export namespace Prisma {
     ownerOrg?: OrgUpdateOneRequiredWithoutAppsNestedInput
     accountApps?: AccountAppUpdateManyWithoutAppNestedInput
     builds?: BuildUpdateManyWithoutAppNestedInput
+    products?: ProductUpdateManyWithoutAppNestedInput
     leaderboards?: LeaderboardUpdateManyWithoutAppNestedInput
     gameStatuses?: GameStatusUpdateManyWithoutAppNestedInput
     notices?: NoticeUpdateManyWithoutAppNestedInput
@@ -96007,6 +96320,7 @@ export namespace Prisma {
     ownerOrgId?: StringFieldUpdateOperationsInput | string
     accountApps?: AccountAppUncheckedUpdateManyWithoutAppNestedInput
     builds?: BuildUncheckedUpdateManyWithoutAppNestedInput
+    products?: ProductUncheckedUpdateManyWithoutAppNestedInput
     leaderboards?: LeaderboardUncheckedUpdateManyWithoutAppNestedInput
     gameStatuses?: GameStatusUncheckedUpdateManyWithoutAppNestedInput
     notices?: NoticeUncheckedUpdateManyWithoutAppNestedInput
@@ -99303,6 +99617,7 @@ export namespace Prisma {
     releaseDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accountApps?: AccountAppUpdateManyWithoutAppNestedInput
     builds?: BuildUpdateManyWithoutAppNestedInput
+    products?: ProductUpdateManyWithoutAppNestedInput
     leaderboards?: LeaderboardUpdateManyWithoutAppNestedInput
     gameStatuses?: GameStatusUpdateManyWithoutAppNestedInput
     notices?: NoticeUpdateManyWithoutAppNestedInput
@@ -99316,6 +99631,7 @@ export namespace Prisma {
     releaseDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accountApps?: AccountAppUncheckedUpdateManyWithoutAppNestedInput
     builds?: BuildUncheckedUpdateManyWithoutAppNestedInput
+    products?: ProductUncheckedUpdateManyWithoutAppNestedInput
     leaderboards?: LeaderboardUncheckedUpdateManyWithoutAppNestedInput
     gameStatuses?: GameStatusUncheckedUpdateManyWithoutAppNestedInput
     notices?: NoticeUncheckedUpdateManyWithoutAppNestedInput
@@ -99441,6 +99757,15 @@ export namespace Prisma {
     published?: boolean
   }
 
+  export type ProductCreateManyAppInput = {
+    id?: string
+    name: string
+    enabled?: boolean
+    priceCents?: number | null
+    priceCoins?: number | null
+    categoryId?: string | null
+  }
+
   export type LeaderboardCreateManyAppInput = {
     id?: string
     name: string
@@ -99500,6 +99825,41 @@ export namespace Prisma {
     version?: StringFieldUpdateOperationsInput | string
     checksum?: StringFieldUpdateOperationsInput | string
     published?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type ProductUpdateWithoutAppInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    enabled?: BoolFieldUpdateOperationsInput | boolean
+    priceCents?: NullableIntFieldUpdateOperationsInput | number | null
+    priceCoins?: NullableIntFieldUpdateOperationsInput | number | null
+    category?: CategoryUpdateOneWithoutProductsNestedInput
+    items?: ItemUpdateManyWithoutProductNestedInput
+    transactions?: TransactionUpdateManyWithoutProductNestedInput
+    entitlements?: EntitlementUpdateManyWithoutProductNestedInput
+    reviews?: ReviewUpdateManyWithoutProductNestedInput
+  }
+
+  export type ProductUncheckedUpdateWithoutAppInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    enabled?: BoolFieldUpdateOperationsInput | boolean
+    priceCents?: NullableIntFieldUpdateOperationsInput | number | null
+    priceCoins?: NullableIntFieldUpdateOperationsInput | number | null
+    categoryId?: NullableStringFieldUpdateOperationsInput | string | null
+    items?: ItemUncheckedUpdateManyWithoutProductNestedInput
+    transactions?: TransactionUncheckedUpdateManyWithoutProductNestedInput
+    entitlements?: EntitlementUncheckedUpdateManyWithoutProductNestedInput
+    reviews?: ReviewUncheckedUpdateManyWithoutProductNestedInput
+  }
+
+  export type ProductUncheckedUpdateManyWithoutAppInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    enabled?: BoolFieldUpdateOperationsInput | boolean
+    priceCents?: NullableIntFieldUpdateOperationsInput | number | null
+    priceCoins?: NullableIntFieldUpdateOperationsInput | number | null
+    categoryId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type LeaderboardUpdateWithoutAppInput = {
@@ -99646,6 +100006,7 @@ export namespace Prisma {
 
   export type ProductCreateManyCategoryInput = {
     id?: string
+    appId: string
     name: string
     enabled?: boolean
     priceCents?: number | null
@@ -99658,6 +100019,7 @@ export namespace Prisma {
     enabled?: BoolFieldUpdateOperationsInput | boolean
     priceCents?: NullableIntFieldUpdateOperationsInput | number | null
     priceCoins?: NullableIntFieldUpdateOperationsInput | number | null
+    app?: AppUpdateOneRequiredWithoutProductsNestedInput
     items?: ItemUpdateManyWithoutProductNestedInput
     transactions?: TransactionUpdateManyWithoutProductNestedInput
     entitlements?: EntitlementUpdateManyWithoutProductNestedInput
@@ -99666,6 +100028,7 @@ export namespace Prisma {
 
   export type ProductUncheckedUpdateWithoutCategoryInput = {
     id?: StringFieldUpdateOperationsInput | string
+    appId?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     enabled?: BoolFieldUpdateOperationsInput | boolean
     priceCents?: NullableIntFieldUpdateOperationsInput | number | null
@@ -99678,6 +100041,7 @@ export namespace Prisma {
 
   export type ProductUncheckedUpdateManyWithoutCategoryInput = {
     id?: StringFieldUpdateOperationsInput | string
+    appId?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     enabled?: BoolFieldUpdateOperationsInput | boolean
     priceCents?: NullableIntFieldUpdateOperationsInput | number | null

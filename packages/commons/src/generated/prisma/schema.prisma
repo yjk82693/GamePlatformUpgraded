@@ -141,6 +141,12 @@ enum RollbackStatus {
   APPROVED
 }
 
+enum AuthProvider {
+  MANUAL
+  GOOGLE
+  APPLE
+}
+
 // ─────────────────────────────────────────────
 // Cluster 1 — Identity, structure, RBAC
 // ─────────────────────────────────────────────
@@ -228,7 +234,8 @@ model App {
   accountApps AccountApp[]
 
   // Cluster 2
-  builds Build[]
+  builds   Build[]
+  products Product[]
 
   // Cluster 3
   leaderboards Leaderboard[]
@@ -348,6 +355,8 @@ model Category {
 
 model Product {
   id           String        @id @default(cuid())
+  appId        String
+  app          App           @relation(fields: [appId], references: [id])
   name         String
   enabled      Boolean       @default(false)
   priceCents   Int?
@@ -421,6 +430,8 @@ model Review {
   product   Product @relation(fields: [productId], references: [id])
   rating    Int
   body      String?
+
+  @@unique([accountId, productId])
 }
 
 model Demo {
@@ -766,10 +777,4 @@ model RollbackRequest {
   byId          String
   by            Account        @relation(fields: [byId], references: [id])
   status        RollbackStatus @default(PENDING)
-}
-
-enum AuthProvider {
-  MANUAL
-  GOOGLE
-  APPLE
 }
