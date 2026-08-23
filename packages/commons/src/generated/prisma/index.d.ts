@@ -139,6 +139,11 @@ export type Settlement = $Result.DefaultSelection<Prisma.$SettlementPayload>
  */
 export type Payout = $Result.DefaultSelection<Prisma.$PayoutPayload>
 /**
+ * Model RefundRequest
+ * 
+ */
+export type RefundRequest = $Result.DefaultSelection<Prisma.$RefundRequestPayload>
+/**
  * Model Review
  * 
  */
@@ -951,6 +956,16 @@ export class PrismaClient<
     * ```
     */
   get payout(): Prisma.PayoutDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.refundRequest`: Exposes CRUD operations for the **RefundRequest** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more RefundRequests
+    * const refundRequests = await prisma.refundRequest.findMany()
+    * ```
+    */
+  get refundRequest(): Prisma.RefundRequestDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.review`: Exposes CRUD operations for the **Review** model.
@@ -1793,6 +1808,7 @@ export namespace Prisma {
     PaymentService: 'PaymentService',
     Settlement: 'Settlement',
     Payout: 'Payout',
+    RefundRequest: 'RefundRequest',
     Review: 'Review',
     Demo: 'Demo',
     DemoParticipation: 'DemoParticipation',
@@ -1845,7 +1861,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "account" | "org" | "project" | "appService" | "app" | "accountApp" | "session" | "playerProfile" | "member" | "role" | "memberRole" | "permission" | "secretKey" | "setting" | "wallet" | "coinLedger" | "category" | "product" | "item" | "transaction" | "merchant" | "paymentMethod" | "paymentService" | "settlement" | "payout" | "review" | "demo" | "demoParticipation" | "redeemCode" | "redeemGrant" | "build" | "entitlement" | "friendship" | "leaderboard" | "score" | "achievementGroup" | "achievement" | "achievementUnlock" | "gameStatus" | "analytics" | "metric" | "dashboard" | "widget" | "notificationSetting" | "notice" | "announcement" | "liveEvent" | "reminder" | "terms" | "consent" | "auditLog" | "deadLetter" | "chatThread" | "chatParticipant" | "chatMessage" | "ticketMeta" | "calendarEvent" | "task" | "document" | "documentVersion" | "documentShare" | "rollbackRequest"
+      modelProps: "account" | "org" | "project" | "appService" | "app" | "accountApp" | "session" | "playerProfile" | "member" | "role" | "memberRole" | "permission" | "secretKey" | "setting" | "wallet" | "coinLedger" | "category" | "product" | "item" | "transaction" | "merchant" | "paymentMethod" | "paymentService" | "settlement" | "payout" | "refundRequest" | "review" | "demo" | "demoParticipation" | "redeemCode" | "redeemGrant" | "build" | "entitlement" | "friendship" | "leaderboard" | "score" | "achievementGroup" | "achievement" | "achievementUnlock" | "gameStatus" | "analytics" | "metric" | "dashboard" | "widget" | "notificationSetting" | "notice" | "announcement" | "liveEvent" | "reminder" | "terms" | "consent" | "auditLog" | "deadLetter" | "chatThread" | "chatParticipant" | "chatMessage" | "ticketMeta" | "calendarEvent" | "task" | "document" | "documentVersion" | "documentShare" | "rollbackRequest"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -3696,6 +3712,80 @@ export namespace Prisma {
           count: {
             args: Prisma.PayoutCountArgs<ExtArgs>
             result: $Utils.Optional<PayoutCountAggregateOutputType> | number
+          }
+        }
+      }
+      RefundRequest: {
+        payload: Prisma.$RefundRequestPayload<ExtArgs>
+        fields: Prisma.RefundRequestFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.RefundRequestFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RefundRequestPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.RefundRequestFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RefundRequestPayload>
+          }
+          findFirst: {
+            args: Prisma.RefundRequestFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RefundRequestPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.RefundRequestFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RefundRequestPayload>
+          }
+          findMany: {
+            args: Prisma.RefundRequestFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RefundRequestPayload>[]
+          }
+          create: {
+            args: Prisma.RefundRequestCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RefundRequestPayload>
+          }
+          createMany: {
+            args: Prisma.RefundRequestCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.RefundRequestCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RefundRequestPayload>[]
+          }
+          delete: {
+            args: Prisma.RefundRequestDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RefundRequestPayload>
+          }
+          update: {
+            args: Prisma.RefundRequestUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RefundRequestPayload>
+          }
+          deleteMany: {
+            args: Prisma.RefundRequestDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.RefundRequestUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.RefundRequestUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RefundRequestPayload>[]
+          }
+          upsert: {
+            args: Prisma.RefundRequestUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RefundRequestPayload>
+          }
+          aggregate: {
+            args: Prisma.RefundRequestAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateRefundRequest>
+          }
+          groupBy: {
+            args: Prisma.RefundRequestGroupByArgs<ExtArgs>
+            result: $Utils.Optional<RefundRequestGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.RefundRequestCountArgs<ExtArgs>
+            result: $Utils.Optional<RefundRequestCountAggregateOutputType> | number
           }
         }
       }
@@ -6585,6 +6675,7 @@ export namespace Prisma {
     paymentService?: PaymentServiceOmit
     settlement?: SettlementOmit
     payout?: PayoutOmit
+    refundRequest?: RefundRequestOmit
     review?: ReviewOmit
     demo?: DemoOmit
     demoParticipation?: DemoParticipationOmit
@@ -6711,6 +6802,7 @@ export namespace Prisma {
     demoParticipations: number
     redeemGrants: number
     entitlements: number
+    refundRequests: number
     friendshipsSent: number
     friendshipsReceived: number
     scores: number
@@ -6740,6 +6832,7 @@ export namespace Prisma {
     demoParticipations?: boolean | AccountCountOutputTypeCountDemoParticipationsArgs
     redeemGrants?: boolean | AccountCountOutputTypeCountRedeemGrantsArgs
     entitlements?: boolean | AccountCountOutputTypeCountEntitlementsArgs
+    refundRequests?: boolean | AccountCountOutputTypeCountRefundRequestsArgs
     friendshipsSent?: boolean | AccountCountOutputTypeCountFriendshipsSentArgs
     friendshipsReceived?: boolean | AccountCountOutputTypeCountFriendshipsReceivedArgs
     scores?: boolean | AccountCountOutputTypeCountScoresArgs
@@ -6831,6 +6924,13 @@ export namespace Prisma {
    */
   export type AccountCountOutputTypeCountEntitlementsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: EntitlementWhereInput
+  }
+
+  /**
+   * AccountCountOutputType without action
+   */
+  export type AccountCountOutputTypeCountRefundRequestsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RefundRequestWhereInput
   }
 
   /**
@@ -7928,6 +8028,7 @@ export namespace Prisma {
     demoParticipations?: boolean | Account$demoParticipationsArgs<ExtArgs>
     redeemGrants?: boolean | Account$redeemGrantsArgs<ExtArgs>
     entitlements?: boolean | Account$entitlementsArgs<ExtArgs>
+    refundRequests?: boolean | Account$refundRequestsArgs<ExtArgs>
     friendshipsSent?: boolean | Account$friendshipsSentArgs<ExtArgs>
     friendshipsReceived?: boolean | Account$friendshipsReceivedArgs<ExtArgs>
     scores?: boolean | Account$scoresArgs<ExtArgs>
@@ -7997,6 +8098,7 @@ export namespace Prisma {
     demoParticipations?: boolean | Account$demoParticipationsArgs<ExtArgs>
     redeemGrants?: boolean | Account$redeemGrantsArgs<ExtArgs>
     entitlements?: boolean | Account$entitlementsArgs<ExtArgs>
+    refundRequests?: boolean | Account$refundRequestsArgs<ExtArgs>
     friendshipsSent?: boolean | Account$friendshipsSentArgs<ExtArgs>
     friendshipsReceived?: boolean | Account$friendshipsReceivedArgs<ExtArgs>
     scores?: boolean | Account$scoresArgs<ExtArgs>
@@ -8033,6 +8135,7 @@ export namespace Prisma {
       demoParticipations: Prisma.$DemoParticipationPayload<ExtArgs>[]
       redeemGrants: Prisma.$RedeemGrantPayload<ExtArgs>[]
       entitlements: Prisma.$EntitlementPayload<ExtArgs>[]
+      refundRequests: Prisma.$RefundRequestPayload<ExtArgs>[]
       friendshipsSent: Prisma.$FriendshipPayload<ExtArgs>[]
       friendshipsReceived: Prisma.$FriendshipPayload<ExtArgs>[]
       scores: Prisma.$ScorePayload<ExtArgs>[]
@@ -8466,6 +8569,7 @@ export namespace Prisma {
     demoParticipations<T extends Account$demoParticipationsArgs<ExtArgs> = {}>(args?: Subset<T, Account$demoParticipationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DemoParticipationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     redeemGrants<T extends Account$redeemGrantsArgs<ExtArgs> = {}>(args?: Subset<T, Account$redeemGrantsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RedeemGrantPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     entitlements<T extends Account$entitlementsArgs<ExtArgs> = {}>(args?: Subset<T, Account$entitlementsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EntitlementPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    refundRequests<T extends Account$refundRequestsArgs<ExtArgs> = {}>(args?: Subset<T, Account$refundRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RefundRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     friendshipsSent<T extends Account$friendshipsSentArgs<ExtArgs> = {}>(args?: Subset<T, Account$friendshipsSentArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FriendshipPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     friendshipsReceived<T extends Account$friendshipsReceivedArgs<ExtArgs> = {}>(args?: Subset<T, Account$friendshipsReceivedArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FriendshipPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     scores<T extends Account$scoresArgs<ExtArgs> = {}>(args?: Subset<T, Account$scoresArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ScorePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -9165,6 +9269,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: EntitlementScalarFieldEnum | EntitlementScalarFieldEnum[]
+  }
+
+  /**
+   * Account.refundRequests
+   */
+  export type Account$refundRequestsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RefundRequest
+     */
+    select?: RefundRequestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RefundRequest
+     */
+    omit?: RefundRequestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RefundRequestInclude<ExtArgs> | null
+    where?: RefundRequestWhereInput
+    orderBy?: RefundRequestOrderByWithRelationInput | RefundRequestOrderByWithRelationInput[]
+    cursor?: RefundRequestWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: RefundRequestScalarFieldEnum | RefundRequestScalarFieldEnum[]
   }
 
   /**
@@ -29274,6 +29402,7 @@ export namespace Prisma {
     occurredAt?: boolean
     account?: boolean | AccountDefaultArgs<ExtArgs>
     product?: boolean | ProductDefaultArgs<ExtArgs>
+    refundRequest?: boolean | Transaction$refundRequestArgs<ExtArgs>
   }, ExtArgs["result"]["transaction"]>
 
   export type TransactionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -29311,6 +29440,7 @@ export namespace Prisma {
   export type TransactionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     account?: boolean | AccountDefaultArgs<ExtArgs>
     product?: boolean | ProductDefaultArgs<ExtArgs>
+    refundRequest?: boolean | Transaction$refundRequestArgs<ExtArgs>
   }
   export type TransactionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     account?: boolean | AccountDefaultArgs<ExtArgs>
@@ -29326,6 +29456,7 @@ export namespace Prisma {
     objects: {
       account: Prisma.$AccountPayload<ExtArgs>
       product: Prisma.$ProductPayload<ExtArgs>
+      refundRequest: Prisma.$RefundRequestPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -29730,6 +29861,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     account<T extends AccountDefaultArgs<ExtArgs> = {}>(args?: Subset<T, AccountDefaultArgs<ExtArgs>>): Prisma__AccountClient<$Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     product<T extends ProductDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ProductDefaultArgs<ExtArgs>>): Prisma__ProductClient<$Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    refundRequest<T extends Transaction$refundRequestArgs<ExtArgs> = {}>(args?: Subset<T, Transaction$refundRequestArgs<ExtArgs>>): Prisma__RefundRequestClient<$Result.GetResult<Prisma.$RefundRequestPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -30163,6 +30295,25 @@ export namespace Prisma {
      * Limit how many Transactions to delete.
      */
     limit?: number
+  }
+
+  /**
+   * Transaction.refundRequest
+   */
+  export type Transaction$refundRequestArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RefundRequest
+     */
+    select?: RefundRequestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RefundRequest
+     */
+    omit?: RefundRequestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RefundRequestInclude<ExtArgs> | null
+    where?: RefundRequestWhereInput
   }
 
   /**
@@ -35237,6 +35388,1064 @@ export namespace Prisma {
      * Omit specific fields from the Payout
      */
     omit?: PayoutOmit<ExtArgs> | null
+  }
+
+
+  /**
+   * Model RefundRequest
+   */
+
+  export type AggregateRefundRequest = {
+    _count: RefundRequestCountAggregateOutputType | null
+    _min: RefundRequestMinAggregateOutputType | null
+    _max: RefundRequestMaxAggregateOutputType | null
+  }
+
+  export type RefundRequestMinAggregateOutputType = {
+    id: string | null
+    txnId: string | null
+    requestedBy: string | null
+    createdAt: Date | null
+  }
+
+  export type RefundRequestMaxAggregateOutputType = {
+    id: string | null
+    txnId: string | null
+    requestedBy: string | null
+    createdAt: Date | null
+  }
+
+  export type RefundRequestCountAggregateOutputType = {
+    id: number
+    txnId: number
+    requestedBy: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type RefundRequestMinAggregateInputType = {
+    id?: true
+    txnId?: true
+    requestedBy?: true
+    createdAt?: true
+  }
+
+  export type RefundRequestMaxAggregateInputType = {
+    id?: true
+    txnId?: true
+    requestedBy?: true
+    createdAt?: true
+  }
+
+  export type RefundRequestCountAggregateInputType = {
+    id?: true
+    txnId?: true
+    requestedBy?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type RefundRequestAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which RefundRequest to aggregate.
+     */
+    where?: RefundRequestWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RefundRequests to fetch.
+     */
+    orderBy?: RefundRequestOrderByWithRelationInput | RefundRequestOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: RefundRequestWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RefundRequests from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RefundRequests.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned RefundRequests
+    **/
+    _count?: true | RefundRequestCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: RefundRequestMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: RefundRequestMaxAggregateInputType
+  }
+
+  export type GetRefundRequestAggregateType<T extends RefundRequestAggregateArgs> = {
+        [P in keyof T & keyof AggregateRefundRequest]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateRefundRequest[P]>
+      : GetScalarType<T[P], AggregateRefundRequest[P]>
+  }
+
+
+
+
+  export type RefundRequestGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RefundRequestWhereInput
+    orderBy?: RefundRequestOrderByWithAggregationInput | RefundRequestOrderByWithAggregationInput[]
+    by: RefundRequestScalarFieldEnum[] | RefundRequestScalarFieldEnum
+    having?: RefundRequestScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: RefundRequestCountAggregateInputType | true
+    _min?: RefundRequestMinAggregateInputType
+    _max?: RefundRequestMaxAggregateInputType
+  }
+
+  export type RefundRequestGroupByOutputType = {
+    id: string
+    txnId: string
+    requestedBy: string
+    createdAt: Date
+    _count: RefundRequestCountAggregateOutputType | null
+    _min: RefundRequestMinAggregateOutputType | null
+    _max: RefundRequestMaxAggregateOutputType | null
+  }
+
+  type GetRefundRequestGroupByPayload<T extends RefundRequestGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<RefundRequestGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof RefundRequestGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], RefundRequestGroupByOutputType[P]>
+            : GetScalarType<T[P], RefundRequestGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type RefundRequestSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    txnId?: boolean
+    requestedBy?: boolean
+    createdAt?: boolean
+    transaction?: boolean | TransactionDefaultArgs<ExtArgs>
+    requester?: boolean | AccountDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["refundRequest"]>
+
+  export type RefundRequestSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    txnId?: boolean
+    requestedBy?: boolean
+    createdAt?: boolean
+    transaction?: boolean | TransactionDefaultArgs<ExtArgs>
+    requester?: boolean | AccountDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["refundRequest"]>
+
+  export type RefundRequestSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    txnId?: boolean
+    requestedBy?: boolean
+    createdAt?: boolean
+    transaction?: boolean | TransactionDefaultArgs<ExtArgs>
+    requester?: boolean | AccountDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["refundRequest"]>
+
+  export type RefundRequestSelectScalar = {
+    id?: boolean
+    txnId?: boolean
+    requestedBy?: boolean
+    createdAt?: boolean
+  }
+
+  export type RefundRequestOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "txnId" | "requestedBy" | "createdAt", ExtArgs["result"]["refundRequest"]>
+  export type RefundRequestInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    transaction?: boolean | TransactionDefaultArgs<ExtArgs>
+    requester?: boolean | AccountDefaultArgs<ExtArgs>
+  }
+  export type RefundRequestIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    transaction?: boolean | TransactionDefaultArgs<ExtArgs>
+    requester?: boolean | AccountDefaultArgs<ExtArgs>
+  }
+  export type RefundRequestIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    transaction?: boolean | TransactionDefaultArgs<ExtArgs>
+    requester?: boolean | AccountDefaultArgs<ExtArgs>
+  }
+
+  export type $RefundRequestPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "RefundRequest"
+    objects: {
+      transaction: Prisma.$TransactionPayload<ExtArgs>
+      requester: Prisma.$AccountPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      txnId: string
+      requestedBy: string
+      createdAt: Date
+    }, ExtArgs["result"]["refundRequest"]>
+    composites: {}
+  }
+
+  type RefundRequestGetPayload<S extends boolean | null | undefined | RefundRequestDefaultArgs> = $Result.GetResult<Prisma.$RefundRequestPayload, S>
+
+  type RefundRequestCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<RefundRequestFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: RefundRequestCountAggregateInputType | true
+    }
+
+  export interface RefundRequestDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['RefundRequest'], meta: { name: 'RefundRequest' } }
+    /**
+     * Find zero or one RefundRequest that matches the filter.
+     * @param {RefundRequestFindUniqueArgs} args - Arguments to find a RefundRequest
+     * @example
+     * // Get one RefundRequest
+     * const refundRequest = await prisma.refundRequest.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends RefundRequestFindUniqueArgs>(args: SelectSubset<T, RefundRequestFindUniqueArgs<ExtArgs>>): Prisma__RefundRequestClient<$Result.GetResult<Prisma.$RefundRequestPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one RefundRequest that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {RefundRequestFindUniqueOrThrowArgs} args - Arguments to find a RefundRequest
+     * @example
+     * // Get one RefundRequest
+     * const refundRequest = await prisma.refundRequest.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends RefundRequestFindUniqueOrThrowArgs>(args: SelectSubset<T, RefundRequestFindUniqueOrThrowArgs<ExtArgs>>): Prisma__RefundRequestClient<$Result.GetResult<Prisma.$RefundRequestPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first RefundRequest that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RefundRequestFindFirstArgs} args - Arguments to find a RefundRequest
+     * @example
+     * // Get one RefundRequest
+     * const refundRequest = await prisma.refundRequest.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends RefundRequestFindFirstArgs>(args?: SelectSubset<T, RefundRequestFindFirstArgs<ExtArgs>>): Prisma__RefundRequestClient<$Result.GetResult<Prisma.$RefundRequestPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first RefundRequest that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RefundRequestFindFirstOrThrowArgs} args - Arguments to find a RefundRequest
+     * @example
+     * // Get one RefundRequest
+     * const refundRequest = await prisma.refundRequest.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends RefundRequestFindFirstOrThrowArgs>(args?: SelectSubset<T, RefundRequestFindFirstOrThrowArgs<ExtArgs>>): Prisma__RefundRequestClient<$Result.GetResult<Prisma.$RefundRequestPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more RefundRequests that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RefundRequestFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all RefundRequests
+     * const refundRequests = await prisma.refundRequest.findMany()
+     * 
+     * // Get first 10 RefundRequests
+     * const refundRequests = await prisma.refundRequest.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const refundRequestWithIdOnly = await prisma.refundRequest.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends RefundRequestFindManyArgs>(args?: SelectSubset<T, RefundRequestFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RefundRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a RefundRequest.
+     * @param {RefundRequestCreateArgs} args - Arguments to create a RefundRequest.
+     * @example
+     * // Create one RefundRequest
+     * const RefundRequest = await prisma.refundRequest.create({
+     *   data: {
+     *     // ... data to create a RefundRequest
+     *   }
+     * })
+     * 
+     */
+    create<T extends RefundRequestCreateArgs>(args: SelectSubset<T, RefundRequestCreateArgs<ExtArgs>>): Prisma__RefundRequestClient<$Result.GetResult<Prisma.$RefundRequestPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many RefundRequests.
+     * @param {RefundRequestCreateManyArgs} args - Arguments to create many RefundRequests.
+     * @example
+     * // Create many RefundRequests
+     * const refundRequest = await prisma.refundRequest.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends RefundRequestCreateManyArgs>(args?: SelectSubset<T, RefundRequestCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many RefundRequests and returns the data saved in the database.
+     * @param {RefundRequestCreateManyAndReturnArgs} args - Arguments to create many RefundRequests.
+     * @example
+     * // Create many RefundRequests
+     * const refundRequest = await prisma.refundRequest.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many RefundRequests and only return the `id`
+     * const refundRequestWithIdOnly = await prisma.refundRequest.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends RefundRequestCreateManyAndReturnArgs>(args?: SelectSubset<T, RefundRequestCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RefundRequestPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a RefundRequest.
+     * @param {RefundRequestDeleteArgs} args - Arguments to delete one RefundRequest.
+     * @example
+     * // Delete one RefundRequest
+     * const RefundRequest = await prisma.refundRequest.delete({
+     *   where: {
+     *     // ... filter to delete one RefundRequest
+     *   }
+     * })
+     * 
+     */
+    delete<T extends RefundRequestDeleteArgs>(args: SelectSubset<T, RefundRequestDeleteArgs<ExtArgs>>): Prisma__RefundRequestClient<$Result.GetResult<Prisma.$RefundRequestPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one RefundRequest.
+     * @param {RefundRequestUpdateArgs} args - Arguments to update one RefundRequest.
+     * @example
+     * // Update one RefundRequest
+     * const refundRequest = await prisma.refundRequest.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends RefundRequestUpdateArgs>(args: SelectSubset<T, RefundRequestUpdateArgs<ExtArgs>>): Prisma__RefundRequestClient<$Result.GetResult<Prisma.$RefundRequestPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more RefundRequests.
+     * @param {RefundRequestDeleteManyArgs} args - Arguments to filter RefundRequests to delete.
+     * @example
+     * // Delete a few RefundRequests
+     * const { count } = await prisma.refundRequest.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends RefundRequestDeleteManyArgs>(args?: SelectSubset<T, RefundRequestDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more RefundRequests.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RefundRequestUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many RefundRequests
+     * const refundRequest = await prisma.refundRequest.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends RefundRequestUpdateManyArgs>(args: SelectSubset<T, RefundRequestUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more RefundRequests and returns the data updated in the database.
+     * @param {RefundRequestUpdateManyAndReturnArgs} args - Arguments to update many RefundRequests.
+     * @example
+     * // Update many RefundRequests
+     * const refundRequest = await prisma.refundRequest.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more RefundRequests and only return the `id`
+     * const refundRequestWithIdOnly = await prisma.refundRequest.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends RefundRequestUpdateManyAndReturnArgs>(args: SelectSubset<T, RefundRequestUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RefundRequestPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one RefundRequest.
+     * @param {RefundRequestUpsertArgs} args - Arguments to update or create a RefundRequest.
+     * @example
+     * // Update or create a RefundRequest
+     * const refundRequest = await prisma.refundRequest.upsert({
+     *   create: {
+     *     // ... data to create a RefundRequest
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the RefundRequest we want to update
+     *   }
+     * })
+     */
+    upsert<T extends RefundRequestUpsertArgs>(args: SelectSubset<T, RefundRequestUpsertArgs<ExtArgs>>): Prisma__RefundRequestClient<$Result.GetResult<Prisma.$RefundRequestPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of RefundRequests.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RefundRequestCountArgs} args - Arguments to filter RefundRequests to count.
+     * @example
+     * // Count the number of RefundRequests
+     * const count = await prisma.refundRequest.count({
+     *   where: {
+     *     // ... the filter for the RefundRequests we want to count
+     *   }
+     * })
+    **/
+    count<T extends RefundRequestCountArgs>(
+      args?: Subset<T, RefundRequestCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], RefundRequestCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a RefundRequest.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RefundRequestAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends RefundRequestAggregateArgs>(args: Subset<T, RefundRequestAggregateArgs>): Prisma.PrismaPromise<GetRefundRequestAggregateType<T>>
+
+    /**
+     * Group by RefundRequest.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RefundRequestGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends RefundRequestGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: RefundRequestGroupByArgs['orderBy'] }
+        : { orderBy?: RefundRequestGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, RefundRequestGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetRefundRequestGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the RefundRequest model
+   */
+  readonly fields: RefundRequestFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for RefundRequest.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__RefundRequestClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    transaction<T extends TransactionDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TransactionDefaultArgs<ExtArgs>>): Prisma__TransactionClient<$Result.GetResult<Prisma.$TransactionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    requester<T extends AccountDefaultArgs<ExtArgs> = {}>(args?: Subset<T, AccountDefaultArgs<ExtArgs>>): Prisma__AccountClient<$Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the RefundRequest model
+   */
+  interface RefundRequestFieldRefs {
+    readonly id: FieldRef<"RefundRequest", 'String'>
+    readonly txnId: FieldRef<"RefundRequest", 'String'>
+    readonly requestedBy: FieldRef<"RefundRequest", 'String'>
+    readonly createdAt: FieldRef<"RefundRequest", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * RefundRequest findUnique
+   */
+  export type RefundRequestFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RefundRequest
+     */
+    select?: RefundRequestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RefundRequest
+     */
+    omit?: RefundRequestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RefundRequestInclude<ExtArgs> | null
+    /**
+     * Filter, which RefundRequest to fetch.
+     */
+    where: RefundRequestWhereUniqueInput
+  }
+
+  /**
+   * RefundRequest findUniqueOrThrow
+   */
+  export type RefundRequestFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RefundRequest
+     */
+    select?: RefundRequestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RefundRequest
+     */
+    omit?: RefundRequestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RefundRequestInclude<ExtArgs> | null
+    /**
+     * Filter, which RefundRequest to fetch.
+     */
+    where: RefundRequestWhereUniqueInput
+  }
+
+  /**
+   * RefundRequest findFirst
+   */
+  export type RefundRequestFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RefundRequest
+     */
+    select?: RefundRequestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RefundRequest
+     */
+    omit?: RefundRequestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RefundRequestInclude<ExtArgs> | null
+    /**
+     * Filter, which RefundRequest to fetch.
+     */
+    where?: RefundRequestWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RefundRequests to fetch.
+     */
+    orderBy?: RefundRequestOrderByWithRelationInput | RefundRequestOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for RefundRequests.
+     */
+    cursor?: RefundRequestWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RefundRequests from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RefundRequests.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of RefundRequests.
+     */
+    distinct?: RefundRequestScalarFieldEnum | RefundRequestScalarFieldEnum[]
+  }
+
+  /**
+   * RefundRequest findFirstOrThrow
+   */
+  export type RefundRequestFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RefundRequest
+     */
+    select?: RefundRequestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RefundRequest
+     */
+    omit?: RefundRequestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RefundRequestInclude<ExtArgs> | null
+    /**
+     * Filter, which RefundRequest to fetch.
+     */
+    where?: RefundRequestWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RefundRequests to fetch.
+     */
+    orderBy?: RefundRequestOrderByWithRelationInput | RefundRequestOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for RefundRequests.
+     */
+    cursor?: RefundRequestWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RefundRequests from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RefundRequests.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of RefundRequests.
+     */
+    distinct?: RefundRequestScalarFieldEnum | RefundRequestScalarFieldEnum[]
+  }
+
+  /**
+   * RefundRequest findMany
+   */
+  export type RefundRequestFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RefundRequest
+     */
+    select?: RefundRequestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RefundRequest
+     */
+    omit?: RefundRequestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RefundRequestInclude<ExtArgs> | null
+    /**
+     * Filter, which RefundRequests to fetch.
+     */
+    where?: RefundRequestWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RefundRequests to fetch.
+     */
+    orderBy?: RefundRequestOrderByWithRelationInput | RefundRequestOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing RefundRequests.
+     */
+    cursor?: RefundRequestWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RefundRequests from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RefundRequests.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of RefundRequests.
+     */
+    distinct?: RefundRequestScalarFieldEnum | RefundRequestScalarFieldEnum[]
+  }
+
+  /**
+   * RefundRequest create
+   */
+  export type RefundRequestCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RefundRequest
+     */
+    select?: RefundRequestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RefundRequest
+     */
+    omit?: RefundRequestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RefundRequestInclude<ExtArgs> | null
+    /**
+     * The data needed to create a RefundRequest.
+     */
+    data: XOR<RefundRequestCreateInput, RefundRequestUncheckedCreateInput>
+  }
+
+  /**
+   * RefundRequest createMany
+   */
+  export type RefundRequestCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many RefundRequests.
+     */
+    data: RefundRequestCreateManyInput | RefundRequestCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * RefundRequest createManyAndReturn
+   */
+  export type RefundRequestCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RefundRequest
+     */
+    select?: RefundRequestSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the RefundRequest
+     */
+    omit?: RefundRequestOmit<ExtArgs> | null
+    /**
+     * The data used to create many RefundRequests.
+     */
+    data: RefundRequestCreateManyInput | RefundRequestCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RefundRequestIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * RefundRequest update
+   */
+  export type RefundRequestUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RefundRequest
+     */
+    select?: RefundRequestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RefundRequest
+     */
+    omit?: RefundRequestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RefundRequestInclude<ExtArgs> | null
+    /**
+     * The data needed to update a RefundRequest.
+     */
+    data: XOR<RefundRequestUpdateInput, RefundRequestUncheckedUpdateInput>
+    /**
+     * Choose, which RefundRequest to update.
+     */
+    where: RefundRequestWhereUniqueInput
+  }
+
+  /**
+   * RefundRequest updateMany
+   */
+  export type RefundRequestUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update RefundRequests.
+     */
+    data: XOR<RefundRequestUpdateManyMutationInput, RefundRequestUncheckedUpdateManyInput>
+    /**
+     * Filter which RefundRequests to update
+     */
+    where?: RefundRequestWhereInput
+    /**
+     * Limit how many RefundRequests to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * RefundRequest updateManyAndReturn
+   */
+  export type RefundRequestUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RefundRequest
+     */
+    select?: RefundRequestSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the RefundRequest
+     */
+    omit?: RefundRequestOmit<ExtArgs> | null
+    /**
+     * The data used to update RefundRequests.
+     */
+    data: XOR<RefundRequestUpdateManyMutationInput, RefundRequestUncheckedUpdateManyInput>
+    /**
+     * Filter which RefundRequests to update
+     */
+    where?: RefundRequestWhereInput
+    /**
+     * Limit how many RefundRequests to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RefundRequestIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * RefundRequest upsert
+   */
+  export type RefundRequestUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RefundRequest
+     */
+    select?: RefundRequestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RefundRequest
+     */
+    omit?: RefundRequestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RefundRequestInclude<ExtArgs> | null
+    /**
+     * The filter to search for the RefundRequest to update in case it exists.
+     */
+    where: RefundRequestWhereUniqueInput
+    /**
+     * In case the RefundRequest found by the `where` argument doesn't exist, create a new RefundRequest with this data.
+     */
+    create: XOR<RefundRequestCreateInput, RefundRequestUncheckedCreateInput>
+    /**
+     * In case the RefundRequest was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<RefundRequestUpdateInput, RefundRequestUncheckedUpdateInput>
+  }
+
+  /**
+   * RefundRequest delete
+   */
+  export type RefundRequestDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RefundRequest
+     */
+    select?: RefundRequestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RefundRequest
+     */
+    omit?: RefundRequestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RefundRequestInclude<ExtArgs> | null
+    /**
+     * Filter which RefundRequest to delete.
+     */
+    where: RefundRequestWhereUniqueInput
+  }
+
+  /**
+   * RefundRequest deleteMany
+   */
+  export type RefundRequestDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which RefundRequests to delete
+     */
+    where?: RefundRequestWhereInput
+    /**
+     * Limit how many RefundRequests to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * RefundRequest without action
+   */
+  export type RefundRequestDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RefundRequest
+     */
+    select?: RefundRequestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RefundRequest
+     */
+    omit?: RefundRequestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RefundRequestInclude<ExtArgs> | null
   }
 
 
@@ -74994,6 +76203,16 @@ export namespace Prisma {
   export type PayoutScalarFieldEnum = (typeof PayoutScalarFieldEnum)[keyof typeof PayoutScalarFieldEnum]
 
 
+  export const RefundRequestScalarFieldEnum: {
+    id: 'id',
+    txnId: 'txnId',
+    requestedBy: 'requestedBy',
+    createdAt: 'createdAt'
+  };
+
+  export type RefundRequestScalarFieldEnum = (typeof RefundRequestScalarFieldEnum)[keyof typeof RefundRequestScalarFieldEnum]
+
+
   export const ReviewScalarFieldEnum: {
     id: 'id',
     accountId: 'accountId',
@@ -75763,6 +76982,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationListRelationFilter
     redeemGrants?: RedeemGrantListRelationFilter
     entitlements?: EntitlementListRelationFilter
+    refundRequests?: RefundRequestListRelationFilter
     friendshipsSent?: FriendshipListRelationFilter
     friendshipsReceived?: FriendshipListRelationFilter
     scores?: ScoreListRelationFilter
@@ -75803,6 +77023,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationOrderByRelationAggregateInput
     redeemGrants?: RedeemGrantOrderByRelationAggregateInput
     entitlements?: EntitlementOrderByRelationAggregateInput
+    refundRequests?: RefundRequestOrderByRelationAggregateInput
     friendshipsSent?: FriendshipOrderByRelationAggregateInput
     friendshipsReceived?: FriendshipOrderByRelationAggregateInput
     scores?: ScoreOrderByRelationAggregateInput
@@ -75846,6 +77067,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationListRelationFilter
     redeemGrants?: RedeemGrantListRelationFilter
     entitlements?: EntitlementListRelationFilter
+    refundRequests?: RefundRequestListRelationFilter
     friendshipsSent?: FriendshipListRelationFilter
     friendshipsReceived?: FriendshipListRelationFilter
     scores?: ScoreListRelationFilter
@@ -76861,6 +78083,7 @@ export namespace Prisma {
     occurredAt?: DateTimeFilter<"Transaction"> | Date | string
     account?: XOR<AccountScalarRelationFilter, AccountWhereInput>
     product?: XOR<ProductScalarRelationFilter, ProductWhereInput>
+    refundRequest?: XOR<RefundRequestNullableScalarRelationFilter, RefundRequestWhereInput> | null
   }
 
   export type TransactionOrderByWithRelationInput = {
@@ -76872,6 +78095,7 @@ export namespace Prisma {
     occurredAt?: SortOrder
     account?: AccountOrderByWithRelationInput
     product?: ProductOrderByWithRelationInput
+    refundRequest?: RefundRequestOrderByWithRelationInput
   }
 
   export type TransactionWhereUniqueInput = Prisma.AtLeast<{
@@ -76886,6 +78110,7 @@ export namespace Prisma {
     occurredAt?: DateTimeFilter<"Transaction"> | Date | string
     account?: XOR<AccountScalarRelationFilter, AccountWhereInput>
     product?: XOR<ProductScalarRelationFilter, ProductWhereInput>
+    refundRequest?: XOR<RefundRequestNullableScalarRelationFilter, RefundRequestWhereInput> | null
   }, "id" | "receiptId">
 
   export type TransactionOrderByWithAggregationInput = {
@@ -77138,6 +78363,59 @@ export namespace Prisma {
     period?: StringWithAggregatesFilter<"Payout"> | string
     amount?: BigIntWithAggregatesFilter<"Payout"> | bigint | number
     createdAt?: DateTimeWithAggregatesFilter<"Payout"> | Date | string
+  }
+
+  export type RefundRequestWhereInput = {
+    AND?: RefundRequestWhereInput | RefundRequestWhereInput[]
+    OR?: RefundRequestWhereInput[]
+    NOT?: RefundRequestWhereInput | RefundRequestWhereInput[]
+    id?: StringFilter<"RefundRequest"> | string
+    txnId?: StringFilter<"RefundRequest"> | string
+    requestedBy?: StringFilter<"RefundRequest"> | string
+    createdAt?: DateTimeFilter<"RefundRequest"> | Date | string
+    transaction?: XOR<TransactionScalarRelationFilter, TransactionWhereInput>
+    requester?: XOR<AccountScalarRelationFilter, AccountWhereInput>
+  }
+
+  export type RefundRequestOrderByWithRelationInput = {
+    id?: SortOrder
+    txnId?: SortOrder
+    requestedBy?: SortOrder
+    createdAt?: SortOrder
+    transaction?: TransactionOrderByWithRelationInput
+    requester?: AccountOrderByWithRelationInput
+  }
+
+  export type RefundRequestWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    txnId?: string
+    AND?: RefundRequestWhereInput | RefundRequestWhereInput[]
+    OR?: RefundRequestWhereInput[]
+    NOT?: RefundRequestWhereInput | RefundRequestWhereInput[]
+    requestedBy?: StringFilter<"RefundRequest"> | string
+    createdAt?: DateTimeFilter<"RefundRequest"> | Date | string
+    transaction?: XOR<TransactionScalarRelationFilter, TransactionWhereInput>
+    requester?: XOR<AccountScalarRelationFilter, AccountWhereInput>
+  }, "id" | "txnId">
+
+  export type RefundRequestOrderByWithAggregationInput = {
+    id?: SortOrder
+    txnId?: SortOrder
+    requestedBy?: SortOrder
+    createdAt?: SortOrder
+    _count?: RefundRequestCountOrderByAggregateInput
+    _max?: RefundRequestMaxOrderByAggregateInput
+    _min?: RefundRequestMinOrderByAggregateInput
+  }
+
+  export type RefundRequestScalarWhereWithAggregatesInput = {
+    AND?: RefundRequestScalarWhereWithAggregatesInput | RefundRequestScalarWhereWithAggregatesInput[]
+    OR?: RefundRequestScalarWhereWithAggregatesInput[]
+    NOT?: RefundRequestScalarWhereWithAggregatesInput | RefundRequestScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"RefundRequest"> | string
+    txnId?: StringWithAggregatesFilter<"RefundRequest"> | string
+    requestedBy?: StringWithAggregatesFilter<"RefundRequest"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"RefundRequest"> | Date | string
   }
 
   export type ReviewWhereInput = {
@@ -79122,6 +80400,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationCreateNestedManyWithoutAccountInput
     redeemGrants?: RedeemGrantCreateNestedManyWithoutAccountInput
     entitlements?: EntitlementCreateNestedManyWithoutAccountInput
+    refundRequests?: RefundRequestCreateNestedManyWithoutRequesterInput
     friendshipsSent?: FriendshipCreateNestedManyWithoutRequesterInput
     friendshipsReceived?: FriendshipCreateNestedManyWithoutAddresseeInput
     scores?: ScoreCreateNestedManyWithoutAccountInput
@@ -79162,6 +80441,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationUncheckedCreateNestedManyWithoutAccountInput
     redeemGrants?: RedeemGrantUncheckedCreateNestedManyWithoutAccountInput
     entitlements?: EntitlementUncheckedCreateNestedManyWithoutAccountInput
+    refundRequests?: RefundRequestUncheckedCreateNestedManyWithoutRequesterInput
     friendshipsSent?: FriendshipUncheckedCreateNestedManyWithoutRequesterInput
     friendshipsReceived?: FriendshipUncheckedCreateNestedManyWithoutAddresseeInput
     scores?: ScoreUncheckedCreateNestedManyWithoutAccountInput
@@ -79202,6 +80482,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationUpdateManyWithoutAccountNestedInput
     redeemGrants?: RedeemGrantUpdateManyWithoutAccountNestedInput
     entitlements?: EntitlementUpdateManyWithoutAccountNestedInput
+    refundRequests?: RefundRequestUpdateManyWithoutRequesterNestedInput
     friendshipsSent?: FriendshipUpdateManyWithoutRequesterNestedInput
     friendshipsReceived?: FriendshipUpdateManyWithoutAddresseeNestedInput
     scores?: ScoreUpdateManyWithoutAccountNestedInput
@@ -79242,6 +80523,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationUncheckedUpdateManyWithoutAccountNestedInput
     redeemGrants?: RedeemGrantUncheckedUpdateManyWithoutAccountNestedInput
     entitlements?: EntitlementUncheckedUpdateManyWithoutAccountNestedInput
+    refundRequests?: RefundRequestUncheckedUpdateManyWithoutRequesterNestedInput
     friendshipsSent?: FriendshipUncheckedUpdateManyWithoutRequesterNestedInput
     friendshipsReceived?: FriendshipUncheckedUpdateManyWithoutAddresseeNestedInput
     scores?: ScoreUncheckedUpdateManyWithoutAccountNestedInput
@@ -80225,6 +81507,7 @@ export namespace Prisma {
     occurredAt?: Date | string
     account: AccountCreateNestedOneWithoutTransactionsInput
     product: ProductCreateNestedOneWithoutTransactionsInput
+    refundRequest?: RefundRequestCreateNestedOneWithoutTransactionInput
   }
 
   export type TransactionUncheckedCreateInput = {
@@ -80234,6 +81517,7 @@ export namespace Prisma {
     receiptId: string
     state?: $Enums.TxnState
     occurredAt?: Date | string
+    refundRequest?: RefundRequestUncheckedCreateNestedOneWithoutTransactionInput
   }
 
   export type TransactionUpdateInput = {
@@ -80243,6 +81527,7 @@ export namespace Prisma {
     occurredAt?: DateTimeFieldUpdateOperationsInput | Date | string
     account?: AccountUpdateOneRequiredWithoutTransactionsNestedInput
     product?: ProductUpdateOneRequiredWithoutTransactionsNestedInput
+    refundRequest?: RefundRequestUpdateOneWithoutTransactionNestedInput
   }
 
   export type TransactionUncheckedUpdateInput = {
@@ -80252,6 +81537,7 @@ export namespace Prisma {
     receiptId?: StringFieldUpdateOperationsInput | string
     state?: EnumTxnStateFieldUpdateOperationsInput | $Enums.TxnState
     occurredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    refundRequest?: RefundRequestUncheckedUpdateOneWithoutTransactionNestedInput
   }
 
   export type TransactionCreateManyInput = {
@@ -80503,6 +81789,53 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     period?: StringFieldUpdateOperationsInput | string
     amount?: BigIntFieldUpdateOperationsInput | bigint | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RefundRequestCreateInput = {
+    id?: string
+    createdAt?: Date | string
+    transaction: TransactionCreateNestedOneWithoutRefundRequestInput
+    requester: AccountCreateNestedOneWithoutRefundRequestsInput
+  }
+
+  export type RefundRequestUncheckedCreateInput = {
+    id?: string
+    txnId: string
+    requestedBy: string
+    createdAt?: Date | string
+  }
+
+  export type RefundRequestUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    transaction?: TransactionUpdateOneRequiredWithoutRefundRequestNestedInput
+    requester?: AccountUpdateOneRequiredWithoutRefundRequestsNestedInput
+  }
+
+  export type RefundRequestUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    txnId?: StringFieldUpdateOperationsInput | string
+    requestedBy?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RefundRequestCreateManyInput = {
+    id?: string
+    txnId: string
+    requestedBy: string
+    createdAt?: Date | string
+  }
+
+  export type RefundRequestUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RefundRequestUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    txnId?: StringFieldUpdateOperationsInput | string
+    requestedBy?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -82497,6 +83830,12 @@ export namespace Prisma {
     none?: EntitlementWhereInput
   }
 
+  export type RefundRequestListRelationFilter = {
+    every?: RefundRequestWhereInput
+    some?: RefundRequestWhereInput
+    none?: RefundRequestWhereInput
+  }
+
   export type FriendshipListRelationFilter = {
     every?: FriendshipWhereInput
     some?: FriendshipWhereInput
@@ -82631,6 +83970,10 @@ export namespace Prisma {
   }
 
   export type EntitlementOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type RefundRequestOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -83546,6 +84889,11 @@ export namespace Prisma {
     not?: NestedEnumTxnStateFilter<$PrismaModel> | $Enums.TxnState
   }
 
+  export type RefundRequestNullableScalarRelationFilter = {
+    is?: RefundRequestWhereInput | null
+    isNot?: RefundRequestWhereInput | null
+  }
+
   export type TransactionCountOrderByAggregateInput = {
     id?: SortOrder
     accountId?: SortOrder
@@ -83743,6 +85091,32 @@ export namespace Prisma {
 
   export type PayoutSumOrderByAggregateInput = {
     amount?: SortOrder
+  }
+
+  export type TransactionScalarRelationFilter = {
+    is?: TransactionWhereInput
+    isNot?: TransactionWhereInput
+  }
+
+  export type RefundRequestCountOrderByAggregateInput = {
+    id?: SortOrder
+    txnId?: SortOrder
+    requestedBy?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type RefundRequestMaxOrderByAggregateInput = {
+    id?: SortOrder
+    txnId?: SortOrder
+    requestedBy?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type RefundRequestMinOrderByAggregateInput = {
+    id?: SortOrder
+    txnId?: SortOrder
+    requestedBy?: SortOrder
+    createdAt?: SortOrder
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -85022,6 +86396,13 @@ export namespace Prisma {
     connect?: EntitlementWhereUniqueInput | EntitlementWhereUniqueInput[]
   }
 
+  export type RefundRequestCreateNestedManyWithoutRequesterInput = {
+    create?: XOR<RefundRequestCreateWithoutRequesterInput, RefundRequestUncheckedCreateWithoutRequesterInput> | RefundRequestCreateWithoutRequesterInput[] | RefundRequestUncheckedCreateWithoutRequesterInput[]
+    connectOrCreate?: RefundRequestCreateOrConnectWithoutRequesterInput | RefundRequestCreateOrConnectWithoutRequesterInput[]
+    createMany?: RefundRequestCreateManyRequesterInputEnvelope
+    connect?: RefundRequestWhereUniqueInput | RefundRequestWhereUniqueInput[]
+  }
+
   export type FriendshipCreateNestedManyWithoutRequesterInput = {
     create?: XOR<FriendshipCreateWithoutRequesterInput, FriendshipUncheckedCreateWithoutRequesterInput> | FriendshipCreateWithoutRequesterInput[] | FriendshipUncheckedCreateWithoutRequesterInput[]
     connectOrCreate?: FriendshipCreateOrConnectWithoutRequesterInput | FriendshipCreateOrConnectWithoutRequesterInput[]
@@ -85214,6 +86595,13 @@ export namespace Prisma {
     connectOrCreate?: EntitlementCreateOrConnectWithoutAccountInput | EntitlementCreateOrConnectWithoutAccountInput[]
     createMany?: EntitlementCreateManyAccountInputEnvelope
     connect?: EntitlementWhereUniqueInput | EntitlementWhereUniqueInput[]
+  }
+
+  export type RefundRequestUncheckedCreateNestedManyWithoutRequesterInput = {
+    create?: XOR<RefundRequestCreateWithoutRequesterInput, RefundRequestUncheckedCreateWithoutRequesterInput> | RefundRequestCreateWithoutRequesterInput[] | RefundRequestUncheckedCreateWithoutRequesterInput[]
+    connectOrCreate?: RefundRequestCreateOrConnectWithoutRequesterInput | RefundRequestCreateOrConnectWithoutRequesterInput[]
+    createMany?: RefundRequestCreateManyRequesterInputEnvelope
+    connect?: RefundRequestWhereUniqueInput | RefundRequestWhereUniqueInput[]
   }
 
   export type FriendshipUncheckedCreateNestedManyWithoutRequesterInput = {
@@ -85503,6 +86891,20 @@ export namespace Prisma {
     update?: EntitlementUpdateWithWhereUniqueWithoutAccountInput | EntitlementUpdateWithWhereUniqueWithoutAccountInput[]
     updateMany?: EntitlementUpdateManyWithWhereWithoutAccountInput | EntitlementUpdateManyWithWhereWithoutAccountInput[]
     deleteMany?: EntitlementScalarWhereInput | EntitlementScalarWhereInput[]
+  }
+
+  export type RefundRequestUpdateManyWithoutRequesterNestedInput = {
+    create?: XOR<RefundRequestCreateWithoutRequesterInput, RefundRequestUncheckedCreateWithoutRequesterInput> | RefundRequestCreateWithoutRequesterInput[] | RefundRequestUncheckedCreateWithoutRequesterInput[]
+    connectOrCreate?: RefundRequestCreateOrConnectWithoutRequesterInput | RefundRequestCreateOrConnectWithoutRequesterInput[]
+    upsert?: RefundRequestUpsertWithWhereUniqueWithoutRequesterInput | RefundRequestUpsertWithWhereUniqueWithoutRequesterInput[]
+    createMany?: RefundRequestCreateManyRequesterInputEnvelope
+    set?: RefundRequestWhereUniqueInput | RefundRequestWhereUniqueInput[]
+    disconnect?: RefundRequestWhereUniqueInput | RefundRequestWhereUniqueInput[]
+    delete?: RefundRequestWhereUniqueInput | RefundRequestWhereUniqueInput[]
+    connect?: RefundRequestWhereUniqueInput | RefundRequestWhereUniqueInput[]
+    update?: RefundRequestUpdateWithWhereUniqueWithoutRequesterInput | RefundRequestUpdateWithWhereUniqueWithoutRequesterInput[]
+    updateMany?: RefundRequestUpdateManyWithWhereWithoutRequesterInput | RefundRequestUpdateManyWithWhereWithoutRequesterInput[]
+    deleteMany?: RefundRequestScalarWhereInput | RefundRequestScalarWhereInput[]
   }
 
   export type FriendshipUpdateManyWithoutRequesterNestedInput = {
@@ -85887,6 +87289,20 @@ export namespace Prisma {
     update?: EntitlementUpdateWithWhereUniqueWithoutAccountInput | EntitlementUpdateWithWhereUniqueWithoutAccountInput[]
     updateMany?: EntitlementUpdateManyWithWhereWithoutAccountInput | EntitlementUpdateManyWithWhereWithoutAccountInput[]
     deleteMany?: EntitlementScalarWhereInput | EntitlementScalarWhereInput[]
+  }
+
+  export type RefundRequestUncheckedUpdateManyWithoutRequesterNestedInput = {
+    create?: XOR<RefundRequestCreateWithoutRequesterInput, RefundRequestUncheckedCreateWithoutRequesterInput> | RefundRequestCreateWithoutRequesterInput[] | RefundRequestUncheckedCreateWithoutRequesterInput[]
+    connectOrCreate?: RefundRequestCreateOrConnectWithoutRequesterInput | RefundRequestCreateOrConnectWithoutRequesterInput[]
+    upsert?: RefundRequestUpsertWithWhereUniqueWithoutRequesterInput | RefundRequestUpsertWithWhereUniqueWithoutRequesterInput[]
+    createMany?: RefundRequestCreateManyRequesterInputEnvelope
+    set?: RefundRequestWhereUniqueInput | RefundRequestWhereUniqueInput[]
+    disconnect?: RefundRequestWhereUniqueInput | RefundRequestWhereUniqueInput[]
+    delete?: RefundRequestWhereUniqueInput | RefundRequestWhereUniqueInput[]
+    connect?: RefundRequestWhereUniqueInput | RefundRequestWhereUniqueInput[]
+    update?: RefundRequestUpdateWithWhereUniqueWithoutRequesterInput | RefundRequestUpdateWithWhereUniqueWithoutRequesterInput[]
+    updateMany?: RefundRequestUpdateManyWithWhereWithoutRequesterInput | RefundRequestUpdateManyWithWhereWithoutRequesterInput[]
+    deleteMany?: RefundRequestScalarWhereInput | RefundRequestScalarWhereInput[]
   }
 
   export type FriendshipUncheckedUpdateManyWithoutRequesterNestedInput = {
@@ -87335,6 +88751,18 @@ export namespace Prisma {
     connect?: ProductWhereUniqueInput
   }
 
+  export type RefundRequestCreateNestedOneWithoutTransactionInput = {
+    create?: XOR<RefundRequestCreateWithoutTransactionInput, RefundRequestUncheckedCreateWithoutTransactionInput>
+    connectOrCreate?: RefundRequestCreateOrConnectWithoutTransactionInput
+    connect?: RefundRequestWhereUniqueInput
+  }
+
+  export type RefundRequestUncheckedCreateNestedOneWithoutTransactionInput = {
+    create?: XOR<RefundRequestCreateWithoutTransactionInput, RefundRequestUncheckedCreateWithoutTransactionInput>
+    connectOrCreate?: RefundRequestCreateOrConnectWithoutTransactionInput
+    connect?: RefundRequestWhereUniqueInput
+  }
+
   export type EnumTxnStateFieldUpdateOperationsInput = {
     set?: $Enums.TxnState
   }
@@ -87353,6 +88781,26 @@ export namespace Prisma {
     upsert?: ProductUpsertWithoutTransactionsInput
     connect?: ProductWhereUniqueInput
     update?: XOR<XOR<ProductUpdateToOneWithWhereWithoutTransactionsInput, ProductUpdateWithoutTransactionsInput>, ProductUncheckedUpdateWithoutTransactionsInput>
+  }
+
+  export type RefundRequestUpdateOneWithoutTransactionNestedInput = {
+    create?: XOR<RefundRequestCreateWithoutTransactionInput, RefundRequestUncheckedCreateWithoutTransactionInput>
+    connectOrCreate?: RefundRequestCreateOrConnectWithoutTransactionInput
+    upsert?: RefundRequestUpsertWithoutTransactionInput
+    disconnect?: RefundRequestWhereInput | boolean
+    delete?: RefundRequestWhereInput | boolean
+    connect?: RefundRequestWhereUniqueInput
+    update?: XOR<XOR<RefundRequestUpdateToOneWithWhereWithoutTransactionInput, RefundRequestUpdateWithoutTransactionInput>, RefundRequestUncheckedUpdateWithoutTransactionInput>
+  }
+
+  export type RefundRequestUncheckedUpdateOneWithoutTransactionNestedInput = {
+    create?: XOR<RefundRequestCreateWithoutTransactionInput, RefundRequestUncheckedCreateWithoutTransactionInput>
+    connectOrCreate?: RefundRequestCreateOrConnectWithoutTransactionInput
+    upsert?: RefundRequestUpsertWithoutTransactionInput
+    disconnect?: RefundRequestWhereInput | boolean
+    delete?: RefundRequestWhereInput | boolean
+    connect?: RefundRequestWhereUniqueInput
+    update?: XOR<XOR<RefundRequestUpdateToOneWithWhereWithoutTransactionInput, RefundRequestUpdateWithoutTransactionInput>, RefundRequestUncheckedUpdateWithoutTransactionInput>
   }
 
   export type PaymentMethodCreateNestedManyWithoutMerchantInput = {
@@ -87409,6 +88857,34 @@ export namespace Prisma {
     upsert?: MerchantUpsertWithoutPaymentMethodsInput
     connect?: MerchantWhereUniqueInput
     update?: XOR<XOR<MerchantUpdateToOneWithWhereWithoutPaymentMethodsInput, MerchantUpdateWithoutPaymentMethodsInput>, MerchantUncheckedUpdateWithoutPaymentMethodsInput>
+  }
+
+  export type TransactionCreateNestedOneWithoutRefundRequestInput = {
+    create?: XOR<TransactionCreateWithoutRefundRequestInput, TransactionUncheckedCreateWithoutRefundRequestInput>
+    connectOrCreate?: TransactionCreateOrConnectWithoutRefundRequestInput
+    connect?: TransactionWhereUniqueInput
+  }
+
+  export type AccountCreateNestedOneWithoutRefundRequestsInput = {
+    create?: XOR<AccountCreateWithoutRefundRequestsInput, AccountUncheckedCreateWithoutRefundRequestsInput>
+    connectOrCreate?: AccountCreateOrConnectWithoutRefundRequestsInput
+    connect?: AccountWhereUniqueInput
+  }
+
+  export type TransactionUpdateOneRequiredWithoutRefundRequestNestedInput = {
+    create?: XOR<TransactionCreateWithoutRefundRequestInput, TransactionUncheckedCreateWithoutRefundRequestInput>
+    connectOrCreate?: TransactionCreateOrConnectWithoutRefundRequestInput
+    upsert?: TransactionUpsertWithoutRefundRequestInput
+    connect?: TransactionWhereUniqueInput
+    update?: XOR<XOR<TransactionUpdateToOneWithWhereWithoutRefundRequestInput, TransactionUpdateWithoutRefundRequestInput>, TransactionUncheckedUpdateWithoutRefundRequestInput>
+  }
+
+  export type AccountUpdateOneRequiredWithoutRefundRequestsNestedInput = {
+    create?: XOR<AccountCreateWithoutRefundRequestsInput, AccountUncheckedCreateWithoutRefundRequestsInput>
+    connectOrCreate?: AccountCreateOrConnectWithoutRefundRequestsInput
+    upsert?: AccountUpsertWithoutRefundRequestsInput
+    connect?: AccountWhereUniqueInput
+    update?: XOR<XOR<AccountUpdateToOneWithWhereWithoutRefundRequestsInput, AccountUpdateWithoutRefundRequestsInput>, AccountUncheckedUpdateWithoutRefundRequestsInput>
   }
 
   export type AccountCreateNestedOneWithoutReviewsInput = {
@@ -89361,6 +90837,7 @@ export namespace Prisma {
     state?: $Enums.TxnState
     occurredAt?: Date | string
     product: ProductCreateNestedOneWithoutTransactionsInput
+    refundRequest?: RefundRequestCreateNestedOneWithoutTransactionInput
   }
 
   export type TransactionUncheckedCreateWithoutAccountInput = {
@@ -89369,6 +90846,7 @@ export namespace Prisma {
     receiptId: string
     state?: $Enums.TxnState
     occurredAt?: Date | string
+    refundRequest?: RefundRequestUncheckedCreateNestedOneWithoutTransactionInput
   }
 
   export type TransactionCreateOrConnectWithoutAccountInput = {
@@ -89458,6 +90936,28 @@ export namespace Prisma {
 
   export type EntitlementCreateManyAccountInputEnvelope = {
     data: EntitlementCreateManyAccountInput | EntitlementCreateManyAccountInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type RefundRequestCreateWithoutRequesterInput = {
+    id?: string
+    createdAt?: Date | string
+    transaction: TransactionCreateNestedOneWithoutRefundRequestInput
+  }
+
+  export type RefundRequestUncheckedCreateWithoutRequesterInput = {
+    id?: string
+    txnId: string
+    createdAt?: Date | string
+  }
+
+  export type RefundRequestCreateOrConnectWithoutRequesterInput = {
+    where: RefundRequestWhereUniqueInput
+    create: XOR<RefundRequestCreateWithoutRequesterInput, RefundRequestUncheckedCreateWithoutRequesterInput>
+  }
+
+  export type RefundRequestCreateManyRequesterInputEnvelope = {
+    data: RefundRequestCreateManyRequesterInput | RefundRequestCreateManyRequesterInput[]
     skipDuplicates?: boolean
   }
 
@@ -90132,6 +91632,32 @@ export namespace Prisma {
     NOT?: EntitlementScalarWhereInput | EntitlementScalarWhereInput[]
     accountId?: StringFilter<"Entitlement"> | string
     productId?: StringFilter<"Entitlement"> | string
+  }
+
+  export type RefundRequestUpsertWithWhereUniqueWithoutRequesterInput = {
+    where: RefundRequestWhereUniqueInput
+    update: XOR<RefundRequestUpdateWithoutRequesterInput, RefundRequestUncheckedUpdateWithoutRequesterInput>
+    create: XOR<RefundRequestCreateWithoutRequesterInput, RefundRequestUncheckedCreateWithoutRequesterInput>
+  }
+
+  export type RefundRequestUpdateWithWhereUniqueWithoutRequesterInput = {
+    where: RefundRequestWhereUniqueInput
+    data: XOR<RefundRequestUpdateWithoutRequesterInput, RefundRequestUncheckedUpdateWithoutRequesterInput>
+  }
+
+  export type RefundRequestUpdateManyWithWhereWithoutRequesterInput = {
+    where: RefundRequestScalarWhereInput
+    data: XOR<RefundRequestUpdateManyMutationInput, RefundRequestUncheckedUpdateManyWithoutRequesterInput>
+  }
+
+  export type RefundRequestScalarWhereInput = {
+    AND?: RefundRequestScalarWhereInput | RefundRequestScalarWhereInput[]
+    OR?: RefundRequestScalarWhereInput[]
+    NOT?: RefundRequestScalarWhereInput | RefundRequestScalarWhereInput[]
+    id?: StringFilter<"RefundRequest"> | string
+    txnId?: StringFilter<"RefundRequest"> | string
+    requestedBy?: StringFilter<"RefundRequest"> | string
+    createdAt?: DateTimeFilter<"RefundRequest"> | Date | string
   }
 
   export type FriendshipUpsertWithWhereUniqueWithoutRequesterInput = {
@@ -91348,6 +92874,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationCreateNestedManyWithoutAccountInput
     redeemGrants?: RedeemGrantCreateNestedManyWithoutAccountInput
     entitlements?: EntitlementCreateNestedManyWithoutAccountInput
+    refundRequests?: RefundRequestCreateNestedManyWithoutRequesterInput
     friendshipsSent?: FriendshipCreateNestedManyWithoutRequesterInput
     friendshipsReceived?: FriendshipCreateNestedManyWithoutAddresseeInput
     scores?: ScoreCreateNestedManyWithoutAccountInput
@@ -91387,6 +92914,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationUncheckedCreateNestedManyWithoutAccountInput
     redeemGrants?: RedeemGrantUncheckedCreateNestedManyWithoutAccountInput
     entitlements?: EntitlementUncheckedCreateNestedManyWithoutAccountInput
+    refundRequests?: RefundRequestUncheckedCreateNestedManyWithoutRequesterInput
     friendshipsSent?: FriendshipUncheckedCreateNestedManyWithoutRequesterInput
     friendshipsReceived?: FriendshipUncheckedCreateNestedManyWithoutAddresseeInput
     scores?: ScoreUncheckedCreateNestedManyWithoutAccountInput
@@ -91475,6 +93003,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationUpdateManyWithoutAccountNestedInput
     redeemGrants?: RedeemGrantUpdateManyWithoutAccountNestedInput
     entitlements?: EntitlementUpdateManyWithoutAccountNestedInput
+    refundRequests?: RefundRequestUpdateManyWithoutRequesterNestedInput
     friendshipsSent?: FriendshipUpdateManyWithoutRequesterNestedInput
     friendshipsReceived?: FriendshipUpdateManyWithoutAddresseeNestedInput
     scores?: ScoreUpdateManyWithoutAccountNestedInput
@@ -91514,6 +93043,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationUncheckedUpdateManyWithoutAccountNestedInput
     redeemGrants?: RedeemGrantUncheckedUpdateManyWithoutAccountNestedInput
     entitlements?: EntitlementUncheckedUpdateManyWithoutAccountNestedInput
+    refundRequests?: RefundRequestUncheckedUpdateManyWithoutRequesterNestedInput
     friendshipsSent?: FriendshipUncheckedUpdateManyWithoutRequesterNestedInput
     friendshipsReceived?: FriendshipUncheckedUpdateManyWithoutAddresseeNestedInput
     scores?: ScoreUncheckedUpdateManyWithoutAccountNestedInput
@@ -91592,6 +93122,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationCreateNestedManyWithoutAccountInput
     redeemGrants?: RedeemGrantCreateNestedManyWithoutAccountInput
     entitlements?: EntitlementCreateNestedManyWithoutAccountInput
+    refundRequests?: RefundRequestCreateNestedManyWithoutRequesterInput
     friendshipsSent?: FriendshipCreateNestedManyWithoutRequesterInput
     friendshipsReceived?: FriendshipCreateNestedManyWithoutAddresseeInput
     scores?: ScoreCreateNestedManyWithoutAccountInput
@@ -91631,6 +93162,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationUncheckedCreateNestedManyWithoutAccountInput
     redeemGrants?: RedeemGrantUncheckedCreateNestedManyWithoutAccountInput
     entitlements?: EntitlementUncheckedCreateNestedManyWithoutAccountInput
+    refundRequests?: RefundRequestUncheckedCreateNestedManyWithoutRequesterInput
     friendshipsSent?: FriendshipUncheckedCreateNestedManyWithoutRequesterInput
     friendshipsReceived?: FriendshipUncheckedCreateNestedManyWithoutAddresseeInput
     scores?: ScoreUncheckedCreateNestedManyWithoutAccountInput
@@ -91686,6 +93218,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationUpdateManyWithoutAccountNestedInput
     redeemGrants?: RedeemGrantUpdateManyWithoutAccountNestedInput
     entitlements?: EntitlementUpdateManyWithoutAccountNestedInput
+    refundRequests?: RefundRequestUpdateManyWithoutRequesterNestedInput
     friendshipsSent?: FriendshipUpdateManyWithoutRequesterNestedInput
     friendshipsReceived?: FriendshipUpdateManyWithoutAddresseeNestedInput
     scores?: ScoreUpdateManyWithoutAccountNestedInput
@@ -91725,6 +93258,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationUncheckedUpdateManyWithoutAccountNestedInput
     redeemGrants?: RedeemGrantUncheckedUpdateManyWithoutAccountNestedInput
     entitlements?: EntitlementUncheckedUpdateManyWithoutAccountNestedInput
+    refundRequests?: RefundRequestUncheckedUpdateManyWithoutRequesterNestedInput
     friendshipsSent?: FriendshipUncheckedUpdateManyWithoutRequesterNestedInput
     friendshipsReceived?: FriendshipUncheckedUpdateManyWithoutAddresseeNestedInput
     scores?: ScoreUncheckedUpdateManyWithoutAccountNestedInput
@@ -91764,6 +93298,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationCreateNestedManyWithoutAccountInput
     redeemGrants?: RedeemGrantCreateNestedManyWithoutAccountInput
     entitlements?: EntitlementCreateNestedManyWithoutAccountInput
+    refundRequests?: RefundRequestCreateNestedManyWithoutRequesterInput
     friendshipsSent?: FriendshipCreateNestedManyWithoutRequesterInput
     friendshipsReceived?: FriendshipCreateNestedManyWithoutAddresseeInput
     scores?: ScoreCreateNestedManyWithoutAccountInput
@@ -91803,6 +93338,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationUncheckedCreateNestedManyWithoutAccountInput
     redeemGrants?: RedeemGrantUncheckedCreateNestedManyWithoutAccountInput
     entitlements?: EntitlementUncheckedCreateNestedManyWithoutAccountInput
+    refundRequests?: RefundRequestUncheckedCreateNestedManyWithoutRequesterInput
     friendshipsSent?: FriendshipUncheckedCreateNestedManyWithoutRequesterInput
     friendshipsReceived?: FriendshipUncheckedCreateNestedManyWithoutAddresseeInput
     scores?: ScoreUncheckedCreateNestedManyWithoutAccountInput
@@ -91858,6 +93394,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationUpdateManyWithoutAccountNestedInput
     redeemGrants?: RedeemGrantUpdateManyWithoutAccountNestedInput
     entitlements?: EntitlementUpdateManyWithoutAccountNestedInput
+    refundRequests?: RefundRequestUpdateManyWithoutRequesterNestedInput
     friendshipsSent?: FriendshipUpdateManyWithoutRequesterNestedInput
     friendshipsReceived?: FriendshipUpdateManyWithoutAddresseeNestedInput
     scores?: ScoreUpdateManyWithoutAccountNestedInput
@@ -91897,6 +93434,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationUncheckedUpdateManyWithoutAccountNestedInput
     redeemGrants?: RedeemGrantUncheckedUpdateManyWithoutAccountNestedInput
     entitlements?: EntitlementUncheckedUpdateManyWithoutAccountNestedInput
+    refundRequests?: RefundRequestUncheckedUpdateManyWithoutRequesterNestedInput
     friendshipsSent?: FriendshipUncheckedUpdateManyWithoutRequesterNestedInput
     friendshipsReceived?: FriendshipUncheckedUpdateManyWithoutAddresseeNestedInput
     scores?: ScoreUncheckedUpdateManyWithoutAccountNestedInput
@@ -91936,6 +93474,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationCreateNestedManyWithoutAccountInput
     redeemGrants?: RedeemGrantCreateNestedManyWithoutAccountInput
     entitlements?: EntitlementCreateNestedManyWithoutAccountInput
+    refundRequests?: RefundRequestCreateNestedManyWithoutRequesterInput
     friendshipsSent?: FriendshipCreateNestedManyWithoutRequesterInput
     friendshipsReceived?: FriendshipCreateNestedManyWithoutAddresseeInput
     scores?: ScoreCreateNestedManyWithoutAccountInput
@@ -91975,6 +93514,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationUncheckedCreateNestedManyWithoutAccountInput
     redeemGrants?: RedeemGrantUncheckedCreateNestedManyWithoutAccountInput
     entitlements?: EntitlementUncheckedCreateNestedManyWithoutAccountInput
+    refundRequests?: RefundRequestUncheckedCreateNestedManyWithoutRequesterInput
     friendshipsSent?: FriendshipUncheckedCreateNestedManyWithoutRequesterInput
     friendshipsReceived?: FriendshipUncheckedCreateNestedManyWithoutAddresseeInput
     scores?: ScoreUncheckedCreateNestedManyWithoutAccountInput
@@ -92099,6 +93639,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationUpdateManyWithoutAccountNestedInput
     redeemGrants?: RedeemGrantUpdateManyWithoutAccountNestedInput
     entitlements?: EntitlementUpdateManyWithoutAccountNestedInput
+    refundRequests?: RefundRequestUpdateManyWithoutRequesterNestedInput
     friendshipsSent?: FriendshipUpdateManyWithoutRequesterNestedInput
     friendshipsReceived?: FriendshipUpdateManyWithoutAddresseeNestedInput
     scores?: ScoreUpdateManyWithoutAccountNestedInput
@@ -92138,6 +93679,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationUncheckedUpdateManyWithoutAccountNestedInput
     redeemGrants?: RedeemGrantUncheckedUpdateManyWithoutAccountNestedInput
     entitlements?: EntitlementUncheckedUpdateManyWithoutAccountNestedInput
+    refundRequests?: RefundRequestUncheckedUpdateManyWithoutRequesterNestedInput
     friendshipsSent?: FriendshipUncheckedUpdateManyWithoutRequesterNestedInput
     friendshipsReceived?: FriendshipUncheckedUpdateManyWithoutAddresseeNestedInput
     scores?: ScoreUncheckedUpdateManyWithoutAccountNestedInput
@@ -92488,6 +94030,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationCreateNestedManyWithoutAccountInput
     redeemGrants?: RedeemGrantCreateNestedManyWithoutAccountInput
     entitlements?: EntitlementCreateNestedManyWithoutAccountInput
+    refundRequests?: RefundRequestCreateNestedManyWithoutRequesterInput
     friendshipsSent?: FriendshipCreateNestedManyWithoutRequesterInput
     friendshipsReceived?: FriendshipCreateNestedManyWithoutAddresseeInput
     scores?: ScoreCreateNestedManyWithoutAccountInput
@@ -92527,6 +94070,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationUncheckedCreateNestedManyWithoutAccountInput
     redeemGrants?: RedeemGrantUncheckedCreateNestedManyWithoutAccountInput
     entitlements?: EntitlementUncheckedCreateNestedManyWithoutAccountInput
+    refundRequests?: RefundRequestUncheckedCreateNestedManyWithoutRequesterInput
     friendshipsSent?: FriendshipUncheckedCreateNestedManyWithoutRequesterInput
     friendshipsReceived?: FriendshipUncheckedCreateNestedManyWithoutAddresseeInput
     scores?: ScoreUncheckedCreateNestedManyWithoutAccountInput
@@ -92582,6 +94126,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationUpdateManyWithoutAccountNestedInput
     redeemGrants?: RedeemGrantUpdateManyWithoutAccountNestedInput
     entitlements?: EntitlementUpdateManyWithoutAccountNestedInput
+    refundRequests?: RefundRequestUpdateManyWithoutRequesterNestedInput
     friendshipsSent?: FriendshipUpdateManyWithoutRequesterNestedInput
     friendshipsReceived?: FriendshipUpdateManyWithoutAddresseeNestedInput
     scores?: ScoreUpdateManyWithoutAccountNestedInput
@@ -92621,6 +94166,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationUncheckedUpdateManyWithoutAccountNestedInput
     redeemGrants?: RedeemGrantUncheckedUpdateManyWithoutAccountNestedInput
     entitlements?: EntitlementUncheckedUpdateManyWithoutAccountNestedInput
+    refundRequests?: RefundRequestUncheckedUpdateManyWithoutRequesterNestedInput
     friendshipsSent?: FriendshipUncheckedUpdateManyWithoutRequesterNestedInput
     friendshipsReceived?: FriendshipUncheckedUpdateManyWithoutAddresseeNestedInput
     scores?: ScoreUncheckedUpdateManyWithoutAccountNestedInput
@@ -92660,6 +94206,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationCreateNestedManyWithoutAccountInput
     redeemGrants?: RedeemGrantCreateNestedManyWithoutAccountInput
     entitlements?: EntitlementCreateNestedManyWithoutAccountInput
+    refundRequests?: RefundRequestCreateNestedManyWithoutRequesterInput
     friendshipsSent?: FriendshipCreateNestedManyWithoutRequesterInput
     friendshipsReceived?: FriendshipCreateNestedManyWithoutAddresseeInput
     scores?: ScoreCreateNestedManyWithoutAccountInput
@@ -92699,6 +94246,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationUncheckedCreateNestedManyWithoutAccountInput
     redeemGrants?: RedeemGrantUncheckedCreateNestedManyWithoutAccountInput
     entitlements?: EntitlementUncheckedCreateNestedManyWithoutAccountInput
+    refundRequests?: RefundRequestUncheckedCreateNestedManyWithoutRequesterInput
     friendshipsSent?: FriendshipUncheckedCreateNestedManyWithoutRequesterInput
     friendshipsReceived?: FriendshipUncheckedCreateNestedManyWithoutAddresseeInput
     scores?: ScoreUncheckedCreateNestedManyWithoutAccountInput
@@ -92754,6 +94302,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationUpdateManyWithoutAccountNestedInput
     redeemGrants?: RedeemGrantUpdateManyWithoutAccountNestedInput
     entitlements?: EntitlementUpdateManyWithoutAccountNestedInput
+    refundRequests?: RefundRequestUpdateManyWithoutRequesterNestedInput
     friendshipsSent?: FriendshipUpdateManyWithoutRequesterNestedInput
     friendshipsReceived?: FriendshipUpdateManyWithoutAddresseeNestedInput
     scores?: ScoreUpdateManyWithoutAccountNestedInput
@@ -92793,6 +94342,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationUncheckedUpdateManyWithoutAccountNestedInput
     redeemGrants?: RedeemGrantUncheckedUpdateManyWithoutAccountNestedInput
     entitlements?: EntitlementUncheckedUpdateManyWithoutAccountNestedInput
+    refundRequests?: RefundRequestUncheckedUpdateManyWithoutRequesterNestedInput
     friendshipsSent?: FriendshipUncheckedUpdateManyWithoutRequesterNestedInput
     friendshipsReceived?: FriendshipUncheckedUpdateManyWithoutAddresseeNestedInput
     scores?: ScoreUncheckedUpdateManyWithoutAccountNestedInput
@@ -92940,6 +94490,7 @@ export namespace Prisma {
     state?: $Enums.TxnState
     occurredAt?: Date | string
     account: AccountCreateNestedOneWithoutTransactionsInput
+    refundRequest?: RefundRequestCreateNestedOneWithoutTransactionInput
   }
 
   export type TransactionUncheckedCreateWithoutProductInput = {
@@ -92948,6 +94499,7 @@ export namespace Prisma {
     receiptId: string
     state?: $Enums.TxnState
     occurredAt?: Date | string
+    refundRequest?: RefundRequestUncheckedCreateNestedOneWithoutTransactionInput
   }
 
   export type TransactionCreateOrConnectWithoutProductInput = {
@@ -93224,6 +94776,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationCreateNestedManyWithoutAccountInput
     redeemGrants?: RedeemGrantCreateNestedManyWithoutAccountInput
     entitlements?: EntitlementCreateNestedManyWithoutAccountInput
+    refundRequests?: RefundRequestCreateNestedManyWithoutRequesterInput
     friendshipsSent?: FriendshipCreateNestedManyWithoutRequesterInput
     friendshipsReceived?: FriendshipCreateNestedManyWithoutAddresseeInput
     scores?: ScoreCreateNestedManyWithoutAccountInput
@@ -93263,6 +94816,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationUncheckedCreateNestedManyWithoutAccountInput
     redeemGrants?: RedeemGrantUncheckedCreateNestedManyWithoutAccountInput
     entitlements?: EntitlementUncheckedCreateNestedManyWithoutAccountInput
+    refundRequests?: RefundRequestUncheckedCreateNestedManyWithoutRequesterInput
     friendshipsSent?: FriendshipUncheckedCreateNestedManyWithoutRequesterInput
     friendshipsReceived?: FriendshipUncheckedCreateNestedManyWithoutAddresseeInput
     scores?: ScoreUncheckedCreateNestedManyWithoutAccountInput
@@ -93318,6 +94872,23 @@ export namespace Prisma {
     create: XOR<ProductCreateWithoutTransactionsInput, ProductUncheckedCreateWithoutTransactionsInput>
   }
 
+  export type RefundRequestCreateWithoutTransactionInput = {
+    id?: string
+    createdAt?: Date | string
+    requester: AccountCreateNestedOneWithoutRefundRequestsInput
+  }
+
+  export type RefundRequestUncheckedCreateWithoutTransactionInput = {
+    id?: string
+    requestedBy: string
+    createdAt?: Date | string
+  }
+
+  export type RefundRequestCreateOrConnectWithoutTransactionInput = {
+    where: RefundRequestWhereUniqueInput
+    create: XOR<RefundRequestCreateWithoutTransactionInput, RefundRequestUncheckedCreateWithoutTransactionInput>
+  }
+
   export type AccountUpsertWithoutTransactionsInput = {
     update: XOR<AccountUpdateWithoutTransactionsInput, AccountUncheckedUpdateWithoutTransactionsInput>
     create: XOR<AccountCreateWithoutTransactionsInput, AccountUncheckedCreateWithoutTransactionsInput>
@@ -93349,6 +94920,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationUpdateManyWithoutAccountNestedInput
     redeemGrants?: RedeemGrantUpdateManyWithoutAccountNestedInput
     entitlements?: EntitlementUpdateManyWithoutAccountNestedInput
+    refundRequests?: RefundRequestUpdateManyWithoutRequesterNestedInput
     friendshipsSent?: FriendshipUpdateManyWithoutRequesterNestedInput
     friendshipsReceived?: FriendshipUpdateManyWithoutAddresseeNestedInput
     scores?: ScoreUpdateManyWithoutAccountNestedInput
@@ -93388,6 +94960,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationUncheckedUpdateManyWithoutAccountNestedInput
     redeemGrants?: RedeemGrantUncheckedUpdateManyWithoutAccountNestedInput
     entitlements?: EntitlementUncheckedUpdateManyWithoutAccountNestedInput
+    refundRequests?: RefundRequestUncheckedUpdateManyWithoutRequesterNestedInput
     friendshipsSent?: FriendshipUncheckedUpdateManyWithoutRequesterNestedInput
     friendshipsReceived?: FriendshipUncheckedUpdateManyWithoutAddresseeNestedInput
     scores?: ScoreUncheckedUpdateManyWithoutAccountNestedInput
@@ -93442,6 +95015,29 @@ export namespace Prisma {
     items?: ItemUncheckedUpdateManyWithoutProductNestedInput
     entitlements?: EntitlementUncheckedUpdateManyWithoutProductNestedInput
     reviews?: ReviewUncheckedUpdateManyWithoutProductNestedInput
+  }
+
+  export type RefundRequestUpsertWithoutTransactionInput = {
+    update: XOR<RefundRequestUpdateWithoutTransactionInput, RefundRequestUncheckedUpdateWithoutTransactionInput>
+    create: XOR<RefundRequestCreateWithoutTransactionInput, RefundRequestUncheckedCreateWithoutTransactionInput>
+    where?: RefundRequestWhereInput
+  }
+
+  export type RefundRequestUpdateToOneWithWhereWithoutTransactionInput = {
+    where?: RefundRequestWhereInput
+    data: XOR<RefundRequestUpdateWithoutTransactionInput, RefundRequestUncheckedUpdateWithoutTransactionInput>
+  }
+
+  export type RefundRequestUpdateWithoutTransactionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    requester?: AccountUpdateOneRequiredWithoutRefundRequestsNestedInput
+  }
+
+  export type RefundRequestUncheckedUpdateWithoutTransactionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    requestedBy?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type PaymentMethodCreateWithoutMerchantInput = {
@@ -93529,6 +95125,234 @@ export namespace Prisma {
     config?: NullableJsonNullValueInput | InputJsonValue
   }
 
+  export type TransactionCreateWithoutRefundRequestInput = {
+    id?: string
+    receiptId: string
+    state?: $Enums.TxnState
+    occurredAt?: Date | string
+    account: AccountCreateNestedOneWithoutTransactionsInput
+    product: ProductCreateNestedOneWithoutTransactionsInput
+  }
+
+  export type TransactionUncheckedCreateWithoutRefundRequestInput = {
+    id?: string
+    accountId: string
+    productId: string
+    receiptId: string
+    state?: $Enums.TxnState
+    occurredAt?: Date | string
+  }
+
+  export type TransactionCreateOrConnectWithoutRefundRequestInput = {
+    where: TransactionWhereUniqueInput
+    create: XOR<TransactionCreateWithoutRefundRequestInput, TransactionUncheckedCreateWithoutRefundRequestInput>
+  }
+
+  export type AccountCreateWithoutRefundRequestsInput = {
+    id?: string
+    email: string
+    passwordHash?: string | null
+    status?: $Enums.AccountStatus
+    createdAt?: Date | string
+    authProvider?: $Enums.AuthProvider
+    externalId?: string | null
+    resetCode?: string | null
+    resetCodeExpiresAt?: Date | string | null
+    playerProfile?: PlayerProfileCreateNestedOneWithoutAccountInput
+    sessions?: SessionCreateNestedManyWithoutAccountInput
+    memberships?: MemberCreateNestedManyWithoutAccountInput
+    accountApps?: AccountAppCreateNestedManyWithoutAccountInput
+    wallet?: WalletCreateNestedOneWithoutAccountInput
+    coinLedger?: CoinLedgerCreateNestedManyWithoutAccountInput
+    transactions?: TransactionCreateNestedManyWithoutAccountInput
+    reviews?: ReviewCreateNestedManyWithoutAccountInput
+    demoParticipations?: DemoParticipationCreateNestedManyWithoutAccountInput
+    redeemGrants?: RedeemGrantCreateNestedManyWithoutAccountInput
+    entitlements?: EntitlementCreateNestedManyWithoutAccountInput
+    friendshipsSent?: FriendshipCreateNestedManyWithoutRequesterInput
+    friendshipsReceived?: FriendshipCreateNestedManyWithoutAddresseeInput
+    scores?: ScoreCreateNestedManyWithoutAccountInput
+    achievementUnlocks?: AchievementUnlockCreateNestedManyWithoutAccountInput
+    gameStatuses?: GameStatusCreateNestedManyWithoutAccountInput
+    notificationSettings?: NotificationSettingCreateNestedManyWithoutAccountInput
+    reminders?: ReminderCreateNestedManyWithoutAccountInput
+    consents?: ConsentCreateNestedManyWithoutAccountInput
+    auditLogs?: AuditLogCreateNestedManyWithoutActorInput
+    chatParticipations?: ChatParticipantCreateNestedManyWithoutAccountInput
+    sentMessages?: ChatMessageCreateNestedManyWithoutSenderInput
+    assignedTickets?: TicketMetaCreateNestedManyWithoutAssigneeInput
+    calendarEvents?: CalendarEventCreateNestedManyWithoutOwnerInput
+    tasks?: TaskCreateNestedManyWithoutAssigneeInput
+    documentVersions?: DocumentVersionCreateNestedManyWithoutAuthorInput
+    documentShares?: DocumentShareCreateNestedManyWithoutMemberInput
+    rollbackRequests?: RollbackRequestCreateNestedManyWithoutByInput
+  }
+
+  export type AccountUncheckedCreateWithoutRefundRequestsInput = {
+    id?: string
+    email: string
+    passwordHash?: string | null
+    status?: $Enums.AccountStatus
+    createdAt?: Date | string
+    authProvider?: $Enums.AuthProvider
+    externalId?: string | null
+    resetCode?: string | null
+    resetCodeExpiresAt?: Date | string | null
+    playerProfile?: PlayerProfileUncheckedCreateNestedOneWithoutAccountInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutAccountInput
+    memberships?: MemberUncheckedCreateNestedManyWithoutAccountInput
+    accountApps?: AccountAppUncheckedCreateNestedManyWithoutAccountInput
+    wallet?: WalletUncheckedCreateNestedOneWithoutAccountInput
+    coinLedger?: CoinLedgerUncheckedCreateNestedManyWithoutAccountInput
+    transactions?: TransactionUncheckedCreateNestedManyWithoutAccountInput
+    reviews?: ReviewUncheckedCreateNestedManyWithoutAccountInput
+    demoParticipations?: DemoParticipationUncheckedCreateNestedManyWithoutAccountInput
+    redeemGrants?: RedeemGrantUncheckedCreateNestedManyWithoutAccountInput
+    entitlements?: EntitlementUncheckedCreateNestedManyWithoutAccountInput
+    friendshipsSent?: FriendshipUncheckedCreateNestedManyWithoutRequesterInput
+    friendshipsReceived?: FriendshipUncheckedCreateNestedManyWithoutAddresseeInput
+    scores?: ScoreUncheckedCreateNestedManyWithoutAccountInput
+    achievementUnlocks?: AchievementUnlockUncheckedCreateNestedManyWithoutAccountInput
+    gameStatuses?: GameStatusUncheckedCreateNestedManyWithoutAccountInput
+    notificationSettings?: NotificationSettingUncheckedCreateNestedManyWithoutAccountInput
+    reminders?: ReminderUncheckedCreateNestedManyWithoutAccountInput
+    consents?: ConsentUncheckedCreateNestedManyWithoutAccountInput
+    auditLogs?: AuditLogUncheckedCreateNestedManyWithoutActorInput
+    chatParticipations?: ChatParticipantUncheckedCreateNestedManyWithoutAccountInput
+    sentMessages?: ChatMessageUncheckedCreateNestedManyWithoutSenderInput
+    assignedTickets?: TicketMetaUncheckedCreateNestedManyWithoutAssigneeInput
+    calendarEvents?: CalendarEventUncheckedCreateNestedManyWithoutOwnerInput
+    tasks?: TaskUncheckedCreateNestedManyWithoutAssigneeInput
+    documentVersions?: DocumentVersionUncheckedCreateNestedManyWithoutAuthorInput
+    documentShares?: DocumentShareUncheckedCreateNestedManyWithoutMemberInput
+    rollbackRequests?: RollbackRequestUncheckedCreateNestedManyWithoutByInput
+  }
+
+  export type AccountCreateOrConnectWithoutRefundRequestsInput = {
+    where: AccountWhereUniqueInput
+    create: XOR<AccountCreateWithoutRefundRequestsInput, AccountUncheckedCreateWithoutRefundRequestsInput>
+  }
+
+  export type TransactionUpsertWithoutRefundRequestInput = {
+    update: XOR<TransactionUpdateWithoutRefundRequestInput, TransactionUncheckedUpdateWithoutRefundRequestInput>
+    create: XOR<TransactionCreateWithoutRefundRequestInput, TransactionUncheckedCreateWithoutRefundRequestInput>
+    where?: TransactionWhereInput
+  }
+
+  export type TransactionUpdateToOneWithWhereWithoutRefundRequestInput = {
+    where?: TransactionWhereInput
+    data: XOR<TransactionUpdateWithoutRefundRequestInput, TransactionUncheckedUpdateWithoutRefundRequestInput>
+  }
+
+  export type TransactionUpdateWithoutRefundRequestInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    receiptId?: StringFieldUpdateOperationsInput | string
+    state?: EnumTxnStateFieldUpdateOperationsInput | $Enums.TxnState
+    occurredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    account?: AccountUpdateOneRequiredWithoutTransactionsNestedInput
+    product?: ProductUpdateOneRequiredWithoutTransactionsNestedInput
+  }
+
+  export type TransactionUncheckedUpdateWithoutRefundRequestInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    accountId?: StringFieldUpdateOperationsInput | string
+    productId?: StringFieldUpdateOperationsInput | string
+    receiptId?: StringFieldUpdateOperationsInput | string
+    state?: EnumTxnStateFieldUpdateOperationsInput | $Enums.TxnState
+    occurredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AccountUpsertWithoutRefundRequestsInput = {
+    update: XOR<AccountUpdateWithoutRefundRequestsInput, AccountUncheckedUpdateWithoutRefundRequestsInput>
+    create: XOR<AccountCreateWithoutRefundRequestsInput, AccountUncheckedCreateWithoutRefundRequestsInput>
+    where?: AccountWhereInput
+  }
+
+  export type AccountUpdateToOneWithWhereWithoutRefundRequestsInput = {
+    where?: AccountWhereInput
+    data: XOR<AccountUpdateWithoutRefundRequestsInput, AccountUncheckedUpdateWithoutRefundRequestsInput>
+  }
+
+  export type AccountUpdateWithoutRefundRequestsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    authProvider?: EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
+    externalId?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCode?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCodeExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    playerProfile?: PlayerProfileUpdateOneWithoutAccountNestedInput
+    sessions?: SessionUpdateManyWithoutAccountNestedInput
+    memberships?: MemberUpdateManyWithoutAccountNestedInput
+    accountApps?: AccountAppUpdateManyWithoutAccountNestedInput
+    wallet?: WalletUpdateOneWithoutAccountNestedInput
+    coinLedger?: CoinLedgerUpdateManyWithoutAccountNestedInput
+    transactions?: TransactionUpdateManyWithoutAccountNestedInput
+    reviews?: ReviewUpdateManyWithoutAccountNestedInput
+    demoParticipations?: DemoParticipationUpdateManyWithoutAccountNestedInput
+    redeemGrants?: RedeemGrantUpdateManyWithoutAccountNestedInput
+    entitlements?: EntitlementUpdateManyWithoutAccountNestedInput
+    friendshipsSent?: FriendshipUpdateManyWithoutRequesterNestedInput
+    friendshipsReceived?: FriendshipUpdateManyWithoutAddresseeNestedInput
+    scores?: ScoreUpdateManyWithoutAccountNestedInput
+    achievementUnlocks?: AchievementUnlockUpdateManyWithoutAccountNestedInput
+    gameStatuses?: GameStatusUpdateManyWithoutAccountNestedInput
+    notificationSettings?: NotificationSettingUpdateManyWithoutAccountNestedInput
+    reminders?: ReminderUpdateManyWithoutAccountNestedInput
+    consents?: ConsentUpdateManyWithoutAccountNestedInput
+    auditLogs?: AuditLogUpdateManyWithoutActorNestedInput
+    chatParticipations?: ChatParticipantUpdateManyWithoutAccountNestedInput
+    sentMessages?: ChatMessageUpdateManyWithoutSenderNestedInput
+    assignedTickets?: TicketMetaUpdateManyWithoutAssigneeNestedInput
+    calendarEvents?: CalendarEventUpdateManyWithoutOwnerNestedInput
+    tasks?: TaskUpdateManyWithoutAssigneeNestedInput
+    documentVersions?: DocumentVersionUpdateManyWithoutAuthorNestedInput
+    documentShares?: DocumentShareUpdateManyWithoutMemberNestedInput
+    rollbackRequests?: RollbackRequestUpdateManyWithoutByNestedInput
+  }
+
+  export type AccountUncheckedUpdateWithoutRefundRequestsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    authProvider?: EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
+    externalId?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCode?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCodeExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    playerProfile?: PlayerProfileUncheckedUpdateOneWithoutAccountNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutAccountNestedInput
+    memberships?: MemberUncheckedUpdateManyWithoutAccountNestedInput
+    accountApps?: AccountAppUncheckedUpdateManyWithoutAccountNestedInput
+    wallet?: WalletUncheckedUpdateOneWithoutAccountNestedInput
+    coinLedger?: CoinLedgerUncheckedUpdateManyWithoutAccountNestedInput
+    transactions?: TransactionUncheckedUpdateManyWithoutAccountNestedInput
+    reviews?: ReviewUncheckedUpdateManyWithoutAccountNestedInput
+    demoParticipations?: DemoParticipationUncheckedUpdateManyWithoutAccountNestedInput
+    redeemGrants?: RedeemGrantUncheckedUpdateManyWithoutAccountNestedInput
+    entitlements?: EntitlementUncheckedUpdateManyWithoutAccountNestedInput
+    friendshipsSent?: FriendshipUncheckedUpdateManyWithoutRequesterNestedInput
+    friendshipsReceived?: FriendshipUncheckedUpdateManyWithoutAddresseeNestedInput
+    scores?: ScoreUncheckedUpdateManyWithoutAccountNestedInput
+    achievementUnlocks?: AchievementUnlockUncheckedUpdateManyWithoutAccountNestedInput
+    gameStatuses?: GameStatusUncheckedUpdateManyWithoutAccountNestedInput
+    notificationSettings?: NotificationSettingUncheckedUpdateManyWithoutAccountNestedInput
+    reminders?: ReminderUncheckedUpdateManyWithoutAccountNestedInput
+    consents?: ConsentUncheckedUpdateManyWithoutAccountNestedInput
+    auditLogs?: AuditLogUncheckedUpdateManyWithoutActorNestedInput
+    chatParticipations?: ChatParticipantUncheckedUpdateManyWithoutAccountNestedInput
+    sentMessages?: ChatMessageUncheckedUpdateManyWithoutSenderNestedInput
+    assignedTickets?: TicketMetaUncheckedUpdateManyWithoutAssigneeNestedInput
+    calendarEvents?: CalendarEventUncheckedUpdateManyWithoutOwnerNestedInput
+    tasks?: TaskUncheckedUpdateManyWithoutAssigneeNestedInput
+    documentVersions?: DocumentVersionUncheckedUpdateManyWithoutAuthorNestedInput
+    documentShares?: DocumentShareUncheckedUpdateManyWithoutMemberNestedInput
+    rollbackRequests?: RollbackRequestUncheckedUpdateManyWithoutByNestedInput
+  }
+
   export type AccountCreateWithoutReviewsInput = {
     id?: string
     email: string
@@ -93549,6 +95373,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationCreateNestedManyWithoutAccountInput
     redeemGrants?: RedeemGrantCreateNestedManyWithoutAccountInput
     entitlements?: EntitlementCreateNestedManyWithoutAccountInput
+    refundRequests?: RefundRequestCreateNestedManyWithoutRequesterInput
     friendshipsSent?: FriendshipCreateNestedManyWithoutRequesterInput
     friendshipsReceived?: FriendshipCreateNestedManyWithoutAddresseeInput
     scores?: ScoreCreateNestedManyWithoutAccountInput
@@ -93588,6 +95413,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationUncheckedCreateNestedManyWithoutAccountInput
     redeemGrants?: RedeemGrantUncheckedCreateNestedManyWithoutAccountInput
     entitlements?: EntitlementUncheckedCreateNestedManyWithoutAccountInput
+    refundRequests?: RefundRequestUncheckedCreateNestedManyWithoutRequesterInput
     friendshipsSent?: FriendshipUncheckedCreateNestedManyWithoutRequesterInput
     friendshipsReceived?: FriendshipUncheckedCreateNestedManyWithoutAddresseeInput
     scores?: ScoreUncheckedCreateNestedManyWithoutAccountInput
@@ -93674,6 +95500,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationUpdateManyWithoutAccountNestedInput
     redeemGrants?: RedeemGrantUpdateManyWithoutAccountNestedInput
     entitlements?: EntitlementUpdateManyWithoutAccountNestedInput
+    refundRequests?: RefundRequestUpdateManyWithoutRequesterNestedInput
     friendshipsSent?: FriendshipUpdateManyWithoutRequesterNestedInput
     friendshipsReceived?: FriendshipUpdateManyWithoutAddresseeNestedInput
     scores?: ScoreUpdateManyWithoutAccountNestedInput
@@ -93713,6 +95540,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationUncheckedUpdateManyWithoutAccountNestedInput
     redeemGrants?: RedeemGrantUncheckedUpdateManyWithoutAccountNestedInput
     entitlements?: EntitlementUncheckedUpdateManyWithoutAccountNestedInput
+    refundRequests?: RefundRequestUncheckedUpdateManyWithoutRequesterNestedInput
     friendshipsSent?: FriendshipUncheckedUpdateManyWithoutRequesterNestedInput
     friendshipsReceived?: FriendshipUncheckedUpdateManyWithoutAddresseeNestedInput
     scores?: ScoreUncheckedUpdateManyWithoutAccountNestedInput
@@ -93840,6 +95668,7 @@ export namespace Prisma {
     reviews?: ReviewCreateNestedManyWithoutAccountInput
     redeemGrants?: RedeemGrantCreateNestedManyWithoutAccountInput
     entitlements?: EntitlementCreateNestedManyWithoutAccountInput
+    refundRequests?: RefundRequestCreateNestedManyWithoutRequesterInput
     friendshipsSent?: FriendshipCreateNestedManyWithoutRequesterInput
     friendshipsReceived?: FriendshipCreateNestedManyWithoutAddresseeInput
     scores?: ScoreCreateNestedManyWithoutAccountInput
@@ -93879,6 +95708,7 @@ export namespace Prisma {
     reviews?: ReviewUncheckedCreateNestedManyWithoutAccountInput
     redeemGrants?: RedeemGrantUncheckedCreateNestedManyWithoutAccountInput
     entitlements?: EntitlementUncheckedCreateNestedManyWithoutAccountInput
+    refundRequests?: RefundRequestUncheckedCreateNestedManyWithoutRequesterInput
     friendshipsSent?: FriendshipUncheckedCreateNestedManyWithoutRequesterInput
     friendshipsReceived?: FriendshipUncheckedCreateNestedManyWithoutAddresseeInput
     scores?: ScoreUncheckedCreateNestedManyWithoutAccountInput
@@ -93955,6 +95785,7 @@ export namespace Prisma {
     reviews?: ReviewUpdateManyWithoutAccountNestedInput
     redeemGrants?: RedeemGrantUpdateManyWithoutAccountNestedInput
     entitlements?: EntitlementUpdateManyWithoutAccountNestedInput
+    refundRequests?: RefundRequestUpdateManyWithoutRequesterNestedInput
     friendshipsSent?: FriendshipUpdateManyWithoutRequesterNestedInput
     friendshipsReceived?: FriendshipUpdateManyWithoutAddresseeNestedInput
     scores?: ScoreUpdateManyWithoutAccountNestedInput
@@ -93994,6 +95825,7 @@ export namespace Prisma {
     reviews?: ReviewUncheckedUpdateManyWithoutAccountNestedInput
     redeemGrants?: RedeemGrantUncheckedUpdateManyWithoutAccountNestedInput
     entitlements?: EntitlementUncheckedUpdateManyWithoutAccountNestedInput
+    refundRequests?: RefundRequestUncheckedUpdateManyWithoutRequesterNestedInput
     friendshipsSent?: FriendshipUncheckedUpdateManyWithoutRequesterNestedInput
     friendshipsReceived?: FriendshipUncheckedUpdateManyWithoutAddresseeNestedInput
     scores?: ScoreUncheckedUpdateManyWithoutAccountNestedInput
@@ -94088,6 +95920,7 @@ export namespace Prisma {
     reviews?: ReviewCreateNestedManyWithoutAccountInput
     demoParticipations?: DemoParticipationCreateNestedManyWithoutAccountInput
     entitlements?: EntitlementCreateNestedManyWithoutAccountInput
+    refundRequests?: RefundRequestCreateNestedManyWithoutRequesterInput
     friendshipsSent?: FriendshipCreateNestedManyWithoutRequesterInput
     friendshipsReceived?: FriendshipCreateNestedManyWithoutAddresseeInput
     scores?: ScoreCreateNestedManyWithoutAccountInput
@@ -94127,6 +95960,7 @@ export namespace Prisma {
     reviews?: ReviewUncheckedCreateNestedManyWithoutAccountInput
     demoParticipations?: DemoParticipationUncheckedCreateNestedManyWithoutAccountInput
     entitlements?: EntitlementUncheckedCreateNestedManyWithoutAccountInput
+    refundRequests?: RefundRequestUncheckedCreateNestedManyWithoutRequesterInput
     friendshipsSent?: FriendshipUncheckedCreateNestedManyWithoutRequesterInput
     friendshipsReceived?: FriendshipUncheckedCreateNestedManyWithoutAddresseeInput
     scores?: ScoreUncheckedCreateNestedManyWithoutAccountInput
@@ -94209,6 +96043,7 @@ export namespace Prisma {
     reviews?: ReviewUpdateManyWithoutAccountNestedInput
     demoParticipations?: DemoParticipationUpdateManyWithoutAccountNestedInput
     entitlements?: EntitlementUpdateManyWithoutAccountNestedInput
+    refundRequests?: RefundRequestUpdateManyWithoutRequesterNestedInput
     friendshipsSent?: FriendshipUpdateManyWithoutRequesterNestedInput
     friendshipsReceived?: FriendshipUpdateManyWithoutAddresseeNestedInput
     scores?: ScoreUpdateManyWithoutAccountNestedInput
@@ -94248,6 +96083,7 @@ export namespace Prisma {
     reviews?: ReviewUncheckedUpdateManyWithoutAccountNestedInput
     demoParticipations?: DemoParticipationUncheckedUpdateManyWithoutAccountNestedInput
     entitlements?: EntitlementUncheckedUpdateManyWithoutAccountNestedInput
+    refundRequests?: RefundRequestUncheckedUpdateManyWithoutRequesterNestedInput
     friendshipsSent?: FriendshipUncheckedUpdateManyWithoutRequesterNestedInput
     friendshipsReceived?: FriendshipUncheckedUpdateManyWithoutAddresseeNestedInput
     scores?: ScoreUncheckedUpdateManyWithoutAccountNestedInput
@@ -94359,6 +96195,7 @@ export namespace Prisma {
     reviews?: ReviewCreateNestedManyWithoutAccountInput
     demoParticipations?: DemoParticipationCreateNestedManyWithoutAccountInput
     redeemGrants?: RedeemGrantCreateNestedManyWithoutAccountInput
+    refundRequests?: RefundRequestCreateNestedManyWithoutRequesterInput
     friendshipsSent?: FriendshipCreateNestedManyWithoutRequesterInput
     friendshipsReceived?: FriendshipCreateNestedManyWithoutAddresseeInput
     scores?: ScoreCreateNestedManyWithoutAccountInput
@@ -94398,6 +96235,7 @@ export namespace Prisma {
     reviews?: ReviewUncheckedCreateNestedManyWithoutAccountInput
     demoParticipations?: DemoParticipationUncheckedCreateNestedManyWithoutAccountInput
     redeemGrants?: RedeemGrantUncheckedCreateNestedManyWithoutAccountInput
+    refundRequests?: RefundRequestUncheckedCreateNestedManyWithoutRequesterInput
     friendshipsSent?: FriendshipUncheckedCreateNestedManyWithoutRequesterInput
     friendshipsReceived?: FriendshipUncheckedCreateNestedManyWithoutAddresseeInput
     scores?: ScoreUncheckedCreateNestedManyWithoutAccountInput
@@ -94484,6 +96322,7 @@ export namespace Prisma {
     reviews?: ReviewUpdateManyWithoutAccountNestedInput
     demoParticipations?: DemoParticipationUpdateManyWithoutAccountNestedInput
     redeemGrants?: RedeemGrantUpdateManyWithoutAccountNestedInput
+    refundRequests?: RefundRequestUpdateManyWithoutRequesterNestedInput
     friendshipsSent?: FriendshipUpdateManyWithoutRequesterNestedInput
     friendshipsReceived?: FriendshipUpdateManyWithoutAddresseeNestedInput
     scores?: ScoreUpdateManyWithoutAccountNestedInput
@@ -94523,6 +96362,7 @@ export namespace Prisma {
     reviews?: ReviewUncheckedUpdateManyWithoutAccountNestedInput
     demoParticipations?: DemoParticipationUncheckedUpdateManyWithoutAccountNestedInput
     redeemGrants?: RedeemGrantUncheckedUpdateManyWithoutAccountNestedInput
+    refundRequests?: RefundRequestUncheckedUpdateManyWithoutRequesterNestedInput
     friendshipsSent?: FriendshipUncheckedUpdateManyWithoutRequesterNestedInput
     friendshipsReceived?: FriendshipUncheckedUpdateManyWithoutAddresseeNestedInput
     scores?: ScoreUncheckedUpdateManyWithoutAccountNestedInput
@@ -94600,6 +96440,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationCreateNestedManyWithoutAccountInput
     redeemGrants?: RedeemGrantCreateNestedManyWithoutAccountInput
     entitlements?: EntitlementCreateNestedManyWithoutAccountInput
+    refundRequests?: RefundRequestCreateNestedManyWithoutRequesterInput
     friendshipsReceived?: FriendshipCreateNestedManyWithoutAddresseeInput
     scores?: ScoreCreateNestedManyWithoutAccountInput
     achievementUnlocks?: AchievementUnlockCreateNestedManyWithoutAccountInput
@@ -94639,6 +96480,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationUncheckedCreateNestedManyWithoutAccountInput
     redeemGrants?: RedeemGrantUncheckedCreateNestedManyWithoutAccountInput
     entitlements?: EntitlementUncheckedCreateNestedManyWithoutAccountInput
+    refundRequests?: RefundRequestUncheckedCreateNestedManyWithoutRequesterInput
     friendshipsReceived?: FriendshipUncheckedCreateNestedManyWithoutAddresseeInput
     scores?: ScoreUncheckedCreateNestedManyWithoutAccountInput
     achievementUnlocks?: AchievementUnlockUncheckedCreateNestedManyWithoutAccountInput
@@ -94683,6 +96525,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationCreateNestedManyWithoutAccountInput
     redeemGrants?: RedeemGrantCreateNestedManyWithoutAccountInput
     entitlements?: EntitlementCreateNestedManyWithoutAccountInput
+    refundRequests?: RefundRequestCreateNestedManyWithoutRequesterInput
     friendshipsSent?: FriendshipCreateNestedManyWithoutRequesterInput
     scores?: ScoreCreateNestedManyWithoutAccountInput
     achievementUnlocks?: AchievementUnlockCreateNestedManyWithoutAccountInput
@@ -94722,6 +96565,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationUncheckedCreateNestedManyWithoutAccountInput
     redeemGrants?: RedeemGrantUncheckedCreateNestedManyWithoutAccountInput
     entitlements?: EntitlementUncheckedCreateNestedManyWithoutAccountInput
+    refundRequests?: RefundRequestUncheckedCreateNestedManyWithoutRequesterInput
     friendshipsSent?: FriendshipUncheckedCreateNestedManyWithoutRequesterInput
     scores?: ScoreUncheckedCreateNestedManyWithoutAccountInput
     achievementUnlocks?: AchievementUnlockUncheckedCreateNestedManyWithoutAccountInput
@@ -94777,6 +96621,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationUpdateManyWithoutAccountNestedInput
     redeemGrants?: RedeemGrantUpdateManyWithoutAccountNestedInput
     entitlements?: EntitlementUpdateManyWithoutAccountNestedInput
+    refundRequests?: RefundRequestUpdateManyWithoutRequesterNestedInput
     friendshipsReceived?: FriendshipUpdateManyWithoutAddresseeNestedInput
     scores?: ScoreUpdateManyWithoutAccountNestedInput
     achievementUnlocks?: AchievementUnlockUpdateManyWithoutAccountNestedInput
@@ -94816,6 +96661,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationUncheckedUpdateManyWithoutAccountNestedInput
     redeemGrants?: RedeemGrantUncheckedUpdateManyWithoutAccountNestedInput
     entitlements?: EntitlementUncheckedUpdateManyWithoutAccountNestedInput
+    refundRequests?: RefundRequestUncheckedUpdateManyWithoutRequesterNestedInput
     friendshipsReceived?: FriendshipUncheckedUpdateManyWithoutAddresseeNestedInput
     scores?: ScoreUncheckedUpdateManyWithoutAccountNestedInput
     achievementUnlocks?: AchievementUnlockUncheckedUpdateManyWithoutAccountNestedInput
@@ -94866,6 +96712,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationUpdateManyWithoutAccountNestedInput
     redeemGrants?: RedeemGrantUpdateManyWithoutAccountNestedInput
     entitlements?: EntitlementUpdateManyWithoutAccountNestedInput
+    refundRequests?: RefundRequestUpdateManyWithoutRequesterNestedInput
     friendshipsSent?: FriendshipUpdateManyWithoutRequesterNestedInput
     scores?: ScoreUpdateManyWithoutAccountNestedInput
     achievementUnlocks?: AchievementUnlockUpdateManyWithoutAccountNestedInput
@@ -94905,6 +96752,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationUncheckedUpdateManyWithoutAccountNestedInput
     redeemGrants?: RedeemGrantUncheckedUpdateManyWithoutAccountNestedInput
     entitlements?: EntitlementUncheckedUpdateManyWithoutAccountNestedInput
+    refundRequests?: RefundRequestUncheckedUpdateManyWithoutRequesterNestedInput
     friendshipsSent?: FriendshipUncheckedUpdateManyWithoutRequesterNestedInput
     scores?: ScoreUncheckedUpdateManyWithoutAccountNestedInput
     achievementUnlocks?: AchievementUnlockUncheckedUpdateManyWithoutAccountNestedInput
@@ -95077,6 +96925,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationCreateNestedManyWithoutAccountInput
     redeemGrants?: RedeemGrantCreateNestedManyWithoutAccountInput
     entitlements?: EntitlementCreateNestedManyWithoutAccountInput
+    refundRequests?: RefundRequestCreateNestedManyWithoutRequesterInput
     friendshipsSent?: FriendshipCreateNestedManyWithoutRequesterInput
     friendshipsReceived?: FriendshipCreateNestedManyWithoutAddresseeInput
     achievementUnlocks?: AchievementUnlockCreateNestedManyWithoutAccountInput
@@ -95116,6 +96965,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationUncheckedCreateNestedManyWithoutAccountInput
     redeemGrants?: RedeemGrantUncheckedCreateNestedManyWithoutAccountInput
     entitlements?: EntitlementUncheckedCreateNestedManyWithoutAccountInput
+    refundRequests?: RefundRequestUncheckedCreateNestedManyWithoutRequesterInput
     friendshipsSent?: FriendshipUncheckedCreateNestedManyWithoutRequesterInput
     friendshipsReceived?: FriendshipUncheckedCreateNestedManyWithoutAddresseeInput
     achievementUnlocks?: AchievementUnlockUncheckedCreateNestedManyWithoutAccountInput
@@ -95198,6 +97048,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationUpdateManyWithoutAccountNestedInput
     redeemGrants?: RedeemGrantUpdateManyWithoutAccountNestedInput
     entitlements?: EntitlementUpdateManyWithoutAccountNestedInput
+    refundRequests?: RefundRequestUpdateManyWithoutRequesterNestedInput
     friendshipsSent?: FriendshipUpdateManyWithoutRequesterNestedInput
     friendshipsReceived?: FriendshipUpdateManyWithoutAddresseeNestedInput
     achievementUnlocks?: AchievementUnlockUpdateManyWithoutAccountNestedInput
@@ -95237,6 +97088,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationUncheckedUpdateManyWithoutAccountNestedInput
     redeemGrants?: RedeemGrantUncheckedUpdateManyWithoutAccountNestedInput
     entitlements?: EntitlementUncheckedUpdateManyWithoutAccountNestedInput
+    refundRequests?: RefundRequestUncheckedUpdateManyWithoutRequesterNestedInput
     friendshipsSent?: FriendshipUncheckedUpdateManyWithoutRequesterNestedInput
     friendshipsReceived?: FriendshipUncheckedUpdateManyWithoutAddresseeNestedInput
     achievementUnlocks?: AchievementUnlockUncheckedUpdateManyWithoutAccountNestedInput
@@ -95412,6 +97264,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationCreateNestedManyWithoutAccountInput
     redeemGrants?: RedeemGrantCreateNestedManyWithoutAccountInput
     entitlements?: EntitlementCreateNestedManyWithoutAccountInput
+    refundRequests?: RefundRequestCreateNestedManyWithoutRequesterInput
     friendshipsSent?: FriendshipCreateNestedManyWithoutRequesterInput
     friendshipsReceived?: FriendshipCreateNestedManyWithoutAddresseeInput
     scores?: ScoreCreateNestedManyWithoutAccountInput
@@ -95451,6 +97304,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationUncheckedCreateNestedManyWithoutAccountInput
     redeemGrants?: RedeemGrantUncheckedCreateNestedManyWithoutAccountInput
     entitlements?: EntitlementUncheckedCreateNestedManyWithoutAccountInput
+    refundRequests?: RefundRequestUncheckedCreateNestedManyWithoutRequesterInput
     friendshipsSent?: FriendshipUncheckedCreateNestedManyWithoutRequesterInput
     friendshipsReceived?: FriendshipUncheckedCreateNestedManyWithoutAddresseeInput
     scores?: ScoreUncheckedCreateNestedManyWithoutAccountInput
@@ -95529,6 +97383,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationUpdateManyWithoutAccountNestedInput
     redeemGrants?: RedeemGrantUpdateManyWithoutAccountNestedInput
     entitlements?: EntitlementUpdateManyWithoutAccountNestedInput
+    refundRequests?: RefundRequestUpdateManyWithoutRequesterNestedInput
     friendshipsSent?: FriendshipUpdateManyWithoutRequesterNestedInput
     friendshipsReceived?: FriendshipUpdateManyWithoutAddresseeNestedInput
     scores?: ScoreUpdateManyWithoutAccountNestedInput
@@ -95568,6 +97423,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationUncheckedUpdateManyWithoutAccountNestedInput
     redeemGrants?: RedeemGrantUncheckedUpdateManyWithoutAccountNestedInput
     entitlements?: EntitlementUncheckedUpdateManyWithoutAccountNestedInput
+    refundRequests?: RefundRequestUncheckedUpdateManyWithoutRequesterNestedInput
     friendshipsSent?: FriendshipUncheckedUpdateManyWithoutRequesterNestedInput
     friendshipsReceived?: FriendshipUncheckedUpdateManyWithoutAddresseeNestedInput
     scores?: ScoreUncheckedUpdateManyWithoutAccountNestedInput
@@ -95607,6 +97463,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationCreateNestedManyWithoutAccountInput
     redeemGrants?: RedeemGrantCreateNestedManyWithoutAccountInput
     entitlements?: EntitlementCreateNestedManyWithoutAccountInput
+    refundRequests?: RefundRequestCreateNestedManyWithoutRequesterInput
     friendshipsSent?: FriendshipCreateNestedManyWithoutRequesterInput
     friendshipsReceived?: FriendshipCreateNestedManyWithoutAddresseeInput
     scores?: ScoreCreateNestedManyWithoutAccountInput
@@ -95646,6 +97503,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationUncheckedCreateNestedManyWithoutAccountInput
     redeemGrants?: RedeemGrantUncheckedCreateNestedManyWithoutAccountInput
     entitlements?: EntitlementUncheckedCreateNestedManyWithoutAccountInput
+    refundRequests?: RefundRequestUncheckedCreateNestedManyWithoutRequesterInput
     friendshipsSent?: FriendshipUncheckedCreateNestedManyWithoutRequesterInput
     friendshipsReceived?: FriendshipUncheckedCreateNestedManyWithoutAddresseeInput
     scores?: ScoreUncheckedCreateNestedManyWithoutAccountInput
@@ -95734,6 +97592,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationUpdateManyWithoutAccountNestedInput
     redeemGrants?: RedeemGrantUpdateManyWithoutAccountNestedInput
     entitlements?: EntitlementUpdateManyWithoutAccountNestedInput
+    refundRequests?: RefundRequestUpdateManyWithoutRequesterNestedInput
     friendshipsSent?: FriendshipUpdateManyWithoutRequesterNestedInput
     friendshipsReceived?: FriendshipUpdateManyWithoutAddresseeNestedInput
     scores?: ScoreUpdateManyWithoutAccountNestedInput
@@ -95773,6 +97632,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationUncheckedUpdateManyWithoutAccountNestedInput
     redeemGrants?: RedeemGrantUncheckedUpdateManyWithoutAccountNestedInput
     entitlements?: EntitlementUncheckedUpdateManyWithoutAccountNestedInput
+    refundRequests?: RefundRequestUncheckedUpdateManyWithoutRequesterNestedInput
     friendshipsSent?: FriendshipUncheckedUpdateManyWithoutRequesterNestedInput
     friendshipsReceived?: FriendshipUncheckedUpdateManyWithoutAddresseeNestedInput
     scores?: ScoreUncheckedUpdateManyWithoutAccountNestedInput
@@ -96031,6 +97891,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationCreateNestedManyWithoutAccountInput
     redeemGrants?: RedeemGrantCreateNestedManyWithoutAccountInput
     entitlements?: EntitlementCreateNestedManyWithoutAccountInput
+    refundRequests?: RefundRequestCreateNestedManyWithoutRequesterInput
     friendshipsSent?: FriendshipCreateNestedManyWithoutRequesterInput
     friendshipsReceived?: FriendshipCreateNestedManyWithoutAddresseeInput
     scores?: ScoreCreateNestedManyWithoutAccountInput
@@ -96070,6 +97931,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationUncheckedCreateNestedManyWithoutAccountInput
     redeemGrants?: RedeemGrantUncheckedCreateNestedManyWithoutAccountInput
     entitlements?: EntitlementUncheckedCreateNestedManyWithoutAccountInput
+    refundRequests?: RefundRequestUncheckedCreateNestedManyWithoutRequesterInput
     friendshipsSent?: FriendshipUncheckedCreateNestedManyWithoutRequesterInput
     friendshipsReceived?: FriendshipUncheckedCreateNestedManyWithoutAddresseeInput
     scores?: ScoreUncheckedCreateNestedManyWithoutAccountInput
@@ -96125,6 +97987,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationUpdateManyWithoutAccountNestedInput
     redeemGrants?: RedeemGrantUpdateManyWithoutAccountNestedInput
     entitlements?: EntitlementUpdateManyWithoutAccountNestedInput
+    refundRequests?: RefundRequestUpdateManyWithoutRequesterNestedInput
     friendshipsSent?: FriendshipUpdateManyWithoutRequesterNestedInput
     friendshipsReceived?: FriendshipUpdateManyWithoutAddresseeNestedInput
     scores?: ScoreUpdateManyWithoutAccountNestedInput
@@ -96164,6 +98027,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationUncheckedUpdateManyWithoutAccountNestedInput
     redeemGrants?: RedeemGrantUncheckedUpdateManyWithoutAccountNestedInput
     entitlements?: EntitlementUncheckedUpdateManyWithoutAccountNestedInput
+    refundRequests?: RefundRequestUncheckedUpdateManyWithoutRequesterNestedInput
     friendshipsSent?: FriendshipUncheckedUpdateManyWithoutRequesterNestedInput
     friendshipsReceived?: FriendshipUncheckedUpdateManyWithoutAddresseeNestedInput
     scores?: ScoreUncheckedUpdateManyWithoutAccountNestedInput
@@ -96347,6 +98211,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationCreateNestedManyWithoutAccountInput
     redeemGrants?: RedeemGrantCreateNestedManyWithoutAccountInput
     entitlements?: EntitlementCreateNestedManyWithoutAccountInput
+    refundRequests?: RefundRequestCreateNestedManyWithoutRequesterInput
     friendshipsSent?: FriendshipCreateNestedManyWithoutRequesterInput
     friendshipsReceived?: FriendshipCreateNestedManyWithoutAddresseeInput
     scores?: ScoreCreateNestedManyWithoutAccountInput
@@ -96386,6 +98251,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationUncheckedCreateNestedManyWithoutAccountInput
     redeemGrants?: RedeemGrantUncheckedCreateNestedManyWithoutAccountInput
     entitlements?: EntitlementUncheckedCreateNestedManyWithoutAccountInput
+    refundRequests?: RefundRequestUncheckedCreateNestedManyWithoutRequesterInput
     friendshipsSent?: FriendshipUncheckedCreateNestedManyWithoutRequesterInput
     friendshipsReceived?: FriendshipUncheckedCreateNestedManyWithoutAddresseeInput
     scores?: ScoreUncheckedCreateNestedManyWithoutAccountInput
@@ -96441,6 +98307,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationUpdateManyWithoutAccountNestedInput
     redeemGrants?: RedeemGrantUpdateManyWithoutAccountNestedInput
     entitlements?: EntitlementUpdateManyWithoutAccountNestedInput
+    refundRequests?: RefundRequestUpdateManyWithoutRequesterNestedInput
     friendshipsSent?: FriendshipUpdateManyWithoutRequesterNestedInput
     friendshipsReceived?: FriendshipUpdateManyWithoutAddresseeNestedInput
     scores?: ScoreUpdateManyWithoutAccountNestedInput
@@ -96480,6 +98347,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationUncheckedUpdateManyWithoutAccountNestedInput
     redeemGrants?: RedeemGrantUncheckedUpdateManyWithoutAccountNestedInput
     entitlements?: EntitlementUncheckedUpdateManyWithoutAccountNestedInput
+    refundRequests?: RefundRequestUncheckedUpdateManyWithoutRequesterNestedInput
     friendshipsSent?: FriendshipUncheckedUpdateManyWithoutRequesterNestedInput
     friendshipsReceived?: FriendshipUncheckedUpdateManyWithoutAddresseeNestedInput
     scores?: ScoreUncheckedUpdateManyWithoutAccountNestedInput
@@ -96555,6 +98423,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationCreateNestedManyWithoutAccountInput
     redeemGrants?: RedeemGrantCreateNestedManyWithoutAccountInput
     entitlements?: EntitlementCreateNestedManyWithoutAccountInput
+    refundRequests?: RefundRequestCreateNestedManyWithoutRequesterInput
     friendshipsSent?: FriendshipCreateNestedManyWithoutRequesterInput
     friendshipsReceived?: FriendshipCreateNestedManyWithoutAddresseeInput
     scores?: ScoreCreateNestedManyWithoutAccountInput
@@ -96594,6 +98463,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationUncheckedCreateNestedManyWithoutAccountInput
     redeemGrants?: RedeemGrantUncheckedCreateNestedManyWithoutAccountInput
     entitlements?: EntitlementUncheckedCreateNestedManyWithoutAccountInput
+    refundRequests?: RefundRequestUncheckedCreateNestedManyWithoutRequesterInput
     friendshipsSent?: FriendshipUncheckedCreateNestedManyWithoutRequesterInput
     friendshipsReceived?: FriendshipUncheckedCreateNestedManyWithoutAddresseeInput
     scores?: ScoreUncheckedCreateNestedManyWithoutAccountInput
@@ -96670,6 +98540,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationUpdateManyWithoutAccountNestedInput
     redeemGrants?: RedeemGrantUpdateManyWithoutAccountNestedInput
     entitlements?: EntitlementUpdateManyWithoutAccountNestedInput
+    refundRequests?: RefundRequestUpdateManyWithoutRequesterNestedInput
     friendshipsSent?: FriendshipUpdateManyWithoutRequesterNestedInput
     friendshipsReceived?: FriendshipUpdateManyWithoutAddresseeNestedInput
     scores?: ScoreUpdateManyWithoutAccountNestedInput
@@ -96709,6 +98580,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationUncheckedUpdateManyWithoutAccountNestedInput
     redeemGrants?: RedeemGrantUncheckedUpdateManyWithoutAccountNestedInput
     entitlements?: EntitlementUncheckedUpdateManyWithoutAccountNestedInput
+    refundRequests?: RefundRequestUncheckedUpdateManyWithoutRequesterNestedInput
     friendshipsSent?: FriendshipUncheckedUpdateManyWithoutRequesterNestedInput
     friendshipsReceived?: FriendshipUncheckedUpdateManyWithoutAddresseeNestedInput
     scores?: ScoreUncheckedUpdateManyWithoutAccountNestedInput
@@ -96775,6 +98647,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationCreateNestedManyWithoutAccountInput
     redeemGrants?: RedeemGrantCreateNestedManyWithoutAccountInput
     entitlements?: EntitlementCreateNestedManyWithoutAccountInput
+    refundRequests?: RefundRequestCreateNestedManyWithoutRequesterInput
     friendshipsSent?: FriendshipCreateNestedManyWithoutRequesterInput
     friendshipsReceived?: FriendshipCreateNestedManyWithoutAddresseeInput
     scores?: ScoreCreateNestedManyWithoutAccountInput
@@ -96814,6 +98687,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationUncheckedCreateNestedManyWithoutAccountInput
     redeemGrants?: RedeemGrantUncheckedCreateNestedManyWithoutAccountInput
     entitlements?: EntitlementUncheckedCreateNestedManyWithoutAccountInput
+    refundRequests?: RefundRequestUncheckedCreateNestedManyWithoutRequesterInput
     friendshipsSent?: FriendshipUncheckedCreateNestedManyWithoutRequesterInput
     friendshipsReceived?: FriendshipUncheckedCreateNestedManyWithoutAddresseeInput
     scores?: ScoreUncheckedCreateNestedManyWithoutAccountInput
@@ -96869,6 +98743,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationUpdateManyWithoutAccountNestedInput
     redeemGrants?: RedeemGrantUpdateManyWithoutAccountNestedInput
     entitlements?: EntitlementUpdateManyWithoutAccountNestedInput
+    refundRequests?: RefundRequestUpdateManyWithoutRequesterNestedInput
     friendshipsSent?: FriendshipUpdateManyWithoutRequesterNestedInput
     friendshipsReceived?: FriendshipUpdateManyWithoutAddresseeNestedInput
     scores?: ScoreUpdateManyWithoutAccountNestedInput
@@ -96908,6 +98783,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationUncheckedUpdateManyWithoutAccountNestedInput
     redeemGrants?: RedeemGrantUncheckedUpdateManyWithoutAccountNestedInput
     entitlements?: EntitlementUncheckedUpdateManyWithoutAccountNestedInput
+    refundRequests?: RefundRequestUncheckedUpdateManyWithoutRequesterNestedInput
     friendshipsSent?: FriendshipUncheckedUpdateManyWithoutRequesterNestedInput
     friendshipsReceived?: FriendshipUncheckedUpdateManyWithoutAddresseeNestedInput
     scores?: ScoreUncheckedUpdateManyWithoutAccountNestedInput
@@ -97078,6 +98954,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationCreateNestedManyWithoutAccountInput
     redeemGrants?: RedeemGrantCreateNestedManyWithoutAccountInput
     entitlements?: EntitlementCreateNestedManyWithoutAccountInput
+    refundRequests?: RefundRequestCreateNestedManyWithoutRequesterInput
     friendshipsSent?: FriendshipCreateNestedManyWithoutRequesterInput
     friendshipsReceived?: FriendshipCreateNestedManyWithoutAddresseeInput
     scores?: ScoreCreateNestedManyWithoutAccountInput
@@ -97117,6 +98994,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationUncheckedCreateNestedManyWithoutAccountInput
     redeemGrants?: RedeemGrantUncheckedCreateNestedManyWithoutAccountInput
     entitlements?: EntitlementUncheckedCreateNestedManyWithoutAccountInput
+    refundRequests?: RefundRequestUncheckedCreateNestedManyWithoutRequesterInput
     friendshipsSent?: FriendshipUncheckedCreateNestedManyWithoutRequesterInput
     friendshipsReceived?: FriendshipUncheckedCreateNestedManyWithoutAddresseeInput
     scores?: ScoreUncheckedCreateNestedManyWithoutAccountInput
@@ -97199,6 +99077,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationUpdateManyWithoutAccountNestedInput
     redeemGrants?: RedeemGrantUpdateManyWithoutAccountNestedInput
     entitlements?: EntitlementUpdateManyWithoutAccountNestedInput
+    refundRequests?: RefundRequestUpdateManyWithoutRequesterNestedInput
     friendshipsSent?: FriendshipUpdateManyWithoutRequesterNestedInput
     friendshipsReceived?: FriendshipUpdateManyWithoutAddresseeNestedInput
     scores?: ScoreUpdateManyWithoutAccountNestedInput
@@ -97238,6 +99117,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationUncheckedUpdateManyWithoutAccountNestedInput
     redeemGrants?: RedeemGrantUncheckedUpdateManyWithoutAccountNestedInput
     entitlements?: EntitlementUncheckedUpdateManyWithoutAccountNestedInput
+    refundRequests?: RefundRequestUncheckedUpdateManyWithoutRequesterNestedInput
     friendshipsSent?: FriendshipUncheckedUpdateManyWithoutRequesterNestedInput
     friendshipsReceived?: FriendshipUncheckedUpdateManyWithoutAddresseeNestedInput
     scores?: ScoreUncheckedUpdateManyWithoutAccountNestedInput
@@ -97298,6 +99178,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationCreateNestedManyWithoutAccountInput
     redeemGrants?: RedeemGrantCreateNestedManyWithoutAccountInput
     entitlements?: EntitlementCreateNestedManyWithoutAccountInput
+    refundRequests?: RefundRequestCreateNestedManyWithoutRequesterInput
     friendshipsSent?: FriendshipCreateNestedManyWithoutRequesterInput
     friendshipsReceived?: FriendshipCreateNestedManyWithoutAddresseeInput
     scores?: ScoreCreateNestedManyWithoutAccountInput
@@ -97337,6 +99218,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationUncheckedCreateNestedManyWithoutAccountInput
     redeemGrants?: RedeemGrantUncheckedCreateNestedManyWithoutAccountInput
     entitlements?: EntitlementUncheckedCreateNestedManyWithoutAccountInput
+    refundRequests?: RefundRequestUncheckedCreateNestedManyWithoutRequesterInput
     friendshipsSent?: FriendshipUncheckedCreateNestedManyWithoutRequesterInput
     friendshipsReceived?: FriendshipUncheckedCreateNestedManyWithoutAddresseeInput
     scores?: ScoreUncheckedCreateNestedManyWithoutAccountInput
@@ -97419,6 +99301,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationUpdateManyWithoutAccountNestedInput
     redeemGrants?: RedeemGrantUpdateManyWithoutAccountNestedInput
     entitlements?: EntitlementUpdateManyWithoutAccountNestedInput
+    refundRequests?: RefundRequestUpdateManyWithoutRequesterNestedInput
     friendshipsSent?: FriendshipUpdateManyWithoutRequesterNestedInput
     friendshipsReceived?: FriendshipUpdateManyWithoutAddresseeNestedInput
     scores?: ScoreUpdateManyWithoutAccountNestedInput
@@ -97458,6 +99341,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationUncheckedUpdateManyWithoutAccountNestedInput
     redeemGrants?: RedeemGrantUncheckedUpdateManyWithoutAccountNestedInput
     entitlements?: EntitlementUncheckedUpdateManyWithoutAccountNestedInput
+    refundRequests?: RefundRequestUncheckedUpdateManyWithoutRequesterNestedInput
     friendshipsSent?: FriendshipUncheckedUpdateManyWithoutRequesterNestedInput
     friendshipsReceived?: FriendshipUncheckedUpdateManyWithoutAddresseeNestedInput
     scores?: ScoreUncheckedUpdateManyWithoutAccountNestedInput
@@ -97518,6 +99402,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationCreateNestedManyWithoutAccountInput
     redeemGrants?: RedeemGrantCreateNestedManyWithoutAccountInput
     entitlements?: EntitlementCreateNestedManyWithoutAccountInput
+    refundRequests?: RefundRequestCreateNestedManyWithoutRequesterInput
     friendshipsSent?: FriendshipCreateNestedManyWithoutRequesterInput
     friendshipsReceived?: FriendshipCreateNestedManyWithoutAddresseeInput
     scores?: ScoreCreateNestedManyWithoutAccountInput
@@ -97557,6 +99442,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationUncheckedCreateNestedManyWithoutAccountInput
     redeemGrants?: RedeemGrantUncheckedCreateNestedManyWithoutAccountInput
     entitlements?: EntitlementUncheckedCreateNestedManyWithoutAccountInput
+    refundRequests?: RefundRequestUncheckedCreateNestedManyWithoutRequesterInput
     friendshipsSent?: FriendshipUncheckedCreateNestedManyWithoutRequesterInput
     friendshipsReceived?: FriendshipUncheckedCreateNestedManyWithoutAddresseeInput
     scores?: ScoreUncheckedCreateNestedManyWithoutAccountInput
@@ -97639,6 +99525,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationUpdateManyWithoutAccountNestedInput
     redeemGrants?: RedeemGrantUpdateManyWithoutAccountNestedInput
     entitlements?: EntitlementUpdateManyWithoutAccountNestedInput
+    refundRequests?: RefundRequestUpdateManyWithoutRequesterNestedInput
     friendshipsSent?: FriendshipUpdateManyWithoutRequesterNestedInput
     friendshipsReceived?: FriendshipUpdateManyWithoutAddresseeNestedInput
     scores?: ScoreUpdateManyWithoutAccountNestedInput
@@ -97678,6 +99565,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationUncheckedUpdateManyWithoutAccountNestedInput
     redeemGrants?: RedeemGrantUncheckedUpdateManyWithoutAccountNestedInput
     entitlements?: EntitlementUncheckedUpdateManyWithoutAccountNestedInput
+    refundRequests?: RefundRequestUncheckedUpdateManyWithoutRequesterNestedInput
     friendshipsSent?: FriendshipUncheckedUpdateManyWithoutRequesterNestedInput
     friendshipsReceived?: FriendshipUncheckedUpdateManyWithoutAddresseeNestedInput
     scores?: ScoreUncheckedUpdateManyWithoutAccountNestedInput
@@ -97717,6 +99605,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationCreateNestedManyWithoutAccountInput
     redeemGrants?: RedeemGrantCreateNestedManyWithoutAccountInput
     entitlements?: EntitlementCreateNestedManyWithoutAccountInput
+    refundRequests?: RefundRequestCreateNestedManyWithoutRequesterInput
     friendshipsSent?: FriendshipCreateNestedManyWithoutRequesterInput
     friendshipsReceived?: FriendshipCreateNestedManyWithoutAddresseeInput
     scores?: ScoreCreateNestedManyWithoutAccountInput
@@ -97756,6 +99645,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationUncheckedCreateNestedManyWithoutAccountInput
     redeemGrants?: RedeemGrantUncheckedCreateNestedManyWithoutAccountInput
     entitlements?: EntitlementUncheckedCreateNestedManyWithoutAccountInput
+    refundRequests?: RefundRequestUncheckedCreateNestedManyWithoutRequesterInput
     friendshipsSent?: FriendshipUncheckedCreateNestedManyWithoutRequesterInput
     friendshipsReceived?: FriendshipUncheckedCreateNestedManyWithoutAddresseeInput
     scores?: ScoreUncheckedCreateNestedManyWithoutAccountInput
@@ -97839,6 +99729,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationUpdateManyWithoutAccountNestedInput
     redeemGrants?: RedeemGrantUpdateManyWithoutAccountNestedInput
     entitlements?: EntitlementUpdateManyWithoutAccountNestedInput
+    refundRequests?: RefundRequestUpdateManyWithoutRequesterNestedInput
     friendshipsSent?: FriendshipUpdateManyWithoutRequesterNestedInput
     friendshipsReceived?: FriendshipUpdateManyWithoutAddresseeNestedInput
     scores?: ScoreUpdateManyWithoutAccountNestedInput
@@ -97878,6 +99769,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationUncheckedUpdateManyWithoutAccountNestedInput
     redeemGrants?: RedeemGrantUncheckedUpdateManyWithoutAccountNestedInput
     entitlements?: EntitlementUncheckedUpdateManyWithoutAccountNestedInput
+    refundRequests?: RefundRequestUncheckedUpdateManyWithoutRequesterNestedInput
     friendshipsSent?: FriendshipUncheckedUpdateManyWithoutRequesterNestedInput
     friendshipsReceived?: FriendshipUncheckedUpdateManyWithoutAddresseeNestedInput
     scores?: ScoreUncheckedUpdateManyWithoutAccountNestedInput
@@ -97933,6 +99825,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationCreateNestedManyWithoutAccountInput
     redeemGrants?: RedeemGrantCreateNestedManyWithoutAccountInput
     entitlements?: EntitlementCreateNestedManyWithoutAccountInput
+    refundRequests?: RefundRequestCreateNestedManyWithoutRequesterInput
     friendshipsSent?: FriendshipCreateNestedManyWithoutRequesterInput
     friendshipsReceived?: FriendshipCreateNestedManyWithoutAddresseeInput
     scores?: ScoreCreateNestedManyWithoutAccountInput
@@ -97972,6 +99865,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationUncheckedCreateNestedManyWithoutAccountInput
     redeemGrants?: RedeemGrantUncheckedCreateNestedManyWithoutAccountInput
     entitlements?: EntitlementUncheckedCreateNestedManyWithoutAccountInput
+    refundRequests?: RefundRequestUncheckedCreateNestedManyWithoutRequesterInput
     friendshipsSent?: FriendshipUncheckedCreateNestedManyWithoutRequesterInput
     friendshipsReceived?: FriendshipUncheckedCreateNestedManyWithoutAddresseeInput
     scores?: ScoreUncheckedCreateNestedManyWithoutAccountInput
@@ -98050,6 +99944,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationUpdateManyWithoutAccountNestedInput
     redeemGrants?: RedeemGrantUpdateManyWithoutAccountNestedInput
     entitlements?: EntitlementUpdateManyWithoutAccountNestedInput
+    refundRequests?: RefundRequestUpdateManyWithoutRequesterNestedInput
     friendshipsSent?: FriendshipUpdateManyWithoutRequesterNestedInput
     friendshipsReceived?: FriendshipUpdateManyWithoutAddresseeNestedInput
     scores?: ScoreUpdateManyWithoutAccountNestedInput
@@ -98089,6 +99984,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationUncheckedUpdateManyWithoutAccountNestedInput
     redeemGrants?: RedeemGrantUncheckedUpdateManyWithoutAccountNestedInput
     entitlements?: EntitlementUncheckedUpdateManyWithoutAccountNestedInput
+    refundRequests?: RefundRequestUncheckedUpdateManyWithoutRequesterNestedInput
     friendshipsSent?: FriendshipUncheckedUpdateManyWithoutRequesterNestedInput
     friendshipsReceived?: FriendshipUncheckedUpdateManyWithoutAddresseeNestedInput
     scores?: ScoreUncheckedUpdateManyWithoutAccountNestedInput
@@ -98296,6 +100192,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationCreateNestedManyWithoutAccountInput
     redeemGrants?: RedeemGrantCreateNestedManyWithoutAccountInput
     entitlements?: EntitlementCreateNestedManyWithoutAccountInput
+    refundRequests?: RefundRequestCreateNestedManyWithoutRequesterInput
     friendshipsSent?: FriendshipCreateNestedManyWithoutRequesterInput
     friendshipsReceived?: FriendshipCreateNestedManyWithoutAddresseeInput
     scores?: ScoreCreateNestedManyWithoutAccountInput
@@ -98335,6 +100232,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationUncheckedCreateNestedManyWithoutAccountInput
     redeemGrants?: RedeemGrantUncheckedCreateNestedManyWithoutAccountInput
     entitlements?: EntitlementUncheckedCreateNestedManyWithoutAccountInput
+    refundRequests?: RefundRequestUncheckedCreateNestedManyWithoutRequesterInput
     friendshipsSent?: FriendshipUncheckedCreateNestedManyWithoutRequesterInput
     friendshipsReceived?: FriendshipUncheckedCreateNestedManyWithoutAddresseeInput
     scores?: ScoreUncheckedCreateNestedManyWithoutAccountInput
@@ -98419,6 +100317,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationUpdateManyWithoutAccountNestedInput
     redeemGrants?: RedeemGrantUpdateManyWithoutAccountNestedInput
     entitlements?: EntitlementUpdateManyWithoutAccountNestedInput
+    refundRequests?: RefundRequestUpdateManyWithoutRequesterNestedInput
     friendshipsSent?: FriendshipUpdateManyWithoutRequesterNestedInput
     friendshipsReceived?: FriendshipUpdateManyWithoutAddresseeNestedInput
     scores?: ScoreUpdateManyWithoutAccountNestedInput
@@ -98458,6 +100357,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationUncheckedUpdateManyWithoutAccountNestedInput
     redeemGrants?: RedeemGrantUncheckedUpdateManyWithoutAccountNestedInput
     entitlements?: EntitlementUncheckedUpdateManyWithoutAccountNestedInput
+    refundRequests?: RefundRequestUncheckedUpdateManyWithoutRequesterNestedInput
     friendshipsSent?: FriendshipUncheckedUpdateManyWithoutRequesterNestedInput
     friendshipsReceived?: FriendshipUncheckedUpdateManyWithoutAddresseeNestedInput
     scores?: ScoreUncheckedUpdateManyWithoutAccountNestedInput
@@ -98520,6 +100420,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationCreateNestedManyWithoutAccountInput
     redeemGrants?: RedeemGrantCreateNestedManyWithoutAccountInput
     entitlements?: EntitlementCreateNestedManyWithoutAccountInput
+    refundRequests?: RefundRequestCreateNestedManyWithoutRequesterInput
     friendshipsSent?: FriendshipCreateNestedManyWithoutRequesterInput
     friendshipsReceived?: FriendshipCreateNestedManyWithoutAddresseeInput
     scores?: ScoreCreateNestedManyWithoutAccountInput
@@ -98559,6 +100460,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationUncheckedCreateNestedManyWithoutAccountInput
     redeemGrants?: RedeemGrantUncheckedCreateNestedManyWithoutAccountInput
     entitlements?: EntitlementUncheckedCreateNestedManyWithoutAccountInput
+    refundRequests?: RefundRequestUncheckedCreateNestedManyWithoutRequesterInput
     friendshipsSent?: FriendshipUncheckedCreateNestedManyWithoutRequesterInput
     friendshipsReceived?: FriendshipUncheckedCreateNestedManyWithoutAddresseeInput
     scores?: ScoreUncheckedCreateNestedManyWithoutAccountInput
@@ -98643,6 +100545,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationUpdateManyWithoutAccountNestedInput
     redeemGrants?: RedeemGrantUpdateManyWithoutAccountNestedInput
     entitlements?: EntitlementUpdateManyWithoutAccountNestedInput
+    refundRequests?: RefundRequestUpdateManyWithoutRequesterNestedInput
     friendshipsSent?: FriendshipUpdateManyWithoutRequesterNestedInput
     friendshipsReceived?: FriendshipUpdateManyWithoutAddresseeNestedInput
     scores?: ScoreUpdateManyWithoutAccountNestedInput
@@ -98682,6 +100585,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationUncheckedUpdateManyWithoutAccountNestedInput
     redeemGrants?: RedeemGrantUncheckedUpdateManyWithoutAccountNestedInput
     entitlements?: EntitlementUncheckedUpdateManyWithoutAccountNestedInput
+    refundRequests?: RefundRequestUncheckedUpdateManyWithoutRequesterNestedInput
     friendshipsSent?: FriendshipUncheckedUpdateManyWithoutRequesterNestedInput
     friendshipsReceived?: FriendshipUncheckedUpdateManyWithoutAddresseeNestedInput
     scores?: ScoreUncheckedUpdateManyWithoutAccountNestedInput
@@ -98744,6 +100648,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationCreateNestedManyWithoutAccountInput
     redeemGrants?: RedeemGrantCreateNestedManyWithoutAccountInput
     entitlements?: EntitlementCreateNestedManyWithoutAccountInput
+    refundRequests?: RefundRequestCreateNestedManyWithoutRequesterInput
     friendshipsSent?: FriendshipCreateNestedManyWithoutRequesterInput
     friendshipsReceived?: FriendshipCreateNestedManyWithoutAddresseeInput
     scores?: ScoreCreateNestedManyWithoutAccountInput
@@ -98783,6 +100688,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationUncheckedCreateNestedManyWithoutAccountInput
     redeemGrants?: RedeemGrantUncheckedCreateNestedManyWithoutAccountInput
     entitlements?: EntitlementUncheckedCreateNestedManyWithoutAccountInput
+    refundRequests?: RefundRequestUncheckedCreateNestedManyWithoutRequesterInput
     friendshipsSent?: FriendshipUncheckedCreateNestedManyWithoutRequesterInput
     friendshipsReceived?: FriendshipUncheckedCreateNestedManyWithoutAddresseeInput
     scores?: ScoreUncheckedCreateNestedManyWithoutAccountInput
@@ -98867,6 +100773,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationUpdateManyWithoutAccountNestedInput
     redeemGrants?: RedeemGrantUpdateManyWithoutAccountNestedInput
     entitlements?: EntitlementUpdateManyWithoutAccountNestedInput
+    refundRequests?: RefundRequestUpdateManyWithoutRequesterNestedInput
     friendshipsSent?: FriendshipUpdateManyWithoutRequesterNestedInput
     friendshipsReceived?: FriendshipUpdateManyWithoutAddresseeNestedInput
     scores?: ScoreUpdateManyWithoutAccountNestedInput
@@ -98906,6 +100813,7 @@ export namespace Prisma {
     demoParticipations?: DemoParticipationUncheckedUpdateManyWithoutAccountNestedInput
     redeemGrants?: RedeemGrantUncheckedUpdateManyWithoutAccountNestedInput
     entitlements?: EntitlementUncheckedUpdateManyWithoutAccountNestedInput
+    refundRequests?: RefundRequestUncheckedUpdateManyWithoutRequesterNestedInput
     friendshipsSent?: FriendshipUncheckedUpdateManyWithoutRequesterNestedInput
     friendshipsReceived?: FriendshipUncheckedUpdateManyWithoutAddresseeNestedInput
     scores?: ScoreUncheckedUpdateManyWithoutAccountNestedInput
@@ -98975,6 +100883,12 @@ export namespace Prisma {
 
   export type EntitlementCreateManyAccountInput = {
     productId: string
+  }
+
+  export type RefundRequestCreateManyRequesterInput = {
+    id?: string
+    txnId: string
+    createdAt?: Date | string
   }
 
   export type FriendshipCreateManyRequesterInput = {
@@ -99169,6 +101083,7 @@ export namespace Prisma {
     state?: EnumTxnStateFieldUpdateOperationsInput | $Enums.TxnState
     occurredAt?: DateTimeFieldUpdateOperationsInput | Date | string
     product?: ProductUpdateOneRequiredWithoutTransactionsNestedInput
+    refundRequest?: RefundRequestUpdateOneWithoutTransactionNestedInput
   }
 
   export type TransactionUncheckedUpdateWithoutAccountInput = {
@@ -99177,6 +101092,7 @@ export namespace Prisma {
     receiptId?: StringFieldUpdateOperationsInput | string
     state?: EnumTxnStateFieldUpdateOperationsInput | $Enums.TxnState
     occurredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    refundRequest?: RefundRequestUncheckedUpdateOneWithoutTransactionNestedInput
   }
 
   export type TransactionUncheckedUpdateManyWithoutAccountInput = {
@@ -99245,6 +101161,24 @@ export namespace Prisma {
 
   export type EntitlementUncheckedUpdateManyWithoutAccountInput = {
     productId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type RefundRequestUpdateWithoutRequesterInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    transaction?: TransactionUpdateOneRequiredWithoutRefundRequestNestedInput
+  }
+
+  export type RefundRequestUncheckedUpdateWithoutRequesterInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    txnId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RefundRequestUncheckedUpdateManyWithoutRequesterInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    txnId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type FriendshipUpdateWithoutRequesterInput = {
@@ -100097,6 +102031,7 @@ export namespace Prisma {
     state?: EnumTxnStateFieldUpdateOperationsInput | $Enums.TxnState
     occurredAt?: DateTimeFieldUpdateOperationsInput | Date | string
     account?: AccountUpdateOneRequiredWithoutTransactionsNestedInput
+    refundRequest?: RefundRequestUpdateOneWithoutTransactionNestedInput
   }
 
   export type TransactionUncheckedUpdateWithoutProductInput = {
@@ -100105,6 +102040,7 @@ export namespace Prisma {
     receiptId?: StringFieldUpdateOperationsInput | string
     state?: EnumTxnStateFieldUpdateOperationsInput | $Enums.TxnState
     occurredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    refundRequest?: RefundRequestUncheckedUpdateOneWithoutTransactionNestedInput
   }
 
   export type TransactionUncheckedUpdateManyWithoutProductInput = {

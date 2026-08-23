@@ -116,3 +116,11 @@ export async function changePw(claim: string, newPassword: string): Promise<void
     data: { passwordHash, resetCode: null, resetCodeExpiresAt: null },
   });
 }
+
+export async function validateSession(token: string): Promise<string> {
+  const session = await prisma.session.findUnique({ where: { token } });
+  if (!session || session.expiresAt < new Date()) {
+    throw new Error("Invalid or expired session");
+  }
+  return session.accountId;
+}

@@ -171,6 +171,7 @@ model Account {
   demoParticipations DemoParticipation[]
   redeemGrants       RedeemGrant[]
   entitlements       Entitlement[]
+  refundRequests     RefundRequest[]
 
   // Cluster 3
   friendshipsSent     Friendship[] @relation("FriendshipRequester")
@@ -378,14 +379,15 @@ model Item {
 }
 
 model Transaction {
-  id         String   @id @default(cuid())
-  accountId  String
-  account    Account  @relation(fields: [accountId], references: [id])
-  productId  String
-  product    Product  @relation(fields: [productId], references: [id])
-  receiptId  String   @unique
-  state      TxnState @default(PAID)
-  occurredAt DateTime @default(now())
+  id            String         @id @default(cuid())
+  accountId     String
+  account       Account        @relation(fields: [accountId], references: [id])
+  productId     String
+  product       Product        @relation(fields: [productId], references: [id])
+  receiptId     String         @unique
+  state         TxnState       @default(PAID)
+  occurredAt    DateTime       @default(now())
+  refundRequest RefundRequest?
 }
 
 model Merchant {
@@ -420,6 +422,15 @@ model Payout {
   period    String
   amount    BigInt
   createdAt DateTime @default(now())
+}
+
+model RefundRequest {
+  id          String      @id @default(cuid())
+  txnId       String      @unique
+  transaction Transaction @relation(fields: [txnId], references: [id])
+  requestedBy String
+  requester   Account     @relation(fields: [requestedBy], references: [id])
+  createdAt   DateTime    @default(now())
 }
 
 model Review {

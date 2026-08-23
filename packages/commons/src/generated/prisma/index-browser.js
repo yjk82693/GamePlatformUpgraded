@@ -295,6 +295,13 @@ exports.Prisma.PayoutScalarFieldEnum = {
   createdAt: 'createdAt'
 };
 
+exports.Prisma.RefundRequestScalarFieldEnum = {
+  id: 'id',
+  txnId: 'txnId',
+  requestedBy: 'requestedBy',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.ReviewScalarFieldEnum = {
   id: 'id',
   accountId: 'accountId',
@@ -741,6 +748,7 @@ exports.Prisma.ModelName = {
   PaymentService: 'PaymentService',
   Settlement: 'Settlement',
   Payout: 'Payout',
+  RefundRequest: 'RefundRequest',
   Review: 'Review',
   Demo: 'Demo',
   DemoParticipation: 'DemoParticipation',
