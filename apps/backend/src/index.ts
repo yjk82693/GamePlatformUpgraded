@@ -1,12 +1,15 @@
 import "dotenv/config";
-
 import express from "express";
 import cors from "cors";
-import {
-  registerManual,
-  login,
-  logout,
-} from "@game-platform/commons";
+import { registerManual, login, logout } from "@game-platform/commons";
+
+import shopRoutes from "./routes/shop.js";
+import walletRoutes from "./routes/wallet.js";
+import downloadRoutes from "./routes/download.js";
+import profileRoutes from "./routes/profile.js";
+import rankingRoutes from "./routes/ranking.js";
+import socialRoutes from "./routes/social.js";
+import supportRoutes from "./routes/support.js";
 
 const app = express();
 app.use(cors());
@@ -41,6 +44,14 @@ app.post("/auth/logout", async (req, res) => {
     res.status(400).json({ error: (err as Error).message });
   }
 });
+
+app.use("/player/shop", shopRoutes);
+app.use("/player/wallet", walletRoutes);
+app.use("/player/download", downloadRoutes);
+app.use("/player/profile", profileRoutes);
+app.use("/player/ranking", rankingRoutes);
+app.use("/player/social", socialRoutes);
+app.use("/player/tickets", supportRoutes);
 
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
