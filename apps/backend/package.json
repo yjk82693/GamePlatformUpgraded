@@ -13,6 +13,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@game-platform/distributor": "^1.0.0",
     "@game-platform/player": "^1.0.0",
     "@prisma/client": "^7.9.1",
     "cors": "^2.8.6",

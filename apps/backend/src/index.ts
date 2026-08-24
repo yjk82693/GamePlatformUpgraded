@@ -11,6 +11,15 @@ import rankingRoutes from "./routes/ranking.js";
 import socialRoutes from "./routes/social.js";
 import supportRoutes from "./routes/support.js";
 
+import catalogRoutes from "./routes/catalog.js";
+import distMembersRoutes from "./routes/members.js";
+import appopsRoutes from "./routes/appops.js";
+import distPaymentsRoutes from "./routes/payments.js";
+import distStatsRoutes from "./routes/stats.js";
+import distConfigRoutes from "./routes/config.js";
+import distStaffsupportRoutes from "./routes/staffsupport.js";
+import logsRoutes from "./routes/logs.js";
+
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -52,6 +61,15 @@ app.use("/player/profile", profileRoutes);
 app.use("/player/ranking", rankingRoutes);
 app.use("/player/social", socialRoutes);
 app.use("/player/tickets", supportRoutes);
+
+app.use("/distributor/catalog", catalogRoutes);
+app.use("/distributor/members", distMembersRoutes);
+app.use("/distributor/appops", appopsRoutes);
+app.use("/distributor/payments", distPaymentsRoutes);
+app.use("/distributor/stats", distStatsRoutes);
+app.use("/distributor/config", distConfigRoutes);
+app.use("/distributor/tickets", distStaffsupportRoutes);
+app.use("/distributor/logs", logsRoutes);
 
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
