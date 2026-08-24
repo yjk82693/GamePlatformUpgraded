@@ -532,6 +532,8 @@ exports.Prisma.TaskScalarFieldEnum = {
   title: 'title',
   assigneeId: 'assigneeId',
   priority: 'priority',
+  status: 'status',
+  completedAt: 'completedAt',
   dueDate: 'dueDate',
   calendarEventId: 'calendarEventId'
 };
@@ -715,6 +717,11 @@ exports.TaskPriority = exports.$Enums.TaskPriority = {
   LOW: 'LOW',
   MEDIUM: 'MEDIUM',
   HIGH: 'HIGH'
+};
+
+exports.TaskStatus = exports.$Enums.TaskStatus = {
+  TODO: 'TODO',
+  DONE: 'DONE'
 };
 
 exports.RollbackStatus = exports.$Enums.RollbackStatus = {

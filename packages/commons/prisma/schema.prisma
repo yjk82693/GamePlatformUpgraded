@@ -131,6 +131,11 @@ enum TaskPriority {
   HIGH
 }
 
+enum TaskStatus {
+  TODO
+  DONE
+}
+
 enum CalScope {
   COMPANY
   PERSONAL
@@ -743,6 +748,8 @@ model Task {
   assigneeId      String?
   assignee        Account?       @relation(fields: [assigneeId], references: [id])
   priority        TaskPriority   @default(MEDIUM)
+  status          TaskStatus     @default(TODO)
+  completedAt     DateTime?
   dueDate         DateTime?
   calendarEventId String?
   calendarEvent   CalendarEvent? @relation(fields: [calendarEventId], references: [id])

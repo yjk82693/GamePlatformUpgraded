@@ -492,6 +492,14 @@ export const TaskPriority: {
 export type TaskPriority = (typeof TaskPriority)[keyof typeof TaskPriority]
 
 
+export const TaskStatus: {
+  TODO: 'TODO',
+  DONE: 'DONE'
+};
+
+export type TaskStatus = (typeof TaskStatus)[keyof typeof TaskStatus]
+
+
 export const CalScope: {
   COMPANY: 'COMPANY',
   PERSONAL: 'PERSONAL'
@@ -573,6 +581,10 @@ export const TicketStatus: typeof $Enums.TicketStatus
 export type TaskPriority = $Enums.TaskPriority
 
 export const TaskPriority: typeof $Enums.TaskPriority
+
+export type TaskStatus = $Enums.TaskStatus
+
+export const TaskStatus: typeof $Enums.TaskStatus
 
 export type CalScope = $Enums.CalScope
 
@@ -70413,6 +70425,8 @@ export namespace Prisma {
     title: string | null
     assigneeId: string | null
     priority: $Enums.TaskPriority | null
+    status: $Enums.TaskStatus | null
+    completedAt: Date | null
     dueDate: Date | null
     calendarEventId: string | null
   }
@@ -70423,6 +70437,8 @@ export namespace Prisma {
     title: string | null
     assigneeId: string | null
     priority: $Enums.TaskPriority | null
+    status: $Enums.TaskStatus | null
+    completedAt: Date | null
     dueDate: Date | null
     calendarEventId: string | null
   }
@@ -70433,6 +70449,8 @@ export namespace Prisma {
     title: number
     assigneeId: number
     priority: number
+    status: number
+    completedAt: number
     dueDate: number
     calendarEventId: number
     _all: number
@@ -70445,6 +70463,8 @@ export namespace Prisma {
     title?: true
     assigneeId?: true
     priority?: true
+    status?: true
+    completedAt?: true
     dueDate?: true
     calendarEventId?: true
   }
@@ -70455,6 +70475,8 @@ export namespace Prisma {
     title?: true
     assigneeId?: true
     priority?: true
+    status?: true
+    completedAt?: true
     dueDate?: true
     calendarEventId?: true
   }
@@ -70465,6 +70487,8 @@ export namespace Prisma {
     title?: true
     assigneeId?: true
     priority?: true
+    status?: true
+    completedAt?: true
     dueDate?: true
     calendarEventId?: true
     _all?: true
@@ -70548,6 +70572,8 @@ export namespace Prisma {
     title: string
     assigneeId: string | null
     priority: $Enums.TaskPriority
+    status: $Enums.TaskStatus
+    completedAt: Date | null
     dueDate: Date | null
     calendarEventId: string | null
     _count: TaskCountAggregateOutputType | null
@@ -70575,6 +70601,8 @@ export namespace Prisma {
     title?: boolean
     assigneeId?: boolean
     priority?: boolean
+    status?: boolean
+    completedAt?: boolean
     dueDate?: boolean
     calendarEventId?: boolean
     assignee?: boolean | Task$assigneeArgs<ExtArgs>
@@ -70587,6 +70615,8 @@ export namespace Prisma {
     title?: boolean
     assigneeId?: boolean
     priority?: boolean
+    status?: boolean
+    completedAt?: boolean
     dueDate?: boolean
     calendarEventId?: boolean
     assignee?: boolean | Task$assigneeArgs<ExtArgs>
@@ -70599,6 +70629,8 @@ export namespace Prisma {
     title?: boolean
     assigneeId?: boolean
     priority?: boolean
+    status?: boolean
+    completedAt?: boolean
     dueDate?: boolean
     calendarEventId?: boolean
     assignee?: boolean | Task$assigneeArgs<ExtArgs>
@@ -70611,11 +70643,13 @@ export namespace Prisma {
     title?: boolean
     assigneeId?: boolean
     priority?: boolean
+    status?: boolean
+    completedAt?: boolean
     dueDate?: boolean
     calendarEventId?: boolean
   }
 
-  export type TaskOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "scope" | "title" | "assigneeId" | "priority" | "dueDate" | "calendarEventId", ExtArgs["result"]["task"]>
+  export type TaskOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "scope" | "title" | "assigneeId" | "priority" | "status" | "completedAt" | "dueDate" | "calendarEventId", ExtArgs["result"]["task"]>
   export type TaskInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     assignee?: boolean | Task$assigneeArgs<ExtArgs>
     calendarEvent?: boolean | Task$calendarEventArgs<ExtArgs>
@@ -70641,6 +70675,8 @@ export namespace Prisma {
       title: string
       assigneeId: string | null
       priority: $Enums.TaskPriority
+      status: $Enums.TaskStatus
+      completedAt: Date | null
       dueDate: Date | null
       calendarEventId: string | null
     }, ExtArgs["result"]["task"]>
@@ -71073,6 +71109,8 @@ export namespace Prisma {
     readonly title: FieldRef<"Task", 'String'>
     readonly assigneeId: FieldRef<"Task", 'String'>
     readonly priority: FieldRef<"Task", 'TaskPriority'>
+    readonly status: FieldRef<"Task", 'TaskStatus'>
+    readonly completedAt: FieldRef<"Task", 'DateTime'>
     readonly dueDate: FieldRef<"Task", 'DateTime'>
     readonly calendarEventId: FieldRef<"Task", 'String'>
   }
@@ -76539,6 +76577,8 @@ export namespace Prisma {
     title: 'title',
     assigneeId: 'assigneeId',
     priority: 'priority',
+    status: 'status',
+    completedAt: 'completedAt',
     dueDate: 'dueDate',
     calendarEventId: 'calendarEventId'
   };
@@ -76924,6 +76964,20 @@ export namespace Prisma {
    * Reference to a field of type 'TaskPriority[]'
    */
   export type ListEnumTaskPriorityFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TaskPriority[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'TaskStatus'
+   */
+  export type EnumTaskStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TaskStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'TaskStatus[]'
+   */
+  export type ListEnumTaskStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TaskStatus[]'>
     
 
 
@@ -80092,6 +80146,8 @@ export namespace Prisma {
     title?: StringFilter<"Task"> | string
     assigneeId?: StringNullableFilter<"Task"> | string | null
     priority?: EnumTaskPriorityFilter<"Task"> | $Enums.TaskPriority
+    status?: EnumTaskStatusFilter<"Task"> | $Enums.TaskStatus
+    completedAt?: DateTimeNullableFilter<"Task"> | Date | string | null
     dueDate?: DateTimeNullableFilter<"Task"> | Date | string | null
     calendarEventId?: StringNullableFilter<"Task"> | string | null
     assignee?: XOR<AccountNullableScalarRelationFilter, AccountWhereInput> | null
@@ -80104,6 +80160,8 @@ export namespace Prisma {
     title?: SortOrder
     assigneeId?: SortOrderInput | SortOrder
     priority?: SortOrder
+    status?: SortOrder
+    completedAt?: SortOrderInput | SortOrder
     dueDate?: SortOrderInput | SortOrder
     calendarEventId?: SortOrderInput | SortOrder
     assignee?: AccountOrderByWithRelationInput
@@ -80119,6 +80177,8 @@ export namespace Prisma {
     title?: StringFilter<"Task"> | string
     assigneeId?: StringNullableFilter<"Task"> | string | null
     priority?: EnumTaskPriorityFilter<"Task"> | $Enums.TaskPriority
+    status?: EnumTaskStatusFilter<"Task"> | $Enums.TaskStatus
+    completedAt?: DateTimeNullableFilter<"Task"> | Date | string | null
     dueDate?: DateTimeNullableFilter<"Task"> | Date | string | null
     calendarEventId?: StringNullableFilter<"Task"> | string | null
     assignee?: XOR<AccountNullableScalarRelationFilter, AccountWhereInput> | null
@@ -80131,6 +80191,8 @@ export namespace Prisma {
     title?: SortOrder
     assigneeId?: SortOrderInput | SortOrder
     priority?: SortOrder
+    status?: SortOrder
+    completedAt?: SortOrderInput | SortOrder
     dueDate?: SortOrderInput | SortOrder
     calendarEventId?: SortOrderInput | SortOrder
     _count?: TaskCountOrderByAggregateInput
@@ -80147,6 +80209,8 @@ export namespace Prisma {
     title?: StringWithAggregatesFilter<"Task"> | string
     assigneeId?: StringNullableWithAggregatesFilter<"Task"> | string | null
     priority?: EnumTaskPriorityWithAggregatesFilter<"Task"> | $Enums.TaskPriority
+    status?: EnumTaskStatusWithAggregatesFilter<"Task"> | $Enums.TaskStatus
+    completedAt?: DateTimeNullableWithAggregatesFilter<"Task"> | Date | string | null
     dueDate?: DateTimeNullableWithAggregatesFilter<"Task"> | Date | string | null
     calendarEventId?: StringNullableWithAggregatesFilter<"Task"> | string | null
   }
@@ -83428,6 +83492,8 @@ export namespace Prisma {
     scope: string
     title: string
     priority?: $Enums.TaskPriority
+    status?: $Enums.TaskStatus
+    completedAt?: Date | string | null
     dueDate?: Date | string | null
     assignee?: AccountCreateNestedOneWithoutTasksInput
     calendarEvent?: CalendarEventCreateNestedOneWithoutTasksInput
@@ -83439,6 +83505,8 @@ export namespace Prisma {
     title: string
     assigneeId?: string | null
     priority?: $Enums.TaskPriority
+    status?: $Enums.TaskStatus
+    completedAt?: Date | string | null
     dueDate?: Date | string | null
     calendarEventId?: string | null
   }
@@ -83448,6 +83516,8 @@ export namespace Prisma {
     scope?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     priority?: EnumTaskPriorityFieldUpdateOperationsInput | $Enums.TaskPriority
+    status?: EnumTaskStatusFieldUpdateOperationsInput | $Enums.TaskStatus
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     assignee?: AccountUpdateOneWithoutTasksNestedInput
     calendarEvent?: CalendarEventUpdateOneWithoutTasksNestedInput
@@ -83459,6 +83529,8 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     assigneeId?: NullableStringFieldUpdateOperationsInput | string | null
     priority?: EnumTaskPriorityFieldUpdateOperationsInput | $Enums.TaskPriority
+    status?: EnumTaskStatusFieldUpdateOperationsInput | $Enums.TaskStatus
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     calendarEventId?: NullableStringFieldUpdateOperationsInput | string | null
   }
@@ -83469,6 +83541,8 @@ export namespace Prisma {
     title: string
     assigneeId?: string | null
     priority?: $Enums.TaskPriority
+    status?: $Enums.TaskStatus
+    completedAt?: Date | string | null
     dueDate?: Date | string | null
     calendarEventId?: string | null
   }
@@ -83478,6 +83552,8 @@ export namespace Prisma {
     scope?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     priority?: EnumTaskPriorityFieldUpdateOperationsInput | $Enums.TaskPriority
+    status?: EnumTaskStatusFieldUpdateOperationsInput | $Enums.TaskStatus
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
@@ -83487,6 +83563,8 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     assigneeId?: NullableStringFieldUpdateOperationsInput | string | null
     priority?: EnumTaskPriorityFieldUpdateOperationsInput | $Enums.TaskPriority
+    status?: EnumTaskStatusFieldUpdateOperationsInput | $Enums.TaskStatus
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     calendarEventId?: NullableStringFieldUpdateOperationsInput | string | null
   }
@@ -86133,6 +86211,13 @@ export namespace Prisma {
     not?: NestedEnumTaskPriorityFilter<$PrismaModel> | $Enums.TaskPriority
   }
 
+  export type EnumTaskStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.TaskStatus | EnumTaskStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.TaskStatus[] | ListEnumTaskStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TaskStatus[] | ListEnumTaskStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumTaskStatusFilter<$PrismaModel> | $Enums.TaskStatus
+  }
+
   export type CalendarEventNullableScalarRelationFilter = {
     is?: CalendarEventWhereInput | null
     isNot?: CalendarEventWhereInput | null
@@ -86144,6 +86229,8 @@ export namespace Prisma {
     title?: SortOrder
     assigneeId?: SortOrder
     priority?: SortOrder
+    status?: SortOrder
+    completedAt?: SortOrder
     dueDate?: SortOrder
     calendarEventId?: SortOrder
   }
@@ -86154,6 +86241,8 @@ export namespace Prisma {
     title?: SortOrder
     assigneeId?: SortOrder
     priority?: SortOrder
+    status?: SortOrder
+    completedAt?: SortOrder
     dueDate?: SortOrder
     calendarEventId?: SortOrder
   }
@@ -86164,6 +86253,8 @@ export namespace Prisma {
     title?: SortOrder
     assigneeId?: SortOrder
     priority?: SortOrder
+    status?: SortOrder
+    completedAt?: SortOrder
     dueDate?: SortOrder
     calendarEventId?: SortOrder
   }
@@ -86176,6 +86267,16 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumTaskPriorityFilter<$PrismaModel>
     _max?: NestedEnumTaskPriorityFilter<$PrismaModel>
+  }
+
+  export type EnumTaskStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.TaskStatus | EnumTaskStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.TaskStatus[] | ListEnumTaskStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TaskStatus[] | ListEnumTaskStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumTaskStatusWithAggregatesFilter<$PrismaModel> | $Enums.TaskStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumTaskStatusFilter<$PrismaModel>
+    _max?: NestedEnumTaskStatusFilter<$PrismaModel>
   }
 
   export type DocumentCountOrderByAggregateInput = {
@@ -89921,6 +90022,10 @@ export namespace Prisma {
     set?: $Enums.TaskPriority
   }
 
+  export type EnumTaskStatusFieldUpdateOperationsInput = {
+    set?: $Enums.TaskStatus
+  }
+
   export type AccountUpdateOneWithoutTasksNestedInput = {
     create?: XOR<AccountCreateWithoutTasksInput, AccountUncheckedCreateWithoutTasksInput>
     connectOrCreate?: AccountCreateOrConnectWithoutTasksInput
@@ -90674,6 +90779,13 @@ export namespace Prisma {
     not?: NestedEnumTaskPriorityFilter<$PrismaModel> | $Enums.TaskPriority
   }
 
+  export type NestedEnumTaskStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.TaskStatus | EnumTaskStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.TaskStatus[] | ListEnumTaskStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TaskStatus[] | ListEnumTaskStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumTaskStatusFilter<$PrismaModel> | $Enums.TaskStatus
+  }
+
   export type NestedEnumTaskPriorityWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.TaskPriority | EnumTaskPriorityFieldRefInput<$PrismaModel>
     in?: $Enums.TaskPriority[] | ListEnumTaskPriorityFieldRefInput<$PrismaModel>
@@ -90682,6 +90794,16 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumTaskPriorityFilter<$PrismaModel>
     _max?: NestedEnumTaskPriorityFilter<$PrismaModel>
+  }
+
+  export type NestedEnumTaskStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.TaskStatus | EnumTaskStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.TaskStatus[] | ListEnumTaskStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TaskStatus[] | ListEnumTaskStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumTaskStatusWithAggregatesFilter<$PrismaModel> | $Enums.TaskStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumTaskStatusFilter<$PrismaModel>
+    _max?: NestedEnumTaskStatusFilter<$PrismaModel>
   }
 
   export type NestedEnumRollbackStatusFilter<$PrismaModel = never> = {
@@ -91260,6 +91382,8 @@ export namespace Prisma {
     scope: string
     title: string
     priority?: $Enums.TaskPriority
+    status?: $Enums.TaskStatus
+    completedAt?: Date | string | null
     dueDate?: Date | string | null
     calendarEvent?: CalendarEventCreateNestedOneWithoutTasksInput
   }
@@ -91269,6 +91393,8 @@ export namespace Prisma {
     scope: string
     title: string
     priority?: $Enums.TaskPriority
+    status?: $Enums.TaskStatus
+    completedAt?: Date | string | null
     dueDate?: Date | string | null
     calendarEventId?: string | null
   }
@@ -92016,6 +92142,8 @@ export namespace Prisma {
     title?: StringFilter<"Task"> | string
     assigneeId?: StringNullableFilter<"Task"> | string | null
     priority?: EnumTaskPriorityFilter<"Task"> | $Enums.TaskPriority
+    status?: EnumTaskStatusFilter<"Task"> | $Enums.TaskStatus
+    completedAt?: DateTimeNullableFilter<"Task"> | Date | string | null
     dueDate?: DateTimeNullableFilter<"Task"> | Date | string | null
     calendarEventId?: StringNullableFilter<"Task"> | string | null
   }
@@ -99674,6 +99802,8 @@ export namespace Prisma {
     scope: string
     title: string
     priority?: $Enums.TaskPriority
+    status?: $Enums.TaskStatus
+    completedAt?: Date | string | null
     dueDate?: Date | string | null
     assignee?: AccountCreateNestedOneWithoutTasksInput
   }
@@ -99684,6 +99814,8 @@ export namespace Prisma {
     title: string
     assigneeId?: string | null
     priority?: $Enums.TaskPriority
+    status?: $Enums.TaskStatus
+    completedAt?: Date | string | null
     dueDate?: Date | string | null
   }
 
@@ -100977,6 +101109,8 @@ export namespace Prisma {
     scope: string
     title: string
     priority?: $Enums.TaskPriority
+    status?: $Enums.TaskStatus
+    completedAt?: Date | string | null
     dueDate?: Date | string | null
     calendarEventId?: string | null
   }
@@ -101431,6 +101565,8 @@ export namespace Prisma {
     scope?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     priority?: EnumTaskPriorityFieldUpdateOperationsInput | $Enums.TaskPriority
+    status?: EnumTaskStatusFieldUpdateOperationsInput | $Enums.TaskStatus
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     calendarEvent?: CalendarEventUpdateOneWithoutTasksNestedInput
   }
@@ -101440,6 +101576,8 @@ export namespace Prisma {
     scope?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     priority?: EnumTaskPriorityFieldUpdateOperationsInput | $Enums.TaskPriority
+    status?: EnumTaskStatusFieldUpdateOperationsInput | $Enums.TaskStatus
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     calendarEventId?: NullableStringFieldUpdateOperationsInput | string | null
   }
@@ -101449,6 +101587,8 @@ export namespace Prisma {
     scope?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     priority?: EnumTaskPriorityFieldUpdateOperationsInput | $Enums.TaskPriority
+    status?: EnumTaskStatusFieldUpdateOperationsInput | $Enums.TaskStatus
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     calendarEventId?: NullableStringFieldUpdateOperationsInput | string | null
   }
@@ -102344,6 +102484,8 @@ export namespace Prisma {
     title: string
     assigneeId?: string | null
     priority?: $Enums.TaskPriority
+    status?: $Enums.TaskStatus
+    completedAt?: Date | string | null
     dueDate?: Date | string | null
   }
 
@@ -102352,6 +102494,8 @@ export namespace Prisma {
     scope?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     priority?: EnumTaskPriorityFieldUpdateOperationsInput | $Enums.TaskPriority
+    status?: EnumTaskStatusFieldUpdateOperationsInput | $Enums.TaskStatus
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     assignee?: AccountUpdateOneWithoutTasksNestedInput
   }
@@ -102362,6 +102506,8 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     assigneeId?: NullableStringFieldUpdateOperationsInput | string | null
     priority?: EnumTaskPriorityFieldUpdateOperationsInput | $Enums.TaskPriority
+    status?: EnumTaskStatusFieldUpdateOperationsInput | $Enums.TaskStatus
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
@@ -102371,6 +102517,8 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     assigneeId?: NullableStringFieldUpdateOperationsInput | string | null
     priority?: EnumTaskPriorityFieldUpdateOperationsInput | $Enums.TaskPriority
+    status?: EnumTaskStatusFieldUpdateOperationsInput | $Enums.TaskStatus
+    completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
