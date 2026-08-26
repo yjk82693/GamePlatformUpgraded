@@ -124,3 +124,11 @@ export async function validateSession(token: string): Promise<string> {
   }
   return session.accountId;
 }
+
+export async function getAccountType(accountId: string) {
+  const [playerProfile, membership] = await Promise.all([
+    prisma.playerProfile.findUnique({ where: { accountId } }),
+    prisma.member.findFirst({ where: { accountId } }),
+  ]);
+  return { isPlayer: !!playerProfile, isStaff: !!membership };
+}
