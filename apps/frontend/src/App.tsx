@@ -1,75 +1,48 @@
-import { useState } from 'react'
-
-const API_URL = 'http://localhost:4000'
+import { Routes, Route } from 'react-router-dom'
+import { ProtectedRoute } from './components/ProtectedRoute'
+import { Placeholder } from './components/Placeholder'
+import LoginPage from './pages/LoginPage'
+import HomePage from './pages/HomePage'
+import PlayerLayout from './pages/player/PlayerLayout'
+import DistributorLayout from './pages/distributor/DistributorLayout'
+import CoopLayout from './pages/coop/CoopLayout'
 
 function App() {
-  const [mode, setMode] = useState<'login' | 'register'>('login')
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [message, setMessage] = useState<string | null>(null)
-  const [token, setToken] = useState<string | null>(null)
-
-  async function handleSubmit(e: React.FormEvent) {
-    e.preventDefault()
-    setMessage(null)
-    const endpoint = mode === 'login' ? '/auth/login' : '/auth/register'
-    try {
-      const res = await fetch(`${API_URL}${endpoint}`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
-      })
-      const data = await res.json()
-      if (!res.ok) {
-        setMessage(data.error || 'Something went wrong')
-        return
-      }
-      if (mode === 'login') {
-        setToken(data.token)
-        setMessage(`Logged in. Session expires ${new Date(data.expiresAt).toLocaleString()}`)
-      } else {
-        setMessage(`Account created: ${data.email}. You can log in now.`)
-        setMode('login')
-      }
-    } catch (err) {
-      setMessage('Could not reach the server')
-    }
-  }
-
   return (
-    <div style={{ maxWidth: 360, margin: '80px auto', fontFamily: 'sans-serif' }}>
-      <h1>{mode === 'login' ? 'Log in' : 'Register'}</h1>
-      <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-        <button type="submit">{mode === 'login' ? 'Log in' : 'Register'}</button>
-      </form>
-      <button
-        type="button"
-        onClick={() => setMode(mode === 'login' ? 'register' : 'login')}
-        style={{ marginTop: 12, background: 'none', border: 'none', color: 'blue', cursor: 'pointer' }}
-      >
-        {mode === 'login' ? 'Need an account? Register' : 'Have an account? Log in'}
-      </button>
-      {message && <p style={{ marginTop: 16 }}>{message}</p>}
-      {token && (
-        <p style={{ wordBreak: 'break-all', fontSize: 12, color: '#666' }}>
-          Token: {token}
-        </p>
-      )}
-    </div>
+    <Routes>
+      <Route path="/login" element={<LoginPage />} />
+
+      <Route element={<ProtectedRoute />}>
+        <Route path="/" element={<HomePage />} />
+
+        <Route path="/player" element={<PlayerLayout />}>
+          <Route index element={<Placeholder title="Shop" />} />
+          <Route path="wallet" element={<Placeholder title="Wallet" />} />
+          <Route path="profile" element={<Placeholder title="Profile" />} />
+          <Route path="social" element={<Placeholder title="Friends" />} />
+          <Route path="rankings" element={<Placeholder title="Rankings" />} />
+          <Route path="tickets" element={<Placeholder title="Support" />} />
+        </Route>
+
+        <Route path="/distributor" element={<DistributorLayout />}>
+          <Route index element={<Placeholder title="Catalog" />} />
+          <Route path="members" element={<Placeholder title="Members & Roles" />} />
+          <Route path="appops" element={<Placeholder title="App Operations" />} />
+          <Route path="payments" element={<Placeholder title="Payments" />} />
+          <Route path="stats" element={<Placeholder title="Statistics" />} />
+          <Route path="config" element={<Placeholder title="Leaderboard / Terms / Redeem" />} />
+          <Route path="tickets" element={<Placeholder title="Support" />} />
+          <Route path="logs" element={<Placeholder title="Logs" />} />
+        </Route>
+
+        <Route path="/coop" element={<CoopLayout />}>
+          <Route index element={<Placeholder title="Chat" />} />
+          <Route path="planner" element={<Placeholder title="Planner & Calendar" />} />
+          <Route path="workspace" element={<Placeholder title="Workspace" />} />
+          <Route path="tasks" element={<Placeholder title="Tasks" />} />
+        </Route>
+      </Route>
+    </Routes>
   )
 }
 
