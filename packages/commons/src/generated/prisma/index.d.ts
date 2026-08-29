@@ -7195,6 +7195,7 @@ export namespace Prisma {
     products: number
     leaderboards: number
     gameStatuses: number
+    achievementGroups: number
     notices: number
     liveEvents: number
   }
@@ -7205,6 +7206,7 @@ export namespace Prisma {
     products?: boolean | AppCountOutputTypeCountProductsArgs
     leaderboards?: boolean | AppCountOutputTypeCountLeaderboardsArgs
     gameStatuses?: boolean | AppCountOutputTypeCountGameStatusesArgs
+    achievementGroups?: boolean | AppCountOutputTypeCountAchievementGroupsArgs
     notices?: boolean | AppCountOutputTypeCountNoticesArgs
     liveEvents?: boolean | AppCountOutputTypeCountLiveEventsArgs
   }
@@ -7253,6 +7255,13 @@ export namespace Prisma {
    */
   export type AppCountOutputTypeCountGameStatusesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: GameStatusWhereInput
+  }
+
+  /**
+   * AppCountOutputType without action
+   */
+  export type AppCountOutputTypeCountAchievementGroupsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AchievementGroupWhereInput
   }
 
   /**
@@ -13132,6 +13141,7 @@ export namespace Prisma {
     products?: boolean | App$productsArgs<ExtArgs>
     leaderboards?: boolean | App$leaderboardsArgs<ExtArgs>
     gameStatuses?: boolean | App$gameStatusesArgs<ExtArgs>
+    achievementGroups?: boolean | App$achievementGroupsArgs<ExtArgs>
     notices?: boolean | App$noticesArgs<ExtArgs>
     liveEvents?: boolean | App$liveEventsArgs<ExtArgs>
     _count?: boolean | AppCountOutputTypeDefaultArgs<ExtArgs>
@@ -13171,6 +13181,7 @@ export namespace Prisma {
     products?: boolean | App$productsArgs<ExtArgs>
     leaderboards?: boolean | App$leaderboardsArgs<ExtArgs>
     gameStatuses?: boolean | App$gameStatusesArgs<ExtArgs>
+    achievementGroups?: boolean | App$achievementGroupsArgs<ExtArgs>
     notices?: boolean | App$noticesArgs<ExtArgs>
     liveEvents?: boolean | App$liveEventsArgs<ExtArgs>
     _count?: boolean | AppCountOutputTypeDefaultArgs<ExtArgs>
@@ -13191,6 +13202,7 @@ export namespace Prisma {
       products: Prisma.$ProductPayload<ExtArgs>[]
       leaderboards: Prisma.$LeaderboardPayload<ExtArgs>[]
       gameStatuses: Prisma.$GameStatusPayload<ExtArgs>[]
+      achievementGroups: Prisma.$AchievementGroupPayload<ExtArgs>[]
       notices: Prisma.$NoticePayload<ExtArgs>[]
       liveEvents: Prisma.$LiveEventPayload<ExtArgs>[]
     }
@@ -13600,6 +13612,7 @@ export namespace Prisma {
     products<T extends App$productsArgs<ExtArgs> = {}>(args?: Subset<T, App$productsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     leaderboards<T extends App$leaderboardsArgs<ExtArgs> = {}>(args?: Subset<T, App$leaderboardsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LeaderboardPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     gameStatuses<T extends App$gameStatusesArgs<ExtArgs> = {}>(args?: Subset<T, App$gameStatusesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GameStatusPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    achievementGroups<T extends App$achievementGroupsArgs<ExtArgs> = {}>(args?: Subset<T, App$achievementGroupsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AchievementGroupPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     notices<T extends App$noticesArgs<ExtArgs> = {}>(args?: Subset<T, App$noticesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NoticePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     liveEvents<T extends App$liveEventsArgs<ExtArgs> = {}>(args?: Subset<T, App$liveEventsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LiveEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
@@ -14154,6 +14167,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: GameStatusScalarFieldEnum | GameStatusScalarFieldEnum[]
+  }
+
+  /**
+   * App.achievementGroups
+   */
+  export type App$achievementGroupsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AchievementGroup
+     */
+    select?: AchievementGroupSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AchievementGroup
+     */
+    omit?: AchievementGroupOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AchievementGroupInclude<ExtArgs> | null
+    where?: AchievementGroupWhereInput
+    orderBy?: AchievementGroupOrderByWithRelationInput | AchievementGroupOrderByWithRelationInput[]
+    cursor?: AchievementGroupWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: AchievementGroupScalarFieldEnum | AchievementGroupScalarFieldEnum[]
   }
 
   /**
@@ -47174,16 +47211,19 @@ export namespace Prisma {
   export type AchievementGroupMinAggregateOutputType = {
     id: string | null
     name: string | null
+    appId: string | null
   }
 
   export type AchievementGroupMaxAggregateOutputType = {
     id: string | null
     name: string | null
+    appId: string | null
   }
 
   export type AchievementGroupCountAggregateOutputType = {
     id: number
     name: number
+    appId: number
     _all: number
   }
 
@@ -47191,16 +47231,19 @@ export namespace Prisma {
   export type AchievementGroupMinAggregateInputType = {
     id?: true
     name?: true
+    appId?: true
   }
 
   export type AchievementGroupMaxAggregateInputType = {
     id?: true
     name?: true
+    appId?: true
   }
 
   export type AchievementGroupCountAggregateInputType = {
     id?: true
     name?: true
+    appId?: true
     _all?: true
   }
 
@@ -47279,6 +47322,7 @@ export namespace Prisma {
   export type AchievementGroupGroupByOutputType = {
     id: string
     name: string
+    appId: string | null
     _count: AchievementGroupCountAggregateOutputType | null
     _min: AchievementGroupMinAggregateOutputType | null
     _max: AchievementGroupMaxAggregateOutputType | null
@@ -47301,6 +47345,8 @@ export namespace Prisma {
   export type AchievementGroupSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
+    appId?: boolean
+    app?: boolean | AchievementGroup$appArgs<ExtArgs>
     achievements?: boolean | AchievementGroup$achievementsArgs<ExtArgs>
     _count?: boolean | AchievementGroupCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["achievementGroup"]>
@@ -47308,34 +47354,46 @@ export namespace Prisma {
   export type AchievementGroupSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
+    appId?: boolean
+    app?: boolean | AchievementGroup$appArgs<ExtArgs>
   }, ExtArgs["result"]["achievementGroup"]>
 
   export type AchievementGroupSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
+    appId?: boolean
+    app?: boolean | AchievementGroup$appArgs<ExtArgs>
   }, ExtArgs["result"]["achievementGroup"]>
 
   export type AchievementGroupSelectScalar = {
     id?: boolean
     name?: boolean
+    appId?: boolean
   }
 
-  export type AchievementGroupOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name", ExtArgs["result"]["achievementGroup"]>
+  export type AchievementGroupOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "appId", ExtArgs["result"]["achievementGroup"]>
   export type AchievementGroupInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    app?: boolean | AchievementGroup$appArgs<ExtArgs>
     achievements?: boolean | AchievementGroup$achievementsArgs<ExtArgs>
     _count?: boolean | AchievementGroupCountOutputTypeDefaultArgs<ExtArgs>
   }
-  export type AchievementGroupIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
-  export type AchievementGroupIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type AchievementGroupIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    app?: boolean | AchievementGroup$appArgs<ExtArgs>
+  }
+  export type AchievementGroupIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    app?: boolean | AchievementGroup$appArgs<ExtArgs>
+  }
 
   export type $AchievementGroupPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "AchievementGroup"
     objects: {
+      app: Prisma.$AppPayload<ExtArgs> | null
       achievements: Prisma.$AchievementPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       name: string
+      appId: string | null
     }, ExtArgs["result"]["achievementGroup"]>
     composites: {}
   }
@@ -47730,6 +47788,7 @@ export namespace Prisma {
    */
   export interface Prisma__AchievementGroupClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    app<T extends AchievementGroup$appArgs<ExtArgs> = {}>(args?: Subset<T, AchievementGroup$appArgs<ExtArgs>>): Prisma__AppClient<$Result.GetResult<Prisma.$AppPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     achievements<T extends AchievementGroup$achievementsArgs<ExtArgs> = {}>(args?: Subset<T, AchievementGroup$achievementsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AchievementPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -47762,6 +47821,7 @@ export namespace Prisma {
   interface AchievementGroupFieldRefs {
     readonly id: FieldRef<"AchievementGroup", 'String'>
     readonly name: FieldRef<"AchievementGroup", 'String'>
+    readonly appId: FieldRef<"AchievementGroup", 'String'>
   }
     
 
@@ -48016,6 +48076,10 @@ export namespace Prisma {
      */
     data: AchievementGroupCreateManyInput | AchievementGroupCreateManyInput[]
     skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AchievementGroupIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -48086,6 +48150,10 @@ export namespace Prisma {
      * Limit how many AchievementGroups to update.
      */
     limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AchievementGroupIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -48152,6 +48220,25 @@ export namespace Prisma {
      * Limit how many AchievementGroups to delete.
      */
     limit?: number
+  }
+
+  /**
+   * AchievementGroup.app
+   */
+  export type AchievementGroup$appArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the App
+     */
+    select?: AppSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the App
+     */
+    omit?: AppOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AppInclude<ExtArgs> | null
+    where?: AppWhereInput
   }
 
   /**
@@ -76351,7 +76438,8 @@ export namespace Prisma {
 
   export const AchievementGroupScalarFieldEnum: {
     id: 'id',
-    name: 'name'
+    name: 'name',
+    appId: 'appId'
   };
 
   export type AchievementGroupScalarFieldEnum = (typeof AchievementGroupScalarFieldEnum)[keyof typeof AchievementGroupScalarFieldEnum]
@@ -77321,6 +77409,7 @@ export namespace Prisma {
     products?: ProductListRelationFilter
     leaderboards?: LeaderboardListRelationFilter
     gameStatuses?: GameStatusListRelationFilter
+    achievementGroups?: AchievementGroupListRelationFilter
     notices?: NoticeListRelationFilter
     liveEvents?: LiveEventListRelationFilter
   }
@@ -77337,6 +77426,7 @@ export namespace Prisma {
     products?: ProductOrderByRelationAggregateInput
     leaderboards?: LeaderboardOrderByRelationAggregateInput
     gameStatuses?: GameStatusOrderByRelationAggregateInput
+    achievementGroups?: AchievementGroupOrderByRelationAggregateInput
     notices?: NoticeOrderByRelationAggregateInput
     liveEvents?: LiveEventOrderByRelationAggregateInput
   }
@@ -77356,6 +77446,7 @@ export namespace Prisma {
     products?: ProductListRelationFilter
     leaderboards?: LeaderboardListRelationFilter
     gameStatuses?: GameStatusListRelationFilter
+    achievementGroups?: AchievementGroupListRelationFilter
     notices?: NoticeListRelationFilter
     liveEvents?: LiveEventListRelationFilter
   }, "id">
@@ -79003,12 +79094,16 @@ export namespace Prisma {
     NOT?: AchievementGroupWhereInput | AchievementGroupWhereInput[]
     id?: StringFilter<"AchievementGroup"> | string
     name?: StringFilter<"AchievementGroup"> | string
+    appId?: StringNullableFilter<"AchievementGroup"> | string | null
+    app?: XOR<AppNullableScalarRelationFilter, AppWhereInput> | null
     achievements?: AchievementListRelationFilter
   }
 
   export type AchievementGroupOrderByWithRelationInput = {
     id?: SortOrder
     name?: SortOrder
+    appId?: SortOrderInput | SortOrder
+    app?: AppOrderByWithRelationInput
     achievements?: AchievementOrderByRelationAggregateInput
   }
 
@@ -79018,12 +79113,15 @@ export namespace Prisma {
     OR?: AchievementGroupWhereInput[]
     NOT?: AchievementGroupWhereInput | AchievementGroupWhereInput[]
     name?: StringFilter<"AchievementGroup"> | string
+    appId?: StringNullableFilter<"AchievementGroup"> | string | null
+    app?: XOR<AppNullableScalarRelationFilter, AppWhereInput> | null
     achievements?: AchievementListRelationFilter
   }, "id">
 
   export type AchievementGroupOrderByWithAggregationInput = {
     id?: SortOrder
     name?: SortOrder
+    appId?: SortOrderInput | SortOrder
     _count?: AchievementGroupCountOrderByAggregateInput
     _max?: AchievementGroupMaxOrderByAggregateInput
     _min?: AchievementGroupMinOrderByAggregateInput
@@ -79035,6 +79133,7 @@ export namespace Prisma {
     NOT?: AchievementGroupScalarWhereWithAggregatesInput | AchievementGroupScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"AchievementGroup"> | string
     name?: StringWithAggregatesFilter<"AchievementGroup"> | string
+    appId?: StringNullableWithAggregatesFilter<"AchievementGroup"> | string | null
   }
 
   export type AchievementWhereInput = {
@@ -80781,6 +80880,7 @@ export namespace Prisma {
     products?: ProductCreateNestedManyWithoutAppInput
     leaderboards?: LeaderboardCreateNestedManyWithoutAppInput
     gameStatuses?: GameStatusCreateNestedManyWithoutAppInput
+    achievementGroups?: AchievementGroupCreateNestedManyWithoutAppInput
     notices?: NoticeCreateNestedManyWithoutAppInput
     liveEvents?: LiveEventCreateNestedManyWithoutAppInput
   }
@@ -80796,6 +80896,7 @@ export namespace Prisma {
     products?: ProductUncheckedCreateNestedManyWithoutAppInput
     leaderboards?: LeaderboardUncheckedCreateNestedManyWithoutAppInput
     gameStatuses?: GameStatusUncheckedCreateNestedManyWithoutAppInput
+    achievementGroups?: AchievementGroupUncheckedCreateNestedManyWithoutAppInput
     notices?: NoticeUncheckedCreateNestedManyWithoutAppInput
     liveEvents?: LiveEventUncheckedCreateNestedManyWithoutAppInput
   }
@@ -80811,6 +80912,7 @@ export namespace Prisma {
     products?: ProductUpdateManyWithoutAppNestedInput
     leaderboards?: LeaderboardUpdateManyWithoutAppNestedInput
     gameStatuses?: GameStatusUpdateManyWithoutAppNestedInput
+    achievementGroups?: AchievementGroupUpdateManyWithoutAppNestedInput
     notices?: NoticeUpdateManyWithoutAppNestedInput
     liveEvents?: LiveEventUpdateManyWithoutAppNestedInput
   }
@@ -80826,6 +80928,7 @@ export namespace Prisma {
     products?: ProductUncheckedUpdateManyWithoutAppNestedInput
     leaderboards?: LeaderboardUncheckedUpdateManyWithoutAppNestedInput
     gameStatuses?: GameStatusUncheckedUpdateManyWithoutAppNestedInput
+    achievementGroups?: AchievementGroupUncheckedUpdateManyWithoutAppNestedInput
     notices?: NoticeUncheckedUpdateManyWithoutAppNestedInput
     liveEvents?: LiveEventUncheckedUpdateManyWithoutAppNestedInput
   }
@@ -82382,30 +82485,35 @@ export namespace Prisma {
   export type AchievementGroupCreateInput = {
     id?: string
     name: string
+    app?: AppCreateNestedOneWithoutAchievementGroupsInput
     achievements?: AchievementCreateNestedManyWithoutGroupInput
   }
 
   export type AchievementGroupUncheckedCreateInput = {
     id?: string
     name: string
+    appId?: string | null
     achievements?: AchievementUncheckedCreateNestedManyWithoutGroupInput
   }
 
   export type AchievementGroupUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    app?: AppUpdateOneWithoutAchievementGroupsNestedInput
     achievements?: AchievementUpdateManyWithoutGroupNestedInput
   }
 
   export type AchievementGroupUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    appId?: NullableStringFieldUpdateOperationsInput | string | null
     achievements?: AchievementUncheckedUpdateManyWithoutGroupNestedInput
   }
 
   export type AchievementGroupCreateManyInput = {
     id?: string
     name: string
+    appId?: string | null
   }
 
   export type AchievementGroupUpdateManyMutationInput = {
@@ -82416,6 +82524,7 @@ export namespace Prisma {
   export type AchievementGroupUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    appId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type AchievementCreateInput = {
@@ -84349,6 +84458,12 @@ export namespace Prisma {
     none?: LeaderboardWhereInput
   }
 
+  export type AchievementGroupListRelationFilter = {
+    every?: AchievementGroupWhereInput
+    some?: AchievementGroupWhereInput
+    none?: AchievementGroupWhereInput
+  }
+
   export type NoticeListRelationFilter = {
     every?: NoticeWhereInput
     some?: NoticeWhereInput
@@ -84370,6 +84485,10 @@ export namespace Prisma {
   }
 
   export type LeaderboardOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type AchievementGroupOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -85565,6 +85684,11 @@ export namespace Prisma {
     value?: SortOrder
   }
 
+  export type AppNullableScalarRelationFilter = {
+    is?: AppWhereInput | null
+    isNot?: AppWhereInput | null
+  }
+
   export type AchievementListRelationFilter = {
     every?: AchievementWhereInput
     some?: AchievementWhereInput
@@ -85578,16 +85702,19 @@ export namespace Prisma {
   export type AchievementGroupCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    appId?: SortOrder
   }
 
   export type AchievementGroupMaxOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    appId?: SortOrder
   }
 
   export type AchievementGroupMinOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    appId?: SortOrder
   }
 
   export type AchievementGroupScalarRelationFilter = {
@@ -87965,6 +88092,13 @@ export namespace Prisma {
     connect?: GameStatusWhereUniqueInput | GameStatusWhereUniqueInput[]
   }
 
+  export type AchievementGroupCreateNestedManyWithoutAppInput = {
+    create?: XOR<AchievementGroupCreateWithoutAppInput, AchievementGroupUncheckedCreateWithoutAppInput> | AchievementGroupCreateWithoutAppInput[] | AchievementGroupUncheckedCreateWithoutAppInput[]
+    connectOrCreate?: AchievementGroupCreateOrConnectWithoutAppInput | AchievementGroupCreateOrConnectWithoutAppInput[]
+    createMany?: AchievementGroupCreateManyAppInputEnvelope
+    connect?: AchievementGroupWhereUniqueInput | AchievementGroupWhereUniqueInput[]
+  }
+
   export type NoticeCreateNestedManyWithoutAppInput = {
     create?: XOR<NoticeCreateWithoutAppInput, NoticeUncheckedCreateWithoutAppInput> | NoticeCreateWithoutAppInput[] | NoticeUncheckedCreateWithoutAppInput[]
     connectOrCreate?: NoticeCreateOrConnectWithoutAppInput | NoticeCreateOrConnectWithoutAppInput[]
@@ -88012,6 +88146,13 @@ export namespace Prisma {
     connectOrCreate?: GameStatusCreateOrConnectWithoutAppInput | GameStatusCreateOrConnectWithoutAppInput[]
     createMany?: GameStatusCreateManyAppInputEnvelope
     connect?: GameStatusWhereUniqueInput | GameStatusWhereUniqueInput[]
+  }
+
+  export type AchievementGroupUncheckedCreateNestedManyWithoutAppInput = {
+    create?: XOR<AchievementGroupCreateWithoutAppInput, AchievementGroupUncheckedCreateWithoutAppInput> | AchievementGroupCreateWithoutAppInput[] | AchievementGroupUncheckedCreateWithoutAppInput[]
+    connectOrCreate?: AchievementGroupCreateOrConnectWithoutAppInput | AchievementGroupCreateOrConnectWithoutAppInput[]
+    createMany?: AchievementGroupCreateManyAppInputEnvelope
+    connect?: AchievementGroupWhereUniqueInput | AchievementGroupWhereUniqueInput[]
   }
 
   export type NoticeUncheckedCreateNestedManyWithoutAppInput = {
@@ -88110,6 +88251,20 @@ export namespace Prisma {
     deleteMany?: GameStatusScalarWhereInput | GameStatusScalarWhereInput[]
   }
 
+  export type AchievementGroupUpdateManyWithoutAppNestedInput = {
+    create?: XOR<AchievementGroupCreateWithoutAppInput, AchievementGroupUncheckedCreateWithoutAppInput> | AchievementGroupCreateWithoutAppInput[] | AchievementGroupUncheckedCreateWithoutAppInput[]
+    connectOrCreate?: AchievementGroupCreateOrConnectWithoutAppInput | AchievementGroupCreateOrConnectWithoutAppInput[]
+    upsert?: AchievementGroupUpsertWithWhereUniqueWithoutAppInput | AchievementGroupUpsertWithWhereUniqueWithoutAppInput[]
+    createMany?: AchievementGroupCreateManyAppInputEnvelope
+    set?: AchievementGroupWhereUniqueInput | AchievementGroupWhereUniqueInput[]
+    disconnect?: AchievementGroupWhereUniqueInput | AchievementGroupWhereUniqueInput[]
+    delete?: AchievementGroupWhereUniqueInput | AchievementGroupWhereUniqueInput[]
+    connect?: AchievementGroupWhereUniqueInput | AchievementGroupWhereUniqueInput[]
+    update?: AchievementGroupUpdateWithWhereUniqueWithoutAppInput | AchievementGroupUpdateWithWhereUniqueWithoutAppInput[]
+    updateMany?: AchievementGroupUpdateManyWithWhereWithoutAppInput | AchievementGroupUpdateManyWithWhereWithoutAppInput[]
+    deleteMany?: AchievementGroupScalarWhereInput | AchievementGroupScalarWhereInput[]
+  }
+
   export type NoticeUpdateManyWithoutAppNestedInput = {
     create?: XOR<NoticeCreateWithoutAppInput, NoticeUncheckedCreateWithoutAppInput> | NoticeCreateWithoutAppInput[] | NoticeUncheckedCreateWithoutAppInput[]
     connectOrCreate?: NoticeCreateOrConnectWithoutAppInput | NoticeCreateOrConnectWithoutAppInput[]
@@ -88206,6 +88361,20 @@ export namespace Prisma {
     update?: GameStatusUpdateWithWhereUniqueWithoutAppInput | GameStatusUpdateWithWhereUniqueWithoutAppInput[]
     updateMany?: GameStatusUpdateManyWithWhereWithoutAppInput | GameStatusUpdateManyWithWhereWithoutAppInput[]
     deleteMany?: GameStatusScalarWhereInput | GameStatusScalarWhereInput[]
+  }
+
+  export type AchievementGroupUncheckedUpdateManyWithoutAppNestedInput = {
+    create?: XOR<AchievementGroupCreateWithoutAppInput, AchievementGroupUncheckedCreateWithoutAppInput> | AchievementGroupCreateWithoutAppInput[] | AchievementGroupUncheckedCreateWithoutAppInput[]
+    connectOrCreate?: AchievementGroupCreateOrConnectWithoutAppInput | AchievementGroupCreateOrConnectWithoutAppInput[]
+    upsert?: AchievementGroupUpsertWithWhereUniqueWithoutAppInput | AchievementGroupUpsertWithWhereUniqueWithoutAppInput[]
+    createMany?: AchievementGroupCreateManyAppInputEnvelope
+    set?: AchievementGroupWhereUniqueInput | AchievementGroupWhereUniqueInput[]
+    disconnect?: AchievementGroupWhereUniqueInput | AchievementGroupWhereUniqueInput[]
+    delete?: AchievementGroupWhereUniqueInput | AchievementGroupWhereUniqueInput[]
+    connect?: AchievementGroupWhereUniqueInput | AchievementGroupWhereUniqueInput[]
+    update?: AchievementGroupUpdateWithWhereUniqueWithoutAppInput | AchievementGroupUpdateWithWhereUniqueWithoutAppInput[]
+    updateMany?: AchievementGroupUpdateManyWithWhereWithoutAppInput | AchievementGroupUpdateManyWithWhereWithoutAppInput[]
+    deleteMany?: AchievementGroupScalarWhereInput | AchievementGroupScalarWhereInput[]
   }
 
   export type NoticeUncheckedUpdateManyWithoutAppNestedInput = {
@@ -89322,6 +89491,12 @@ export namespace Prisma {
     update?: XOR<XOR<AccountUpdateToOneWithWhereWithoutScoresInput, AccountUpdateWithoutScoresInput>, AccountUncheckedUpdateWithoutScoresInput>
   }
 
+  export type AppCreateNestedOneWithoutAchievementGroupsInput = {
+    create?: XOR<AppCreateWithoutAchievementGroupsInput, AppUncheckedCreateWithoutAchievementGroupsInput>
+    connectOrCreate?: AppCreateOrConnectWithoutAchievementGroupsInput
+    connect?: AppWhereUniqueInput
+  }
+
   export type AchievementCreateNestedManyWithoutGroupInput = {
     create?: XOR<AchievementCreateWithoutGroupInput, AchievementUncheckedCreateWithoutGroupInput> | AchievementCreateWithoutGroupInput[] | AchievementUncheckedCreateWithoutGroupInput[]
     connectOrCreate?: AchievementCreateOrConnectWithoutGroupInput | AchievementCreateOrConnectWithoutGroupInput[]
@@ -89334,6 +89509,16 @@ export namespace Prisma {
     connectOrCreate?: AchievementCreateOrConnectWithoutGroupInput | AchievementCreateOrConnectWithoutGroupInput[]
     createMany?: AchievementCreateManyGroupInputEnvelope
     connect?: AchievementWhereUniqueInput | AchievementWhereUniqueInput[]
+  }
+
+  export type AppUpdateOneWithoutAchievementGroupsNestedInput = {
+    create?: XOR<AppCreateWithoutAchievementGroupsInput, AppUncheckedCreateWithoutAchievementGroupsInput>
+    connectOrCreate?: AppCreateOrConnectWithoutAchievementGroupsInput
+    upsert?: AppUpsertWithoutAchievementGroupsInput
+    disconnect?: AppWhereInput | boolean
+    delete?: AppWhereInput | boolean
+    connect?: AppWhereUniqueInput
+    update?: XOR<XOR<AppUpdateToOneWithWhereWithoutAchievementGroupsInput, AppUpdateWithoutAchievementGroupsInput>, AppUncheckedUpdateWithoutAchievementGroupsInput>
   }
 
   export type AchievementUpdateManyWithoutGroupNestedInput = {
@@ -92259,6 +92444,7 @@ export namespace Prisma {
     products?: ProductCreateNestedManyWithoutAppInput
     leaderboards?: LeaderboardCreateNestedManyWithoutAppInput
     gameStatuses?: GameStatusCreateNestedManyWithoutAppInput
+    achievementGroups?: AchievementGroupCreateNestedManyWithoutAppInput
     notices?: NoticeCreateNestedManyWithoutAppInput
     liveEvents?: LiveEventCreateNestedManyWithoutAppInput
   }
@@ -92273,6 +92459,7 @@ export namespace Prisma {
     products?: ProductUncheckedCreateNestedManyWithoutAppInput
     leaderboards?: LeaderboardUncheckedCreateNestedManyWithoutAppInput
     gameStatuses?: GameStatusUncheckedCreateNestedManyWithoutAppInput
+    achievementGroups?: AchievementGroupUncheckedCreateNestedManyWithoutAppInput
     notices?: NoticeUncheckedCreateNestedManyWithoutAppInput
     liveEvents?: LiveEventUncheckedCreateNestedManyWithoutAppInput
   }
@@ -92737,6 +92924,28 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type AchievementGroupCreateWithoutAppInput = {
+    id?: string
+    name: string
+    achievements?: AchievementCreateNestedManyWithoutGroupInput
+  }
+
+  export type AchievementGroupUncheckedCreateWithoutAppInput = {
+    id?: string
+    name: string
+    achievements?: AchievementUncheckedCreateNestedManyWithoutGroupInput
+  }
+
+  export type AchievementGroupCreateOrConnectWithoutAppInput = {
+    where: AchievementGroupWhereUniqueInput
+    create: XOR<AchievementGroupCreateWithoutAppInput, AchievementGroupUncheckedCreateWithoutAppInput>
+  }
+
+  export type AchievementGroupCreateManyAppInputEnvelope = {
+    data: AchievementGroupCreateManyAppInput | AchievementGroupCreateManyAppInput[]
+    skipDuplicates?: boolean
+  }
+
   export type NoticeCreateWithoutAppInput = {
     id?: string
     content: string
@@ -92927,6 +93136,31 @@ export namespace Prisma {
     data: XOR<GameStatusUpdateManyMutationInput, GameStatusUncheckedUpdateManyWithoutAppInput>
   }
 
+  export type AchievementGroupUpsertWithWhereUniqueWithoutAppInput = {
+    where: AchievementGroupWhereUniqueInput
+    update: XOR<AchievementGroupUpdateWithoutAppInput, AchievementGroupUncheckedUpdateWithoutAppInput>
+    create: XOR<AchievementGroupCreateWithoutAppInput, AchievementGroupUncheckedCreateWithoutAppInput>
+  }
+
+  export type AchievementGroupUpdateWithWhereUniqueWithoutAppInput = {
+    where: AchievementGroupWhereUniqueInput
+    data: XOR<AchievementGroupUpdateWithoutAppInput, AchievementGroupUncheckedUpdateWithoutAppInput>
+  }
+
+  export type AchievementGroupUpdateManyWithWhereWithoutAppInput = {
+    where: AchievementGroupScalarWhereInput
+    data: XOR<AchievementGroupUpdateManyMutationInput, AchievementGroupUncheckedUpdateManyWithoutAppInput>
+  }
+
+  export type AchievementGroupScalarWhereInput = {
+    AND?: AchievementGroupScalarWhereInput | AchievementGroupScalarWhereInput[]
+    OR?: AchievementGroupScalarWhereInput[]
+    NOT?: AchievementGroupScalarWhereInput | AchievementGroupScalarWhereInput[]
+    id?: StringFilter<"AchievementGroup"> | string
+    name?: StringFilter<"AchievementGroup"> | string
+    appId?: StringNullableFilter<"AchievementGroup"> | string | null
+  }
+
   export type NoticeUpsertWithWhereUniqueWithoutAppInput = {
     where: NoticeWhereUniqueInput
     update: XOR<NoticeUpdateWithoutAppInput, NoticeUncheckedUpdateWithoutAppInput>
@@ -93077,6 +93311,7 @@ export namespace Prisma {
     products?: ProductCreateNestedManyWithoutAppInput
     leaderboards?: LeaderboardCreateNestedManyWithoutAppInput
     gameStatuses?: GameStatusCreateNestedManyWithoutAppInput
+    achievementGroups?: AchievementGroupCreateNestedManyWithoutAppInput
     notices?: NoticeCreateNestedManyWithoutAppInput
     liveEvents?: LiveEventCreateNestedManyWithoutAppInput
   }
@@ -93091,6 +93326,7 @@ export namespace Prisma {
     products?: ProductUncheckedCreateNestedManyWithoutAppInput
     leaderboards?: LeaderboardUncheckedCreateNestedManyWithoutAppInput
     gameStatuses?: GameStatusUncheckedCreateNestedManyWithoutAppInput
+    achievementGroups?: AchievementGroupUncheckedCreateNestedManyWithoutAppInput
     notices?: NoticeUncheckedCreateNestedManyWithoutAppInput
     liveEvents?: LiveEventUncheckedCreateNestedManyWithoutAppInput
   }
@@ -93212,6 +93448,7 @@ export namespace Prisma {
     products?: ProductUpdateManyWithoutAppNestedInput
     leaderboards?: LeaderboardUpdateManyWithoutAppNestedInput
     gameStatuses?: GameStatusUpdateManyWithoutAppNestedInput
+    achievementGroups?: AchievementGroupUpdateManyWithoutAppNestedInput
     notices?: NoticeUpdateManyWithoutAppNestedInput
     liveEvents?: LiveEventUpdateManyWithoutAppNestedInput
   }
@@ -93226,6 +93463,7 @@ export namespace Prisma {
     products?: ProductUncheckedUpdateManyWithoutAppNestedInput
     leaderboards?: LeaderboardUncheckedUpdateManyWithoutAppNestedInput
     gameStatuses?: GameStatusUncheckedUpdateManyWithoutAppNestedInput
+    achievementGroups?: AchievementGroupUncheckedUpdateManyWithoutAppNestedInput
     notices?: NoticeUncheckedUpdateManyWithoutAppNestedInput
     liveEvents?: LiveEventUncheckedUpdateManyWithoutAppNestedInput
   }
@@ -94552,6 +94790,7 @@ export namespace Prisma {
     builds?: BuildCreateNestedManyWithoutAppInput
     leaderboards?: LeaderboardCreateNestedManyWithoutAppInput
     gameStatuses?: GameStatusCreateNestedManyWithoutAppInput
+    achievementGroups?: AchievementGroupCreateNestedManyWithoutAppInput
     notices?: NoticeCreateNestedManyWithoutAppInput
     liveEvents?: LiveEventCreateNestedManyWithoutAppInput
   }
@@ -94566,6 +94805,7 @@ export namespace Prisma {
     builds?: BuildUncheckedCreateNestedManyWithoutAppInput
     leaderboards?: LeaderboardUncheckedCreateNestedManyWithoutAppInput
     gameStatuses?: GameStatusUncheckedCreateNestedManyWithoutAppInput
+    achievementGroups?: AchievementGroupUncheckedCreateNestedManyWithoutAppInput
     notices?: NoticeUncheckedCreateNestedManyWithoutAppInput
     liveEvents?: LiveEventUncheckedCreateNestedManyWithoutAppInput
   }
@@ -94703,6 +94943,7 @@ export namespace Prisma {
     builds?: BuildUpdateManyWithoutAppNestedInput
     leaderboards?: LeaderboardUpdateManyWithoutAppNestedInput
     gameStatuses?: GameStatusUpdateManyWithoutAppNestedInput
+    achievementGroups?: AchievementGroupUpdateManyWithoutAppNestedInput
     notices?: NoticeUpdateManyWithoutAppNestedInput
     liveEvents?: LiveEventUpdateManyWithoutAppNestedInput
   }
@@ -94717,6 +94958,7 @@ export namespace Prisma {
     builds?: BuildUncheckedUpdateManyWithoutAppNestedInput
     leaderboards?: LeaderboardUncheckedUpdateManyWithoutAppNestedInput
     gameStatuses?: GameStatusUncheckedUpdateManyWithoutAppNestedInput
+    achievementGroups?: AchievementGroupUncheckedUpdateManyWithoutAppNestedInput
     notices?: NoticeUncheckedUpdateManyWithoutAppNestedInput
     liveEvents?: LiveEventUncheckedUpdateManyWithoutAppNestedInput
   }
@@ -96241,6 +96483,7 @@ export namespace Prisma {
     products?: ProductCreateNestedManyWithoutAppInput
     leaderboards?: LeaderboardCreateNestedManyWithoutAppInput
     gameStatuses?: GameStatusCreateNestedManyWithoutAppInput
+    achievementGroups?: AchievementGroupCreateNestedManyWithoutAppInput
     notices?: NoticeCreateNestedManyWithoutAppInput
     liveEvents?: LiveEventCreateNestedManyWithoutAppInput
   }
@@ -96255,6 +96498,7 @@ export namespace Prisma {
     products?: ProductUncheckedCreateNestedManyWithoutAppInput
     leaderboards?: LeaderboardUncheckedCreateNestedManyWithoutAppInput
     gameStatuses?: GameStatusUncheckedCreateNestedManyWithoutAppInput
+    achievementGroups?: AchievementGroupUncheckedCreateNestedManyWithoutAppInput
     notices?: NoticeUncheckedCreateNestedManyWithoutAppInput
     liveEvents?: LiveEventUncheckedCreateNestedManyWithoutAppInput
   }
@@ -96285,6 +96529,7 @@ export namespace Prisma {
     products?: ProductUpdateManyWithoutAppNestedInput
     leaderboards?: LeaderboardUpdateManyWithoutAppNestedInput
     gameStatuses?: GameStatusUpdateManyWithoutAppNestedInput
+    achievementGroups?: AchievementGroupUpdateManyWithoutAppNestedInput
     notices?: NoticeUpdateManyWithoutAppNestedInput
     liveEvents?: LiveEventUpdateManyWithoutAppNestedInput
   }
@@ -96299,6 +96544,7 @@ export namespace Prisma {
     products?: ProductUncheckedUpdateManyWithoutAppNestedInput
     leaderboards?: LeaderboardUncheckedUpdateManyWithoutAppNestedInput
     gameStatuses?: GameStatusUncheckedUpdateManyWithoutAppNestedInput
+    achievementGroups?: AchievementGroupUncheckedUpdateManyWithoutAppNestedInput
     notices?: NoticeUncheckedUpdateManyWithoutAppNestedInput
     liveEvents?: LiveEventUncheckedUpdateManyWithoutAppNestedInput
   }
@@ -96909,6 +97155,7 @@ export namespace Prisma {
     builds?: BuildCreateNestedManyWithoutAppInput
     products?: ProductCreateNestedManyWithoutAppInput
     gameStatuses?: GameStatusCreateNestedManyWithoutAppInput
+    achievementGroups?: AchievementGroupCreateNestedManyWithoutAppInput
     notices?: NoticeCreateNestedManyWithoutAppInput
     liveEvents?: LiveEventCreateNestedManyWithoutAppInput
   }
@@ -96923,6 +97170,7 @@ export namespace Prisma {
     builds?: BuildUncheckedCreateNestedManyWithoutAppInput
     products?: ProductUncheckedCreateNestedManyWithoutAppInput
     gameStatuses?: GameStatusUncheckedCreateNestedManyWithoutAppInput
+    achievementGroups?: AchievementGroupUncheckedCreateNestedManyWithoutAppInput
     notices?: NoticeUncheckedCreateNestedManyWithoutAppInput
     liveEvents?: LiveEventUncheckedCreateNestedManyWithoutAppInput
   }
@@ -96977,6 +97225,7 @@ export namespace Prisma {
     builds?: BuildUpdateManyWithoutAppNestedInput
     products?: ProductUpdateManyWithoutAppNestedInput
     gameStatuses?: GameStatusUpdateManyWithoutAppNestedInput
+    achievementGroups?: AchievementGroupUpdateManyWithoutAppNestedInput
     notices?: NoticeUpdateManyWithoutAppNestedInput
     liveEvents?: LiveEventUpdateManyWithoutAppNestedInput
   }
@@ -96991,6 +97240,7 @@ export namespace Prisma {
     builds?: BuildUncheckedUpdateManyWithoutAppNestedInput
     products?: ProductUncheckedUpdateManyWithoutAppNestedInput
     gameStatuses?: GameStatusUncheckedUpdateManyWithoutAppNestedInput
+    achievementGroups?: AchievementGroupUncheckedUpdateManyWithoutAppNestedInput
     notices?: NoticeUncheckedUpdateManyWithoutAppNestedInput
     liveEvents?: LiveEventUncheckedUpdateManyWithoutAppNestedInput
   }
@@ -97235,6 +97485,41 @@ export namespace Prisma {
     rollbackRequests?: RollbackRequestUncheckedUpdateManyWithoutByNestedInput
   }
 
+  export type AppCreateWithoutAchievementGroupsInput = {
+    id?: string
+    name: string
+    status?: $Enums.AppStatus
+    releaseDate?: Date | string | null
+    ownerOrg: OrgCreateNestedOneWithoutAppsInput
+    accountApps?: AccountAppCreateNestedManyWithoutAppInput
+    builds?: BuildCreateNestedManyWithoutAppInput
+    products?: ProductCreateNestedManyWithoutAppInput
+    leaderboards?: LeaderboardCreateNestedManyWithoutAppInput
+    gameStatuses?: GameStatusCreateNestedManyWithoutAppInput
+    notices?: NoticeCreateNestedManyWithoutAppInput
+    liveEvents?: LiveEventCreateNestedManyWithoutAppInput
+  }
+
+  export type AppUncheckedCreateWithoutAchievementGroupsInput = {
+    id?: string
+    name: string
+    status?: $Enums.AppStatus
+    releaseDate?: Date | string | null
+    ownerOrgId: string
+    accountApps?: AccountAppUncheckedCreateNestedManyWithoutAppInput
+    builds?: BuildUncheckedCreateNestedManyWithoutAppInput
+    products?: ProductUncheckedCreateNestedManyWithoutAppInput
+    leaderboards?: LeaderboardUncheckedCreateNestedManyWithoutAppInput
+    gameStatuses?: GameStatusUncheckedCreateNestedManyWithoutAppInput
+    notices?: NoticeUncheckedCreateNestedManyWithoutAppInput
+    liveEvents?: LiveEventUncheckedCreateNestedManyWithoutAppInput
+  }
+
+  export type AppCreateOrConnectWithoutAchievementGroupsInput = {
+    where: AppWhereUniqueInput
+    create: XOR<AppCreateWithoutAchievementGroupsInput, AppUncheckedCreateWithoutAchievementGroupsInput>
+  }
+
   export type AchievementCreateWithoutGroupInput = {
     id?: string
     name: string
@@ -97255,6 +97540,47 @@ export namespace Prisma {
   export type AchievementCreateManyGroupInputEnvelope = {
     data: AchievementCreateManyGroupInput | AchievementCreateManyGroupInput[]
     skipDuplicates?: boolean
+  }
+
+  export type AppUpsertWithoutAchievementGroupsInput = {
+    update: XOR<AppUpdateWithoutAchievementGroupsInput, AppUncheckedUpdateWithoutAchievementGroupsInput>
+    create: XOR<AppCreateWithoutAchievementGroupsInput, AppUncheckedCreateWithoutAchievementGroupsInput>
+    where?: AppWhereInput
+  }
+
+  export type AppUpdateToOneWithWhereWithoutAchievementGroupsInput = {
+    where?: AppWhereInput
+    data: XOR<AppUpdateWithoutAchievementGroupsInput, AppUncheckedUpdateWithoutAchievementGroupsInput>
+  }
+
+  export type AppUpdateWithoutAchievementGroupsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    status?: EnumAppStatusFieldUpdateOperationsInput | $Enums.AppStatus
+    releaseDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    ownerOrg?: OrgUpdateOneRequiredWithoutAppsNestedInput
+    accountApps?: AccountAppUpdateManyWithoutAppNestedInput
+    builds?: BuildUpdateManyWithoutAppNestedInput
+    products?: ProductUpdateManyWithoutAppNestedInput
+    leaderboards?: LeaderboardUpdateManyWithoutAppNestedInput
+    gameStatuses?: GameStatusUpdateManyWithoutAppNestedInput
+    notices?: NoticeUpdateManyWithoutAppNestedInput
+    liveEvents?: LiveEventUpdateManyWithoutAppNestedInput
+  }
+
+  export type AppUncheckedUpdateWithoutAchievementGroupsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    status?: EnumAppStatusFieldUpdateOperationsInput | $Enums.AppStatus
+    releaseDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    ownerOrgId?: StringFieldUpdateOperationsInput | string
+    accountApps?: AccountAppUncheckedUpdateManyWithoutAppNestedInput
+    builds?: BuildUncheckedUpdateManyWithoutAppNestedInput
+    products?: ProductUncheckedUpdateManyWithoutAppNestedInput
+    leaderboards?: LeaderboardUncheckedUpdateManyWithoutAppNestedInput
+    gameStatuses?: GameStatusUncheckedUpdateManyWithoutAppNestedInput
+    notices?: NoticeUncheckedUpdateManyWithoutAppNestedInput
+    liveEvents?: LiveEventUncheckedUpdateManyWithoutAppNestedInput
   }
 
   export type AchievementUpsertWithWhereUniqueWithoutGroupInput = {
@@ -97285,11 +97611,13 @@ export namespace Prisma {
   export type AchievementGroupCreateWithoutAchievementsInput = {
     id?: string
     name: string
+    app?: AppCreateNestedOneWithoutAchievementGroupsInput
   }
 
   export type AchievementGroupUncheckedCreateWithoutAchievementsInput = {
     id?: string
     name: string
+    appId?: string | null
   }
 
   export type AchievementGroupCreateOrConnectWithoutAchievementsInput = {
@@ -97331,11 +97659,13 @@ export namespace Prisma {
   export type AchievementGroupUpdateWithoutAchievementsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    app?: AppUpdateOneWithoutAchievementGroupsNestedInput
   }
 
   export type AchievementGroupUncheckedUpdateWithoutAchievementsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    appId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type AchievementUnlockUpsertWithWhereUniqueWithoutAchievementInput = {
@@ -97665,6 +97995,7 @@ export namespace Prisma {
     builds?: BuildCreateNestedManyWithoutAppInput
     products?: ProductCreateNestedManyWithoutAppInput
     leaderboards?: LeaderboardCreateNestedManyWithoutAppInput
+    achievementGroups?: AchievementGroupCreateNestedManyWithoutAppInput
     notices?: NoticeCreateNestedManyWithoutAppInput
     liveEvents?: LiveEventCreateNestedManyWithoutAppInput
   }
@@ -97679,6 +98010,7 @@ export namespace Prisma {
     builds?: BuildUncheckedCreateNestedManyWithoutAppInput
     products?: ProductUncheckedCreateNestedManyWithoutAppInput
     leaderboards?: LeaderboardUncheckedCreateNestedManyWithoutAppInput
+    achievementGroups?: AchievementGroupUncheckedCreateNestedManyWithoutAppInput
     notices?: NoticeUncheckedCreateNestedManyWithoutAppInput
     liveEvents?: LiveEventUncheckedCreateNestedManyWithoutAppInput
   }
@@ -97800,6 +98132,7 @@ export namespace Prisma {
     builds?: BuildUpdateManyWithoutAppNestedInput
     products?: ProductUpdateManyWithoutAppNestedInput
     leaderboards?: LeaderboardUpdateManyWithoutAppNestedInput
+    achievementGroups?: AchievementGroupUpdateManyWithoutAppNestedInput
     notices?: NoticeUpdateManyWithoutAppNestedInput
     liveEvents?: LiveEventUpdateManyWithoutAppNestedInput
   }
@@ -97814,6 +98147,7 @@ export namespace Prisma {
     builds?: BuildUncheckedUpdateManyWithoutAppNestedInput
     products?: ProductUncheckedUpdateManyWithoutAppNestedInput
     leaderboards?: LeaderboardUncheckedUpdateManyWithoutAppNestedInput
+    achievementGroups?: AchievementGroupUncheckedUpdateManyWithoutAppNestedInput
     notices?: NoticeUncheckedUpdateManyWithoutAppNestedInput
     liveEvents?: LiveEventUncheckedUpdateManyWithoutAppNestedInput
   }
@@ -98185,6 +98519,7 @@ export namespace Prisma {
     products?: ProductCreateNestedManyWithoutAppInput
     leaderboards?: LeaderboardCreateNestedManyWithoutAppInput
     gameStatuses?: GameStatusCreateNestedManyWithoutAppInput
+    achievementGroups?: AchievementGroupCreateNestedManyWithoutAppInput
     liveEvents?: LiveEventCreateNestedManyWithoutAppInput
   }
 
@@ -98199,6 +98534,7 @@ export namespace Prisma {
     products?: ProductUncheckedCreateNestedManyWithoutAppInput
     leaderboards?: LeaderboardUncheckedCreateNestedManyWithoutAppInput
     gameStatuses?: GameStatusUncheckedCreateNestedManyWithoutAppInput
+    achievementGroups?: AchievementGroupUncheckedCreateNestedManyWithoutAppInput
     liveEvents?: LiveEventUncheckedCreateNestedManyWithoutAppInput
   }
 
@@ -98229,6 +98565,7 @@ export namespace Prisma {
     products?: ProductUpdateManyWithoutAppNestedInput
     leaderboards?: LeaderboardUpdateManyWithoutAppNestedInput
     gameStatuses?: GameStatusUpdateManyWithoutAppNestedInput
+    achievementGroups?: AchievementGroupUpdateManyWithoutAppNestedInput
     liveEvents?: LiveEventUpdateManyWithoutAppNestedInput
   }
 
@@ -98243,6 +98580,7 @@ export namespace Prisma {
     products?: ProductUncheckedUpdateManyWithoutAppNestedInput
     leaderboards?: LeaderboardUncheckedUpdateManyWithoutAppNestedInput
     gameStatuses?: GameStatusUncheckedUpdateManyWithoutAppNestedInput
+    achievementGroups?: AchievementGroupUncheckedUpdateManyWithoutAppNestedInput
     liveEvents?: LiveEventUncheckedUpdateManyWithoutAppNestedInput
   }
 
@@ -98257,6 +98595,7 @@ export namespace Prisma {
     products?: ProductCreateNestedManyWithoutAppInput
     leaderboards?: LeaderboardCreateNestedManyWithoutAppInput
     gameStatuses?: GameStatusCreateNestedManyWithoutAppInput
+    achievementGroups?: AchievementGroupCreateNestedManyWithoutAppInput
     notices?: NoticeCreateNestedManyWithoutAppInput
   }
 
@@ -98271,6 +98610,7 @@ export namespace Prisma {
     products?: ProductUncheckedCreateNestedManyWithoutAppInput
     leaderboards?: LeaderboardUncheckedCreateNestedManyWithoutAppInput
     gameStatuses?: GameStatusUncheckedCreateNestedManyWithoutAppInput
+    achievementGroups?: AchievementGroupUncheckedCreateNestedManyWithoutAppInput
     notices?: NoticeUncheckedCreateNestedManyWithoutAppInput
   }
 
@@ -98301,6 +98641,7 @@ export namespace Prisma {
     products?: ProductUpdateManyWithoutAppNestedInput
     leaderboards?: LeaderboardUpdateManyWithoutAppNestedInput
     gameStatuses?: GameStatusUpdateManyWithoutAppNestedInput
+    achievementGroups?: AchievementGroupUpdateManyWithoutAppNestedInput
     notices?: NoticeUpdateManyWithoutAppNestedInput
   }
 
@@ -98315,6 +98656,7 @@ export namespace Prisma {
     products?: ProductUncheckedUpdateManyWithoutAppNestedInput
     leaderboards?: LeaderboardUncheckedUpdateManyWithoutAppNestedInput
     gameStatuses?: GameStatusUncheckedUpdateManyWithoutAppNestedInput
+    achievementGroups?: AchievementGroupUncheckedUpdateManyWithoutAppNestedInput
     notices?: NoticeUncheckedUpdateManyWithoutAppNestedInput
   }
 
@@ -101694,6 +102036,7 @@ export namespace Prisma {
     products?: ProductUpdateManyWithoutAppNestedInput
     leaderboards?: LeaderboardUpdateManyWithoutAppNestedInput
     gameStatuses?: GameStatusUpdateManyWithoutAppNestedInput
+    achievementGroups?: AchievementGroupUpdateManyWithoutAppNestedInput
     notices?: NoticeUpdateManyWithoutAppNestedInput
     liveEvents?: LiveEventUpdateManyWithoutAppNestedInput
   }
@@ -101708,6 +102051,7 @@ export namespace Prisma {
     products?: ProductUncheckedUpdateManyWithoutAppNestedInput
     leaderboards?: LeaderboardUncheckedUpdateManyWithoutAppNestedInput
     gameStatuses?: GameStatusUncheckedUpdateManyWithoutAppNestedInput
+    achievementGroups?: AchievementGroupUncheckedUpdateManyWithoutAppNestedInput
     notices?: NoticeUncheckedUpdateManyWithoutAppNestedInput
     liveEvents?: LiveEventUncheckedUpdateManyWithoutAppNestedInput
   }
@@ -101853,6 +102197,11 @@ export namespace Prisma {
     data: JsonNullValueInput | InputJsonValue
   }
 
+  export type AchievementGroupCreateManyAppInput = {
+    id?: string
+    name: string
+  }
+
   export type NoticeCreateManyAppInput = {
     id?: string
     content: string
@@ -101975,6 +102324,23 @@ export namespace Prisma {
     accountId?: StringFieldUpdateOperationsInput | string
     gameType?: EnumGameTypeFieldUpdateOperationsInput | $Enums.GameType
     data?: JsonNullValueInput | InputJsonValue
+  }
+
+  export type AchievementGroupUpdateWithoutAppInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    achievements?: AchievementUpdateManyWithoutGroupNestedInput
+  }
+
+  export type AchievementGroupUncheckedUpdateWithoutAppInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    achievements?: AchievementUncheckedUpdateManyWithoutGroupNestedInput
+  }
+
+  export type AchievementGroupUncheckedUpdateManyWithoutAppInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
   }
 
   export type NoticeUpdateWithoutAppInput = {

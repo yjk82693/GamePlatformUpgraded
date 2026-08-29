@@ -244,8 +244,9 @@ model App {
   products Product[]
 
   // Cluster 3
-  leaderboards Leaderboard[]
-  gameStatuses GameStatus[]
+  leaderboards      Leaderboard[]
+  gameStatuses      GameStatus[]
+  achievementGroups AchievementGroup[]
 
   // Cluster 4
   notices    Notice[]
@@ -542,6 +543,8 @@ model Score {
 model AchievementGroup {
   id           String        @id @default(cuid())
   name         String
+  appId        String?
+  app          App?          @relation(fields: [appId], references: [id])
   achievements Achievement[]
 }
 

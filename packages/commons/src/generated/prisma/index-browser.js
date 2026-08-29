@@ -372,7 +372,8 @@ exports.Prisma.ScoreScalarFieldEnum = {
 
 exports.Prisma.AchievementGroupScalarFieldEnum = {
   id: 'id',
-  name: 'name'
+  name: 'name',
+  appId: 'appId'
 };
 
 exports.Prisma.AchievementScalarFieldEnum = {
