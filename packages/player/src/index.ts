@@ -5,3 +5,4 @@ export * from "./profile.js";
 export * from "./ranking.js";
 export * from "./social.js";
 export * from "./support.js";
+export * from "./showcase.js";

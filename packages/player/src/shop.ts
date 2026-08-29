@@ -11,6 +11,7 @@ export async function browseShop(filter?: { categoryId?: string; appId?: string 
       ...(filter?.categoryId ? { categoryId: filter.categoryId } : {}),
       ...(filter?.appId ? { appId: filter.appId } : {}),
     },
+    include: { app: true },
   });
 }
 
