@@ -11,6 +11,7 @@ import profileRoutes from "./routes/profile.js";
 import rankingRoutes from "./routes/ranking.js";
 import socialRoutes from "./routes/social.js";
 import supportRoutes from "./routes/support.js";
+import showcaseRoutes from "./routes/showcase.js";
 
 import catalogRoutes from "./routes/catalog.js";
 import distMembersRoutes from "./routes/members.js";
@@ -72,6 +73,7 @@ app.use("/player/profile", profileRoutes);
 app.use("/player/ranking", rankingRoutes);
 app.use("/player/social", socialRoutes);
 app.use("/player/tickets", supportRoutes);
+app.use("/player/showcase", showcaseRoutes);
 
 app.use("/distributor/catalog", catalogRoutes);
 app.use("/distributor/members", distMembersRoutes);
