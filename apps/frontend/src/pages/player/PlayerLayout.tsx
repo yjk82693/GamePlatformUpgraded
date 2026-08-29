@@ -5,7 +5,7 @@ const links = [
   { to: '/player/wallet', label: 'Wallet' },
   { to: '/player/profile', label: 'Profile' },
   { to: '/player/social', label: 'Friends' },
-  { to: '/player/rankings', label: 'Rankings' },
+  { to: '/player/rankings', label: 'Achievements' },
   { to: '/player/tickets', label: 'Support' },
 ]
 
