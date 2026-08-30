@@ -2,6 +2,8 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { apiFetch } from '../lib/api'
 import { useAuth } from '../context/AuthContext'
+import { tokens } from '../theme/tokens'
+import { Card, Button } from '../components/ui'
 
 export default function LoginPage() {
   const [mode, setMode] = useState<'login' | 'register'>('login')
@@ -35,22 +37,60 @@ export default function LoginPage() {
     }
   }
 
+  const inputStyle: React.CSSProperties = {
+    background: tokens.color.surfaceAlt,
+    border: `1px solid ${tokens.color.border}`,
+    borderRadius: tokens.radius.sm,
+    padding: '10px 12px',
+    color: tokens.color.text,
+    fontSize: 14,
+    fontFamily: tokens.font.body,
+  }
+
   return (
-    <div style={{ maxWidth: 360, margin: '80px auto', fontFamily: 'sans-serif' }}>
-      <h1>{mode === 'login' ? 'Log in' : 'Register'}</h1>
-      <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-        <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
-        <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required />
-        <button type="submit">{mode === 'login' ? 'Log in' : 'Register'}</button>
-      </form>
-      <button
-        type="button"
-        onClick={() => setMode(mode === 'login' ? 'register' : 'login')}
-        style={{ marginTop: 12, background: 'none', border: 'none', color: 'blue', cursor: 'pointer' }}
-      >
-        {mode === 'login' ? 'Need an account? Register' : 'Have an account? Log in'}
-      </button>
-      {message && <p style={{ marginTop: 16 }}>{message}</p>}
+    <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <Card style={{ width: 360 }}>
+        <h1 style={{ fontFamily: tokens.font.display, fontSize: 18, marginBottom: 24 }}>
+          {mode === 'login' ? 'Log in' : 'Register'}
+        </h1>
+        <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+          <input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            style={inputStyle}
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+            style={inputStyle}
+          />
+          <Button type="submit" variant="primary">
+            {mode === 'login' ? 'Log in' : 'Register'}
+          </Button>
+        </form>
+        <button
+          type="button"
+          onClick={() => setMode(mode === 'login' ? 'register' : 'login')}
+          style={{
+            marginTop: 16,
+            background: 'none',
+            border: 'none',
+            color: tokens.color.accentSoft,
+            cursor: 'pointer',
+            fontSize: 13,
+            padding: 0,
+          }}
+        >
+          {mode === 'login' ? 'Need an account? Register' : 'Have an account? Log in'}
+        </button>
+        {message && <p style={{ marginTop: 16, color: tokens.color.textMuted, fontSize: 13 }}>{message}</p>}
+      </Card>
     </div>
   )
 }

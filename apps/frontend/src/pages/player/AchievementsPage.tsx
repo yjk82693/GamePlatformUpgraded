@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
 import { apiFetch } from '../../lib/api'
+import { Card, StatCard, ProgressBar, Pill, Button } from '../../components/ui'
+import { tokens, gameAccent } from '../../theme/tokens'
 
 interface Game {
   id: string
@@ -49,11 +51,6 @@ interface SkinEntry {
 }
 
 interface Summary {
-  daysActive?: number
-  achievements?: number
-  charactersUnlocked?: number
-  maxComboStreak?: number
-  bestClearMode?: string
   [key: string]: unknown
 }
 
@@ -64,14 +61,12 @@ export default function AchievementsPage() {
   const [error, setError] = useState<string | null>(null)
   const [loading, setLoading] = useState(true)
 
-  // MULTI state
   const [boards, setBoards] = useState<Board[]>([])
   const [selectedBoard, setSelectedBoard] = useState<string | null>(null)
   const [rankings, setRankings] = useState<RankRow[]>([])
   const [myRank, setMyRank] = useState<number | null>(null)
   const [myAccountId, setMyAccountId] = useState<string | null>(null)
 
-  // SOLO state
   const [summary, setSummary] = useState<Summary | null>(null)
   const [groups, setGroups] = useState<GroupProgress[]>([])
   const [groupDetail, setGroupDetail] = useState<GroupDetail | null>(null)
@@ -79,6 +74,8 @@ export default function AchievementsPage() {
   const [selectedCharacter, setSelectedCharacter] = useState<Character | null>(null)
   const [worlds, setWorlds] = useState<WorldEntry[]>([])
   const [skins, setSkins] = useState<SkinEntry[]>([])
+
+  const currentAccent = selectedGame ? gameAccent(games.find((g) => g.id === selectedGame)?.name ?? '') : tokens.color.accent
 
   useEffect(() => {
     loadGames()
@@ -169,147 +166,178 @@ export default function AchievementsPage() {
     }
   }
 
-  if (loading) return <p>Loading games...</p>
-  if (error) return <p style={{ color: 'red' }}>{error}</p>
+  if (loading) return <p style={{ padding: 24, color: tokens.color.textMuted }}>Loading games...</p>
+  if (error) return <p style={{ padding: 24, color: tokens.color.danger }}>{error}</p>
 
   return (
-    <div>
-      <h2>Achievements & Rankings</h2>
+    <div style={{ padding: 24 }}>
+      <h1 style={{ fontFamily: tokens.font.display, fontSize: 20, marginBottom: 24 }}>Achievements & Rankings</h1>
 
-      <div style={{ display: 'flex', gap: 8, marginBottom: 24, flexWrap: 'wrap' }}>
-        {games.map((g) => (
-          <button
-            key={g.id}
-            onClick={() => selectGame(g.id)}
-            style={{ fontWeight: selectedGame === g.id ? 'bold' : 'normal' }}
-          >
-            {g.name}
-          </button>
-        ))}
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 18, marginBottom: 32 }}>
+        {games.map((g) => {
+          const accent = gameAccent(g.name)
+          const active = selectedGame === g.id
+          return (
+            <Card
+              key={g.id}
+              onClick={() => selectGame(g.id)}
+              style={{
+                position: 'relative',
+                textAlign: 'left',
+                padding: '32px 28px',
+                minHeight: 140,
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+                background: active ? accent : tokens.color.surface,
+                border: `2px solid ${accent}`,
+                borderTop: `2px solid ${accent}`,
+                transform: active ? 'translateY(-3px)' : 'none',
+                boxShadow: active ? `0 8px 24px ${accent}55` : tokens.shadow.card,
+              }}
+            >
+              <div
+                style={{
+                  fontFamily: tokens.font.display,
+                  fontSize: 15,
+                  lineHeight: 1.5,
+                  color: active ? '#0C0D12' : tokens.color.text,
+                }}
+              >
+                {g.name}
+              </div>
+              <div
+                style={{
+                  fontSize: 12,
+                  fontWeight: 600,
+                  letterSpacing: 0.5,
+                  marginTop: 16,
+                  color: active ? 'rgba(12,13,18,0.7)' : tokens.color.textMuted,
+                }}
+              >
+                ENTER →
+              </div>
+            </Card>
+          )
+        })}
       </div>
 
       {selectedGame && mode === 'MULTI' && (
         <div>
-          <h3>Rankings</h3>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
+            <div style={{ width: 6, height: 22, background: currentAccent, borderRadius: 2 }} />
+            <h2 style={{ fontSize: 16, margin: 0 }}>Rankings</h2>
+          </div>
+
           {boards.length > 1 && (
-            <div style={{ marginBottom: 12 }}>
+            <div style={{ display: 'flex', gap: 8, marginBottom: 16 }}>
               {boards.map((b) => (
-                <button
+                <Button
                   key={b.id}
+                  variant={selectedBoard === b.id ? 'primary' : 'secondary'}
                   onClick={() => selectBoard(b.id)}
-                  style={{ marginRight: 8, fontWeight: selectedBoard === b.id ? 'bold' : 'normal' }}
                 >
                   {b.name}
-                </button>
+                </Button>
               ))}
             </div>
           )}
+
           {myRank != null && (
-            <div style={{ background: '#eef', padding: 12, borderRadius: 8, marginBottom: 12 }}>
-              Your rank: <strong>#{myRank}</strong>
-            </div>
+            <Card accent={currentAccent} style={{ marginBottom: 16, display: 'inline-block' }}>
+              Your rank: <strong style={{ color: tokens.color.gold }}>#{myRank}</strong>
+            </Card>
           )}
-          {rankings.length === 0 && <p>No scores submitted yet.</p>}
-          <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-            <thead>
-              <tr style={{ textAlign: 'left', borderBottom: '2px solid #ddd' }}>
-                <th style={{ padding: 8 }}>#</th>
-                <th style={{ padding: 8 }}>Player</th>
-                <th style={{ padding: 8 }}>Score</th>
-              </tr>
-            </thead>
-            <tbody>
-              {rankings.map((r) => (
-                <tr
-                  key={r.accountId}
-                  style={{
-                    borderBottom: '1px solid #eee',
-                    background: r.accountId === myAccountId ? '#ffe' : 'transparent',
-                    fontWeight: r.accountId === myAccountId ? 'bold' : 'normal',
-                  }}
-                >
-                  <td style={{ padding: 8 }}>{r.rank}</td>
-                  <td style={{ padding: 8 }}>{r.displayName}</td>
-                  <td style={{ padding: 8 }}>{r.value}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+
+          {rankings.length === 0 && <p style={{ color: tokens.color.textMuted }}>No scores submitted yet.</p>}
+
+          {rankings.length > 0 && (
+            <Card style={{ padding: 0, overflow: 'hidden' }}>
+              <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+                <thead>
+                  <tr style={{ textAlign: 'left', borderBottom: `1px solid ${tokens.color.border}` }}>
+                    <th style={{ padding: 12, color: tokens.color.textMuted, fontSize: 12 }}>#</th>
+                    <th style={{ padding: 12, color: tokens.color.textMuted, fontSize: 12 }}>Player</th>
+                    <th style={{ padding: 12, color: tokens.color.textMuted, fontSize: 12 }}>Score</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {rankings.map((r) => (
+                    <tr
+                      key={r.accountId}
+                      style={{
+                        borderBottom: `1px solid ${tokens.color.border}`,
+                        background: r.accountId === myAccountId ? 'rgba(108,92,231,0.15)' : 'transparent',
+                        fontWeight: r.accountId === myAccountId ? 700 : 400,
+                      }}
+                    >
+                      <td style={{ padding: 12 }}>{r.rank}</td>
+                      <td style={{ padding: 12 }}>{r.displayName}</td>
+                      <td style={{ padding: 12, fontFamily: tokens.font.mono }}>{r.value}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </Card>
+          )}
         </div>
       )}
 
       {selectedGame && mode === 'SOLO' && (
         <div>
           {summary && (
-            <div style={{ display: 'flex', gap: 16, marginBottom: 24, flexWrap: 'wrap' }}>
+            <div style={{ display: 'flex', gap: 12, marginBottom: 32, flexWrap: 'wrap' }}>
               {Object.entries(summary).map(([key, value]) => (
-                <div key={key} style={{ border: '1px solid #ddd', borderRadius: 8, padding: 12, minWidth: 120 }}>
-                  <div style={{ fontSize: 20, fontWeight: 'bold' }}>{String(value)}</div>
-                  <div style={{ color: '#888', fontSize: 12 }}>{key}</div>
-                </div>
+                <StatCard key={key} label={key} value={String(value)} />
               ))}
             </div>
           )}
 
-          <h3>Achievements</h3>
-          {groups.length === 0 && <p>No achievements for this game yet.</p>}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
+            <div style={{ width: 6, height: 22, background: currentAccent, borderRadius: 2 }} />
+            <h2 style={{ fontSize: 16, margin: 0 }}>Achievements</h2>
+          </div>
+
+          {groups.length === 0 && <p style={{ color: tokens.color.textMuted }}>No achievements for this game yet.</p>}
+
           {groups.map((g) => (
-            <div
-              key={g.id}
-              onClick={() => openGroup(g.id)}
-              style={{ border: '1px solid #ddd', borderRadius: 8, padding: 12, marginBottom: 8, cursor: 'pointer' }}
-            >
-              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+            <Card key={g.id} accent={currentAccent} style={{ marginBottom: 10, cursor: 'pointer' }} onClick={() => openGroup(g.id)}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 8 }}>
                 <strong>{g.name}</strong>
-                <span>{g.obtained}/{g.total}</span>
+                <span style={{ fontFamily: tokens.font.mono, color: tokens.color.textMuted }}>
+                  {g.obtained}/{g.total}
+                </span>
               </div>
-              <div style={{ background: '#eee', borderRadius: 4, height: 8, marginTop: 6 }}>
-                <div
-                  style={{
-                    width: `${g.total ? (g.obtained / g.total) * 100 : 0}%`,
-                    background: '#4a90d9',
-                    height: 8,
-                    borderRadius: 4,
-                  }}
-                />
-              </div>
-            </div>
+              <ProgressBar current={g.obtained} total={g.total} color={currentAccent} />
+            </Card>
           ))}
 
           {groupDetail && (
-            <div style={{ border: '1px solid #ccc', borderRadius: 8, padding: 16, marginTop: 16 }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <h4>{groupDetail.name}</h4>
-                <button onClick={() => setGroupDetail(null)}>Close</button>
+            <Card style={{ marginTop: 8 }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 12 }}>
+                <h3 style={{ margin: 0, fontSize: 15 }}>{groupDetail.name}</h3>
+                <Button variant="ghost" onClick={() => setGroupDetail(null)}>Close</Button>
               </div>
-              <ul>
-                {groupDetail.achievements.map((a) => (
-                  <li key={a.id} style={{ color: a.unlocked ? 'inherit' : '#aaa' }}>
-                    {a.unlocked ? '✓' : '○'} {a.name}
-                  </li>
-                ))}
-              </ul>
-            </div>
+              {groupDetail.achievements.map((a) => (
+                <div key={a.id} style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6 }}>
+                  <Pill tone={a.unlocked ? 'success' : 'locked'}>{a.unlocked ? '✓' : '○'}</Pill>
+                  <span style={{ color: a.unlocked ? tokens.color.text : tokens.color.textMuted }}>{a.name}</span>
+                </div>
+              ))}
+            </Card>
           )}
 
           {worlds.length > 0 && (
             <div style={{ marginTop: 32 }}>
-              <h3>Worlds Cleared</h3>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
+                <div style={{ width: 6, height: 22, background: currentAccent, borderRadius: 2 }} />
+                <h2 style={{ fontSize: 16, margin: 0 }}>Worlds Cleared</h2>
+              </div>
               <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
                 {worlds.map((w) => (
-                  <div
-                    key={w.name}
-                    style={{
-                      border: '1px solid #ddd',
-                      borderRadius: 8,
-                      padding: '8px 12px',
-                      background:
-                        w.status === 'cleared' ? '#e6f4e6' : w.status === 'in-progress' ? '#fff8e0' : '#f0f0f0',
-                      color: w.status === 'locked' ? '#999' : 'inherit',
-                    }}
-                  >
+                  <Pill key={w.name} tone={w.status === 'cleared' ? 'success' : w.status === 'in-progress' ? 'warning' : 'locked'}>
                     {w.name} {w.status === 'cleared' ? '✓' : w.status === 'in-progress' ? '…' : '🔒'}
-                  </div>
+                  </Pill>
                 ))}
               </div>
             </div>
@@ -317,20 +345,15 @@ export default function AchievementsPage() {
 
           {skins.length > 0 && (
             <div style={{ marginTop: 32 }}>
-              <h3>Skins Unlocked</h3>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
+                <div style={{ width: 6, height: 22, background: currentAccent, borderRadius: 2 }} />
+                <h2 style={{ fontSize: 16, margin: 0 }}>Skins Unlocked</h2>
+              </div>
               <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
                 {skins.map((s) => (
-                  <div
-                    key={s.name}
-                    style={{
-                      border: '1px solid #ddd',
-                      borderRadius: 8,
-                      padding: '8px 12px',
-                      opacity: s.unlocked ? 1 : 0.4,
-                    }}
-                  >
+                  <Pill key={s.name} tone={s.unlocked ? 'success' : 'locked'}>
                     {s.name} {s.unlocked ? '✓' : '🔒'}
-                  </div>
+                  </Pill>
                 ))}
               </div>
             </div>
@@ -338,35 +361,38 @@ export default function AchievementsPage() {
 
           {characters.length > 0 && (
             <div style={{ marginTop: 32 }}>
-              <h3>Characters</h3>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
+                <div style={{ width: 6, height: 22, background: currentAccent, borderRadius: 2 }} />
+                <h2 style={{ fontSize: 16, margin: 0 }}>Characters</h2>
+              </div>
               <div style={{ display: 'flex', gap: 8, marginBottom: 16, flexWrap: 'wrap' }}>
                 {characters.map((c) => (
-                  <button
+                  <Button
                     key={c.name}
+                    variant={selectedCharacter?.name === c.name ? 'primary' : 'secondary'}
                     onClick={() => setSelectedCharacter(c)}
-                    style={{ fontWeight: selectedCharacter?.name === c.name ? 'bold' : 'normal' }}
                   >
                     {c.name}
-                  </button>
+                  </Button>
                 ))}
               </div>
 
               {selectedCharacter && (
-                <div style={{ border: '1px solid #ddd', borderRadius: 8, padding: 16 }}>
-                  <h4>
+                <Card accent={currentAccent}>
+                  <h3 style={{ margin: '0 0 4px' }}>
                     {selectedCharacter.name} — Lv. {selectedCharacter.level}{' '}
-                    <span style={{ color: '#e0a800' }}>{'★'.repeat(selectedCharacter.rarity)}</span>
-                  </h4>
-                  <p>Weapon: {selectedCharacter.weapon}</p>
+                    <span style={{ color: tokens.color.gold }}>{'★'.repeat(selectedCharacter.rarity)}</span>
+                  </h3>
+                  <p style={{ color: tokens.color.textMuted, marginTop: 0 }}>Weapon: {selectedCharacter.weapon}</p>
                   <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, maxWidth: 400 }}>
                     {Object.entries(selectedCharacter.stats).map(([stat, value]) => (
-                      <div key={stat} style={{ display: 'flex', justifyContent: 'space-between' }}>
-                        <span style={{ color: '#888' }}>{stat}</span>
-                        <span>{String(value)}</span>
+                      <div key={stat} style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13 }}>
+                        <span style={{ color: tokens.color.textMuted }}>{stat}</span>
+                        <span style={{ fontFamily: tokens.font.mono }}>{String(value)}</span>
                       </div>
                     ))}
                   </div>
-                </div>
+                </Card>
               )}
             </div>
           )}

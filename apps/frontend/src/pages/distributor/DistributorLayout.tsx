@@ -1,30 +1,34 @@
-import { NavLink, Outlet } from 'react-router-dom'
+import { Outlet, Link, useLocation } from 'react-router-dom'
+import { Layout, Menu } from 'antd'
+import type { MenuProps } from 'antd'
+import { Header } from '../../components/ui'
 
-const links = [
-  { to: '/distributor', label: 'Catalog', end: true },
-  { to: '/distributor/members', label: 'Members & Roles' },
-  { to: '/distributor/appops', label: 'App Operations' },
-  { to: '/distributor/payments', label: 'Payments' },
-  { to: '/distributor/stats', label: 'Statistics' },
-  { to: '/distributor/config', label: 'Leaderboard/Terms/Redeem' },
-  { to: '/distributor/tickets', label: 'Support' },
-  { to: '/distributor/logs', label: 'Logs' },
+const { Sider, Content } = Layout
+
+const items: MenuProps['items'] = [
+  { key: '/distributor', label: <Link to="/distributor">Catalog</Link> },
+  { key: '/distributor/members', label: <Link to="/distributor/members">Members & Roles</Link> },
+  { key: '/distributor/appops', label: <Link to="/distributor/appops">App Operations</Link> },
+  { key: '/distributor/payments', label: <Link to="/distributor/payments">Payments</Link> },
+  { key: '/distributor/stats', label: <Link to="/distributor/stats">Statistics</Link> },
+  { key: '/distributor/config', label: <Link to="/distributor/config">Leaderboard / Terms / Redeem</Link> },
+  { key: '/distributor/tickets', label: <Link to="/distributor/tickets">Support</Link> },
+  { key: '/distributor/logs', label: <Link to="/distributor/logs">Logs</Link> },
 ]
 
 export default function DistributorLayout() {
+  const location = useLocation()
   return (
-    <div style={{ display: 'flex', minHeight: '100vh', fontFamily: 'sans-serif' }}>
-      <nav style={{ width: 220, borderRight: '1px solid #ddd', padding: 16 }}>
-        <h3>Distributor</h3>
-        {links.map((l) => (
-          <NavLink key={l.to} to={l.to} end={l.end} style={{ display: 'block', margin: '8px 0' }}>
-            {l.label}
-          </NavLink>
-        ))}
-      </nav>
-      <main style={{ flex: 1, padding: 24 }}>
-        <Outlet />
-      </main>
+    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+      <Header />
+      <Layout style={{ flex: 1 }}>
+        <Sider width={240} theme="dark">
+          <Menu theme="dark" mode="inline" selectedKeys={[location.pathname]} items={items} />
+        </Sider>
+        <Content style={{ padding: 24 }}>
+          <Outlet />
+        </Content>
+      </Layout>
     </div>
   )
 }

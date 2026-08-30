@@ -1,4 +1,6 @@
 import { NavLink, Outlet } from 'react-router-dom'
+import { tokens } from '../../theme/tokens'
+import { Header } from '../../components/ui'
 
 const links = [
   { to: '/player', label: 'Shop', end: true },
@@ -11,18 +13,45 @@ const links = [
 
 export default function PlayerLayout() {
   return (
-    <div style={{ display: 'flex', minHeight: '100vh', fontFamily: 'sans-serif' }}>
-      <nav style={{ width: 200, borderRight: '1px solid #ddd', padding: 16 }}>
-        <h3>Player</h3>
-        {links.map((l) => (
-          <NavLink key={l.to} to={l.to} end={l.end} style={{ display: 'block', margin: '8px 0' }}>
-            {l.label}
-          </NavLink>
-        ))}
-      </nav>
-      <main style={{ flex: 1, padding: 24 }}>
-        <Outlet />
-      </main>
+    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+      <Header />
+      <div style={{ display: 'flex', flex: 1 }}>
+        <nav
+          style={{
+            width: 220,
+            background: tokens.color.surface,
+            borderRight: `1px solid ${tokens.color.border}`,
+            padding: '24px 16px',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 4,
+          }}
+        >
+          {links.map((l) => (
+            <NavLink
+              key={l.to}
+              to={l.to}
+              end={l.end}
+              style={({ isActive }) => ({
+                display: 'block',
+                padding: '10px 12px',
+                borderRadius: tokens.radius.sm,
+                color: isActive ? '#fff' : tokens.color.textMuted,
+                background: isActive ? tokens.color.accent : 'transparent',
+                textDecoration: 'none',
+                fontWeight: isActive ? 600 : 500,
+                fontSize: 14,
+                transition: 'background 0.15s ease',
+              })}
+            >
+              {l.label}
+            </NavLink>
+          ))}
+        </nav>
+        <main style={{ flex: 1, background: tokens.color.bg, color: tokens.color.text }}>
+          <Outlet />
+        </main>
+      </div>
     </div>
   )
 }

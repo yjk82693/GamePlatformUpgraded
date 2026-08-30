@@ -1,6 +1,7 @@
 import { Routes, Route } from 'react-router-dom'
 import { ProtectedRoute } from './components/ProtectedRoute'
 import { TypeRoute } from './components/TypeRoute'
+import { StaffThemeProvider } from './components/admin'
 import { Placeholder } from './components/Placeholder'
 import LoginPage from './pages/LoginPage'
 import HomePage from './pages/HomePage'
@@ -10,7 +11,16 @@ import WalletPage from './pages/player/WalletPage'
 import ProfilePage from './pages/player/ProfilePage'
 import SocialPage from './pages/player/SocialPage'
 import AchievementsPage from './pages/player/AchievementsPage'
+import SupportPage from './pages/player/SupportPage'
 import DistributorLayout from './pages/distributor/DistributorLayout'
+import CatalogPage from './pages/distributor/CatalogPage'
+import MembersPage from './pages/distributor/MembersPage'
+import AppOpsPage from './pages/distributor/AppOpsPage'
+import PaymentsPage from './pages/distributor/PaymentsPage'
+import StatsPage from './pages/distributor/StatsPage'
+import ConfigPage from './pages/distributor/ConfigPage'
+import TicketsPage from './pages/distributor/TicketsPage'
+import LogsPage from './pages/distributor/LogsPage'
 import CoopLayout from './pages/coop/CoopLayout'
 
 function App() {
@@ -28,27 +38,29 @@ function App() {
             <Route path="profile" element={<ProfilePage />} />
             <Route path="social" element={<SocialPage />} />
             <Route path="rankings" element={<AchievementsPage />} />
-            <Route path="tickets" element={<Placeholder title="Support" />} />
+            <Route path="tickets" element={<SupportPage />} />
           </Route>
         </Route>
 
         <Route element={<TypeRoute require="isStaff" />}>
-          <Route path="/distributor" element={<DistributorLayout />}>
-            <Route index element={<Placeholder title="Catalog" />} />
-            <Route path="members" element={<Placeholder title="Members & Roles" />} />
-            <Route path="appops" element={<Placeholder title="App Operations" />} />
-            <Route path="payments" element={<Placeholder title="Payments" />} />
-            <Route path="stats" element={<Placeholder title="Statistics" />} />
-            <Route path="config" element={<Placeholder title="Leaderboard / Terms / Redeem" />} />
-            <Route path="tickets" element={<Placeholder title="Support" />} />
-            <Route path="logs" element={<Placeholder title="Logs" />} />
-          </Route>
+          <Route element={<StaffThemeProvider />}>
+            <Route path="/distributor" element={<DistributorLayout />}>
+              <Route index element={<CatalogPage />} />
+              <Route path="members" element={<MembersPage />} />
+              <Route path="appops" element={<AppOpsPage />} />
+              <Route path="payments" element={<PaymentsPage />} />
+              <Route path="stats" element={<StatsPage />} />
+              <Route path="config" element={<ConfigPage />} />
+              <Route path="tickets" element={<TicketsPage />} />
+              <Route path="logs" element={<LogsPage />} />
+            </Route>
 
-          <Route path="/coop" element={<CoopLayout />}>
-            <Route index element={<Placeholder title="Chat" />} />
-            <Route path="planner" element={<Placeholder title="Planner & Calendar" />} />
-            <Route path="workspace" element={<Placeholder title="Workspace" />} />
-            <Route path="tasks" element={<Placeholder title="Tasks" />} />
+            <Route path="/coop" element={<CoopLayout />}>
+              <Route index element={<Placeholder title="Chat" />} />
+              <Route path="planner" element={<Placeholder title="Planner & Calendar" />} />
+              <Route path="workspace" element={<Placeholder title="Workspace" />} />
+              <Route path="tasks" element={<Placeholder title="Tasks" />} />
+            </Route>
           </Route>
         </Route>
       </Route>

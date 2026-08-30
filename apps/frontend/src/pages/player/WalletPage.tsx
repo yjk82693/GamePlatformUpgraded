@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
 import { apiFetch } from '../../lib/api'
+import { StatCard, Button } from '../../components/ui'
+import { tokens } from '../../theme/tokens'
 
 interface WalletData {
   cash: string
@@ -28,30 +30,19 @@ export default function WalletPage() {
     }
   }
 
-  if (loading) return <p>Loading wallet...</p>
-  if (error) return <p style={{ color: 'red' }}>{error}</p>
+  if (loading) return <p style={{ padding: 24, color: tokens.color.textMuted }}>Loading wallet...</p>
+  if (error) return <p style={{ padding: 24, color: tokens.color.danger }}>{error}</p>
   if (!wallet) return null
 
   return (
-    <div>
-      <h2>Wallet</h2>
-      <div style={{ display: 'flex', gap: 24, marginTop: 16 }}>
-        <div style={{ border: '1px solid #ddd', borderRadius: 8, padding: 16, minWidth: 140 }}>
-          <div style={{ color: '#888', fontSize: 14 }}>Cash</div>
-          <div style={{ fontSize: 24, fontWeight: 'bold' }}>
-            ${(Number(wallet.cash) / 100).toFixed(2)}
-          </div>
-        </div>
-        <div style={{ border: '1px solid #ddd', borderRadius: 8, padding: 16, minWidth: 140 }}>
-          <div style={{ color: '#888', fontSize: 14 }}>Gold</div>
-          <div style={{ fontSize: 24, fontWeight: 'bold' }}>{wallet.coins.gold}</div>
-        </div>
-        <div style={{ border: '1px solid #ddd', borderRadius: 8, padding: 16, minWidth: 140 }}>
-          <div style={{ color: '#888', fontSize: 14 }}>Silver</div>
-          <div style={{ fontSize: 24, fontWeight: 'bold' }}>{wallet.coins.silver}</div>
-        </div>
+    <div style={{ padding: 24 }}>
+      <h1 style={{ fontFamily: tokens.font.display, fontSize: 20, marginBottom: 24 }}>Wallet</h1>
+      <div style={{ display: 'flex', gap: 16, marginBottom: 24 }}>
+        <StatCard label="Cash" value={`$${(Number(wallet.cash) / 100).toFixed(2)}`} />
+        <StatCard label="Gold" value={wallet.coins.gold} />
+        <StatCard label="Silver" value={wallet.coins.silver} />
       </div>
-      <button onClick={loadWallet} style={{ marginTop: 24 }}>Refresh</button>
+      <Button variant="secondary" onClick={loadWallet}>Refresh</Button>
     </div>
   )
 }

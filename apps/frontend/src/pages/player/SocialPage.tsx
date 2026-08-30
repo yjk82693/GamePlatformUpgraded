@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
 import { apiFetch } from '../../lib/api'
+import { Card, Button, Pill } from '../../components/ui'
+import { tokens } from '../../theme/tokens'
 
 export default function SocialPage() {
   const [friends, setFriends] = useState<string[]>([])
@@ -51,34 +53,42 @@ export default function SocialPage() {
     }
   }
 
-  if (loading) return <p>Loading friends...</p>
-  if (error) return <p style={{ color: 'red' }}>{error}</p>
+  if (loading) return <p style={{ padding: 24, color: tokens.color.textMuted }}>Loading friends...</p>
+  if (error) return <p style={{ padding: 24, color: tokens.color.danger }}>{error}</p>
+
+  const inputStyle: React.CSSProperties = {
+    background: tokens.color.surfaceAlt,
+    border: `1px solid ${tokens.color.border}`,
+    borderRadius: tokens.radius.sm,
+    padding: '8px 12px',
+    color: tokens.color.text,
+    fontSize: 14,
+  }
 
   return (
-    <div>
-      <h2>Friends</h2>
-      {message && <p>{message}</p>}
+    <div style={{ padding: 24, maxWidth: 480 }}>
+      <h1 style={{ fontFamily: tokens.font.display, fontSize: 20, marginBottom: 24 }}>Friends</h1>
+      {message && <Pill tone="neutral">{message}</Pill>}
 
-      <form onSubmit={handleAddFriend} style={{ marginBottom: 24 }}>
+      <form onSubmit={handleAddFriend} style={{ display: 'flex', gap: 8, margin: '16px 0 24px' }}>
         <input
           placeholder="Friend code"
           value={friendCode}
           onChange={(e) => setFriendCode(e.target.value)}
+          style={{ ...inputStyle, flex: 1 }}
         />
-        <button type="submit" style={{ marginLeft: 8 }}>Add friend</button>
+        <Button variant="primary" type="submit">Add friend</Button>
       </form>
 
-      {friends.length === 0 && <p>No friends yet.</p>}
-      <ul>
-        {friends.map((accountId) => (
-          <li key={accountId} style={{ marginBottom: 8 }}>
-            <code>{accountId}</code>
-            <button onClick={() => handleRemove(accountId)} style={{ marginLeft: 8 }}>
-              Remove
-            </button>
-          </li>
-        ))}
-      </ul>
+      {friends.length === 0 && <p style={{ color: tokens.color.textMuted }}>No friends yet.</p>}
+      {friends.map((accountId) => (
+        <Card key={accountId} style={{ marginBottom: 8, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <code style={{ fontFamily: tokens.font.mono, fontSize: 13, color: tokens.color.textMuted }}>
+            {accountId}
+          </code>
+          <Button variant="secondary" onClick={() => handleRemove(accountId)}>Remove</Button>
+        </Card>
+      ))}
     </div>
   )
 }

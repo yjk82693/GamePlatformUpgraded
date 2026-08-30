@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
 import { apiFetch } from '../../lib/api'
+import { Card, Button, Pill } from '../../components/ui'
+import { tokens } from '../../theme/tokens'
 
 interface Profile {
   displayName: string
@@ -71,40 +73,64 @@ export default function ProfilePage() {
     }
   }
 
-  if (loading) return <p>Loading profile...</p>
-  if (error) return <p style={{ color: 'red' }}>{error}</p>
+  if (loading) return <p style={{ padding: 24, color: tokens.color.textMuted }}>Loading profile...</p>
+  if (error) return <p style={{ padding: 24, color: tokens.color.danger }}>{error}</p>
   if (!profile) return null
 
+  const inputStyle: React.CSSProperties = {
+    background: tokens.color.surfaceAlt,
+    border: `1px solid ${tokens.color.border}`,
+    borderRadius: tokens.radius.sm,
+    padding: '8px 12px',
+    color: tokens.color.text,
+    fontSize: 14,
+  }
+
   return (
-    <div>
-      <h2>Profile</h2>
-      {message && <p>{message}</p>}
+    <div style={{ padding: 24, maxWidth: 480 }}>
+      <h1 style={{ fontFamily: tokens.font.display, fontSize: 20, marginBottom: 24 }}>Profile</h1>
+      {message && <Pill tone="neutral">{message}</Pill>}
 
-      <div style={{ marginTop: 16 }}>
-        <label>Display name</label>
-        <br />
-        <input value={displayName} onChange={(e) => setDisplayName(e.target.value)} />
-        <button onClick={handleSave} style={{ marginLeft: 8 }}>Save</button>
-      </div>
+      <Card style={{ marginTop: 16, marginBottom: 16 }}>
+        <label style={{ color: tokens.color.textMuted, fontSize: 12 }}>Display name</label>
+        <div style={{ display: 'flex', gap: 8, marginTop: 6 }}>
+          <input
+            value={displayName}
+            onChange={(e) => setDisplayName(e.target.value)}
+            style={{ ...inputStyle, flex: 1 }}
+          />
+          <Button variant="primary" onClick={handleSave}>Save</Button>
+        </div>
+      </Card>
 
-      <div style={{ marginTop: 16 }}>
-        <label>Visibility: </label>
-        {(['PUBLIC', 'FRIENDS', 'PRIVATE'] as const).map((v) => (
-          <button
-            key={v}
-            onClick={() => handleVisibility(v)}
-            style={{ marginLeft: 8, fontWeight: profile.visibility === v ? 'bold' : 'normal' }}
-          >
-            {v}
-          </button>
-        ))}
-      </div>
+      <Card style={{ marginBottom: 16 }}>
+        <label style={{ color: tokens.color.textMuted, fontSize: 12, display: 'block', marginBottom: 10 }}>
+          Visibility
+        </label>
+        <div style={{ display: 'flex', gap: 8 }}>
+          {(['PUBLIC', 'FRIENDS', 'PRIVATE'] as const).map((v) => (
+            <Button
+              key={v}
+              variant={profile.visibility === v ? 'primary' : 'secondary'}
+              onClick={() => handleVisibility(v)}
+            >
+              {v}
+            </Button>
+          ))}
+        </div>
+      </Card>
 
-      <div style={{ marginTop: 16 }}>
-        <label>Friend code: </label>
-        <code>{profile.friendCode}</code>
-        <button onClick={handleRegenerateCode} style={{ marginLeft: 8 }}>Regenerate</button>
-      </div>
+      <Card>
+        <label style={{ color: tokens.color.textMuted, fontSize: 12, display: 'block', marginBottom: 10 }}>
+          Friend code
+        </label>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+          <code style={{ fontFamily: tokens.font.mono, color: tokens.color.gold, fontSize: 16 }}>
+            {profile.friendCode}
+          </code>
+          <Button variant="secondary" onClick={handleRegenerateCode}>Regenerate</Button>
+        </div>
+      </Card>
     </div>
   )
 }

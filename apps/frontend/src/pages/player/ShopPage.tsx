@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
 import { apiFetch } from '../../lib/api'
+import { Card, Button, Pill } from '../../components/ui'
+import { tokens, gameAccent } from '../../theme/tokens'
 
 interface Product {
   id: string
@@ -46,8 +48,8 @@ export default function ShopPage() {
     }
   }
 
-  if (loading) return <p>Loading shop...</p>
-  if (error) return <p style={{ color: 'red' }}>{error}</p>
+  if (loading) return <p style={{ color: tokens.color.textMuted, padding: 24 }}>Loading shop...</p>
+  if (error) return <p style={{ color: tokens.color.danger, padding: 24 }}>{error}</p>
 
   const grouped = products.reduce<Record<string, Product[]>>((acc, p) => {
     const key = p.app?.name ?? p.appId
@@ -57,34 +59,57 @@ export default function ShopPage() {
   }, {})
 
   return (
-    <div>
-      <h2>Shop</h2>
-      {message && <p style={{ color: message.includes('successful') ? 'green' : 'red' }}>{message}</p>}
-      {products.length === 0 && <p>No products available.</p>}
-      {Object.entries(grouped).map(([gameName, items]) => (
-        <div key={gameName} style={{ marginBottom: 32 }}>
-          <h3>{gameName}</h3>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: 12 }}>
-            {items.map((p) => (
-              <div key={p.id} style={{ border: '1px solid #ddd', borderRadius: 8, padding: 12 }}>
-                <strong>{p.name}</strong>
-                <div style={{ margin: '8px 0', color: '#555' }}>
-                  {p.priceCents != null && <div>${(p.priceCents / 100).toFixed(2)}</div>}
-                  {p.priceCoins != null && <div>{p.priceCoins} coins</div>}
-                </div>
-                <div style={{ display: 'flex', gap: 8 }}>
-                  {p.priceCents != null && (
-                    <button onClick={() => handlePurchase(p.id, 'CASH')}>Buy (cash)</button>
-                  )}
-                  {p.priceCoins != null && (
-                    <button onClick={() => handlePurchase(p.id, 'COIN')}>Buy (coins)</button>
-                  )}
-                </div>
-              </div>
-            ))}
+    <div style={{ padding: 24 }}>
+      <h1 style={{ fontFamily: tokens.font.display, fontSize: 20, marginBottom: 24 }}>Shop</h1>
+
+      {message && (
+        <Pill tone={message.includes('successful') ? 'success' : 'warning'}>{message}</Pill>
+      )}
+
+      {products.length === 0 && <p style={{ color: tokens.color.textMuted }}>No products available.</p>}
+
+      {Object.entries(grouped).map(([gameName, items]) => {
+        const accent = gameAccent(gameName)
+        return (
+          <div key={gameName} style={{ marginTop: 32 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 12 }}>
+              <div style={{ width: 6, height: 22, background: accent, borderRadius: 2 }} />
+              <h2 style={{ fontSize: 16, fontWeight: 700, margin: 0 }}>{gameName}</h2>
+            </div>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(230px, 1fr))', gap: 14 }}>
+              {items.map((p) => (
+                <Card key={p.id} accent={accent}>
+                  <div style={{ fontWeight: 600, marginBottom: 10 }}>{p.name}</div>
+                  <div style={{ display: 'flex', gap: 8, marginBottom: 12, flexWrap: 'wrap' }}>
+                    {p.priceCents != null && (
+                      <span style={{ fontFamily: tokens.font.mono, color: tokens.color.text, fontSize: 14 }}>
+                        ${(p.priceCents / 100).toFixed(2)}
+                      </span>
+                    )}
+                    {p.priceCoins != null && (
+                      <span style={{ fontFamily: tokens.font.mono, color: tokens.color.gold, fontSize: 14 }}>
+                        {p.priceCoins} coins
+                      </span>
+                    )}
+                  </div>
+                  <div style={{ display: 'flex', gap: 8 }}>
+                    {p.priceCents != null && (
+                      <Button variant="primary" onClick={() => handlePurchase(p.id, 'CASH')}>
+                        Buy (cash)
+                      </Button>
+                    )}
+                    {p.priceCoins != null && (
+                      <Button variant="secondary" onClick={() => handlePurchase(p.id, 'COIN')}>
+                        Buy (coins)
+                      </Button>
+                    )}
+                  </div>
+                </Card>
+              ))}
+            </div>
           </div>
-        </div>
-      ))}
+        )
+      })}
     </div>
   )
 }
