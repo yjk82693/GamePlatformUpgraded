@@ -1,9 +1,26 @@
 import { Router } from "express";
-import { publishBuild, maintenanceMode, authorNotice, configureLiveEvent } from "@game-platform/distributor";
+import { publishBuild, maintenanceMode, authorNotice, configureLiveEvent, createBuild, listBuildsForApp } from "@game-platform/distributor";
 import { requireAuth, type AuthedRequest } from "../middleware/auth.js";
 
 const router = Router();
 router.use(requireAuth);
+
+router.get("/builds/app/:appId", async (req: AuthedRequest, res) => {
+  try {
+    res.json(await listBuildsForApp(req.accountId!, req.params.appId as string));
+  } catch (err) {
+    res.status(403).json({ error: (err as Error).message });
+  }
+});
+
+router.post("/builds", async (req: AuthedRequest, res) => {
+  try {
+    const { appId, version, checksum } = req.body;
+    res.json(await createBuild(req.accountId!, appId, version, checksum));
+  } catch (err) {
+    res.status(403).json({ error: (err as Error).message });
+  }
+});
 
 router.post("/builds/:id/publish", async (req: AuthedRequest, res) => {
   try {

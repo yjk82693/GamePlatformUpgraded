@@ -1,9 +1,18 @@
 import { Router } from "express";
-import { getMetric, loadDashboard, exportPdf, addWidget, editWidget, removeWidget, listWidgets, reorderWidget, analyzeDashboard } from "@game-platform/distributor";
+import { getMetric, loadDashboard, exportPdf, addWidget, editWidget, removeWidget, listWidgets, reorderWidget, analyzeDashboard, getOrCreateDashboard } from "@game-platform/distributor";
 import { requireAuth, type AuthedRequest } from "../middleware/auth.js";
 
 const router = Router();
 router.use(requireAuth);
+
+router.get("/dashboard", async (req: AuthedRequest, res) => {
+  try {
+    const ownerScope = (req.query.ownerScope as string) ?? "default";
+    res.json(await getOrCreateDashboard(req.accountId!, ownerScope));
+  } catch (err) {
+    res.status(403).json({ error: (err as Error).message });
+  }
+});
 
 router.post("/metric", async (req: AuthedRequest, res) => {
   try {

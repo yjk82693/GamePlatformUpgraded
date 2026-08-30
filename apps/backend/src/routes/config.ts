@@ -1,9 +1,25 @@
 import { Router } from "express";
-import { createBoard, configureBoard, openSeason, closeSeason, registerTerms, activateTerms, generateCode, batchGenerate, trackRedemptions, revokeCode } from "@game-platform/distributor";
+import { createBoard, configureBoard, openSeason, closeSeason, registerTerms, activateTerms, generateCode, batchGenerate, trackRedemptions, revokeCode, listBoardsForApp, listTerms, listRedeemCodes, listMultiplayerApps } from "@game-platform/distributor";
 import { requireAuth, type AuthedRequest } from "../middleware/auth.js";
 
 const router = Router();
 router.use(requireAuth);
+
+router.get("/apps/multiplayer", async (req: AuthedRequest, res) => {
+  try {
+    res.json(await listMultiplayerApps(req.accountId!));
+  } catch (err) {
+    res.status(403).json({ error: (err as Error).message });
+  }
+});
+
+router.get("/boards/app/:appId", async (req: AuthedRequest, res) => {
+  try {
+    res.json(await listBoardsForApp(req.accountId!, req.params.appId as string));
+  } catch (err) {
+    res.status(403).json({ error: (err as Error).message });
+  }
+});
 
 router.post("/boards", async (req: AuthedRequest, res) => {
   try {
@@ -38,6 +54,14 @@ router.post("/boards/:id/close-season", async (req: AuthedRequest, res) => {
   }
 });
 
+router.get("/terms", async (req: AuthedRequest, res) => {
+  try {
+    res.json(await listTerms(req.accountId!));
+  } catch (err) {
+    res.status(403).json({ error: (err as Error).message });
+  }
+});
+
 router.post("/terms", async (req: AuthedRequest, res) => {
   try {
     const { content, version, effectiveDate } = req.body;
@@ -50,6 +74,14 @@ router.post("/terms", async (req: AuthedRequest, res) => {
 router.post("/terms/:version/activate", async (req: AuthedRequest, res) => {
   try {
     res.json(await activateTerms(req.accountId!, req.params.version as string));
+  } catch (err) {
+    res.status(403).json({ error: (err as Error).message });
+  }
+});
+
+router.get("/redeem-codes", async (req: AuthedRequest, res) => {
+  try {
+    res.json(await listRedeemCodes(req.accountId!));
   } catch (err) {
     res.status(403).json({ error: (err as Error).message });
   }

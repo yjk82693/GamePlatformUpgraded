@@ -1,9 +1,25 @@
 import { Router } from "express";
-import { inviteMember, grantRole, revokeRole, resetMemberPassword, sanctionMember, unsanctionMember, kickMember } from "@game-platform/distributor";
+import { inviteMember, grantRole, revokeRole, resetMemberPassword, sanctionMember, unsanctionMember, kickMember, listMembers, listRoles } from "@game-platform/distributor";
 import { requireAuth, type AuthedRequest } from "../middleware/auth.js";
 
 const router = Router();
 router.use(requireAuth);
+
+router.get("/", async (req: AuthedRequest, res) => {
+  try {
+    res.json(await listMembers(req.accountId!));
+  } catch (err) {
+    res.status(403).json({ error: (err as Error).message });
+  }
+});
+
+router.get("/roles", async (req: AuthedRequest, res) => {
+  try {
+    res.json(await listRoles(req.accountId!));
+  } catch (err) {
+    res.status(403).json({ error: (err as Error).message });
+  }
+});
 
 router.post("/invite", async (req: AuthedRequest, res) => {
   try {
