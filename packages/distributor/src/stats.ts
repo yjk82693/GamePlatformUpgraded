@@ -110,3 +110,10 @@ export async function analyzeDashboard(actorId: string, dashboardId: string) {
     narrative: null,
   };
 }
+
+export async function getOrCreateDashboard(actorId: string, ownerScope: string) {
+  await requirePermission(actorId, "READ", "ANALYTICS");
+  const existing = await prisma.dashboard.findFirst({ where: { ownerScope } });
+  if (existing) return existing;
+  return prisma.dashboard.create({ data: { ownerScope } });
+}

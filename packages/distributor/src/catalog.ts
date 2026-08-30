@@ -45,3 +45,11 @@ export async function manageCategory(actorId: string, data: { id?: string; name:
   }
   return prisma.category.create({ data: { name: data.name } });
 }
+
+export async function listProductsForApp(actorId: string, appId: string) {
+  await requirePermission(actorId, "READ", "PRODUCT");
+  return prisma.product.findMany({
+    where: { appId },
+    orderBy: { name: "asc" },
+  });
+}

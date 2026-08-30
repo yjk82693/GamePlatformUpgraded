@@ -85,3 +85,8 @@ export async function exportTransactions(actorId: string, filter?: { accountId?:
     orderBy: { occurredAt: "desc" },
   });
 }
+
+export async function listMerchants(actorId: string) {
+  await requirePermission(actorId, "READ", "SETTLEMENT");
+  return prisma.merchant.findMany({ include: { paymentMethods: true } });
+}

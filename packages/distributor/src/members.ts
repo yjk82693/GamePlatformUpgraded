@@ -78,3 +78,15 @@ export async function kickMember(actorId: string, playerId: string, appId: strin
   await prisma.accountApp.deleteMany({ where: { accountId: playerId, appId } });
   await prisma.session.deleteMany({ where: { accountId: playerId } });
 }
+
+export async function listMembers(actorId: string) {
+  await requirePermission(actorId, "READ", "MEMBER");
+  return prisma.member.findMany({
+    include: { account: true, org: true, roles: { include: { role: true } } },
+  });
+}
+
+export async function listRoles(actorId: string) {
+  await requirePermission(actorId, "READ", "ROLE");
+  return prisma.role.findMany();
+}

@@ -57,3 +57,13 @@ export async function configureLiveEvent(
     data: { appId, config, startsAt, endsAt },
   });
 }
+
+export async function createBuild(actorId: string, appId: string, version: string, checksum: string) {
+  await requirePermission(actorId, "PUBLISH", "APP");
+  return prisma.build.create({ data: { appId, version, checksum } });
+}
+
+export async function listBuildsForApp(actorId: string, appId: string) {
+  await requirePermission(actorId, "READ", "SETTING");
+  return prisma.build.findMany({ where: { appId }, orderBy: { id: "desc" } });
+}

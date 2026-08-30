@@ -93,3 +93,27 @@ export async function revokeCode(actorId: string, codeId: string) {
   await requirePermission(actorId, "DELETE", "PRODUCT");
   return prisma.redeemCode.update({ where: { id: codeId }, data: { usesLeft: 0 } });
 }
+
+export async function listBoardsForApp(actorId: string, appId: string) {
+  await requirePermission(actorId, "READ", "ANALYTICS");
+  return prisma.leaderboard.findMany({ where: { appId } });
+}
+
+export async function listTerms(actorId: string) {
+  await requirePermission(actorId, "READ", "SETTING");
+  return prisma.terms.findMany({ orderBy: { effectiveDate: "desc" } });
+}
+
+export async function listRedeemCodes(actorId: string) {
+  await requirePermission(actorId, "READ", "PRODUCT");
+  return prisma.redeemCode.findMany({ orderBy: { id: "desc" } });
+}
+
+export async function listMultiplayerApps(actorId: string) {
+  await requirePermission(actorId, "READ", "ANALYTICS");
+  const boards = await prisma.leaderboard.findMany({
+    distinct: ["appId"],
+    include: { app: true },
+  });
+  return boards.map((b) => ({ id: b.app.id, name: b.app.name }));
+}
