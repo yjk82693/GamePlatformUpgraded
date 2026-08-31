@@ -2,7 +2,6 @@ import { Routes, Route } from 'react-router-dom'
 import { ProtectedRoute } from './components/ProtectedRoute'
 import { TypeRoute } from './components/TypeRoute'
 import { StaffThemeProvider } from './components/admin'
-import { Placeholder } from './components/Placeholder'
 import LoginPage from './pages/LoginPage'
 import HomePage from './pages/HomePage'
 import PlayerLayout from './pages/player/PlayerLayout'
@@ -22,6 +21,10 @@ import ConfigPage from './pages/distributor/ConfigPage'
 import TicketsPage from './pages/distributor/TicketsPage'
 import LogsPage from './pages/distributor/LogsPage'
 import CoopLayout from './pages/coop/CoopLayout'
+import ChatPage from './pages/coop/ChatPage'
+import PlannerPage from './pages/coop/PlannerPage'
+import WorkspacePage from './pages/coop/WorkspacePage'
+import TasksPage from './pages/coop/TasksPage'
 
 function App() {
   return (
@@ -56,10 +59,10 @@ function App() {
             </Route>
 
             <Route path="/coop" element={<CoopLayout />}>
-              <Route index element={<Placeholder title="Chat" />} />
-              <Route path="planner" element={<Placeholder title="Planner & Calendar" />} />
-              <Route path="workspace" element={<Placeholder title="Workspace" />} />
-              <Route path="tasks" element={<Placeholder title="Tasks" />} />
+              <Route index element={<ChatPage />} />
+              <Route path="planner" element={<PlannerPage />} />
+              <Route path="workspace" element={<WorkspacePage />} />
+              <Route path="tasks" element={<TasksPage />} />
             </Route>
           </Route>
         </Route>
