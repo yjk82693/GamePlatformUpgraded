@@ -26,6 +26,7 @@ import coopChatRoutes from "./routes/coopchat.js";
 import plannerRoutes from "./routes/planner.js";
 import workspaceRoutes from "./routes/workspace.js";
 import tasksRoutes from "./routes/tasks.js";
+import commitsRoutes from "./routes/commits.js";
 
 const app = express();
 app.use(cors());
@@ -88,6 +89,7 @@ app.use("/coop/chat", coopChatRoutes);
 app.use("/coop/planner", plannerRoutes);
 app.use("/coop/workspace", workspaceRoutes);
 app.use("/coop/tasks", tasksRoutes);
+app.use("/coop/commits", commitsRoutes);
 
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {

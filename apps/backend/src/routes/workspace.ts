@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { createDocument, listDocuments, openDocument, saveDocument, shareDocument, listVersions, requestRollback, approveRollback } from "@game-platform/coop";
+import { createDocument, listDocuments, openDocument, saveDocument, shareDocument, listVersions, requestRollback, approveRollback, listRollbackRequests } from "@game-platform/coop";
 import { requireAuth, type AuthedRequest } from "../middleware/auth.js";
 
 const router = Router();
@@ -51,6 +51,10 @@ router.post("/documents/:id/share", async (req: AuthedRequest, res) => {
 
 router.get("/documents/:id/versions", async (req: AuthedRequest, res) => {
   res.json(await listVersions(req.params.id as string));
+});
+
+router.get("/documents/:id/rollback-requests", async (req: AuthedRequest, res) => {
+  res.json(await listRollbackRequests(req.params.id as string));
 });
 
 router.post("/documents/:id/rollback", async (req: AuthedRequest, res) => {

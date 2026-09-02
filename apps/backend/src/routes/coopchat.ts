@@ -1,9 +1,13 @@
 import { Router } from "express";
-import { createStaffThread, sendMessage, listMessages, fetchSince, addParticipant, removeParticipant } from "@game-platform/coop";
+import { createStaffThread, sendMessage, listMessages, fetchSince, addParticipant, removeParticipant, listMyThreads } from "@game-platform/coop";
 import { requireAuth, type AuthedRequest } from "../middleware/auth.js";
 
 const router = Router();
 router.use(requireAuth);
+
+router.get("/threads", async (req: AuthedRequest, res) => {
+  res.json(await listMyThreads(req.accountId!));
+});
 
 router.post("/threads", async (req: AuthedRequest, res) => {
   try {
