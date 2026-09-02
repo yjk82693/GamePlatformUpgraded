@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
-import { Table, Button, Modal, Form, Input, Select, Tag, message } from 'antd'
+import { Table, Button, Input, Select, Tag, message, Space } from 'antd'
+import { PlusOutlined } from '@ant-design/icons'
 import { apiFetch } from '../../lib/api'
 
 const SCOPE = 'default'
@@ -20,8 +21,9 @@ interface Member {
 export default function TasksPage() {
   const [tasks, setTasks] = useState<Task[]>([])
   const [members, setMembers] = useState<Member[]>([])
-  const [modalOpen, setModalOpen] = useState(false)
-  const [form] = Form.useForm()
+
+  const [newTitle, setNewTitle] = useState('')
+  const [newPriority, setNewPriority] = useState<'LOW' | 'MEDIUM' | 'HIGH'>('MEDIUM')
 
   useEffect(() => {
     load()
@@ -40,21 +42,20 @@ export default function TasksPage() {
     try {
       const list = await apiFetch('/distributor/members')
       setMembers(list.map((m: any) => ({ accountId: m.accountId, account: m.account })))
-    } catch (err) {
+    } catch {
       // members list is a nice-to-have for assignment; ignore failure
     }
   }
 
-  async function handleCreate() {
-    const values = await form.validateFields()
+  async function handleAdd() {
+    if (!newTitle.trim()) return
     try {
       await apiFetch('/coop/tasks', {
         method: 'POST',
-        body: JSON.stringify({ scope: SCOPE, title: values.title, priority: values.priority }),
+        body: JSON.stringify({ scope: SCOPE, title: newTitle, priority: newPriority }),
       })
-      message.success('Task added')
-      setModalOpen(false)
-      form.resetFields()
+      setNewTitle('')
+      setNewPriority('MEDIUM')
       load()
     } catch (err) {
       message.error((err as Error).message)
@@ -97,7 +98,22 @@ export default function TasksPage() {
   return (
     <div>
       <h2>Tasks</h2>
-      <Button onClick={() => setModalOpen(true)} style={{ marginBottom: 16 }}>+ New Task</Button>
+
+      <Space.Compact style={{ marginBottom: 16, width: '100%', maxWidth: 480 }}>
+        <Input
+          placeholder="Task title..."
+          value={newTitle}
+          onChange={(e) => setNewTitle(e.target.value)}
+          onPressEnter={handleAdd}
+        />
+        <Select
+          value={newPriority}
+          onChange={(v: 'LOW' | 'MEDIUM' | 'HIGH') => setNewPriority(v)}
+          style={{ width: 120 }}
+          options={[{ value: 'LOW', label: 'Low' }, { value: 'MEDIUM', label: 'Medium' }, { value: 'HIGH', label: 'High' }]}
+        />
+        <Button type="primary" icon={<PlusOutlined />} onClick={handleAdd}>Add</Button>
+      </Space.Compact>
 
       <Table
         rowKey="id"
@@ -142,17 +158,6 @@ export default function TasksPage() {
           },
         ]}
       />
-
-      <Modal title="New Task" open={modalOpen} onOk={handleCreate} onCancel={() => setModalOpen(false)}>
-        <Form form={form} layout="vertical">
-          <Form.Item name="title" label="Title" rules={[{ required: true }]}>
-            <Input />
-          </Form.Item>
-          <Form.Item name="priority" label="Priority" rules={[{ required: true }]} initialValue="MEDIUM">
-            <Select options={[{ value: 'LOW', label: 'Low' }, { value: 'MEDIUM', label: 'Medium' }, { value: 'HIGH', label: 'High' }]} />
-          </Form.Item>
-        </Form>
-      </Modal>
     </div>
   )
 }

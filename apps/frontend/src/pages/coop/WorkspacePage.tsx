@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
-import { Table, Button, Modal, Form, Input, Space, Tag, message, Card } from 'antd'
+import { List, Button, Input, Space, Tag, message, Card, Table, Avatar, Breadcrumb } from 'antd'
+import { FileTextOutlined, FolderOutlined, PlusOutlined, ShareAltOutlined, HistoryOutlined, SaveOutlined } from '@ant-design/icons'
 import { apiFetch } from '../../lib/api'
 
 interface Doc {
@@ -25,18 +26,36 @@ interface RollbackReq {
 
 const WORKSPACE_ID = 'default'
 
+function segments(path: string): string[] {
+  return path.split('/').filter(Boolean)
+}
+
+function folderContents(docs: Doc[], currentFolder: string[]) {
+  const folderSet = new Set<string>()
+  const files: Doc[] = []
+  for (const doc of docs) {
+    const segs = segments(doc.path)
+    const matchesPrefix = currentFolder.every((c, i) => segs[i] === c)
+    if (!matchesPrefix) continue
+    const rest = segs.slice(currentFolder.length)
+    if (rest.length === 1) files.push(doc)
+    else if (rest.length > 1) folderSet.add(rest[0])
+  }
+  return { folders: Array.from(folderSet).sort(), files }
+}
+
 export default function WorkspacePage() {
   const [myAccountId, setMyAccountId] = useState<string | null>(null)
   const [docs, setDocs] = useState<Doc[]>([])
-  const [createOpen, setCreateOpen] = useState(false)
-  const [createForm] = Form.useForm()
+  const [currentFolder, setCurrentFolder] = useState<string[]>([])
+  const [newName, setNewName] = useState('')
 
   const [selectedDoc, setSelectedDoc] = useState<Doc | null>(null)
   const [content, setContent] = useState('')
   const [versions, setVersions] = useState<Version[]>([])
   const [rollbacks, setRollbacks] = useState<RollbackReq[]>([])
-  const [shareOpen, setShareOpen] = useState(false)
-  const [shareForm] = Form.useForm()
+  const [shareId, setShareId] = useState('')
+  const [showHistory, setShowHistory] = useState(false)
 
   useEffect(() => {
     apiFetch('/auth/me').then((me) => setMyAccountId(me.accountId)).catch(() => {})
@@ -52,15 +71,14 @@ export default function WorkspacePage() {
   }
 
   async function handleCreate() {
-    const values = await createForm.validateFields()
+    if (!newName.trim()) return
+    const path = '/' + [...currentFolder, newName].join('/')
     try {
       await apiFetch('/coop/workspace/documents', {
         method: 'POST',
-        body: JSON.stringify({ workspaceId: WORKSPACE_ID, path: values.path, blobRef: values.content }),
+        body: JSON.stringify({ workspaceId: WORKSPACE_ID, path, blobRef: '' }),
       })
-      message.success('Document created')
-      setCreateOpen(false)
-      createForm.resetFields()
+      setNewName('')
       loadDocs()
     } catch (err) {
       message.error((err as Error).message)
@@ -69,6 +87,7 @@ export default function WorkspacePage() {
 
   async function openDoc(doc: Doc) {
     setSelectedDoc(doc)
+    setShowHistory(false)
     try {
       const data = await apiFetch(`/coop/workspace/documents/${doc.id}`)
       setContent(data.content ?? '')
@@ -97,16 +116,14 @@ export default function WorkspacePage() {
   }
 
   async function handleShare() {
-    if (!selectedDoc) return
-    const values = await shareForm.validateFields()
+    if (!selectedDoc || !shareId.trim()) return
     try {
       await apiFetch(`/coop/workspace/documents/${selectedDoc.id}/share`, {
         method: 'POST',
-        body: JSON.stringify({ memberId: values.memberId, access: 'EDIT' }),
+        body: JSON.stringify({ memberId: shareId, access: 'EDIT' }),
       })
       message.success('Shared')
-      setShareOpen(false)
-      shareForm.resetFields()
+      setShareId('')
     } catch (err) {
       message.error((err as Error).message)
     }
@@ -137,105 +154,161 @@ export default function WorkspacePage() {
     }
   }
 
-  return (
-    <div>
-      <h2>Workspace</h2>
-      <Button onClick={() => setCreateOpen(true)} style={{ marginBottom: 16 }}>+ New Document</Button>
+  const { folders, files } = folderContents(docs, currentFolder)
 
-      <div style={{ display: 'flex', gap: 24 }}>
-        <div style={{ minWidth: 260 }}>
-          <Table
-            rowKey="id"
-            dataSource={docs}
-            pagination={false}
-            columns={[
-              { title: 'Path', dataIndex: 'path' },
-              { title: 'v', dataIndex: 'currentVersion' },
+  return (
+    <div style={{ display: 'flex', height: 'calc(100vh - 130px)' }}>
+      {/* Directory browser */}
+      <div style={{ width: 280, borderRight: '1px solid #2a2a2a', display: 'flex', flexDirection: 'column' }}>
+        <div style={{ padding: 16, borderBottom: '1px solid #2a2a2a' }}>
+          <h3 style={{ margin: '0 0 8px' }}>Workspace</h3>
+          <Breadcrumb
+            style={{ marginBottom: 10, fontSize: 12 }}
+            items={[
+              { title: <a onClick={() => setCurrentFolder([])}>root</a> },
+              ...currentFolder.map((seg, i) => ({
+                title: <a onClick={() => setCurrentFolder(currentFolder.slice(0, i + 1))}>{seg}</a>,
+              })),
             ]}
-            onRow={(doc) => ({ onClick: () => openDoc(doc), style: { cursor: 'pointer' } })}
           />
+          <Space.Compact style={{ width: '100%' }}>
+            <Input
+              placeholder="name.md or folder/name.md"
+              value={newName}
+              onChange={(e) => setNewName(e.target.value)}
+              onPressEnter={handleCreate}
+              size="small"
+            />
+            <Button size="small" type="primary" icon={<PlusOutlined />} onClick={handleCreate} />
+          </Space.Compact>
         </div>
 
-        {selectedDoc && (
-          <div style={{ flex: 1 }}>
-            <h3>{selectedDoc.path}</h3>
-            <Input.TextArea rows={8} value={content} onChange={(e) => setContent(e.target.value)} style={{ marginBottom: 8 }} />
-            <Space style={{ marginBottom: 16 }}>
-              <Button type="primary" onClick={handleSave}>Save</Button>
-              <Button onClick={() => setShareOpen(true)}>Share</Button>
-            </Space>
-
-            <Card title="Version History" size="small" style={{ marginBottom: 16 }}>
-              <Table
-                rowKey="version"
-                size="small"
-                dataSource={versions}
-                pagination={false}
-                columns={[
-                  { title: 'Version', dataIndex: 'version' },
-                  { title: 'Author', dataIndex: 'authorId', render: (id: string) => id.slice(0, 8) },
-                  { title: 'Saved', dataIndex: 'createdAt', render: (d: string) => new Date(d).toLocaleString() },
-                  {
-                    title: 'Actions',
-                    render: (_, v: Version) =>
-                      v.version !== selectedDoc.currentVersion && (
-                        <Button size="small" onClick={() => handleRequestRollback(v.version)}>
-                          Request Rollback
-                        </Button>
-                      ),
-                  },
-                ]}
-              />
-            </Card>
-
-            <Card title="Rollback Requests" size="small">
-              <Table
-                rowKey="id"
-                size="small"
-                dataSource={rollbacks}
-                pagination={false}
-                columns={[
-                  { title: 'Target v', dataIndex: 'targetVersion' },
-                  { title: 'Requested by', dataIndex: 'byId', render: (id: string) => id.slice(0, 8) },
-                  { title: 'Status', dataIndex: 'status', render: (s: string) => <Tag color={s === 'APPROVED' ? 'green' : 'orange'}>{s}</Tag> },
-                  {
-                    title: 'Actions',
-                    render: (_, r: RollbackReq) =>
-                      r.status === 'PENDING' && (
-                        <Button
-                          size="small"
-                          disabled={r.byId === myAccountId}
-                          onClick={() => handleApproveRollback(r.id)}
-                        >
-                          {r.byId === myAccountId ? "Can't approve own request" : 'Approve'}
-                        </Button>
-                      ),
-                  },
-                ]}
-              />
-            </Card>
-          </div>
-        )}
+        <List
+          style={{ overflowY: 'auto', flex: 1 }}
+          dataSource={[
+            ...folders.map((f) => ({ type: 'folder' as const, name: f })),
+            ...files.map((f) => ({ type: 'file' as const, doc: f })),
+          ]}
+          renderItem={(item) =>
+            item.type === 'folder' ? (
+              <List.Item
+                onClick={() => setCurrentFolder([...currentFolder, item.name])}
+                style={{ padding: '10px 16px', cursor: 'pointer', borderBottom: '1px solid #222' }}
+              >
+                <List.Item.Meta
+                  avatar={<Avatar size="small" icon={<FolderOutlined />} style={{ background: '#F5B93E' }} />}
+                  title={<span style={{ fontSize: 13 }}>{item.name}</span>}
+                />
+              </List.Item>
+            ) : (
+              <List.Item
+                onClick={() => openDoc(item.doc)}
+                style={{
+                  padding: '10px 16px',
+                  cursor: 'pointer',
+                  background: selectedDoc?.id === item.doc.id ? '#1f1a33' : 'transparent',
+                  borderBottom: '1px solid #222',
+                }}
+              >
+                <List.Item.Meta
+                  avatar={<Avatar size="small" icon={<FileTextOutlined />} style={{ background: '#6C5CE7' }} />}
+                  title={<span style={{ fontSize: 13 }}>{segments(item.doc.path).slice(-1)[0]}</span>}
+                  description={<span style={{ fontSize: 11, color: '#888' }}>v{item.doc.currentVersion}</span>}
+                />
+              </List.Item>
+            )
+          }
+        />
       </div>
 
-      <Modal title="New Document" open={createOpen} onOk={handleCreate} onCancel={() => setCreateOpen(false)}>
-        <Form form={createForm} layout="vertical">
-          <Form.Item name="path" label="Path" rules={[{ required: true }]}>
-            <Input placeholder="/notes/roadmap.md" />
-          </Form.Item>
-          <Form.Item name="content" label="Content">
-            <Input.TextArea rows={4} />
-          </Form.Item>
-        </Form>
-      </Modal>
+      {/* Editor */}
+      <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+        {!selectedDoc ? (
+          <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#666' }}>
+            Select or create a document
+          </div>
+        ) : (
+          <>
+            <div style={{ padding: '14px 20px', borderBottom: '1px solid #2a2a2a', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <div>
+                <strong>{selectedDoc.path}</strong> <Tag style={{ marginLeft: 8 }}>v{selectedDoc.currentVersion}</Tag>
+              </div>
+              <Space>
+                <Button size="small" icon={<SaveOutlined />} type="primary" onClick={handleSave}>Save</Button>
+                <Button size="small" icon={<HistoryOutlined />} onClick={() => setShowHistory((s) => !s)}>
+                  History
+                </Button>
+              </Space>
+            </div>
 
-      <Modal title="Share Document" open={shareOpen} onOk={handleShare} onCancel={() => setShareOpen(false)}>
-        <Form form={shareForm} layout="vertical">
-          <Form.Item name="memberId" label="Member Account ID" rules={[{ required: true }]}>
-            <Input placeholder="Paste an account ID (see Members & Roles for IDs)" />
-          </Form.Item>
-        </Form>
-      </Modal>
+            <div style={{ flex: 1, display: 'flex' }}>
+              <Input.TextArea
+                value={content}
+                onChange={(e) => setContent(e.target.value)}
+                style={{ flex: 1, border: 'none', resize: 'none', padding: 20, fontSize: 14, borderRadius: 0 }}
+                placeholder="Start writing..."
+              />
+
+              {showHistory && (
+                <div style={{ width: 320, borderLeft: '1px solid #2a2a2a', overflowY: 'auto', padding: 16 }}>
+                  <div style={{ marginBottom: 12, display: 'flex', gap: 8 }}>
+                    <Input
+                      size="small"
+                      placeholder="Account ID to share with"
+                      value={shareId}
+                      onChange={(e) => setShareId(e.target.value)}
+                      onPressEnter={handleShare}
+                    />
+                    <Button size="small" icon={<ShareAltOutlined />} onClick={handleShare} />
+                  </div>
+
+                  <Card title="Version History" size="small" style={{ marginBottom: 16 }}>
+                    <Table
+                      rowKey="version"
+                      size="small"
+                      dataSource={versions}
+                      pagination={false}
+                      columns={[
+                        { title: 'v', dataIndex: 'version', width: 40 },
+                        { title: 'When', dataIndex: 'createdAt', render: (d: string) => new Date(d).toLocaleDateString() },
+                        {
+                          title: '',
+                          render: (_, v: Version) =>
+                            v.version !== selectedDoc.currentVersion && (
+                              <Button size="small" onClick={() => handleRequestRollback(v.version)}>Revert</Button>
+                            ),
+                        },
+                      ]}
+                    />
+                  </Card>
+
+                  <Card title="Rollback Requests" size="small">
+                    <Table
+                      rowKey="id"
+                      size="small"
+                      dataSource={rollbacks}
+                      pagination={false}
+                      columns={[
+                        { title: 'Target v', dataIndex: 'targetVersion', width: 60 },
+                        { title: 'Status', dataIndex: 'status', render: (s: string) => <Tag color={s === 'APPROVED' ? 'green' : 'orange'}>{s}</Tag> },
+                        {
+                          title: '',
+                          render: (_, r: RollbackReq) =>
+                            r.status === 'PENDING' && (
+                              <Button size="small" disabled={r.byId === myAccountId} onClick={() => handleApproveRollback(r.id)}>
+                                {r.byId === myAccountId ? "Own" : 'Approve'}
+                              </Button>
+                            ),
+                        },
+                      ]}
+                    />
+                  </Card>
+                </div>
+              )}
+            </div>
+          </>
+        )}
+      </div>
     </div>
   )
 }

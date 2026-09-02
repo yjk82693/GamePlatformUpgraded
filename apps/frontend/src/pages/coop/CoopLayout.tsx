@@ -9,6 +9,7 @@ const items: MenuProps['items'] = [
   { key: '/coop', label: <Link to="/coop">Chat</Link> },
   { key: '/coop/planner', label: <Link to="/coop/planner">Planner & Calendar</Link> },
   { key: '/coop/workspace', label: <Link to="/coop/workspace">Workspace</Link> },
+  { key: '/coop/commits', label: <Link to="/coop/commits">Commits & Feedback</Link> },
   { key: '/coop/tasks', label: <Link to="/coop/tasks">Tasks</Link> },
 ]
 

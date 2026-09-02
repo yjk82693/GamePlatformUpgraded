@@ -24,6 +24,7 @@ import CoopLayout from './pages/coop/CoopLayout'
 import ChatPage from './pages/coop/ChatPage'
 import PlannerPage from './pages/coop/PlannerPage'
 import WorkspacePage from './pages/coop/WorkspacePage'
+import CommitsPage from './pages/coop/CommitsPage'
 import TasksPage from './pages/coop/TasksPage'
 
 function App() {
@@ -62,6 +63,7 @@ function App() {
               <Route index element={<ChatPage />} />
               <Route path="planner" element={<PlannerPage />} />
               <Route path="workspace" element={<WorkspacePage />} />
+              <Route path="commits" element={<CommitsPage />} />
               <Route path="tasks" element={<TasksPage />} />
             </Route>
           </Route>
