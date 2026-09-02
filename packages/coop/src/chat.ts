@@ -19,3 +19,13 @@ export async function createStaffThread(kind: ChatKind, participantIds: string[]
 }
 
 export { sendMessage, listMessages, fetchSince, addParticipant, removeParticipant };
+
+export async function listMyThreads(actorId: string) {
+  return prisma.chatThread.findMany({
+    where: {
+      kind: { in: ["GROUP", "STAFF_DIRECT"] },
+      participants: { some: { accountId: actorId } },
+    },
+    include: { participants: { include: { account: true } } },
+  });
+}

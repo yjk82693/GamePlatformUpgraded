@@ -101,3 +101,10 @@ export async function approveRollback(approverId: string, requestId: string) {
 
   return saveDocument(approverId, request.docId, old.blobRef);
 }
+
+export async function listRollbackRequests(docId: string) {
+  return prisma.rollbackRequest.findMany({
+    where: { docId },
+    orderBy: { id: "desc" },
+  });
+}
