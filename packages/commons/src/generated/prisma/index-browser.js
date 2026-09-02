@@ -568,6 +568,16 @@ exports.Prisma.RollbackRequestScalarFieldEnum = {
   status: 'status'
 };
 
+exports.Prisma.VersionCommentScalarFieldEnum = {
+  id: 'id',
+  documentId: 'documentId',
+  version: 'version',
+  authorId: 'authorId',
+  body: 'body',
+  parentId: 'parentId',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -793,7 +803,8 @@ exports.Prisma.ModelName = {
   Document: 'Document',
   DocumentVersion: 'DocumentVersion',
   DocumentShare: 'DocumentShare',
-  RollbackRequest: 'RollbackRequest'
+  RollbackRequest: 'RollbackRequest',
+  VersionComment: 'VersionComment'
 };
 
 /**

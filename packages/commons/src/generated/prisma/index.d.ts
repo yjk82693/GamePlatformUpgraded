@@ -328,6 +328,11 @@ export type DocumentShare = $Result.DefaultSelection<Prisma.$DocumentSharePayloa
  * 
  */
 export type RollbackRequest = $Result.DefaultSelection<Prisma.$RollbackRequestPayload>
+/**
+ * Model VersionComment
+ * 
+ */
+export type VersionComment = $Result.DefaultSelection<Prisma.$VersionCommentPayload>
 
 /**
  * Enums
@@ -1348,6 +1353,16 @@ export class PrismaClient<
     * ```
     */
   get rollbackRequest(): Prisma.RollbackRequestDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.versionComment`: Exposes CRUD operations for the **VersionComment** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more VersionComments
+    * const versionComments = await prisma.versionComment.findMany()
+    * ```
+    */
+  get versionComment(): Prisma.VersionCommentDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -1857,7 +1872,8 @@ export namespace Prisma {
     Document: 'Document',
     DocumentVersion: 'DocumentVersion',
     DocumentShare: 'DocumentShare',
-    RollbackRequest: 'RollbackRequest'
+    RollbackRequest: 'RollbackRequest',
+    VersionComment: 'VersionComment'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -1873,7 +1889,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "account" | "org" | "project" | "appService" | "app" | "accountApp" | "session" | "playerProfile" | "member" | "role" | "memberRole" | "permission" | "secretKey" | "setting" | "wallet" | "coinLedger" | "category" | "product" | "item" | "transaction" | "merchant" | "paymentMethod" | "paymentService" | "settlement" | "payout" | "refundRequest" | "review" | "demo" | "demoParticipation" | "redeemCode" | "redeemGrant" | "build" | "entitlement" | "friendship" | "leaderboard" | "score" | "achievementGroup" | "achievement" | "achievementUnlock" | "gameStatus" | "analytics" | "metric" | "dashboard" | "widget" | "notificationSetting" | "notice" | "announcement" | "liveEvent" | "reminder" | "terms" | "consent" | "auditLog" | "deadLetter" | "chatThread" | "chatParticipant" | "chatMessage" | "ticketMeta" | "calendarEvent" | "task" | "document" | "documentVersion" | "documentShare" | "rollbackRequest"
+      modelProps: "account" | "org" | "project" | "appService" | "app" | "accountApp" | "session" | "playerProfile" | "member" | "role" | "memberRole" | "permission" | "secretKey" | "setting" | "wallet" | "coinLedger" | "category" | "product" | "item" | "transaction" | "merchant" | "paymentMethod" | "paymentService" | "settlement" | "payout" | "refundRequest" | "review" | "demo" | "demoParticipation" | "redeemCode" | "redeemGrant" | "build" | "entitlement" | "friendship" | "leaderboard" | "score" | "achievementGroup" | "achievement" | "achievementUnlock" | "gameStatus" | "analytics" | "metric" | "dashboard" | "widget" | "notificationSetting" | "notice" | "announcement" | "liveEvent" | "reminder" | "terms" | "consent" | "auditLog" | "deadLetter" | "chatThread" | "chatParticipant" | "chatMessage" | "ticketMeta" | "calendarEvent" | "task" | "document" | "documentVersion" | "documentShare" | "rollbackRequest" | "versionComment"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -6539,6 +6555,80 @@ export namespace Prisma {
           }
         }
       }
+      VersionComment: {
+        payload: Prisma.$VersionCommentPayload<ExtArgs>
+        fields: Prisma.VersionCommentFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.VersionCommentFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VersionCommentPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.VersionCommentFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VersionCommentPayload>
+          }
+          findFirst: {
+            args: Prisma.VersionCommentFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VersionCommentPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.VersionCommentFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VersionCommentPayload>
+          }
+          findMany: {
+            args: Prisma.VersionCommentFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VersionCommentPayload>[]
+          }
+          create: {
+            args: Prisma.VersionCommentCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VersionCommentPayload>
+          }
+          createMany: {
+            args: Prisma.VersionCommentCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.VersionCommentCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VersionCommentPayload>[]
+          }
+          delete: {
+            args: Prisma.VersionCommentDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VersionCommentPayload>
+          }
+          update: {
+            args: Prisma.VersionCommentUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VersionCommentPayload>
+          }
+          deleteMany: {
+            args: Prisma.VersionCommentDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.VersionCommentUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.VersionCommentUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VersionCommentPayload>[]
+          }
+          upsert: {
+            args: Prisma.VersionCommentUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VersionCommentPayload>
+          }
+          aggregate: {
+            args: Prisma.VersionCommentAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateVersionComment>
+          }
+          groupBy: {
+            args: Prisma.VersionCommentGroupByArgs<ExtArgs>
+            result: $Utils.Optional<VersionCommentGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.VersionCommentCountArgs<ExtArgs>
+            result: $Utils.Optional<VersionCommentCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -6725,6 +6815,7 @@ export namespace Prisma {
     documentVersion?: DocumentVersionOmit
     documentShare?: DocumentShareOmit
     rollbackRequest?: RollbackRequestOmit
+    versionComment?: VersionCommentOmit
   }
 
   /* Types for Logging */
@@ -6832,6 +6923,7 @@ export namespace Prisma {
     documentVersions: number
     documentShares: number
     rollbackRequests: number
+    versionComments: number
   }
 
   export type AccountCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -6862,6 +6954,7 @@ export namespace Prisma {
     documentVersions?: boolean | AccountCountOutputTypeCountDocumentVersionsArgs
     documentShares?: boolean | AccountCountOutputTypeCountDocumentSharesArgs
     rollbackRequests?: boolean | AccountCountOutputTypeCountRollbackRequestsArgs
+    versionComments?: boolean | AccountCountOutputTypeCountVersionCommentsArgs
   }
 
   // Custom InputTypes
@@ -7062,6 +7155,13 @@ export namespace Prisma {
    */
   export type AccountCountOutputTypeCountRollbackRequestsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: RollbackRequestWhereInput
+  }
+
+  /**
+   * AccountCountOutputType without action
+   */
+  export type AccountCountOutputTypeCountVersionCommentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: VersionCommentWhereInput
   }
 
 
@@ -7839,6 +7939,68 @@ export namespace Prisma {
 
 
   /**
+   * Count Type DocumentVersionCountOutputType
+   */
+
+  export type DocumentVersionCountOutputType = {
+    comments: number
+  }
+
+  export type DocumentVersionCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    comments?: boolean | DocumentVersionCountOutputTypeCountCommentsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * DocumentVersionCountOutputType without action
+   */
+  export type DocumentVersionCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DocumentVersionCountOutputType
+     */
+    select?: DocumentVersionCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * DocumentVersionCountOutputType without action
+   */
+  export type DocumentVersionCountOutputTypeCountCommentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: VersionCommentWhereInput
+  }
+
+
+  /**
+   * Count Type VersionCommentCountOutputType
+   */
+
+  export type VersionCommentCountOutputType = {
+    replies: number
+  }
+
+  export type VersionCommentCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    replies?: boolean | VersionCommentCountOutputTypeCountRepliesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * VersionCommentCountOutputType without action
+   */
+  export type VersionCommentCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VersionCommentCountOutputType
+     */
+    select?: VersionCommentCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * VersionCommentCountOutputType without action
+   */
+  export type VersionCommentCountOutputTypeCountRepliesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: VersionCommentWhereInput
+  }
+
+
+  /**
    * Models
    */
 
@@ -8067,6 +8229,7 @@ export namespace Prisma {
     documentVersions?: boolean | Account$documentVersionsArgs<ExtArgs>
     documentShares?: boolean | Account$documentSharesArgs<ExtArgs>
     rollbackRequests?: boolean | Account$rollbackRequestsArgs<ExtArgs>
+    versionComments?: boolean | Account$versionCommentsArgs<ExtArgs>
     _count?: boolean | AccountCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["account"]>
 
@@ -8137,6 +8300,7 @@ export namespace Prisma {
     documentVersions?: boolean | Account$documentVersionsArgs<ExtArgs>
     documentShares?: boolean | Account$documentSharesArgs<ExtArgs>
     rollbackRequests?: boolean | Account$rollbackRequestsArgs<ExtArgs>
+    versionComments?: boolean | Account$versionCommentsArgs<ExtArgs>
     _count?: boolean | AccountCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type AccountIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -8174,6 +8338,7 @@ export namespace Prisma {
       documentVersions: Prisma.$DocumentVersionPayload<ExtArgs>[]
       documentShares: Prisma.$DocumentSharePayload<ExtArgs>[]
       rollbackRequests: Prisma.$RollbackRequestPayload<ExtArgs>[]
+      versionComments: Prisma.$VersionCommentPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -8608,6 +8773,7 @@ export namespace Prisma {
     documentVersions<T extends Account$documentVersionsArgs<ExtArgs> = {}>(args?: Subset<T, Account$documentVersionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DocumentVersionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     documentShares<T extends Account$documentSharesArgs<ExtArgs> = {}>(args?: Subset<T, Account$documentSharesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DocumentSharePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     rollbackRequests<T extends Account$rollbackRequestsArgs<ExtArgs> = {}>(args?: Subset<T, Account$rollbackRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RollbackRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    versionComments<T extends Account$versionCommentsArgs<ExtArgs> = {}>(args?: Subset<T, Account$versionCommentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VersionCommentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -9722,6 +9888,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: RollbackRequestScalarFieldEnum | RollbackRequestScalarFieldEnum[]
+  }
+
+  /**
+   * Account.versionComments
+   */
+  export type Account$versionCommentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VersionComment
+     */
+    select?: VersionCommentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the VersionComment
+     */
+    omit?: VersionCommentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VersionCommentInclude<ExtArgs> | null
+    where?: VersionCommentWhereInput
+    orderBy?: VersionCommentOrderByWithRelationInput | VersionCommentOrderByWithRelationInput[]
+    cursor?: VersionCommentWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: VersionCommentScalarFieldEnum | VersionCommentScalarFieldEnum[]
   }
 
   /**
@@ -73009,6 +73199,8 @@ export namespace Prisma {
     createdAt?: boolean
     document?: boolean | DocumentDefaultArgs<ExtArgs>
     author?: boolean | AccountDefaultArgs<ExtArgs>
+    comments?: boolean | DocumentVersion$commentsArgs<ExtArgs>
+    _count?: boolean | DocumentVersionCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["documentVersion"]>
 
   export type DocumentVersionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -73043,6 +73235,8 @@ export namespace Prisma {
   export type DocumentVersionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     document?: boolean | DocumentDefaultArgs<ExtArgs>
     author?: boolean | AccountDefaultArgs<ExtArgs>
+    comments?: boolean | DocumentVersion$commentsArgs<ExtArgs>
+    _count?: boolean | DocumentVersionCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type DocumentVersionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     document?: boolean | DocumentDefaultArgs<ExtArgs>
@@ -73058,6 +73252,7 @@ export namespace Prisma {
     objects: {
       document: Prisma.$DocumentPayload<ExtArgs>
       author: Prisma.$AccountPayload<ExtArgs>
+      comments: Prisma.$VersionCommentPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       documentId: string
@@ -73461,6 +73656,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     document<T extends DocumentDefaultArgs<ExtArgs> = {}>(args?: Subset<T, DocumentDefaultArgs<ExtArgs>>): Prisma__DocumentClient<$Result.GetResult<Prisma.$DocumentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     author<T extends AccountDefaultArgs<ExtArgs> = {}>(args?: Subset<T, AccountDefaultArgs<ExtArgs>>): Prisma__AccountClient<$Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    comments<T extends DocumentVersion$commentsArgs<ExtArgs> = {}>(args?: Subset<T, DocumentVersion$commentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VersionCommentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -73893,6 +74089,30 @@ export namespace Prisma {
      * Limit how many DocumentVersions to delete.
      */
     limit?: number
+  }
+
+  /**
+   * DocumentVersion.comments
+   */
+  export type DocumentVersion$commentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VersionComment
+     */
+    select?: VersionCommentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the VersionComment
+     */
+    omit?: VersionCommentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VersionCommentInclude<ExtArgs> | null
+    where?: VersionCommentWhereInput
+    orderBy?: VersionCommentOrderByWithRelationInput | VersionCommentOrderByWithRelationInput[]
+    cursor?: VersionCommentWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: VersionCommentScalarFieldEnum | VersionCommentScalarFieldEnum[]
   }
 
   /**
@@ -76065,6 +76285,1194 @@ export namespace Prisma {
 
 
   /**
+   * Model VersionComment
+   */
+
+  export type AggregateVersionComment = {
+    _count: VersionCommentCountAggregateOutputType | null
+    _avg: VersionCommentAvgAggregateOutputType | null
+    _sum: VersionCommentSumAggregateOutputType | null
+    _min: VersionCommentMinAggregateOutputType | null
+    _max: VersionCommentMaxAggregateOutputType | null
+  }
+
+  export type VersionCommentAvgAggregateOutputType = {
+    version: number | null
+  }
+
+  export type VersionCommentSumAggregateOutputType = {
+    version: number | null
+  }
+
+  export type VersionCommentMinAggregateOutputType = {
+    id: string | null
+    documentId: string | null
+    version: number | null
+    authorId: string | null
+    body: string | null
+    parentId: string | null
+    createdAt: Date | null
+  }
+
+  export type VersionCommentMaxAggregateOutputType = {
+    id: string | null
+    documentId: string | null
+    version: number | null
+    authorId: string | null
+    body: string | null
+    parentId: string | null
+    createdAt: Date | null
+  }
+
+  export type VersionCommentCountAggregateOutputType = {
+    id: number
+    documentId: number
+    version: number
+    authorId: number
+    body: number
+    parentId: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type VersionCommentAvgAggregateInputType = {
+    version?: true
+  }
+
+  export type VersionCommentSumAggregateInputType = {
+    version?: true
+  }
+
+  export type VersionCommentMinAggregateInputType = {
+    id?: true
+    documentId?: true
+    version?: true
+    authorId?: true
+    body?: true
+    parentId?: true
+    createdAt?: true
+  }
+
+  export type VersionCommentMaxAggregateInputType = {
+    id?: true
+    documentId?: true
+    version?: true
+    authorId?: true
+    body?: true
+    parentId?: true
+    createdAt?: true
+  }
+
+  export type VersionCommentCountAggregateInputType = {
+    id?: true
+    documentId?: true
+    version?: true
+    authorId?: true
+    body?: true
+    parentId?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type VersionCommentAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which VersionComment to aggregate.
+     */
+    where?: VersionCommentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of VersionComments to fetch.
+     */
+    orderBy?: VersionCommentOrderByWithRelationInput | VersionCommentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: VersionCommentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` VersionComments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` VersionComments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned VersionComments
+    **/
+    _count?: true | VersionCommentCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: VersionCommentAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: VersionCommentSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: VersionCommentMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: VersionCommentMaxAggregateInputType
+  }
+
+  export type GetVersionCommentAggregateType<T extends VersionCommentAggregateArgs> = {
+        [P in keyof T & keyof AggregateVersionComment]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateVersionComment[P]>
+      : GetScalarType<T[P], AggregateVersionComment[P]>
+  }
+
+
+
+
+  export type VersionCommentGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: VersionCommentWhereInput
+    orderBy?: VersionCommentOrderByWithAggregationInput | VersionCommentOrderByWithAggregationInput[]
+    by: VersionCommentScalarFieldEnum[] | VersionCommentScalarFieldEnum
+    having?: VersionCommentScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: VersionCommentCountAggregateInputType | true
+    _avg?: VersionCommentAvgAggregateInputType
+    _sum?: VersionCommentSumAggregateInputType
+    _min?: VersionCommentMinAggregateInputType
+    _max?: VersionCommentMaxAggregateInputType
+  }
+
+  export type VersionCommentGroupByOutputType = {
+    id: string
+    documentId: string
+    version: number
+    authorId: string
+    body: string
+    parentId: string | null
+    createdAt: Date
+    _count: VersionCommentCountAggregateOutputType | null
+    _avg: VersionCommentAvgAggregateOutputType | null
+    _sum: VersionCommentSumAggregateOutputType | null
+    _min: VersionCommentMinAggregateOutputType | null
+    _max: VersionCommentMaxAggregateOutputType | null
+  }
+
+  type GetVersionCommentGroupByPayload<T extends VersionCommentGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<VersionCommentGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof VersionCommentGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], VersionCommentGroupByOutputType[P]>
+            : GetScalarType<T[P], VersionCommentGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type VersionCommentSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    documentId?: boolean
+    version?: boolean
+    authorId?: boolean
+    body?: boolean
+    parentId?: boolean
+    createdAt?: boolean
+    documentVersion?: boolean | DocumentVersionDefaultArgs<ExtArgs>
+    author?: boolean | AccountDefaultArgs<ExtArgs>
+    parent?: boolean | VersionComment$parentArgs<ExtArgs>
+    replies?: boolean | VersionComment$repliesArgs<ExtArgs>
+    _count?: boolean | VersionCommentCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["versionComment"]>
+
+  export type VersionCommentSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    documentId?: boolean
+    version?: boolean
+    authorId?: boolean
+    body?: boolean
+    parentId?: boolean
+    createdAt?: boolean
+    documentVersion?: boolean | DocumentVersionDefaultArgs<ExtArgs>
+    author?: boolean | AccountDefaultArgs<ExtArgs>
+    parent?: boolean | VersionComment$parentArgs<ExtArgs>
+  }, ExtArgs["result"]["versionComment"]>
+
+  export type VersionCommentSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    documentId?: boolean
+    version?: boolean
+    authorId?: boolean
+    body?: boolean
+    parentId?: boolean
+    createdAt?: boolean
+    documentVersion?: boolean | DocumentVersionDefaultArgs<ExtArgs>
+    author?: boolean | AccountDefaultArgs<ExtArgs>
+    parent?: boolean | VersionComment$parentArgs<ExtArgs>
+  }, ExtArgs["result"]["versionComment"]>
+
+  export type VersionCommentSelectScalar = {
+    id?: boolean
+    documentId?: boolean
+    version?: boolean
+    authorId?: boolean
+    body?: boolean
+    parentId?: boolean
+    createdAt?: boolean
+  }
+
+  export type VersionCommentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "documentId" | "version" | "authorId" | "body" | "parentId" | "createdAt", ExtArgs["result"]["versionComment"]>
+  export type VersionCommentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    documentVersion?: boolean | DocumentVersionDefaultArgs<ExtArgs>
+    author?: boolean | AccountDefaultArgs<ExtArgs>
+    parent?: boolean | VersionComment$parentArgs<ExtArgs>
+    replies?: boolean | VersionComment$repliesArgs<ExtArgs>
+    _count?: boolean | VersionCommentCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type VersionCommentIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    documentVersion?: boolean | DocumentVersionDefaultArgs<ExtArgs>
+    author?: boolean | AccountDefaultArgs<ExtArgs>
+    parent?: boolean | VersionComment$parentArgs<ExtArgs>
+  }
+  export type VersionCommentIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    documentVersion?: boolean | DocumentVersionDefaultArgs<ExtArgs>
+    author?: boolean | AccountDefaultArgs<ExtArgs>
+    parent?: boolean | VersionComment$parentArgs<ExtArgs>
+  }
+
+  export type $VersionCommentPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "VersionComment"
+    objects: {
+      documentVersion: Prisma.$DocumentVersionPayload<ExtArgs>
+      author: Prisma.$AccountPayload<ExtArgs>
+      parent: Prisma.$VersionCommentPayload<ExtArgs> | null
+      replies: Prisma.$VersionCommentPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      documentId: string
+      version: number
+      authorId: string
+      body: string
+      parentId: string | null
+      createdAt: Date
+    }, ExtArgs["result"]["versionComment"]>
+    composites: {}
+  }
+
+  type VersionCommentGetPayload<S extends boolean | null | undefined | VersionCommentDefaultArgs> = $Result.GetResult<Prisma.$VersionCommentPayload, S>
+
+  type VersionCommentCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<VersionCommentFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: VersionCommentCountAggregateInputType | true
+    }
+
+  export interface VersionCommentDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['VersionComment'], meta: { name: 'VersionComment' } }
+    /**
+     * Find zero or one VersionComment that matches the filter.
+     * @param {VersionCommentFindUniqueArgs} args - Arguments to find a VersionComment
+     * @example
+     * // Get one VersionComment
+     * const versionComment = await prisma.versionComment.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends VersionCommentFindUniqueArgs>(args: SelectSubset<T, VersionCommentFindUniqueArgs<ExtArgs>>): Prisma__VersionCommentClient<$Result.GetResult<Prisma.$VersionCommentPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one VersionComment that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {VersionCommentFindUniqueOrThrowArgs} args - Arguments to find a VersionComment
+     * @example
+     * // Get one VersionComment
+     * const versionComment = await prisma.versionComment.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends VersionCommentFindUniqueOrThrowArgs>(args: SelectSubset<T, VersionCommentFindUniqueOrThrowArgs<ExtArgs>>): Prisma__VersionCommentClient<$Result.GetResult<Prisma.$VersionCommentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first VersionComment that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VersionCommentFindFirstArgs} args - Arguments to find a VersionComment
+     * @example
+     * // Get one VersionComment
+     * const versionComment = await prisma.versionComment.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends VersionCommentFindFirstArgs>(args?: SelectSubset<T, VersionCommentFindFirstArgs<ExtArgs>>): Prisma__VersionCommentClient<$Result.GetResult<Prisma.$VersionCommentPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first VersionComment that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VersionCommentFindFirstOrThrowArgs} args - Arguments to find a VersionComment
+     * @example
+     * // Get one VersionComment
+     * const versionComment = await prisma.versionComment.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends VersionCommentFindFirstOrThrowArgs>(args?: SelectSubset<T, VersionCommentFindFirstOrThrowArgs<ExtArgs>>): Prisma__VersionCommentClient<$Result.GetResult<Prisma.$VersionCommentPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more VersionComments that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VersionCommentFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all VersionComments
+     * const versionComments = await prisma.versionComment.findMany()
+     * 
+     * // Get first 10 VersionComments
+     * const versionComments = await prisma.versionComment.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const versionCommentWithIdOnly = await prisma.versionComment.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends VersionCommentFindManyArgs>(args?: SelectSubset<T, VersionCommentFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VersionCommentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a VersionComment.
+     * @param {VersionCommentCreateArgs} args - Arguments to create a VersionComment.
+     * @example
+     * // Create one VersionComment
+     * const VersionComment = await prisma.versionComment.create({
+     *   data: {
+     *     // ... data to create a VersionComment
+     *   }
+     * })
+     * 
+     */
+    create<T extends VersionCommentCreateArgs>(args: SelectSubset<T, VersionCommentCreateArgs<ExtArgs>>): Prisma__VersionCommentClient<$Result.GetResult<Prisma.$VersionCommentPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many VersionComments.
+     * @param {VersionCommentCreateManyArgs} args - Arguments to create many VersionComments.
+     * @example
+     * // Create many VersionComments
+     * const versionComment = await prisma.versionComment.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends VersionCommentCreateManyArgs>(args?: SelectSubset<T, VersionCommentCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many VersionComments and returns the data saved in the database.
+     * @param {VersionCommentCreateManyAndReturnArgs} args - Arguments to create many VersionComments.
+     * @example
+     * // Create many VersionComments
+     * const versionComment = await prisma.versionComment.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many VersionComments and only return the `id`
+     * const versionCommentWithIdOnly = await prisma.versionComment.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends VersionCommentCreateManyAndReturnArgs>(args?: SelectSubset<T, VersionCommentCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VersionCommentPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a VersionComment.
+     * @param {VersionCommentDeleteArgs} args - Arguments to delete one VersionComment.
+     * @example
+     * // Delete one VersionComment
+     * const VersionComment = await prisma.versionComment.delete({
+     *   where: {
+     *     // ... filter to delete one VersionComment
+     *   }
+     * })
+     * 
+     */
+    delete<T extends VersionCommentDeleteArgs>(args: SelectSubset<T, VersionCommentDeleteArgs<ExtArgs>>): Prisma__VersionCommentClient<$Result.GetResult<Prisma.$VersionCommentPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one VersionComment.
+     * @param {VersionCommentUpdateArgs} args - Arguments to update one VersionComment.
+     * @example
+     * // Update one VersionComment
+     * const versionComment = await prisma.versionComment.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends VersionCommentUpdateArgs>(args: SelectSubset<T, VersionCommentUpdateArgs<ExtArgs>>): Prisma__VersionCommentClient<$Result.GetResult<Prisma.$VersionCommentPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more VersionComments.
+     * @param {VersionCommentDeleteManyArgs} args - Arguments to filter VersionComments to delete.
+     * @example
+     * // Delete a few VersionComments
+     * const { count } = await prisma.versionComment.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends VersionCommentDeleteManyArgs>(args?: SelectSubset<T, VersionCommentDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more VersionComments.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VersionCommentUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many VersionComments
+     * const versionComment = await prisma.versionComment.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends VersionCommentUpdateManyArgs>(args: SelectSubset<T, VersionCommentUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more VersionComments and returns the data updated in the database.
+     * @param {VersionCommentUpdateManyAndReturnArgs} args - Arguments to update many VersionComments.
+     * @example
+     * // Update many VersionComments
+     * const versionComment = await prisma.versionComment.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more VersionComments and only return the `id`
+     * const versionCommentWithIdOnly = await prisma.versionComment.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends VersionCommentUpdateManyAndReturnArgs>(args: SelectSubset<T, VersionCommentUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VersionCommentPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one VersionComment.
+     * @param {VersionCommentUpsertArgs} args - Arguments to update or create a VersionComment.
+     * @example
+     * // Update or create a VersionComment
+     * const versionComment = await prisma.versionComment.upsert({
+     *   create: {
+     *     // ... data to create a VersionComment
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the VersionComment we want to update
+     *   }
+     * })
+     */
+    upsert<T extends VersionCommentUpsertArgs>(args: SelectSubset<T, VersionCommentUpsertArgs<ExtArgs>>): Prisma__VersionCommentClient<$Result.GetResult<Prisma.$VersionCommentPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of VersionComments.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VersionCommentCountArgs} args - Arguments to filter VersionComments to count.
+     * @example
+     * // Count the number of VersionComments
+     * const count = await prisma.versionComment.count({
+     *   where: {
+     *     // ... the filter for the VersionComments we want to count
+     *   }
+     * })
+    **/
+    count<T extends VersionCommentCountArgs>(
+      args?: Subset<T, VersionCommentCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], VersionCommentCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a VersionComment.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VersionCommentAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends VersionCommentAggregateArgs>(args: Subset<T, VersionCommentAggregateArgs>): Prisma.PrismaPromise<GetVersionCommentAggregateType<T>>
+
+    /**
+     * Group by VersionComment.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VersionCommentGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends VersionCommentGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: VersionCommentGroupByArgs['orderBy'] }
+        : { orderBy?: VersionCommentGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, VersionCommentGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetVersionCommentGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the VersionComment model
+   */
+  readonly fields: VersionCommentFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for VersionComment.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__VersionCommentClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    documentVersion<T extends DocumentVersionDefaultArgs<ExtArgs> = {}>(args?: Subset<T, DocumentVersionDefaultArgs<ExtArgs>>): Prisma__DocumentVersionClient<$Result.GetResult<Prisma.$DocumentVersionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    author<T extends AccountDefaultArgs<ExtArgs> = {}>(args?: Subset<T, AccountDefaultArgs<ExtArgs>>): Prisma__AccountClient<$Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    parent<T extends VersionComment$parentArgs<ExtArgs> = {}>(args?: Subset<T, VersionComment$parentArgs<ExtArgs>>): Prisma__VersionCommentClient<$Result.GetResult<Prisma.$VersionCommentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    replies<T extends VersionComment$repliesArgs<ExtArgs> = {}>(args?: Subset<T, VersionComment$repliesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VersionCommentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the VersionComment model
+   */
+  interface VersionCommentFieldRefs {
+    readonly id: FieldRef<"VersionComment", 'String'>
+    readonly documentId: FieldRef<"VersionComment", 'String'>
+    readonly version: FieldRef<"VersionComment", 'Int'>
+    readonly authorId: FieldRef<"VersionComment", 'String'>
+    readonly body: FieldRef<"VersionComment", 'String'>
+    readonly parentId: FieldRef<"VersionComment", 'String'>
+    readonly createdAt: FieldRef<"VersionComment", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * VersionComment findUnique
+   */
+  export type VersionCommentFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VersionComment
+     */
+    select?: VersionCommentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the VersionComment
+     */
+    omit?: VersionCommentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VersionCommentInclude<ExtArgs> | null
+    /**
+     * Filter, which VersionComment to fetch.
+     */
+    where: VersionCommentWhereUniqueInput
+  }
+
+  /**
+   * VersionComment findUniqueOrThrow
+   */
+  export type VersionCommentFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VersionComment
+     */
+    select?: VersionCommentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the VersionComment
+     */
+    omit?: VersionCommentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VersionCommentInclude<ExtArgs> | null
+    /**
+     * Filter, which VersionComment to fetch.
+     */
+    where: VersionCommentWhereUniqueInput
+  }
+
+  /**
+   * VersionComment findFirst
+   */
+  export type VersionCommentFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VersionComment
+     */
+    select?: VersionCommentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the VersionComment
+     */
+    omit?: VersionCommentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VersionCommentInclude<ExtArgs> | null
+    /**
+     * Filter, which VersionComment to fetch.
+     */
+    where?: VersionCommentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of VersionComments to fetch.
+     */
+    orderBy?: VersionCommentOrderByWithRelationInput | VersionCommentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for VersionComments.
+     */
+    cursor?: VersionCommentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` VersionComments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` VersionComments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of VersionComments.
+     */
+    distinct?: VersionCommentScalarFieldEnum | VersionCommentScalarFieldEnum[]
+  }
+
+  /**
+   * VersionComment findFirstOrThrow
+   */
+  export type VersionCommentFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VersionComment
+     */
+    select?: VersionCommentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the VersionComment
+     */
+    omit?: VersionCommentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VersionCommentInclude<ExtArgs> | null
+    /**
+     * Filter, which VersionComment to fetch.
+     */
+    where?: VersionCommentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of VersionComments to fetch.
+     */
+    orderBy?: VersionCommentOrderByWithRelationInput | VersionCommentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for VersionComments.
+     */
+    cursor?: VersionCommentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` VersionComments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` VersionComments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of VersionComments.
+     */
+    distinct?: VersionCommentScalarFieldEnum | VersionCommentScalarFieldEnum[]
+  }
+
+  /**
+   * VersionComment findMany
+   */
+  export type VersionCommentFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VersionComment
+     */
+    select?: VersionCommentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the VersionComment
+     */
+    omit?: VersionCommentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VersionCommentInclude<ExtArgs> | null
+    /**
+     * Filter, which VersionComments to fetch.
+     */
+    where?: VersionCommentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of VersionComments to fetch.
+     */
+    orderBy?: VersionCommentOrderByWithRelationInput | VersionCommentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing VersionComments.
+     */
+    cursor?: VersionCommentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` VersionComments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` VersionComments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of VersionComments.
+     */
+    distinct?: VersionCommentScalarFieldEnum | VersionCommentScalarFieldEnum[]
+  }
+
+  /**
+   * VersionComment create
+   */
+  export type VersionCommentCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VersionComment
+     */
+    select?: VersionCommentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the VersionComment
+     */
+    omit?: VersionCommentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VersionCommentInclude<ExtArgs> | null
+    /**
+     * The data needed to create a VersionComment.
+     */
+    data: XOR<VersionCommentCreateInput, VersionCommentUncheckedCreateInput>
+  }
+
+  /**
+   * VersionComment createMany
+   */
+  export type VersionCommentCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many VersionComments.
+     */
+    data: VersionCommentCreateManyInput | VersionCommentCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * VersionComment createManyAndReturn
+   */
+  export type VersionCommentCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VersionComment
+     */
+    select?: VersionCommentSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the VersionComment
+     */
+    omit?: VersionCommentOmit<ExtArgs> | null
+    /**
+     * The data used to create many VersionComments.
+     */
+    data: VersionCommentCreateManyInput | VersionCommentCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VersionCommentIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * VersionComment update
+   */
+  export type VersionCommentUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VersionComment
+     */
+    select?: VersionCommentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the VersionComment
+     */
+    omit?: VersionCommentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VersionCommentInclude<ExtArgs> | null
+    /**
+     * The data needed to update a VersionComment.
+     */
+    data: XOR<VersionCommentUpdateInput, VersionCommentUncheckedUpdateInput>
+    /**
+     * Choose, which VersionComment to update.
+     */
+    where: VersionCommentWhereUniqueInput
+  }
+
+  /**
+   * VersionComment updateMany
+   */
+  export type VersionCommentUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update VersionComments.
+     */
+    data: XOR<VersionCommentUpdateManyMutationInput, VersionCommentUncheckedUpdateManyInput>
+    /**
+     * Filter which VersionComments to update
+     */
+    where?: VersionCommentWhereInput
+    /**
+     * Limit how many VersionComments to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * VersionComment updateManyAndReturn
+   */
+  export type VersionCommentUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VersionComment
+     */
+    select?: VersionCommentSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the VersionComment
+     */
+    omit?: VersionCommentOmit<ExtArgs> | null
+    /**
+     * The data used to update VersionComments.
+     */
+    data: XOR<VersionCommentUpdateManyMutationInput, VersionCommentUncheckedUpdateManyInput>
+    /**
+     * Filter which VersionComments to update
+     */
+    where?: VersionCommentWhereInput
+    /**
+     * Limit how many VersionComments to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VersionCommentIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * VersionComment upsert
+   */
+  export type VersionCommentUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VersionComment
+     */
+    select?: VersionCommentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the VersionComment
+     */
+    omit?: VersionCommentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VersionCommentInclude<ExtArgs> | null
+    /**
+     * The filter to search for the VersionComment to update in case it exists.
+     */
+    where: VersionCommentWhereUniqueInput
+    /**
+     * In case the VersionComment found by the `where` argument doesn't exist, create a new VersionComment with this data.
+     */
+    create: XOR<VersionCommentCreateInput, VersionCommentUncheckedCreateInput>
+    /**
+     * In case the VersionComment was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<VersionCommentUpdateInput, VersionCommentUncheckedUpdateInput>
+  }
+
+  /**
+   * VersionComment delete
+   */
+  export type VersionCommentDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VersionComment
+     */
+    select?: VersionCommentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the VersionComment
+     */
+    omit?: VersionCommentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VersionCommentInclude<ExtArgs> | null
+    /**
+     * Filter which VersionComment to delete.
+     */
+    where: VersionCommentWhereUniqueInput
+  }
+
+  /**
+   * VersionComment deleteMany
+   */
+  export type VersionCommentDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which VersionComments to delete
+     */
+    where?: VersionCommentWhereInput
+    /**
+     * Limit how many VersionComments to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * VersionComment.parent
+   */
+  export type VersionComment$parentArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VersionComment
+     */
+    select?: VersionCommentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the VersionComment
+     */
+    omit?: VersionCommentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VersionCommentInclude<ExtArgs> | null
+    where?: VersionCommentWhereInput
+  }
+
+  /**
+   * VersionComment.replies
+   */
+  export type VersionComment$repliesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VersionComment
+     */
+    select?: VersionCommentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the VersionComment
+     */
+    omit?: VersionCommentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VersionCommentInclude<ExtArgs> | null
+    where?: VersionCommentWhereInput
+    orderBy?: VersionCommentOrderByWithRelationInput | VersionCommentOrderByWithRelationInput[]
+    cursor?: VersionCommentWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: VersionCommentScalarFieldEnum | VersionCommentScalarFieldEnum[]
+  }
+
+  /**
+   * VersionComment without action
+   */
+  export type VersionCommentDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VersionComment
+     */
+    select?: VersionCommentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the VersionComment
+     */
+    omit?: VersionCommentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VersionCommentInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -76715,6 +78123,19 @@ export namespace Prisma {
   export type RollbackRequestScalarFieldEnum = (typeof RollbackRequestScalarFieldEnum)[keyof typeof RollbackRequestScalarFieldEnum]
 
 
+  export const VersionCommentScalarFieldEnum: {
+    id: 'id',
+    documentId: 'documentId',
+    version: 'version',
+    authorId: 'authorId',
+    body: 'body',
+    parentId: 'parentId',
+    createdAt: 'createdAt'
+  };
+
+  export type VersionCommentScalarFieldEnum = (typeof VersionCommentScalarFieldEnum)[keyof typeof VersionCommentScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
@@ -77142,6 +78563,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionListRelationFilter
     documentShares?: DocumentShareListRelationFilter
     rollbackRequests?: RollbackRequestListRelationFilter
+    versionComments?: VersionCommentListRelationFilter
   }
 
   export type AccountOrderByWithRelationInput = {
@@ -77183,6 +78605,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionOrderByRelationAggregateInput
     documentShares?: DocumentShareOrderByRelationAggregateInput
     rollbackRequests?: RollbackRequestOrderByRelationAggregateInput
+    versionComments?: VersionCommentOrderByRelationAggregateInput
   }
 
   export type AccountWhereUniqueInput = Prisma.AtLeast<{
@@ -77227,6 +78650,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionListRelationFilter
     documentShares?: DocumentShareListRelationFilter
     rollbackRequests?: RollbackRequestListRelationFilter
+    versionComments?: VersionCommentListRelationFilter
   }, "id" | "email" | "externalId">
 
   export type AccountOrderByWithAggregationInput = {
@@ -80383,6 +81807,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"DocumentVersion"> | Date | string
     document?: XOR<DocumentScalarRelationFilter, DocumentWhereInput>
     author?: XOR<AccountScalarRelationFilter, AccountWhereInput>
+    comments?: VersionCommentListRelationFilter
   }
 
   export type DocumentVersionOrderByWithRelationInput = {
@@ -80393,6 +81818,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     document?: DocumentOrderByWithRelationInput
     author?: AccountOrderByWithRelationInput
+    comments?: VersionCommentOrderByRelationAggregateInput
   }
 
   export type DocumentVersionWhereUniqueInput = Prisma.AtLeast<{
@@ -80407,6 +81833,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"DocumentVersion"> | Date | string
     document?: XOR<DocumentScalarRelationFilter, DocumentWhereInput>
     author?: XOR<AccountScalarRelationFilter, AccountWhereInput>
+    comments?: VersionCommentListRelationFilter
   }, "documentId_version">
 
   export type DocumentVersionOrderByWithAggregationInput = {
@@ -80542,6 +81969,82 @@ export namespace Prisma {
     status?: EnumRollbackStatusWithAggregatesFilter<"RollbackRequest"> | $Enums.RollbackStatus
   }
 
+  export type VersionCommentWhereInput = {
+    AND?: VersionCommentWhereInput | VersionCommentWhereInput[]
+    OR?: VersionCommentWhereInput[]
+    NOT?: VersionCommentWhereInput | VersionCommentWhereInput[]
+    id?: StringFilter<"VersionComment"> | string
+    documentId?: StringFilter<"VersionComment"> | string
+    version?: IntFilter<"VersionComment"> | number
+    authorId?: StringFilter<"VersionComment"> | string
+    body?: StringFilter<"VersionComment"> | string
+    parentId?: StringNullableFilter<"VersionComment"> | string | null
+    createdAt?: DateTimeFilter<"VersionComment"> | Date | string
+    documentVersion?: XOR<DocumentVersionScalarRelationFilter, DocumentVersionWhereInput>
+    author?: XOR<AccountScalarRelationFilter, AccountWhereInput>
+    parent?: XOR<VersionCommentNullableScalarRelationFilter, VersionCommentWhereInput> | null
+    replies?: VersionCommentListRelationFilter
+  }
+
+  export type VersionCommentOrderByWithRelationInput = {
+    id?: SortOrder
+    documentId?: SortOrder
+    version?: SortOrder
+    authorId?: SortOrder
+    body?: SortOrder
+    parentId?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    documentVersion?: DocumentVersionOrderByWithRelationInput
+    author?: AccountOrderByWithRelationInput
+    parent?: VersionCommentOrderByWithRelationInput
+    replies?: VersionCommentOrderByRelationAggregateInput
+  }
+
+  export type VersionCommentWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: VersionCommentWhereInput | VersionCommentWhereInput[]
+    OR?: VersionCommentWhereInput[]
+    NOT?: VersionCommentWhereInput | VersionCommentWhereInput[]
+    documentId?: StringFilter<"VersionComment"> | string
+    version?: IntFilter<"VersionComment"> | number
+    authorId?: StringFilter<"VersionComment"> | string
+    body?: StringFilter<"VersionComment"> | string
+    parentId?: StringNullableFilter<"VersionComment"> | string | null
+    createdAt?: DateTimeFilter<"VersionComment"> | Date | string
+    documentVersion?: XOR<DocumentVersionScalarRelationFilter, DocumentVersionWhereInput>
+    author?: XOR<AccountScalarRelationFilter, AccountWhereInput>
+    parent?: XOR<VersionCommentNullableScalarRelationFilter, VersionCommentWhereInput> | null
+    replies?: VersionCommentListRelationFilter
+  }, "id">
+
+  export type VersionCommentOrderByWithAggregationInput = {
+    id?: SortOrder
+    documentId?: SortOrder
+    version?: SortOrder
+    authorId?: SortOrder
+    body?: SortOrder
+    parentId?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    _count?: VersionCommentCountOrderByAggregateInput
+    _avg?: VersionCommentAvgOrderByAggregateInput
+    _max?: VersionCommentMaxOrderByAggregateInput
+    _min?: VersionCommentMinOrderByAggregateInput
+    _sum?: VersionCommentSumOrderByAggregateInput
+  }
+
+  export type VersionCommentScalarWhereWithAggregatesInput = {
+    AND?: VersionCommentScalarWhereWithAggregatesInput | VersionCommentScalarWhereWithAggregatesInput[]
+    OR?: VersionCommentScalarWhereWithAggregatesInput[]
+    NOT?: VersionCommentScalarWhereWithAggregatesInput | VersionCommentScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"VersionComment"> | string
+    documentId?: StringWithAggregatesFilter<"VersionComment"> | string
+    version?: IntWithAggregatesFilter<"VersionComment"> | number
+    authorId?: StringWithAggregatesFilter<"VersionComment"> | string
+    body?: StringWithAggregatesFilter<"VersionComment"> | string
+    parentId?: StringNullableWithAggregatesFilter<"VersionComment"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"VersionComment"> | Date | string
+  }
+
   export type AccountCreateInput = {
     id?: string
     email: string
@@ -80581,6 +82084,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionCreateNestedManyWithoutAuthorInput
     documentShares?: DocumentShareCreateNestedManyWithoutMemberInput
     rollbackRequests?: RollbackRequestCreateNestedManyWithoutByInput
+    versionComments?: VersionCommentCreateNestedManyWithoutAuthorInput
   }
 
   export type AccountUncheckedCreateInput = {
@@ -80622,6 +82126,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionUncheckedCreateNestedManyWithoutAuthorInput
     documentShares?: DocumentShareUncheckedCreateNestedManyWithoutMemberInput
     rollbackRequests?: RollbackRequestUncheckedCreateNestedManyWithoutByInput
+    versionComments?: VersionCommentUncheckedCreateNestedManyWithoutAuthorInput
   }
 
   export type AccountUpdateInput = {
@@ -80663,6 +82168,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionUpdateManyWithoutAuthorNestedInput
     documentShares?: DocumentShareUpdateManyWithoutMemberNestedInput
     rollbackRequests?: RollbackRequestUpdateManyWithoutByNestedInput
+    versionComments?: VersionCommentUpdateManyWithoutAuthorNestedInput
   }
 
   export type AccountUncheckedUpdateInput = {
@@ -80704,6 +82210,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionUncheckedUpdateManyWithoutAuthorNestedInput
     documentShares?: DocumentShareUncheckedUpdateManyWithoutMemberNestedInput
     rollbackRequests?: RollbackRequestUncheckedUpdateManyWithoutByNestedInput
+    versionComments?: VersionCommentUncheckedUpdateManyWithoutAuthorNestedInput
   }
 
   export type AccountCreateManyInput = {
@@ -83745,6 +85252,7 @@ export namespace Prisma {
     createdAt?: Date | string
     document: DocumentCreateNestedOneWithoutVersionsInput
     author: AccountCreateNestedOneWithoutDocumentVersionsInput
+    comments?: VersionCommentCreateNestedManyWithoutDocumentVersionInput
   }
 
   export type DocumentVersionUncheckedCreateInput = {
@@ -83753,6 +85261,7 @@ export namespace Prisma {
     blobRef: string
     authorId: string
     createdAt?: Date | string
+    comments?: VersionCommentUncheckedCreateNestedManyWithoutDocumentVersionInput
   }
 
   export type DocumentVersionUpdateInput = {
@@ -83761,6 +85270,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     document?: DocumentUpdateOneRequiredWithoutVersionsNestedInput
     author?: AccountUpdateOneRequiredWithoutDocumentVersionsNestedInput
+    comments?: VersionCommentUpdateManyWithoutDocumentVersionNestedInput
   }
 
   export type DocumentVersionUncheckedUpdateInput = {
@@ -83769,6 +85279,7 @@ export namespace Prisma {
     blobRef?: StringFieldUpdateOperationsInput | string
     authorId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    comments?: VersionCommentUncheckedUpdateManyWithoutDocumentVersionNestedInput
   }
 
   export type DocumentVersionCreateManyInput = {
@@ -83885,6 +85396,74 @@ export namespace Prisma {
     targetVersion?: IntFieldUpdateOperationsInput | number
     byId?: StringFieldUpdateOperationsInput | string
     status?: EnumRollbackStatusFieldUpdateOperationsInput | $Enums.RollbackStatus
+  }
+
+  export type VersionCommentCreateInput = {
+    id?: string
+    body: string
+    createdAt?: Date | string
+    documentVersion: DocumentVersionCreateNestedOneWithoutCommentsInput
+    author: AccountCreateNestedOneWithoutVersionCommentsInput
+    parent?: VersionCommentCreateNestedOneWithoutRepliesInput
+    replies?: VersionCommentCreateNestedManyWithoutParentInput
+  }
+
+  export type VersionCommentUncheckedCreateInput = {
+    id?: string
+    documentId: string
+    version: number
+    authorId: string
+    body: string
+    parentId?: string | null
+    createdAt?: Date | string
+    replies?: VersionCommentUncheckedCreateNestedManyWithoutParentInput
+  }
+
+  export type VersionCommentUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    body?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    documentVersion?: DocumentVersionUpdateOneRequiredWithoutCommentsNestedInput
+    author?: AccountUpdateOneRequiredWithoutVersionCommentsNestedInput
+    parent?: VersionCommentUpdateOneWithoutRepliesNestedInput
+    replies?: VersionCommentUpdateManyWithoutParentNestedInput
+  }
+
+  export type VersionCommentUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    documentId?: StringFieldUpdateOperationsInput | string
+    version?: IntFieldUpdateOperationsInput | number
+    authorId?: StringFieldUpdateOperationsInput | string
+    body?: StringFieldUpdateOperationsInput | string
+    parentId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    replies?: VersionCommentUncheckedUpdateManyWithoutParentNestedInput
+  }
+
+  export type VersionCommentCreateManyInput = {
+    id?: string
+    documentId: string
+    version: number
+    authorId: string
+    body: string
+    parentId?: string | null
+    createdAt?: Date | string
+  }
+
+  export type VersionCommentUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    body?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type VersionCommentUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    documentId?: StringFieldUpdateOperationsInput | string
+    version?: IntFieldUpdateOperationsInput | number
+    authorId?: StringFieldUpdateOperationsInput | string
+    body?: StringFieldUpdateOperationsInput | string
+    parentId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -84119,6 +85698,12 @@ export namespace Prisma {
     none?: RollbackRequestWhereInput
   }
 
+  export type VersionCommentListRelationFilter = {
+    every?: VersionCommentWhereInput
+    some?: VersionCommentWhereInput
+    none?: VersionCommentWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -84225,6 +85810,10 @@ export namespace Prisma {
   }
 
   export type RollbackRequestOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type VersionCommentOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -86549,6 +88138,54 @@ export namespace Prisma {
     _max?: NestedEnumRollbackStatusFilter<$PrismaModel>
   }
 
+  export type DocumentVersionScalarRelationFilter = {
+    is?: DocumentVersionWhereInput
+    isNot?: DocumentVersionWhereInput
+  }
+
+  export type VersionCommentNullableScalarRelationFilter = {
+    is?: VersionCommentWhereInput | null
+    isNot?: VersionCommentWhereInput | null
+  }
+
+  export type VersionCommentCountOrderByAggregateInput = {
+    id?: SortOrder
+    documentId?: SortOrder
+    version?: SortOrder
+    authorId?: SortOrder
+    body?: SortOrder
+    parentId?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type VersionCommentAvgOrderByAggregateInput = {
+    version?: SortOrder
+  }
+
+  export type VersionCommentMaxOrderByAggregateInput = {
+    id?: SortOrder
+    documentId?: SortOrder
+    version?: SortOrder
+    authorId?: SortOrder
+    body?: SortOrder
+    parentId?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type VersionCommentMinOrderByAggregateInput = {
+    id?: SortOrder
+    documentId?: SortOrder
+    version?: SortOrder
+    authorId?: SortOrder
+    body?: SortOrder
+    parentId?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type VersionCommentSumOrderByAggregateInput = {
+    version?: SortOrder
+  }
+
   export type PlayerProfileCreateNestedOneWithoutAccountInput = {
     create?: XOR<PlayerProfileCreateWithoutAccountInput, PlayerProfileUncheckedCreateWithoutAccountInput>
     connectOrCreate?: PlayerProfileCreateOrConnectWithoutAccountInput
@@ -86750,6 +88387,13 @@ export namespace Prisma {
     connect?: RollbackRequestWhereUniqueInput | RollbackRequestWhereUniqueInput[]
   }
 
+  export type VersionCommentCreateNestedManyWithoutAuthorInput = {
+    create?: XOR<VersionCommentCreateWithoutAuthorInput, VersionCommentUncheckedCreateWithoutAuthorInput> | VersionCommentCreateWithoutAuthorInput[] | VersionCommentUncheckedCreateWithoutAuthorInput[]
+    connectOrCreate?: VersionCommentCreateOrConnectWithoutAuthorInput | VersionCommentCreateOrConnectWithoutAuthorInput[]
+    createMany?: VersionCommentCreateManyAuthorInputEnvelope
+    connect?: VersionCommentWhereUniqueInput | VersionCommentWhereUniqueInput[]
+  }
+
   export type PlayerProfileUncheckedCreateNestedOneWithoutAccountInput = {
     create?: XOR<PlayerProfileCreateWithoutAccountInput, PlayerProfileUncheckedCreateWithoutAccountInput>
     connectOrCreate?: PlayerProfileCreateOrConnectWithoutAccountInput
@@ -86949,6 +88593,13 @@ export namespace Prisma {
     connectOrCreate?: RollbackRequestCreateOrConnectWithoutByInput | RollbackRequestCreateOrConnectWithoutByInput[]
     createMany?: RollbackRequestCreateManyByInputEnvelope
     connect?: RollbackRequestWhereUniqueInput | RollbackRequestWhereUniqueInput[]
+  }
+
+  export type VersionCommentUncheckedCreateNestedManyWithoutAuthorInput = {
+    create?: XOR<VersionCommentCreateWithoutAuthorInput, VersionCommentUncheckedCreateWithoutAuthorInput> | VersionCommentCreateWithoutAuthorInput[] | VersionCommentUncheckedCreateWithoutAuthorInput[]
+    connectOrCreate?: VersionCommentCreateOrConnectWithoutAuthorInput | VersionCommentCreateOrConnectWithoutAuthorInput[]
+    createMany?: VersionCommentCreateManyAuthorInputEnvelope
+    connect?: VersionCommentWhereUniqueInput | VersionCommentWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -87373,6 +89024,20 @@ export namespace Prisma {
     deleteMany?: RollbackRequestScalarWhereInput | RollbackRequestScalarWhereInput[]
   }
 
+  export type VersionCommentUpdateManyWithoutAuthorNestedInput = {
+    create?: XOR<VersionCommentCreateWithoutAuthorInput, VersionCommentUncheckedCreateWithoutAuthorInput> | VersionCommentCreateWithoutAuthorInput[] | VersionCommentUncheckedCreateWithoutAuthorInput[]
+    connectOrCreate?: VersionCommentCreateOrConnectWithoutAuthorInput | VersionCommentCreateOrConnectWithoutAuthorInput[]
+    upsert?: VersionCommentUpsertWithWhereUniqueWithoutAuthorInput | VersionCommentUpsertWithWhereUniqueWithoutAuthorInput[]
+    createMany?: VersionCommentCreateManyAuthorInputEnvelope
+    set?: VersionCommentWhereUniqueInput | VersionCommentWhereUniqueInput[]
+    disconnect?: VersionCommentWhereUniqueInput | VersionCommentWhereUniqueInput[]
+    delete?: VersionCommentWhereUniqueInput | VersionCommentWhereUniqueInput[]
+    connect?: VersionCommentWhereUniqueInput | VersionCommentWhereUniqueInput[]
+    update?: VersionCommentUpdateWithWhereUniqueWithoutAuthorInput | VersionCommentUpdateWithWhereUniqueWithoutAuthorInput[]
+    updateMany?: VersionCommentUpdateManyWithWhereWithoutAuthorInput | VersionCommentUpdateManyWithWhereWithoutAuthorInput[]
+    deleteMany?: VersionCommentScalarWhereInput | VersionCommentScalarWhereInput[]
+  }
+
   export type PlayerProfileUncheckedUpdateOneWithoutAccountNestedInput = {
     create?: XOR<PlayerProfileCreateWithoutAccountInput, PlayerProfileUncheckedCreateWithoutAccountInput>
     connectOrCreate?: PlayerProfileCreateOrConnectWithoutAccountInput
@@ -87769,6 +89434,20 @@ export namespace Prisma {
     update?: RollbackRequestUpdateWithWhereUniqueWithoutByInput | RollbackRequestUpdateWithWhereUniqueWithoutByInput[]
     updateMany?: RollbackRequestUpdateManyWithWhereWithoutByInput | RollbackRequestUpdateManyWithWhereWithoutByInput[]
     deleteMany?: RollbackRequestScalarWhereInput | RollbackRequestScalarWhereInput[]
+  }
+
+  export type VersionCommentUncheckedUpdateManyWithoutAuthorNestedInput = {
+    create?: XOR<VersionCommentCreateWithoutAuthorInput, VersionCommentUncheckedCreateWithoutAuthorInput> | VersionCommentCreateWithoutAuthorInput[] | VersionCommentUncheckedCreateWithoutAuthorInput[]
+    connectOrCreate?: VersionCommentCreateOrConnectWithoutAuthorInput | VersionCommentCreateOrConnectWithoutAuthorInput[]
+    upsert?: VersionCommentUpsertWithWhereUniqueWithoutAuthorInput | VersionCommentUpsertWithWhereUniqueWithoutAuthorInput[]
+    createMany?: VersionCommentCreateManyAuthorInputEnvelope
+    set?: VersionCommentWhereUniqueInput | VersionCommentWhereUniqueInput[]
+    disconnect?: VersionCommentWhereUniqueInput | VersionCommentWhereUniqueInput[]
+    delete?: VersionCommentWhereUniqueInput | VersionCommentWhereUniqueInput[]
+    connect?: VersionCommentWhereUniqueInput | VersionCommentWhereUniqueInput[]
+    update?: VersionCommentUpdateWithWhereUniqueWithoutAuthorInput | VersionCommentUpdateWithWhereUniqueWithoutAuthorInput[]
+    updateMany?: VersionCommentUpdateManyWithWhereWithoutAuthorInput | VersionCommentUpdateManyWithWhereWithoutAuthorInput[]
+    deleteMany?: VersionCommentScalarWhereInput | VersionCommentScalarWhereInput[]
   }
 
   export type ProjectCreateNestedManyWithoutOrgInput = {
@@ -90369,6 +92048,20 @@ export namespace Prisma {
     connect?: AccountWhereUniqueInput
   }
 
+  export type VersionCommentCreateNestedManyWithoutDocumentVersionInput = {
+    create?: XOR<VersionCommentCreateWithoutDocumentVersionInput, VersionCommentUncheckedCreateWithoutDocumentVersionInput> | VersionCommentCreateWithoutDocumentVersionInput[] | VersionCommentUncheckedCreateWithoutDocumentVersionInput[]
+    connectOrCreate?: VersionCommentCreateOrConnectWithoutDocumentVersionInput | VersionCommentCreateOrConnectWithoutDocumentVersionInput[]
+    createMany?: VersionCommentCreateManyDocumentVersionInputEnvelope
+    connect?: VersionCommentWhereUniqueInput | VersionCommentWhereUniqueInput[]
+  }
+
+  export type VersionCommentUncheckedCreateNestedManyWithoutDocumentVersionInput = {
+    create?: XOR<VersionCommentCreateWithoutDocumentVersionInput, VersionCommentUncheckedCreateWithoutDocumentVersionInput> | VersionCommentCreateWithoutDocumentVersionInput[] | VersionCommentUncheckedCreateWithoutDocumentVersionInput[]
+    connectOrCreate?: VersionCommentCreateOrConnectWithoutDocumentVersionInput | VersionCommentCreateOrConnectWithoutDocumentVersionInput[]
+    createMany?: VersionCommentCreateManyDocumentVersionInputEnvelope
+    connect?: VersionCommentWhereUniqueInput | VersionCommentWhereUniqueInput[]
+  }
+
   export type DocumentUpdateOneRequiredWithoutVersionsNestedInput = {
     create?: XOR<DocumentCreateWithoutVersionsInput, DocumentUncheckedCreateWithoutVersionsInput>
     connectOrCreate?: DocumentCreateOrConnectWithoutVersionsInput
@@ -90383,6 +92076,34 @@ export namespace Prisma {
     upsert?: AccountUpsertWithoutDocumentVersionsInput
     connect?: AccountWhereUniqueInput
     update?: XOR<XOR<AccountUpdateToOneWithWhereWithoutDocumentVersionsInput, AccountUpdateWithoutDocumentVersionsInput>, AccountUncheckedUpdateWithoutDocumentVersionsInput>
+  }
+
+  export type VersionCommentUpdateManyWithoutDocumentVersionNestedInput = {
+    create?: XOR<VersionCommentCreateWithoutDocumentVersionInput, VersionCommentUncheckedCreateWithoutDocumentVersionInput> | VersionCommentCreateWithoutDocumentVersionInput[] | VersionCommentUncheckedCreateWithoutDocumentVersionInput[]
+    connectOrCreate?: VersionCommentCreateOrConnectWithoutDocumentVersionInput | VersionCommentCreateOrConnectWithoutDocumentVersionInput[]
+    upsert?: VersionCommentUpsertWithWhereUniqueWithoutDocumentVersionInput | VersionCommentUpsertWithWhereUniqueWithoutDocumentVersionInput[]
+    createMany?: VersionCommentCreateManyDocumentVersionInputEnvelope
+    set?: VersionCommentWhereUniqueInput | VersionCommentWhereUniqueInput[]
+    disconnect?: VersionCommentWhereUniqueInput | VersionCommentWhereUniqueInput[]
+    delete?: VersionCommentWhereUniqueInput | VersionCommentWhereUniqueInput[]
+    connect?: VersionCommentWhereUniqueInput | VersionCommentWhereUniqueInput[]
+    update?: VersionCommentUpdateWithWhereUniqueWithoutDocumentVersionInput | VersionCommentUpdateWithWhereUniqueWithoutDocumentVersionInput[]
+    updateMany?: VersionCommentUpdateManyWithWhereWithoutDocumentVersionInput | VersionCommentUpdateManyWithWhereWithoutDocumentVersionInput[]
+    deleteMany?: VersionCommentScalarWhereInput | VersionCommentScalarWhereInput[]
+  }
+
+  export type VersionCommentUncheckedUpdateManyWithoutDocumentVersionNestedInput = {
+    create?: XOR<VersionCommentCreateWithoutDocumentVersionInput, VersionCommentUncheckedCreateWithoutDocumentVersionInput> | VersionCommentCreateWithoutDocumentVersionInput[] | VersionCommentUncheckedCreateWithoutDocumentVersionInput[]
+    connectOrCreate?: VersionCommentCreateOrConnectWithoutDocumentVersionInput | VersionCommentCreateOrConnectWithoutDocumentVersionInput[]
+    upsert?: VersionCommentUpsertWithWhereUniqueWithoutDocumentVersionInput | VersionCommentUpsertWithWhereUniqueWithoutDocumentVersionInput[]
+    createMany?: VersionCommentCreateManyDocumentVersionInputEnvelope
+    set?: VersionCommentWhereUniqueInput | VersionCommentWhereUniqueInput[]
+    disconnect?: VersionCommentWhereUniqueInput | VersionCommentWhereUniqueInput[]
+    delete?: VersionCommentWhereUniqueInput | VersionCommentWhereUniqueInput[]
+    connect?: VersionCommentWhereUniqueInput | VersionCommentWhereUniqueInput[]
+    update?: VersionCommentUpdateWithWhereUniqueWithoutDocumentVersionInput | VersionCommentUpdateWithWhereUniqueWithoutDocumentVersionInput[]
+    updateMany?: VersionCommentUpdateManyWithWhereWithoutDocumentVersionInput | VersionCommentUpdateManyWithWhereWithoutDocumentVersionInput[]
+    deleteMany?: VersionCommentScalarWhereInput | VersionCommentScalarWhereInput[]
   }
 
   export type DocumentCreateNestedOneWithoutSharesInput = {
@@ -90443,6 +92164,92 @@ export namespace Prisma {
     upsert?: AccountUpsertWithoutRollbackRequestsInput
     connect?: AccountWhereUniqueInput
     update?: XOR<XOR<AccountUpdateToOneWithWhereWithoutRollbackRequestsInput, AccountUpdateWithoutRollbackRequestsInput>, AccountUncheckedUpdateWithoutRollbackRequestsInput>
+  }
+
+  export type DocumentVersionCreateNestedOneWithoutCommentsInput = {
+    create?: XOR<DocumentVersionCreateWithoutCommentsInput, DocumentVersionUncheckedCreateWithoutCommentsInput>
+    connectOrCreate?: DocumentVersionCreateOrConnectWithoutCommentsInput
+    connect?: DocumentVersionWhereUniqueInput
+  }
+
+  export type AccountCreateNestedOneWithoutVersionCommentsInput = {
+    create?: XOR<AccountCreateWithoutVersionCommentsInput, AccountUncheckedCreateWithoutVersionCommentsInput>
+    connectOrCreate?: AccountCreateOrConnectWithoutVersionCommentsInput
+    connect?: AccountWhereUniqueInput
+  }
+
+  export type VersionCommentCreateNestedOneWithoutRepliesInput = {
+    create?: XOR<VersionCommentCreateWithoutRepliesInput, VersionCommentUncheckedCreateWithoutRepliesInput>
+    connectOrCreate?: VersionCommentCreateOrConnectWithoutRepliesInput
+    connect?: VersionCommentWhereUniqueInput
+  }
+
+  export type VersionCommentCreateNestedManyWithoutParentInput = {
+    create?: XOR<VersionCommentCreateWithoutParentInput, VersionCommentUncheckedCreateWithoutParentInput> | VersionCommentCreateWithoutParentInput[] | VersionCommentUncheckedCreateWithoutParentInput[]
+    connectOrCreate?: VersionCommentCreateOrConnectWithoutParentInput | VersionCommentCreateOrConnectWithoutParentInput[]
+    createMany?: VersionCommentCreateManyParentInputEnvelope
+    connect?: VersionCommentWhereUniqueInput | VersionCommentWhereUniqueInput[]
+  }
+
+  export type VersionCommentUncheckedCreateNestedManyWithoutParentInput = {
+    create?: XOR<VersionCommentCreateWithoutParentInput, VersionCommentUncheckedCreateWithoutParentInput> | VersionCommentCreateWithoutParentInput[] | VersionCommentUncheckedCreateWithoutParentInput[]
+    connectOrCreate?: VersionCommentCreateOrConnectWithoutParentInput | VersionCommentCreateOrConnectWithoutParentInput[]
+    createMany?: VersionCommentCreateManyParentInputEnvelope
+    connect?: VersionCommentWhereUniqueInput | VersionCommentWhereUniqueInput[]
+  }
+
+  export type DocumentVersionUpdateOneRequiredWithoutCommentsNestedInput = {
+    create?: XOR<DocumentVersionCreateWithoutCommentsInput, DocumentVersionUncheckedCreateWithoutCommentsInput>
+    connectOrCreate?: DocumentVersionCreateOrConnectWithoutCommentsInput
+    upsert?: DocumentVersionUpsertWithoutCommentsInput
+    connect?: DocumentVersionWhereUniqueInput
+    update?: XOR<XOR<DocumentVersionUpdateToOneWithWhereWithoutCommentsInput, DocumentVersionUpdateWithoutCommentsInput>, DocumentVersionUncheckedUpdateWithoutCommentsInput>
+  }
+
+  export type AccountUpdateOneRequiredWithoutVersionCommentsNestedInput = {
+    create?: XOR<AccountCreateWithoutVersionCommentsInput, AccountUncheckedCreateWithoutVersionCommentsInput>
+    connectOrCreate?: AccountCreateOrConnectWithoutVersionCommentsInput
+    upsert?: AccountUpsertWithoutVersionCommentsInput
+    connect?: AccountWhereUniqueInput
+    update?: XOR<XOR<AccountUpdateToOneWithWhereWithoutVersionCommentsInput, AccountUpdateWithoutVersionCommentsInput>, AccountUncheckedUpdateWithoutVersionCommentsInput>
+  }
+
+  export type VersionCommentUpdateOneWithoutRepliesNestedInput = {
+    create?: XOR<VersionCommentCreateWithoutRepliesInput, VersionCommentUncheckedCreateWithoutRepliesInput>
+    connectOrCreate?: VersionCommentCreateOrConnectWithoutRepliesInput
+    upsert?: VersionCommentUpsertWithoutRepliesInput
+    disconnect?: VersionCommentWhereInput | boolean
+    delete?: VersionCommentWhereInput | boolean
+    connect?: VersionCommentWhereUniqueInput
+    update?: XOR<XOR<VersionCommentUpdateToOneWithWhereWithoutRepliesInput, VersionCommentUpdateWithoutRepliesInput>, VersionCommentUncheckedUpdateWithoutRepliesInput>
+  }
+
+  export type VersionCommentUpdateManyWithoutParentNestedInput = {
+    create?: XOR<VersionCommentCreateWithoutParentInput, VersionCommentUncheckedCreateWithoutParentInput> | VersionCommentCreateWithoutParentInput[] | VersionCommentUncheckedCreateWithoutParentInput[]
+    connectOrCreate?: VersionCommentCreateOrConnectWithoutParentInput | VersionCommentCreateOrConnectWithoutParentInput[]
+    upsert?: VersionCommentUpsertWithWhereUniqueWithoutParentInput | VersionCommentUpsertWithWhereUniqueWithoutParentInput[]
+    createMany?: VersionCommentCreateManyParentInputEnvelope
+    set?: VersionCommentWhereUniqueInput | VersionCommentWhereUniqueInput[]
+    disconnect?: VersionCommentWhereUniqueInput | VersionCommentWhereUniqueInput[]
+    delete?: VersionCommentWhereUniqueInput | VersionCommentWhereUniqueInput[]
+    connect?: VersionCommentWhereUniqueInput | VersionCommentWhereUniqueInput[]
+    update?: VersionCommentUpdateWithWhereUniqueWithoutParentInput | VersionCommentUpdateWithWhereUniqueWithoutParentInput[]
+    updateMany?: VersionCommentUpdateManyWithWhereWithoutParentInput | VersionCommentUpdateManyWithWhereWithoutParentInput[]
+    deleteMany?: VersionCommentScalarWhereInput | VersionCommentScalarWhereInput[]
+  }
+
+  export type VersionCommentUncheckedUpdateManyWithoutParentNestedInput = {
+    create?: XOR<VersionCommentCreateWithoutParentInput, VersionCommentUncheckedCreateWithoutParentInput> | VersionCommentCreateWithoutParentInput[] | VersionCommentUncheckedCreateWithoutParentInput[]
+    connectOrCreate?: VersionCommentCreateOrConnectWithoutParentInput | VersionCommentCreateOrConnectWithoutParentInput[]
+    upsert?: VersionCommentUpsertWithWhereUniqueWithoutParentInput | VersionCommentUpsertWithWhereUniqueWithoutParentInput[]
+    createMany?: VersionCommentCreateManyParentInputEnvelope
+    set?: VersionCommentWhereUniqueInput | VersionCommentWhereUniqueInput[]
+    disconnect?: VersionCommentWhereUniqueInput | VersionCommentWhereUniqueInput[]
+    delete?: VersionCommentWhereUniqueInput | VersionCommentWhereUniqueInput[]
+    connect?: VersionCommentWhereUniqueInput | VersionCommentWhereUniqueInput[]
+    update?: VersionCommentUpdateWithWhereUniqueWithoutParentInput | VersionCommentUpdateWithWhereUniqueWithoutParentInput[]
+    updateMany?: VersionCommentUpdateManyWithWhereWithoutParentInput | VersionCommentUpdateManyWithWhereWithoutParentInput[]
+    deleteMany?: VersionCommentScalarWhereInput | VersionCommentScalarWhereInput[]
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -91599,6 +93406,7 @@ export namespace Prisma {
     blobRef: string
     createdAt?: Date | string
     document: DocumentCreateNestedOneWithoutVersionsInput
+    comments?: VersionCommentCreateNestedManyWithoutDocumentVersionInput
   }
 
   export type DocumentVersionUncheckedCreateWithoutAuthorInput = {
@@ -91606,6 +93414,7 @@ export namespace Prisma {
     version: number
     blobRef: string
     createdAt?: Date | string
+    comments?: VersionCommentUncheckedCreateNestedManyWithoutDocumentVersionInput
   }
 
   export type DocumentVersionCreateOrConnectWithoutAuthorInput = {
@@ -91659,6 +93468,35 @@ export namespace Prisma {
 
   export type RollbackRequestCreateManyByInputEnvelope = {
     data: RollbackRequestCreateManyByInput | RollbackRequestCreateManyByInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type VersionCommentCreateWithoutAuthorInput = {
+    id?: string
+    body: string
+    createdAt?: Date | string
+    documentVersion: DocumentVersionCreateNestedOneWithoutCommentsInput
+    parent?: VersionCommentCreateNestedOneWithoutRepliesInput
+    replies?: VersionCommentCreateNestedManyWithoutParentInput
+  }
+
+  export type VersionCommentUncheckedCreateWithoutAuthorInput = {
+    id?: string
+    documentId: string
+    version: number
+    body: string
+    parentId?: string | null
+    createdAt?: Date | string
+    replies?: VersionCommentUncheckedCreateNestedManyWithoutParentInput
+  }
+
+  export type VersionCommentCreateOrConnectWithoutAuthorInput = {
+    where: VersionCommentWhereUniqueInput
+    create: XOR<VersionCommentCreateWithoutAuthorInput, VersionCommentUncheckedCreateWithoutAuthorInput>
+  }
+
+  export type VersionCommentCreateManyAuthorInputEnvelope = {
+    data: VersionCommentCreateManyAuthorInput | VersionCommentCreateManyAuthorInput[]
     skipDuplicates?: boolean
   }
 
@@ -92410,6 +94248,35 @@ export namespace Prisma {
     targetVersion?: IntFilter<"RollbackRequest"> | number
     byId?: StringFilter<"RollbackRequest"> | string
     status?: EnumRollbackStatusFilter<"RollbackRequest"> | $Enums.RollbackStatus
+  }
+
+  export type VersionCommentUpsertWithWhereUniqueWithoutAuthorInput = {
+    where: VersionCommentWhereUniqueInput
+    update: XOR<VersionCommentUpdateWithoutAuthorInput, VersionCommentUncheckedUpdateWithoutAuthorInput>
+    create: XOR<VersionCommentCreateWithoutAuthorInput, VersionCommentUncheckedCreateWithoutAuthorInput>
+  }
+
+  export type VersionCommentUpdateWithWhereUniqueWithoutAuthorInput = {
+    where: VersionCommentWhereUniqueInput
+    data: XOR<VersionCommentUpdateWithoutAuthorInput, VersionCommentUncheckedUpdateWithoutAuthorInput>
+  }
+
+  export type VersionCommentUpdateManyWithWhereWithoutAuthorInput = {
+    where: VersionCommentScalarWhereInput
+    data: XOR<VersionCommentUpdateManyMutationInput, VersionCommentUncheckedUpdateManyWithoutAuthorInput>
+  }
+
+  export type VersionCommentScalarWhereInput = {
+    AND?: VersionCommentScalarWhereInput | VersionCommentScalarWhereInput[]
+    OR?: VersionCommentScalarWhereInput[]
+    NOT?: VersionCommentScalarWhereInput | VersionCommentScalarWhereInput[]
+    id?: StringFilter<"VersionComment"> | string
+    documentId?: StringFilter<"VersionComment"> | string
+    version?: IntFilter<"VersionComment"> | number
+    authorId?: StringFilter<"VersionComment"> | string
+    body?: StringFilter<"VersionComment"> | string
+    parentId?: StringNullableFilter<"VersionComment"> | string | null
+    createdAt?: DateTimeFilter<"VersionComment"> | Date | string
   }
 
   export type ProjectCreateWithoutOrgInput = {
@@ -93254,6 +95121,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionCreateNestedManyWithoutAuthorInput
     documentShares?: DocumentShareCreateNestedManyWithoutMemberInput
     rollbackRequests?: RollbackRequestCreateNestedManyWithoutByInput
+    versionComments?: VersionCommentCreateNestedManyWithoutAuthorInput
   }
 
   export type AccountUncheckedCreateWithoutAccountAppsInput = {
@@ -93294,6 +95162,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionUncheckedCreateNestedManyWithoutAuthorInput
     documentShares?: DocumentShareUncheckedCreateNestedManyWithoutMemberInput
     rollbackRequests?: RollbackRequestUncheckedCreateNestedManyWithoutByInput
+    versionComments?: VersionCommentUncheckedCreateNestedManyWithoutAuthorInput
   }
 
   export type AccountCreateOrConnectWithoutAccountAppsInput = {
@@ -93385,6 +95254,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionUpdateManyWithoutAuthorNestedInput
     documentShares?: DocumentShareUpdateManyWithoutMemberNestedInput
     rollbackRequests?: RollbackRequestUpdateManyWithoutByNestedInput
+    versionComments?: VersionCommentUpdateManyWithoutAuthorNestedInput
   }
 
   export type AccountUncheckedUpdateWithoutAccountAppsInput = {
@@ -93425,6 +95295,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionUncheckedUpdateManyWithoutAuthorNestedInput
     documentShares?: DocumentShareUncheckedUpdateManyWithoutMemberNestedInput
     rollbackRequests?: RollbackRequestUncheckedUpdateManyWithoutByNestedInput
+    versionComments?: VersionCommentUncheckedUpdateManyWithoutAuthorNestedInput
   }
 
   export type AppUpsertWithoutAccountAppsInput = {
@@ -93506,6 +95377,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionCreateNestedManyWithoutAuthorInput
     documentShares?: DocumentShareCreateNestedManyWithoutMemberInput
     rollbackRequests?: RollbackRequestCreateNestedManyWithoutByInput
+    versionComments?: VersionCommentCreateNestedManyWithoutAuthorInput
   }
 
   export type AccountUncheckedCreateWithoutSessionsInput = {
@@ -93546,6 +95418,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionUncheckedCreateNestedManyWithoutAuthorInput
     documentShares?: DocumentShareUncheckedCreateNestedManyWithoutMemberInput
     rollbackRequests?: RollbackRequestUncheckedCreateNestedManyWithoutByInput
+    versionComments?: VersionCommentUncheckedCreateNestedManyWithoutAuthorInput
   }
 
   export type AccountCreateOrConnectWithoutSessionsInput = {
@@ -93602,6 +95475,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionUpdateManyWithoutAuthorNestedInput
     documentShares?: DocumentShareUpdateManyWithoutMemberNestedInput
     rollbackRequests?: RollbackRequestUpdateManyWithoutByNestedInput
+    versionComments?: VersionCommentUpdateManyWithoutAuthorNestedInput
   }
 
   export type AccountUncheckedUpdateWithoutSessionsInput = {
@@ -93642,6 +95516,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionUncheckedUpdateManyWithoutAuthorNestedInput
     documentShares?: DocumentShareUncheckedUpdateManyWithoutMemberNestedInput
     rollbackRequests?: RollbackRequestUncheckedUpdateManyWithoutByNestedInput
+    versionComments?: VersionCommentUncheckedUpdateManyWithoutAuthorNestedInput
   }
 
   export type AccountCreateWithoutPlayerProfileInput = {
@@ -93682,6 +95557,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionCreateNestedManyWithoutAuthorInput
     documentShares?: DocumentShareCreateNestedManyWithoutMemberInput
     rollbackRequests?: RollbackRequestCreateNestedManyWithoutByInput
+    versionComments?: VersionCommentCreateNestedManyWithoutAuthorInput
   }
 
   export type AccountUncheckedCreateWithoutPlayerProfileInput = {
@@ -93722,6 +95598,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionUncheckedCreateNestedManyWithoutAuthorInput
     documentShares?: DocumentShareUncheckedCreateNestedManyWithoutMemberInput
     rollbackRequests?: RollbackRequestUncheckedCreateNestedManyWithoutByInput
+    versionComments?: VersionCommentUncheckedCreateNestedManyWithoutAuthorInput
   }
 
   export type AccountCreateOrConnectWithoutPlayerProfileInput = {
@@ -93778,6 +95655,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionUpdateManyWithoutAuthorNestedInput
     documentShares?: DocumentShareUpdateManyWithoutMemberNestedInput
     rollbackRequests?: RollbackRequestUpdateManyWithoutByNestedInput
+    versionComments?: VersionCommentUpdateManyWithoutAuthorNestedInput
   }
 
   export type AccountUncheckedUpdateWithoutPlayerProfileInput = {
@@ -93818,6 +95696,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionUncheckedUpdateManyWithoutAuthorNestedInput
     documentShares?: DocumentShareUncheckedUpdateManyWithoutMemberNestedInput
     rollbackRequests?: RollbackRequestUncheckedUpdateManyWithoutByNestedInput
+    versionComments?: VersionCommentUncheckedUpdateManyWithoutAuthorNestedInput
   }
 
   export type AccountCreateWithoutMembershipsInput = {
@@ -93858,6 +95737,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionCreateNestedManyWithoutAuthorInput
     documentShares?: DocumentShareCreateNestedManyWithoutMemberInput
     rollbackRequests?: RollbackRequestCreateNestedManyWithoutByInput
+    versionComments?: VersionCommentCreateNestedManyWithoutAuthorInput
   }
 
   export type AccountUncheckedCreateWithoutMembershipsInput = {
@@ -93898,6 +95778,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionUncheckedCreateNestedManyWithoutAuthorInput
     documentShares?: DocumentShareUncheckedCreateNestedManyWithoutMemberInput
     rollbackRequests?: RollbackRequestUncheckedCreateNestedManyWithoutByInput
+    versionComments?: VersionCommentUncheckedCreateNestedManyWithoutAuthorInput
   }
 
   export type AccountCreateOrConnectWithoutMembershipsInput = {
@@ -94023,6 +95904,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionUpdateManyWithoutAuthorNestedInput
     documentShares?: DocumentShareUpdateManyWithoutMemberNestedInput
     rollbackRequests?: RollbackRequestUpdateManyWithoutByNestedInput
+    versionComments?: VersionCommentUpdateManyWithoutAuthorNestedInput
   }
 
   export type AccountUncheckedUpdateWithoutMembershipsInput = {
@@ -94063,6 +95945,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionUncheckedUpdateManyWithoutAuthorNestedInput
     documentShares?: DocumentShareUncheckedUpdateManyWithoutMemberNestedInput
     rollbackRequests?: RollbackRequestUncheckedUpdateManyWithoutByNestedInput
+    versionComments?: VersionCommentUncheckedUpdateManyWithoutAuthorNestedInput
   }
 
   export type OrgUpsertWithoutMembersInput = {
@@ -94414,6 +96297,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionCreateNestedManyWithoutAuthorInput
     documentShares?: DocumentShareCreateNestedManyWithoutMemberInput
     rollbackRequests?: RollbackRequestCreateNestedManyWithoutByInput
+    versionComments?: VersionCommentCreateNestedManyWithoutAuthorInput
   }
 
   export type AccountUncheckedCreateWithoutWalletInput = {
@@ -94454,6 +96338,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionUncheckedCreateNestedManyWithoutAuthorInput
     documentShares?: DocumentShareUncheckedCreateNestedManyWithoutMemberInput
     rollbackRequests?: RollbackRequestUncheckedCreateNestedManyWithoutByInput
+    versionComments?: VersionCommentUncheckedCreateNestedManyWithoutAuthorInput
   }
 
   export type AccountCreateOrConnectWithoutWalletInput = {
@@ -94510,6 +96395,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionUpdateManyWithoutAuthorNestedInput
     documentShares?: DocumentShareUpdateManyWithoutMemberNestedInput
     rollbackRequests?: RollbackRequestUpdateManyWithoutByNestedInput
+    versionComments?: VersionCommentUpdateManyWithoutAuthorNestedInput
   }
 
   export type AccountUncheckedUpdateWithoutWalletInput = {
@@ -94550,6 +96436,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionUncheckedUpdateManyWithoutAuthorNestedInput
     documentShares?: DocumentShareUncheckedUpdateManyWithoutMemberNestedInput
     rollbackRequests?: RollbackRequestUncheckedUpdateManyWithoutByNestedInput
+    versionComments?: VersionCommentUncheckedUpdateManyWithoutAuthorNestedInput
   }
 
   export type AccountCreateWithoutCoinLedgerInput = {
@@ -94590,6 +96477,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionCreateNestedManyWithoutAuthorInput
     documentShares?: DocumentShareCreateNestedManyWithoutMemberInput
     rollbackRequests?: RollbackRequestCreateNestedManyWithoutByInput
+    versionComments?: VersionCommentCreateNestedManyWithoutAuthorInput
   }
 
   export type AccountUncheckedCreateWithoutCoinLedgerInput = {
@@ -94630,6 +96518,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionUncheckedCreateNestedManyWithoutAuthorInput
     documentShares?: DocumentShareUncheckedCreateNestedManyWithoutMemberInput
     rollbackRequests?: RollbackRequestUncheckedCreateNestedManyWithoutByInput
+    versionComments?: VersionCommentUncheckedCreateNestedManyWithoutAuthorInput
   }
 
   export type AccountCreateOrConnectWithoutCoinLedgerInput = {
@@ -94686,6 +96575,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionUpdateManyWithoutAuthorNestedInput
     documentShares?: DocumentShareUpdateManyWithoutMemberNestedInput
     rollbackRequests?: RollbackRequestUpdateManyWithoutByNestedInput
+    versionComments?: VersionCommentUpdateManyWithoutAuthorNestedInput
   }
 
   export type AccountUncheckedUpdateWithoutCoinLedgerInput = {
@@ -94726,6 +96616,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionUncheckedUpdateManyWithoutAuthorNestedInput
     documentShares?: DocumentShareUncheckedUpdateManyWithoutMemberNestedInput
     rollbackRequests?: RollbackRequestUncheckedUpdateManyWithoutByNestedInput
+    versionComments?: VersionCommentUncheckedUpdateManyWithoutAuthorNestedInput
   }
 
   export type ProductCreateWithoutCategoryInput = {
@@ -95164,6 +97055,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionCreateNestedManyWithoutAuthorInput
     documentShares?: DocumentShareCreateNestedManyWithoutMemberInput
     rollbackRequests?: RollbackRequestCreateNestedManyWithoutByInput
+    versionComments?: VersionCommentCreateNestedManyWithoutAuthorInput
   }
 
   export type AccountUncheckedCreateWithoutTransactionsInput = {
@@ -95204,6 +97096,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionUncheckedCreateNestedManyWithoutAuthorInput
     documentShares?: DocumentShareUncheckedCreateNestedManyWithoutMemberInput
     rollbackRequests?: RollbackRequestUncheckedCreateNestedManyWithoutByInput
+    versionComments?: VersionCommentUncheckedCreateNestedManyWithoutAuthorInput
   }
 
   export type AccountCreateOrConnectWithoutTransactionsInput = {
@@ -95308,6 +97201,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionUpdateManyWithoutAuthorNestedInput
     documentShares?: DocumentShareUpdateManyWithoutMemberNestedInput
     rollbackRequests?: RollbackRequestUpdateManyWithoutByNestedInput
+    versionComments?: VersionCommentUpdateManyWithoutAuthorNestedInput
   }
 
   export type AccountUncheckedUpdateWithoutTransactionsInput = {
@@ -95348,6 +97242,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionUncheckedUpdateManyWithoutAuthorNestedInput
     documentShares?: DocumentShareUncheckedUpdateManyWithoutMemberNestedInput
     rollbackRequests?: RollbackRequestUncheckedUpdateManyWithoutByNestedInput
+    versionComments?: VersionCommentUncheckedUpdateManyWithoutAuthorNestedInput
   }
 
   export type ProductUpsertWithoutTransactionsInput = {
@@ -95556,6 +97451,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionCreateNestedManyWithoutAuthorInput
     documentShares?: DocumentShareCreateNestedManyWithoutMemberInput
     rollbackRequests?: RollbackRequestCreateNestedManyWithoutByInput
+    versionComments?: VersionCommentCreateNestedManyWithoutAuthorInput
   }
 
   export type AccountUncheckedCreateWithoutRefundRequestsInput = {
@@ -95596,6 +97492,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionUncheckedCreateNestedManyWithoutAuthorInput
     documentShares?: DocumentShareUncheckedCreateNestedManyWithoutMemberInput
     rollbackRequests?: RollbackRequestUncheckedCreateNestedManyWithoutByInput
+    versionComments?: VersionCommentUncheckedCreateNestedManyWithoutAuthorInput
   }
 
   export type AccountCreateOrConnectWithoutRefundRequestsInput = {
@@ -95681,6 +97578,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionUpdateManyWithoutAuthorNestedInput
     documentShares?: DocumentShareUpdateManyWithoutMemberNestedInput
     rollbackRequests?: RollbackRequestUpdateManyWithoutByNestedInput
+    versionComments?: VersionCommentUpdateManyWithoutAuthorNestedInput
   }
 
   export type AccountUncheckedUpdateWithoutRefundRequestsInput = {
@@ -95721,6 +97619,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionUncheckedUpdateManyWithoutAuthorNestedInput
     documentShares?: DocumentShareUncheckedUpdateManyWithoutMemberNestedInput
     rollbackRequests?: RollbackRequestUncheckedUpdateManyWithoutByNestedInput
+    versionComments?: VersionCommentUncheckedUpdateManyWithoutAuthorNestedInput
   }
 
   export type AccountCreateWithoutReviewsInput = {
@@ -95761,6 +97660,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionCreateNestedManyWithoutAuthorInput
     documentShares?: DocumentShareCreateNestedManyWithoutMemberInput
     rollbackRequests?: RollbackRequestCreateNestedManyWithoutByInput
+    versionComments?: VersionCommentCreateNestedManyWithoutAuthorInput
   }
 
   export type AccountUncheckedCreateWithoutReviewsInput = {
@@ -95801,6 +97701,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionUncheckedCreateNestedManyWithoutAuthorInput
     documentShares?: DocumentShareUncheckedCreateNestedManyWithoutMemberInput
     rollbackRequests?: RollbackRequestUncheckedCreateNestedManyWithoutByInput
+    versionComments?: VersionCommentUncheckedCreateNestedManyWithoutAuthorInput
   }
 
   export type AccountCreateOrConnectWithoutReviewsInput = {
@@ -95888,6 +97789,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionUpdateManyWithoutAuthorNestedInput
     documentShares?: DocumentShareUpdateManyWithoutMemberNestedInput
     rollbackRequests?: RollbackRequestUpdateManyWithoutByNestedInput
+    versionComments?: VersionCommentUpdateManyWithoutAuthorNestedInput
   }
 
   export type AccountUncheckedUpdateWithoutReviewsInput = {
@@ -95928,6 +97830,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionUncheckedUpdateManyWithoutAuthorNestedInput
     documentShares?: DocumentShareUncheckedUpdateManyWithoutMemberNestedInput
     rollbackRequests?: RollbackRequestUncheckedUpdateManyWithoutByNestedInput
+    versionComments?: VersionCommentUncheckedUpdateManyWithoutAuthorNestedInput
   }
 
   export type ProductUpsertWithoutReviewsInput = {
@@ -96056,6 +97959,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionCreateNestedManyWithoutAuthorInput
     documentShares?: DocumentShareCreateNestedManyWithoutMemberInput
     rollbackRequests?: RollbackRequestCreateNestedManyWithoutByInput
+    versionComments?: VersionCommentCreateNestedManyWithoutAuthorInput
   }
 
   export type AccountUncheckedCreateWithoutDemoParticipationsInput = {
@@ -96096,6 +98000,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionUncheckedCreateNestedManyWithoutAuthorInput
     documentShares?: DocumentShareUncheckedCreateNestedManyWithoutMemberInput
     rollbackRequests?: RollbackRequestUncheckedCreateNestedManyWithoutByInput
+    versionComments?: VersionCommentUncheckedCreateNestedManyWithoutAuthorInput
   }
 
   export type AccountCreateOrConnectWithoutDemoParticipationsInput = {
@@ -96173,6 +98078,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionUpdateManyWithoutAuthorNestedInput
     documentShares?: DocumentShareUpdateManyWithoutMemberNestedInput
     rollbackRequests?: RollbackRequestUpdateManyWithoutByNestedInput
+    versionComments?: VersionCommentUpdateManyWithoutAuthorNestedInput
   }
 
   export type AccountUncheckedUpdateWithoutDemoParticipationsInput = {
@@ -96213,6 +98119,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionUncheckedUpdateManyWithoutAuthorNestedInput
     documentShares?: DocumentShareUncheckedUpdateManyWithoutMemberNestedInput
     rollbackRequests?: RollbackRequestUncheckedUpdateManyWithoutByNestedInput
+    versionComments?: VersionCommentUncheckedUpdateManyWithoutAuthorNestedInput
   }
 
   export type RedeemGrantCreateWithoutCodeInput = {
@@ -96308,6 +98215,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionCreateNestedManyWithoutAuthorInput
     documentShares?: DocumentShareCreateNestedManyWithoutMemberInput
     rollbackRequests?: RollbackRequestCreateNestedManyWithoutByInput
+    versionComments?: VersionCommentCreateNestedManyWithoutAuthorInput
   }
 
   export type AccountUncheckedCreateWithoutRedeemGrantsInput = {
@@ -96348,6 +98256,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionUncheckedCreateNestedManyWithoutAuthorInput
     documentShares?: DocumentShareUncheckedCreateNestedManyWithoutMemberInput
     rollbackRequests?: RollbackRequestUncheckedCreateNestedManyWithoutByInput
+    versionComments?: VersionCommentUncheckedCreateNestedManyWithoutAuthorInput
   }
 
   export type AccountCreateOrConnectWithoutRedeemGrantsInput = {
@@ -96431,6 +98340,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionUpdateManyWithoutAuthorNestedInput
     documentShares?: DocumentShareUpdateManyWithoutMemberNestedInput
     rollbackRequests?: RollbackRequestUpdateManyWithoutByNestedInput
+    versionComments?: VersionCommentUpdateManyWithoutAuthorNestedInput
   }
 
   export type AccountUncheckedUpdateWithoutRedeemGrantsInput = {
@@ -96471,6 +98381,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionUncheckedUpdateManyWithoutAuthorNestedInput
     documentShares?: DocumentShareUncheckedUpdateManyWithoutMemberNestedInput
     rollbackRequests?: RollbackRequestUncheckedUpdateManyWithoutByNestedInput
+    versionComments?: VersionCommentUncheckedUpdateManyWithoutAuthorNestedInput
   }
 
   export type AppCreateWithoutBuildsInput = {
@@ -96587,6 +98498,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionCreateNestedManyWithoutAuthorInput
     documentShares?: DocumentShareCreateNestedManyWithoutMemberInput
     rollbackRequests?: RollbackRequestCreateNestedManyWithoutByInput
+    versionComments?: VersionCommentCreateNestedManyWithoutAuthorInput
   }
 
   export type AccountUncheckedCreateWithoutEntitlementsInput = {
@@ -96627,6 +98539,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionUncheckedCreateNestedManyWithoutAuthorInput
     documentShares?: DocumentShareUncheckedCreateNestedManyWithoutMemberInput
     rollbackRequests?: RollbackRequestUncheckedCreateNestedManyWithoutByInput
+    versionComments?: VersionCommentUncheckedCreateNestedManyWithoutAuthorInput
   }
 
   export type AccountCreateOrConnectWithoutEntitlementsInput = {
@@ -96714,6 +98627,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionUpdateManyWithoutAuthorNestedInput
     documentShares?: DocumentShareUpdateManyWithoutMemberNestedInput
     rollbackRequests?: RollbackRequestUpdateManyWithoutByNestedInput
+    versionComments?: VersionCommentUpdateManyWithoutAuthorNestedInput
   }
 
   export type AccountUncheckedUpdateWithoutEntitlementsInput = {
@@ -96754,6 +98668,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionUncheckedUpdateManyWithoutAuthorNestedInput
     documentShares?: DocumentShareUncheckedUpdateManyWithoutMemberNestedInput
     rollbackRequests?: RollbackRequestUncheckedUpdateManyWithoutByNestedInput
+    versionComments?: VersionCommentUncheckedUpdateManyWithoutAuthorNestedInput
   }
 
   export type ProductUpsertWithoutEntitlementsInput = {
@@ -96831,6 +98746,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionCreateNestedManyWithoutAuthorInput
     documentShares?: DocumentShareCreateNestedManyWithoutMemberInput
     rollbackRequests?: RollbackRequestCreateNestedManyWithoutByInput
+    versionComments?: VersionCommentCreateNestedManyWithoutAuthorInput
   }
 
   export type AccountUncheckedCreateWithoutFriendshipsSentInput = {
@@ -96871,6 +98787,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionUncheckedCreateNestedManyWithoutAuthorInput
     documentShares?: DocumentShareUncheckedCreateNestedManyWithoutMemberInput
     rollbackRequests?: RollbackRequestUncheckedCreateNestedManyWithoutByInput
+    versionComments?: VersionCommentUncheckedCreateNestedManyWithoutAuthorInput
   }
 
   export type AccountCreateOrConnectWithoutFriendshipsSentInput = {
@@ -96916,6 +98833,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionCreateNestedManyWithoutAuthorInput
     documentShares?: DocumentShareCreateNestedManyWithoutMemberInput
     rollbackRequests?: RollbackRequestCreateNestedManyWithoutByInput
+    versionComments?: VersionCommentCreateNestedManyWithoutAuthorInput
   }
 
   export type AccountUncheckedCreateWithoutFriendshipsReceivedInput = {
@@ -96956,6 +98874,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionUncheckedCreateNestedManyWithoutAuthorInput
     documentShares?: DocumentShareUncheckedCreateNestedManyWithoutMemberInput
     rollbackRequests?: RollbackRequestUncheckedCreateNestedManyWithoutByInput
+    versionComments?: VersionCommentUncheckedCreateNestedManyWithoutAuthorInput
   }
 
   export type AccountCreateOrConnectWithoutFriendshipsReceivedInput = {
@@ -97012,6 +98931,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionUpdateManyWithoutAuthorNestedInput
     documentShares?: DocumentShareUpdateManyWithoutMemberNestedInput
     rollbackRequests?: RollbackRequestUpdateManyWithoutByNestedInput
+    versionComments?: VersionCommentUpdateManyWithoutAuthorNestedInput
   }
 
   export type AccountUncheckedUpdateWithoutFriendshipsSentInput = {
@@ -97052,6 +98972,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionUncheckedUpdateManyWithoutAuthorNestedInput
     documentShares?: DocumentShareUncheckedUpdateManyWithoutMemberNestedInput
     rollbackRequests?: RollbackRequestUncheckedUpdateManyWithoutByNestedInput
+    versionComments?: VersionCommentUncheckedUpdateManyWithoutAuthorNestedInput
   }
 
   export type AccountUpsertWithoutFriendshipsReceivedInput = {
@@ -97103,6 +99024,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionUpdateManyWithoutAuthorNestedInput
     documentShares?: DocumentShareUpdateManyWithoutMemberNestedInput
     rollbackRequests?: RollbackRequestUpdateManyWithoutByNestedInput
+    versionComments?: VersionCommentUpdateManyWithoutAuthorNestedInput
   }
 
   export type AccountUncheckedUpdateWithoutFriendshipsReceivedInput = {
@@ -97143,6 +99065,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionUncheckedUpdateManyWithoutAuthorNestedInput
     documentShares?: DocumentShareUncheckedUpdateManyWithoutMemberNestedInput
     rollbackRequests?: RollbackRequestUncheckedUpdateManyWithoutByNestedInput
+    versionComments?: VersionCommentUncheckedUpdateManyWithoutAuthorNestedInput
   }
 
   export type AppCreateWithoutLeaderboardsInput = {
@@ -97320,6 +99243,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionCreateNestedManyWithoutAuthorInput
     documentShares?: DocumentShareCreateNestedManyWithoutMemberInput
     rollbackRequests?: RollbackRequestCreateNestedManyWithoutByInput
+    versionComments?: VersionCommentCreateNestedManyWithoutAuthorInput
   }
 
   export type AccountUncheckedCreateWithoutScoresInput = {
@@ -97360,6 +99284,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionUncheckedCreateNestedManyWithoutAuthorInput
     documentShares?: DocumentShareUncheckedCreateNestedManyWithoutMemberInput
     rollbackRequests?: RollbackRequestUncheckedCreateNestedManyWithoutByInput
+    versionComments?: VersionCommentUncheckedCreateNestedManyWithoutAuthorInput
   }
 
   export type AccountCreateOrConnectWithoutScoresInput = {
@@ -97443,6 +99368,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionUpdateManyWithoutAuthorNestedInput
     documentShares?: DocumentShareUpdateManyWithoutMemberNestedInput
     rollbackRequests?: RollbackRequestUpdateManyWithoutByNestedInput
+    versionComments?: VersionCommentUpdateManyWithoutAuthorNestedInput
   }
 
   export type AccountUncheckedUpdateWithoutScoresInput = {
@@ -97483,6 +99409,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionUncheckedUpdateManyWithoutAuthorNestedInput
     documentShares?: DocumentShareUncheckedUpdateManyWithoutMemberNestedInput
     rollbackRequests?: RollbackRequestUncheckedUpdateManyWithoutByNestedInput
+    versionComments?: VersionCommentUncheckedUpdateManyWithoutAuthorNestedInput
   }
 
   export type AppCreateWithoutAchievementGroupsInput = {
@@ -97739,6 +99666,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionCreateNestedManyWithoutAuthorInput
     documentShares?: DocumentShareCreateNestedManyWithoutMemberInput
     rollbackRequests?: RollbackRequestCreateNestedManyWithoutByInput
+    versionComments?: VersionCommentCreateNestedManyWithoutAuthorInput
   }
 
   export type AccountUncheckedCreateWithoutAchievementUnlocksInput = {
@@ -97779,6 +99707,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionUncheckedCreateNestedManyWithoutAuthorInput
     documentShares?: DocumentShareUncheckedCreateNestedManyWithoutMemberInput
     rollbackRequests?: RollbackRequestUncheckedCreateNestedManyWithoutByInput
+    versionComments?: VersionCommentUncheckedCreateNestedManyWithoutAuthorInput
   }
 
   export type AccountCreateOrConnectWithoutAchievementUnlocksInput = {
@@ -97858,6 +99787,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionUpdateManyWithoutAuthorNestedInput
     documentShares?: DocumentShareUpdateManyWithoutMemberNestedInput
     rollbackRequests?: RollbackRequestUpdateManyWithoutByNestedInput
+    versionComments?: VersionCommentUpdateManyWithoutAuthorNestedInput
   }
 
   export type AccountUncheckedUpdateWithoutAchievementUnlocksInput = {
@@ -97898,6 +99828,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionUncheckedUpdateManyWithoutAuthorNestedInput
     documentShares?: DocumentShareUncheckedUpdateManyWithoutMemberNestedInput
     rollbackRequests?: RollbackRequestUncheckedUpdateManyWithoutByNestedInput
+    versionComments?: VersionCommentUncheckedUpdateManyWithoutAuthorNestedInput
   }
 
   export type AccountCreateWithoutGameStatusesInput = {
@@ -97938,6 +99869,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionCreateNestedManyWithoutAuthorInput
     documentShares?: DocumentShareCreateNestedManyWithoutMemberInput
     rollbackRequests?: RollbackRequestCreateNestedManyWithoutByInput
+    versionComments?: VersionCommentCreateNestedManyWithoutAuthorInput
   }
 
   export type AccountUncheckedCreateWithoutGameStatusesInput = {
@@ -97978,6 +99910,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionUncheckedCreateNestedManyWithoutAuthorInput
     documentShares?: DocumentShareUncheckedCreateNestedManyWithoutMemberInput
     rollbackRequests?: RollbackRequestUncheckedCreateNestedManyWithoutByInput
+    versionComments?: VersionCommentUncheckedCreateNestedManyWithoutAuthorInput
   }
 
   export type AccountCreateOrConnectWithoutGameStatusesInput = {
@@ -98069,6 +100002,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionUpdateManyWithoutAuthorNestedInput
     documentShares?: DocumentShareUpdateManyWithoutMemberNestedInput
     rollbackRequests?: RollbackRequestUpdateManyWithoutByNestedInput
+    versionComments?: VersionCommentUpdateManyWithoutAuthorNestedInput
   }
 
   export type AccountUncheckedUpdateWithoutGameStatusesInput = {
@@ -98109,6 +100043,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionUncheckedUpdateManyWithoutAuthorNestedInput
     documentShares?: DocumentShareUncheckedUpdateManyWithoutMemberNestedInput
     rollbackRequests?: RollbackRequestUncheckedUpdateManyWithoutByNestedInput
+    versionComments?: VersionCommentUncheckedUpdateManyWithoutAuthorNestedInput
   }
 
   export type AppUpsertWithoutGameStatusesInput = {
@@ -98370,6 +100305,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionCreateNestedManyWithoutAuthorInput
     documentShares?: DocumentShareCreateNestedManyWithoutMemberInput
     rollbackRequests?: RollbackRequestCreateNestedManyWithoutByInput
+    versionComments?: VersionCommentCreateNestedManyWithoutAuthorInput
   }
 
   export type AccountUncheckedCreateWithoutNotificationSettingsInput = {
@@ -98410,6 +100346,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionUncheckedCreateNestedManyWithoutAuthorInput
     documentShares?: DocumentShareUncheckedCreateNestedManyWithoutMemberInput
     rollbackRequests?: RollbackRequestUncheckedCreateNestedManyWithoutByInput
+    versionComments?: VersionCommentUncheckedCreateNestedManyWithoutAuthorInput
   }
 
   export type AccountCreateOrConnectWithoutNotificationSettingsInput = {
@@ -98466,6 +100403,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionUpdateManyWithoutAuthorNestedInput
     documentShares?: DocumentShareUpdateManyWithoutMemberNestedInput
     rollbackRequests?: RollbackRequestUpdateManyWithoutByNestedInput
+    versionComments?: VersionCommentUpdateManyWithoutAuthorNestedInput
   }
 
   export type AccountUncheckedUpdateWithoutNotificationSettingsInput = {
@@ -98506,6 +100444,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionUncheckedUpdateManyWithoutAuthorNestedInput
     documentShares?: DocumentShareUncheckedUpdateManyWithoutMemberNestedInput
     rollbackRequests?: RollbackRequestUncheckedUpdateManyWithoutByNestedInput
+    versionComments?: VersionCommentUncheckedUpdateManyWithoutAuthorNestedInput
   }
 
   export type AppCreateWithoutNoticesInput = {
@@ -98698,6 +100637,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionCreateNestedManyWithoutAuthorInput
     documentShares?: DocumentShareCreateNestedManyWithoutMemberInput
     rollbackRequests?: RollbackRequestCreateNestedManyWithoutByInput
+    versionComments?: VersionCommentCreateNestedManyWithoutAuthorInput
   }
 
   export type AccountUncheckedCreateWithoutRemindersInput = {
@@ -98738,6 +100678,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionUncheckedCreateNestedManyWithoutAuthorInput
     documentShares?: DocumentShareUncheckedCreateNestedManyWithoutMemberInput
     rollbackRequests?: RollbackRequestUncheckedCreateNestedManyWithoutByInput
+    versionComments?: VersionCommentUncheckedCreateNestedManyWithoutAuthorInput
   }
 
   export type AccountCreateOrConnectWithoutRemindersInput = {
@@ -98794,6 +100735,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionUpdateManyWithoutAuthorNestedInput
     documentShares?: DocumentShareUpdateManyWithoutMemberNestedInput
     rollbackRequests?: RollbackRequestUpdateManyWithoutByNestedInput
+    versionComments?: VersionCommentUpdateManyWithoutAuthorNestedInput
   }
 
   export type AccountUncheckedUpdateWithoutRemindersInput = {
@@ -98834,6 +100776,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionUncheckedUpdateManyWithoutAuthorNestedInput
     documentShares?: DocumentShareUncheckedUpdateManyWithoutMemberNestedInput
     rollbackRequests?: RollbackRequestUncheckedUpdateManyWithoutByNestedInput
+    versionComments?: VersionCommentUncheckedUpdateManyWithoutAuthorNestedInput
   }
 
   export type ConsentCreateWithoutTermsInput = {
@@ -98910,6 +100853,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionCreateNestedManyWithoutAuthorInput
     documentShares?: DocumentShareCreateNestedManyWithoutMemberInput
     rollbackRequests?: RollbackRequestCreateNestedManyWithoutByInput
+    versionComments?: VersionCommentCreateNestedManyWithoutAuthorInput
   }
 
   export type AccountUncheckedCreateWithoutConsentsInput = {
@@ -98950,6 +100894,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionUncheckedCreateNestedManyWithoutAuthorInput
     documentShares?: DocumentShareUncheckedCreateNestedManyWithoutMemberInput
     rollbackRequests?: RollbackRequestUncheckedCreateNestedManyWithoutByInput
+    versionComments?: VersionCommentUncheckedCreateNestedManyWithoutAuthorInput
   }
 
   export type AccountCreateOrConnectWithoutConsentsInput = {
@@ -99027,6 +100972,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionUpdateManyWithoutAuthorNestedInput
     documentShares?: DocumentShareUpdateManyWithoutMemberNestedInput
     rollbackRequests?: RollbackRequestUpdateManyWithoutByNestedInput
+    versionComments?: VersionCommentUpdateManyWithoutAuthorNestedInput
   }
 
   export type AccountUncheckedUpdateWithoutConsentsInput = {
@@ -99067,6 +101013,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionUncheckedUpdateManyWithoutAuthorNestedInput
     documentShares?: DocumentShareUncheckedUpdateManyWithoutMemberNestedInput
     rollbackRequests?: RollbackRequestUncheckedUpdateManyWithoutByNestedInput
+    versionComments?: VersionCommentUncheckedUpdateManyWithoutAuthorNestedInput
   }
 
   export type TermsUpsertWithoutConsentsInput = {
@@ -99134,6 +101081,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionCreateNestedManyWithoutAuthorInput
     documentShares?: DocumentShareCreateNestedManyWithoutMemberInput
     rollbackRequests?: RollbackRequestCreateNestedManyWithoutByInput
+    versionComments?: VersionCommentCreateNestedManyWithoutAuthorInput
   }
 
   export type AccountUncheckedCreateWithoutAuditLogsInput = {
@@ -99174,6 +101122,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionUncheckedCreateNestedManyWithoutAuthorInput
     documentShares?: DocumentShareUncheckedCreateNestedManyWithoutMemberInput
     rollbackRequests?: RollbackRequestUncheckedCreateNestedManyWithoutByInput
+    versionComments?: VersionCommentUncheckedCreateNestedManyWithoutAuthorInput
   }
 
   export type AccountCreateOrConnectWithoutAuditLogsInput = {
@@ -99230,6 +101179,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionUpdateManyWithoutAuthorNestedInput
     documentShares?: DocumentShareUpdateManyWithoutMemberNestedInput
     rollbackRequests?: RollbackRequestUpdateManyWithoutByNestedInput
+    versionComments?: VersionCommentUpdateManyWithoutAuthorNestedInput
   }
 
   export type AccountUncheckedUpdateWithoutAuditLogsInput = {
@@ -99270,6 +101220,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionUncheckedUpdateManyWithoutAuthorNestedInput
     documentShares?: DocumentShareUncheckedUpdateManyWithoutMemberNestedInput
     rollbackRequests?: RollbackRequestUncheckedUpdateManyWithoutByNestedInput
+    versionComments?: VersionCommentUncheckedUpdateManyWithoutAuthorNestedInput
   }
 
   export type ChatParticipantCreateWithoutThreadInput = {
@@ -99441,6 +101392,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionCreateNestedManyWithoutAuthorInput
     documentShares?: DocumentShareCreateNestedManyWithoutMemberInput
     rollbackRequests?: RollbackRequestCreateNestedManyWithoutByInput
+    versionComments?: VersionCommentCreateNestedManyWithoutAuthorInput
   }
 
   export type AccountUncheckedCreateWithoutChatParticipationsInput = {
@@ -99481,6 +101433,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionUncheckedCreateNestedManyWithoutAuthorInput
     documentShares?: DocumentShareUncheckedCreateNestedManyWithoutMemberInput
     rollbackRequests?: RollbackRequestUncheckedCreateNestedManyWithoutByInput
+    versionComments?: VersionCommentUncheckedCreateNestedManyWithoutAuthorInput
   }
 
   export type AccountCreateOrConnectWithoutChatParticipationsInput = {
@@ -99564,6 +101517,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionUpdateManyWithoutAuthorNestedInput
     documentShares?: DocumentShareUpdateManyWithoutMemberNestedInput
     rollbackRequests?: RollbackRequestUpdateManyWithoutByNestedInput
+    versionComments?: VersionCommentUpdateManyWithoutAuthorNestedInput
   }
 
   export type AccountUncheckedUpdateWithoutChatParticipationsInput = {
@@ -99604,6 +101558,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionUncheckedUpdateManyWithoutAuthorNestedInput
     documentShares?: DocumentShareUncheckedUpdateManyWithoutMemberNestedInput
     rollbackRequests?: RollbackRequestUncheckedUpdateManyWithoutByNestedInput
+    versionComments?: VersionCommentUncheckedUpdateManyWithoutAuthorNestedInput
   }
 
   export type ChatThreadCreateWithoutMessagesInput = {
@@ -99665,6 +101620,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionCreateNestedManyWithoutAuthorInput
     documentShares?: DocumentShareCreateNestedManyWithoutMemberInput
     rollbackRequests?: RollbackRequestCreateNestedManyWithoutByInput
+    versionComments?: VersionCommentCreateNestedManyWithoutAuthorInput
   }
 
   export type AccountUncheckedCreateWithoutSentMessagesInput = {
@@ -99705,6 +101661,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionUncheckedCreateNestedManyWithoutAuthorInput
     documentShares?: DocumentShareUncheckedCreateNestedManyWithoutMemberInput
     rollbackRequests?: RollbackRequestUncheckedCreateNestedManyWithoutByInput
+    versionComments?: VersionCommentUncheckedCreateNestedManyWithoutAuthorInput
   }
 
   export type AccountCreateOrConnectWithoutSentMessagesInput = {
@@ -99788,6 +101745,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionUpdateManyWithoutAuthorNestedInput
     documentShares?: DocumentShareUpdateManyWithoutMemberNestedInput
     rollbackRequests?: RollbackRequestUpdateManyWithoutByNestedInput
+    versionComments?: VersionCommentUpdateManyWithoutAuthorNestedInput
   }
 
   export type AccountUncheckedUpdateWithoutSentMessagesInput = {
@@ -99828,6 +101786,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionUncheckedUpdateManyWithoutAuthorNestedInput
     documentShares?: DocumentShareUncheckedUpdateManyWithoutMemberNestedInput
     rollbackRequests?: RollbackRequestUncheckedUpdateManyWithoutByNestedInput
+    versionComments?: VersionCommentUncheckedUpdateManyWithoutAuthorNestedInput
   }
 
   export type ChatThreadCreateWithoutTicketMetaInput = {
@@ -99889,6 +101848,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionCreateNestedManyWithoutAuthorInput
     documentShares?: DocumentShareCreateNestedManyWithoutMemberInput
     rollbackRequests?: RollbackRequestCreateNestedManyWithoutByInput
+    versionComments?: VersionCommentCreateNestedManyWithoutAuthorInput
   }
 
   export type AccountUncheckedCreateWithoutAssignedTicketsInput = {
@@ -99929,6 +101889,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionUncheckedCreateNestedManyWithoutAuthorInput
     documentShares?: DocumentShareUncheckedCreateNestedManyWithoutMemberInput
     rollbackRequests?: RollbackRequestUncheckedCreateNestedManyWithoutByInput
+    versionComments?: VersionCommentUncheckedCreateNestedManyWithoutAuthorInput
   }
 
   export type AccountCreateOrConnectWithoutAssignedTicketsInput = {
@@ -100012,6 +101973,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionUpdateManyWithoutAuthorNestedInput
     documentShares?: DocumentShareUpdateManyWithoutMemberNestedInput
     rollbackRequests?: RollbackRequestUpdateManyWithoutByNestedInput
+    versionComments?: VersionCommentUpdateManyWithoutAuthorNestedInput
   }
 
   export type AccountUncheckedUpdateWithoutAssignedTicketsInput = {
@@ -100052,6 +102014,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionUncheckedUpdateManyWithoutAuthorNestedInput
     documentShares?: DocumentShareUncheckedUpdateManyWithoutMemberNestedInput
     rollbackRequests?: RollbackRequestUncheckedUpdateManyWithoutByNestedInput
+    versionComments?: VersionCommentUncheckedUpdateManyWithoutAuthorNestedInput
   }
 
   export type AccountCreateWithoutCalendarEventsInput = {
@@ -100092,6 +102055,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionCreateNestedManyWithoutAuthorInput
     documentShares?: DocumentShareCreateNestedManyWithoutMemberInput
     rollbackRequests?: RollbackRequestCreateNestedManyWithoutByInput
+    versionComments?: VersionCommentCreateNestedManyWithoutAuthorInput
   }
 
   export type AccountUncheckedCreateWithoutCalendarEventsInput = {
@@ -100132,6 +102096,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionUncheckedCreateNestedManyWithoutAuthorInput
     documentShares?: DocumentShareUncheckedCreateNestedManyWithoutMemberInput
     rollbackRequests?: RollbackRequestUncheckedCreateNestedManyWithoutByInput
+    versionComments?: VersionCommentUncheckedCreateNestedManyWithoutAuthorInput
   }
 
   export type AccountCreateOrConnectWithoutCalendarEventsInput = {
@@ -100220,6 +102185,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionUpdateManyWithoutAuthorNestedInput
     documentShares?: DocumentShareUpdateManyWithoutMemberNestedInput
     rollbackRequests?: RollbackRequestUpdateManyWithoutByNestedInput
+    versionComments?: VersionCommentUpdateManyWithoutAuthorNestedInput
   }
 
   export type AccountUncheckedUpdateWithoutCalendarEventsInput = {
@@ -100260,6 +102226,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionUncheckedUpdateManyWithoutAuthorNestedInput
     documentShares?: DocumentShareUncheckedUpdateManyWithoutMemberNestedInput
     rollbackRequests?: RollbackRequestUncheckedUpdateManyWithoutByNestedInput
+    versionComments?: VersionCommentUncheckedUpdateManyWithoutAuthorNestedInput
   }
 
   export type TaskUpsertWithWhereUniqueWithoutCalendarEventInput = {
@@ -100316,6 +102283,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionCreateNestedManyWithoutAuthorInput
     documentShares?: DocumentShareCreateNestedManyWithoutMemberInput
     rollbackRequests?: RollbackRequestCreateNestedManyWithoutByInput
+    versionComments?: VersionCommentCreateNestedManyWithoutAuthorInput
   }
 
   export type AccountUncheckedCreateWithoutTasksInput = {
@@ -100356,6 +102324,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionUncheckedCreateNestedManyWithoutAuthorInput
     documentShares?: DocumentShareUncheckedCreateNestedManyWithoutMemberInput
     rollbackRequests?: RollbackRequestUncheckedCreateNestedManyWithoutByInput
+    versionComments?: VersionCommentUncheckedCreateNestedManyWithoutAuthorInput
   }
 
   export type AccountCreateOrConnectWithoutTasksInput = {
@@ -100435,6 +102404,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionUpdateManyWithoutAuthorNestedInput
     documentShares?: DocumentShareUpdateManyWithoutMemberNestedInput
     rollbackRequests?: RollbackRequestUpdateManyWithoutByNestedInput
+    versionComments?: VersionCommentUpdateManyWithoutAuthorNestedInput
   }
 
   export type AccountUncheckedUpdateWithoutTasksInput = {
@@ -100475,6 +102445,7 @@ export namespace Prisma {
     documentVersions?: DocumentVersionUncheckedUpdateManyWithoutAuthorNestedInput
     documentShares?: DocumentShareUncheckedUpdateManyWithoutMemberNestedInput
     rollbackRequests?: RollbackRequestUncheckedUpdateManyWithoutByNestedInput
+    versionComments?: VersionCommentUncheckedUpdateManyWithoutAuthorNestedInput
   }
 
   export type CalendarEventUpsertWithoutTasksInput = {
@@ -100511,6 +102482,7 @@ export namespace Prisma {
     blobRef: string
     createdAt?: Date | string
     author: AccountCreateNestedOneWithoutDocumentVersionsInput
+    comments?: VersionCommentCreateNestedManyWithoutDocumentVersionInput
   }
 
   export type DocumentVersionUncheckedCreateWithoutDocumentInput = {
@@ -100518,6 +102490,7 @@ export namespace Prisma {
     blobRef: string
     authorId: string
     createdAt?: Date | string
+    comments?: VersionCommentUncheckedCreateNestedManyWithoutDocumentVersionInput
   }
 
   export type DocumentVersionCreateOrConnectWithoutDocumentInput = {
@@ -100683,6 +102656,7 @@ export namespace Prisma {
     tasks?: TaskCreateNestedManyWithoutAssigneeInput
     documentShares?: DocumentShareCreateNestedManyWithoutMemberInput
     rollbackRequests?: RollbackRequestCreateNestedManyWithoutByInput
+    versionComments?: VersionCommentCreateNestedManyWithoutAuthorInput
   }
 
   export type AccountUncheckedCreateWithoutDocumentVersionsInput = {
@@ -100723,11 +102697,40 @@ export namespace Prisma {
     tasks?: TaskUncheckedCreateNestedManyWithoutAssigneeInput
     documentShares?: DocumentShareUncheckedCreateNestedManyWithoutMemberInput
     rollbackRequests?: RollbackRequestUncheckedCreateNestedManyWithoutByInput
+    versionComments?: VersionCommentUncheckedCreateNestedManyWithoutAuthorInput
   }
 
   export type AccountCreateOrConnectWithoutDocumentVersionsInput = {
     where: AccountWhereUniqueInput
     create: XOR<AccountCreateWithoutDocumentVersionsInput, AccountUncheckedCreateWithoutDocumentVersionsInput>
+  }
+
+  export type VersionCommentCreateWithoutDocumentVersionInput = {
+    id?: string
+    body: string
+    createdAt?: Date | string
+    author: AccountCreateNestedOneWithoutVersionCommentsInput
+    parent?: VersionCommentCreateNestedOneWithoutRepliesInput
+    replies?: VersionCommentCreateNestedManyWithoutParentInput
+  }
+
+  export type VersionCommentUncheckedCreateWithoutDocumentVersionInput = {
+    id?: string
+    authorId: string
+    body: string
+    parentId?: string | null
+    createdAt?: Date | string
+    replies?: VersionCommentUncheckedCreateNestedManyWithoutParentInput
+  }
+
+  export type VersionCommentCreateOrConnectWithoutDocumentVersionInput = {
+    where: VersionCommentWhereUniqueInput
+    create: XOR<VersionCommentCreateWithoutDocumentVersionInput, VersionCommentUncheckedCreateWithoutDocumentVersionInput>
+  }
+
+  export type VersionCommentCreateManyDocumentVersionInputEnvelope = {
+    data: VersionCommentCreateManyDocumentVersionInput | VersionCommentCreateManyDocumentVersionInput[]
+    skipDuplicates?: boolean
   }
 
   export type DocumentUpsertWithoutVersionsInput = {
@@ -100808,6 +102811,7 @@ export namespace Prisma {
     tasks?: TaskUpdateManyWithoutAssigneeNestedInput
     documentShares?: DocumentShareUpdateManyWithoutMemberNestedInput
     rollbackRequests?: RollbackRequestUpdateManyWithoutByNestedInput
+    versionComments?: VersionCommentUpdateManyWithoutAuthorNestedInput
   }
 
   export type AccountUncheckedUpdateWithoutDocumentVersionsInput = {
@@ -100848,6 +102852,23 @@ export namespace Prisma {
     tasks?: TaskUncheckedUpdateManyWithoutAssigneeNestedInput
     documentShares?: DocumentShareUncheckedUpdateManyWithoutMemberNestedInput
     rollbackRequests?: RollbackRequestUncheckedUpdateManyWithoutByNestedInput
+    versionComments?: VersionCommentUncheckedUpdateManyWithoutAuthorNestedInput
+  }
+
+  export type VersionCommentUpsertWithWhereUniqueWithoutDocumentVersionInput = {
+    where: VersionCommentWhereUniqueInput
+    update: XOR<VersionCommentUpdateWithoutDocumentVersionInput, VersionCommentUncheckedUpdateWithoutDocumentVersionInput>
+    create: XOR<VersionCommentCreateWithoutDocumentVersionInput, VersionCommentUncheckedCreateWithoutDocumentVersionInput>
+  }
+
+  export type VersionCommentUpdateWithWhereUniqueWithoutDocumentVersionInput = {
+    where: VersionCommentWhereUniqueInput
+    data: XOR<VersionCommentUpdateWithoutDocumentVersionInput, VersionCommentUncheckedUpdateWithoutDocumentVersionInput>
+  }
+
+  export type VersionCommentUpdateManyWithWhereWithoutDocumentVersionInput = {
+    where: VersionCommentScalarWhereInput
+    data: XOR<VersionCommentUpdateManyMutationInput, VersionCommentUncheckedUpdateManyWithoutDocumentVersionInput>
   }
 
   export type DocumentCreateWithoutSharesInput = {
@@ -100911,6 +102932,7 @@ export namespace Prisma {
     tasks?: TaskCreateNestedManyWithoutAssigneeInput
     documentVersions?: DocumentVersionCreateNestedManyWithoutAuthorInput
     rollbackRequests?: RollbackRequestCreateNestedManyWithoutByInput
+    versionComments?: VersionCommentCreateNestedManyWithoutAuthorInput
   }
 
   export type AccountUncheckedCreateWithoutDocumentSharesInput = {
@@ -100951,6 +102973,7 @@ export namespace Prisma {
     tasks?: TaskUncheckedCreateNestedManyWithoutAssigneeInput
     documentVersions?: DocumentVersionUncheckedCreateNestedManyWithoutAuthorInput
     rollbackRequests?: RollbackRequestUncheckedCreateNestedManyWithoutByInput
+    versionComments?: VersionCommentUncheckedCreateNestedManyWithoutAuthorInput
   }
 
   export type AccountCreateOrConnectWithoutDocumentSharesInput = {
@@ -101036,6 +103059,7 @@ export namespace Prisma {
     tasks?: TaskUpdateManyWithoutAssigneeNestedInput
     documentVersions?: DocumentVersionUpdateManyWithoutAuthorNestedInput
     rollbackRequests?: RollbackRequestUpdateManyWithoutByNestedInput
+    versionComments?: VersionCommentUpdateManyWithoutAuthorNestedInput
   }
 
   export type AccountUncheckedUpdateWithoutDocumentSharesInput = {
@@ -101076,6 +103100,7 @@ export namespace Prisma {
     tasks?: TaskUncheckedUpdateManyWithoutAssigneeNestedInput
     documentVersions?: DocumentVersionUncheckedUpdateManyWithoutAuthorNestedInput
     rollbackRequests?: RollbackRequestUncheckedUpdateManyWithoutByNestedInput
+    versionComments?: VersionCommentUncheckedUpdateManyWithoutAuthorNestedInput
   }
 
   export type DocumentCreateWithoutRollbacksInput = {
@@ -101139,6 +103164,7 @@ export namespace Prisma {
     tasks?: TaskCreateNestedManyWithoutAssigneeInput
     documentVersions?: DocumentVersionCreateNestedManyWithoutAuthorInput
     documentShares?: DocumentShareCreateNestedManyWithoutMemberInput
+    versionComments?: VersionCommentCreateNestedManyWithoutAuthorInput
   }
 
   export type AccountUncheckedCreateWithoutRollbackRequestsInput = {
@@ -101179,6 +103205,7 @@ export namespace Prisma {
     tasks?: TaskUncheckedCreateNestedManyWithoutAssigneeInput
     documentVersions?: DocumentVersionUncheckedCreateNestedManyWithoutAuthorInput
     documentShares?: DocumentShareUncheckedCreateNestedManyWithoutMemberInput
+    versionComments?: VersionCommentUncheckedCreateNestedManyWithoutAuthorInput
   }
 
   export type AccountCreateOrConnectWithoutRollbackRequestsInput = {
@@ -101264,6 +103291,7 @@ export namespace Prisma {
     tasks?: TaskUpdateManyWithoutAssigneeNestedInput
     documentVersions?: DocumentVersionUpdateManyWithoutAuthorNestedInput
     documentShares?: DocumentShareUpdateManyWithoutMemberNestedInput
+    versionComments?: VersionCommentUpdateManyWithoutAuthorNestedInput
   }
 
   export type AccountUncheckedUpdateWithoutRollbackRequestsInput = {
@@ -101304,6 +103332,334 @@ export namespace Prisma {
     tasks?: TaskUncheckedUpdateManyWithoutAssigneeNestedInput
     documentVersions?: DocumentVersionUncheckedUpdateManyWithoutAuthorNestedInput
     documentShares?: DocumentShareUncheckedUpdateManyWithoutMemberNestedInput
+    versionComments?: VersionCommentUncheckedUpdateManyWithoutAuthorNestedInput
+  }
+
+  export type DocumentVersionCreateWithoutCommentsInput = {
+    version: number
+    blobRef: string
+    createdAt?: Date | string
+    document: DocumentCreateNestedOneWithoutVersionsInput
+    author: AccountCreateNestedOneWithoutDocumentVersionsInput
+  }
+
+  export type DocumentVersionUncheckedCreateWithoutCommentsInput = {
+    documentId: string
+    version: number
+    blobRef: string
+    authorId: string
+    createdAt?: Date | string
+  }
+
+  export type DocumentVersionCreateOrConnectWithoutCommentsInput = {
+    where: DocumentVersionWhereUniqueInput
+    create: XOR<DocumentVersionCreateWithoutCommentsInput, DocumentVersionUncheckedCreateWithoutCommentsInput>
+  }
+
+  export type AccountCreateWithoutVersionCommentsInput = {
+    id?: string
+    email: string
+    passwordHash?: string | null
+    status?: $Enums.AccountStatus
+    createdAt?: Date | string
+    authProvider?: $Enums.AuthProvider
+    externalId?: string | null
+    resetCode?: string | null
+    resetCodeExpiresAt?: Date | string | null
+    playerProfile?: PlayerProfileCreateNestedOneWithoutAccountInput
+    sessions?: SessionCreateNestedManyWithoutAccountInput
+    memberships?: MemberCreateNestedManyWithoutAccountInput
+    accountApps?: AccountAppCreateNestedManyWithoutAccountInput
+    wallet?: WalletCreateNestedOneWithoutAccountInput
+    coinLedger?: CoinLedgerCreateNestedManyWithoutAccountInput
+    transactions?: TransactionCreateNestedManyWithoutAccountInput
+    reviews?: ReviewCreateNestedManyWithoutAccountInput
+    demoParticipations?: DemoParticipationCreateNestedManyWithoutAccountInput
+    redeemGrants?: RedeemGrantCreateNestedManyWithoutAccountInput
+    entitlements?: EntitlementCreateNestedManyWithoutAccountInput
+    refundRequests?: RefundRequestCreateNestedManyWithoutRequesterInput
+    friendshipsSent?: FriendshipCreateNestedManyWithoutRequesterInput
+    friendshipsReceived?: FriendshipCreateNestedManyWithoutAddresseeInput
+    scores?: ScoreCreateNestedManyWithoutAccountInput
+    achievementUnlocks?: AchievementUnlockCreateNestedManyWithoutAccountInput
+    gameStatuses?: GameStatusCreateNestedManyWithoutAccountInput
+    notificationSettings?: NotificationSettingCreateNestedManyWithoutAccountInput
+    reminders?: ReminderCreateNestedManyWithoutAccountInput
+    consents?: ConsentCreateNestedManyWithoutAccountInput
+    auditLogs?: AuditLogCreateNestedManyWithoutActorInput
+    chatParticipations?: ChatParticipantCreateNestedManyWithoutAccountInput
+    sentMessages?: ChatMessageCreateNestedManyWithoutSenderInput
+    assignedTickets?: TicketMetaCreateNestedManyWithoutAssigneeInput
+    calendarEvents?: CalendarEventCreateNestedManyWithoutOwnerInput
+    tasks?: TaskCreateNestedManyWithoutAssigneeInput
+    documentVersions?: DocumentVersionCreateNestedManyWithoutAuthorInput
+    documentShares?: DocumentShareCreateNestedManyWithoutMemberInput
+    rollbackRequests?: RollbackRequestCreateNestedManyWithoutByInput
+  }
+
+  export type AccountUncheckedCreateWithoutVersionCommentsInput = {
+    id?: string
+    email: string
+    passwordHash?: string | null
+    status?: $Enums.AccountStatus
+    createdAt?: Date | string
+    authProvider?: $Enums.AuthProvider
+    externalId?: string | null
+    resetCode?: string | null
+    resetCodeExpiresAt?: Date | string | null
+    playerProfile?: PlayerProfileUncheckedCreateNestedOneWithoutAccountInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutAccountInput
+    memberships?: MemberUncheckedCreateNestedManyWithoutAccountInput
+    accountApps?: AccountAppUncheckedCreateNestedManyWithoutAccountInput
+    wallet?: WalletUncheckedCreateNestedOneWithoutAccountInput
+    coinLedger?: CoinLedgerUncheckedCreateNestedManyWithoutAccountInput
+    transactions?: TransactionUncheckedCreateNestedManyWithoutAccountInput
+    reviews?: ReviewUncheckedCreateNestedManyWithoutAccountInput
+    demoParticipations?: DemoParticipationUncheckedCreateNestedManyWithoutAccountInput
+    redeemGrants?: RedeemGrantUncheckedCreateNestedManyWithoutAccountInput
+    entitlements?: EntitlementUncheckedCreateNestedManyWithoutAccountInput
+    refundRequests?: RefundRequestUncheckedCreateNestedManyWithoutRequesterInput
+    friendshipsSent?: FriendshipUncheckedCreateNestedManyWithoutRequesterInput
+    friendshipsReceived?: FriendshipUncheckedCreateNestedManyWithoutAddresseeInput
+    scores?: ScoreUncheckedCreateNestedManyWithoutAccountInput
+    achievementUnlocks?: AchievementUnlockUncheckedCreateNestedManyWithoutAccountInput
+    gameStatuses?: GameStatusUncheckedCreateNestedManyWithoutAccountInput
+    notificationSettings?: NotificationSettingUncheckedCreateNestedManyWithoutAccountInput
+    reminders?: ReminderUncheckedCreateNestedManyWithoutAccountInput
+    consents?: ConsentUncheckedCreateNestedManyWithoutAccountInput
+    auditLogs?: AuditLogUncheckedCreateNestedManyWithoutActorInput
+    chatParticipations?: ChatParticipantUncheckedCreateNestedManyWithoutAccountInput
+    sentMessages?: ChatMessageUncheckedCreateNestedManyWithoutSenderInput
+    assignedTickets?: TicketMetaUncheckedCreateNestedManyWithoutAssigneeInput
+    calendarEvents?: CalendarEventUncheckedCreateNestedManyWithoutOwnerInput
+    tasks?: TaskUncheckedCreateNestedManyWithoutAssigneeInput
+    documentVersions?: DocumentVersionUncheckedCreateNestedManyWithoutAuthorInput
+    documentShares?: DocumentShareUncheckedCreateNestedManyWithoutMemberInput
+    rollbackRequests?: RollbackRequestUncheckedCreateNestedManyWithoutByInput
+  }
+
+  export type AccountCreateOrConnectWithoutVersionCommentsInput = {
+    where: AccountWhereUniqueInput
+    create: XOR<AccountCreateWithoutVersionCommentsInput, AccountUncheckedCreateWithoutVersionCommentsInput>
+  }
+
+  export type VersionCommentCreateWithoutRepliesInput = {
+    id?: string
+    body: string
+    createdAt?: Date | string
+    documentVersion: DocumentVersionCreateNestedOneWithoutCommentsInput
+    author: AccountCreateNestedOneWithoutVersionCommentsInput
+    parent?: VersionCommentCreateNestedOneWithoutRepliesInput
+  }
+
+  export type VersionCommentUncheckedCreateWithoutRepliesInput = {
+    id?: string
+    documentId: string
+    version: number
+    authorId: string
+    body: string
+    parentId?: string | null
+    createdAt?: Date | string
+  }
+
+  export type VersionCommentCreateOrConnectWithoutRepliesInput = {
+    where: VersionCommentWhereUniqueInput
+    create: XOR<VersionCommentCreateWithoutRepliesInput, VersionCommentUncheckedCreateWithoutRepliesInput>
+  }
+
+  export type VersionCommentCreateWithoutParentInput = {
+    id?: string
+    body: string
+    createdAt?: Date | string
+    documentVersion: DocumentVersionCreateNestedOneWithoutCommentsInput
+    author: AccountCreateNestedOneWithoutVersionCommentsInput
+    replies?: VersionCommentCreateNestedManyWithoutParentInput
+  }
+
+  export type VersionCommentUncheckedCreateWithoutParentInput = {
+    id?: string
+    documentId: string
+    version: number
+    authorId: string
+    body: string
+    createdAt?: Date | string
+    replies?: VersionCommentUncheckedCreateNestedManyWithoutParentInput
+  }
+
+  export type VersionCommentCreateOrConnectWithoutParentInput = {
+    where: VersionCommentWhereUniqueInput
+    create: XOR<VersionCommentCreateWithoutParentInput, VersionCommentUncheckedCreateWithoutParentInput>
+  }
+
+  export type VersionCommentCreateManyParentInputEnvelope = {
+    data: VersionCommentCreateManyParentInput | VersionCommentCreateManyParentInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type DocumentVersionUpsertWithoutCommentsInput = {
+    update: XOR<DocumentVersionUpdateWithoutCommentsInput, DocumentVersionUncheckedUpdateWithoutCommentsInput>
+    create: XOR<DocumentVersionCreateWithoutCommentsInput, DocumentVersionUncheckedCreateWithoutCommentsInput>
+    where?: DocumentVersionWhereInput
+  }
+
+  export type DocumentVersionUpdateToOneWithWhereWithoutCommentsInput = {
+    where?: DocumentVersionWhereInput
+    data: XOR<DocumentVersionUpdateWithoutCommentsInput, DocumentVersionUncheckedUpdateWithoutCommentsInput>
+  }
+
+  export type DocumentVersionUpdateWithoutCommentsInput = {
+    version?: IntFieldUpdateOperationsInput | number
+    blobRef?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    document?: DocumentUpdateOneRequiredWithoutVersionsNestedInput
+    author?: AccountUpdateOneRequiredWithoutDocumentVersionsNestedInput
+  }
+
+  export type DocumentVersionUncheckedUpdateWithoutCommentsInput = {
+    documentId?: StringFieldUpdateOperationsInput | string
+    version?: IntFieldUpdateOperationsInput | number
+    blobRef?: StringFieldUpdateOperationsInput | string
+    authorId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AccountUpsertWithoutVersionCommentsInput = {
+    update: XOR<AccountUpdateWithoutVersionCommentsInput, AccountUncheckedUpdateWithoutVersionCommentsInput>
+    create: XOR<AccountCreateWithoutVersionCommentsInput, AccountUncheckedCreateWithoutVersionCommentsInput>
+    where?: AccountWhereInput
+  }
+
+  export type AccountUpdateToOneWithWhereWithoutVersionCommentsInput = {
+    where?: AccountWhereInput
+    data: XOR<AccountUpdateWithoutVersionCommentsInput, AccountUncheckedUpdateWithoutVersionCommentsInput>
+  }
+
+  export type AccountUpdateWithoutVersionCommentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    authProvider?: EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
+    externalId?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCode?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCodeExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    playerProfile?: PlayerProfileUpdateOneWithoutAccountNestedInput
+    sessions?: SessionUpdateManyWithoutAccountNestedInput
+    memberships?: MemberUpdateManyWithoutAccountNestedInput
+    accountApps?: AccountAppUpdateManyWithoutAccountNestedInput
+    wallet?: WalletUpdateOneWithoutAccountNestedInput
+    coinLedger?: CoinLedgerUpdateManyWithoutAccountNestedInput
+    transactions?: TransactionUpdateManyWithoutAccountNestedInput
+    reviews?: ReviewUpdateManyWithoutAccountNestedInput
+    demoParticipations?: DemoParticipationUpdateManyWithoutAccountNestedInput
+    redeemGrants?: RedeemGrantUpdateManyWithoutAccountNestedInput
+    entitlements?: EntitlementUpdateManyWithoutAccountNestedInput
+    refundRequests?: RefundRequestUpdateManyWithoutRequesterNestedInput
+    friendshipsSent?: FriendshipUpdateManyWithoutRequesterNestedInput
+    friendshipsReceived?: FriendshipUpdateManyWithoutAddresseeNestedInput
+    scores?: ScoreUpdateManyWithoutAccountNestedInput
+    achievementUnlocks?: AchievementUnlockUpdateManyWithoutAccountNestedInput
+    gameStatuses?: GameStatusUpdateManyWithoutAccountNestedInput
+    notificationSettings?: NotificationSettingUpdateManyWithoutAccountNestedInput
+    reminders?: ReminderUpdateManyWithoutAccountNestedInput
+    consents?: ConsentUpdateManyWithoutAccountNestedInput
+    auditLogs?: AuditLogUpdateManyWithoutActorNestedInput
+    chatParticipations?: ChatParticipantUpdateManyWithoutAccountNestedInput
+    sentMessages?: ChatMessageUpdateManyWithoutSenderNestedInput
+    assignedTickets?: TicketMetaUpdateManyWithoutAssigneeNestedInput
+    calendarEvents?: CalendarEventUpdateManyWithoutOwnerNestedInput
+    tasks?: TaskUpdateManyWithoutAssigneeNestedInput
+    documentVersions?: DocumentVersionUpdateManyWithoutAuthorNestedInput
+    documentShares?: DocumentShareUpdateManyWithoutMemberNestedInput
+    rollbackRequests?: RollbackRequestUpdateManyWithoutByNestedInput
+  }
+
+  export type AccountUncheckedUpdateWithoutVersionCommentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumAccountStatusFieldUpdateOperationsInput | $Enums.AccountStatus
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    authProvider?: EnumAuthProviderFieldUpdateOperationsInput | $Enums.AuthProvider
+    externalId?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCode?: NullableStringFieldUpdateOperationsInput | string | null
+    resetCodeExpiresAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    playerProfile?: PlayerProfileUncheckedUpdateOneWithoutAccountNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutAccountNestedInput
+    memberships?: MemberUncheckedUpdateManyWithoutAccountNestedInput
+    accountApps?: AccountAppUncheckedUpdateManyWithoutAccountNestedInput
+    wallet?: WalletUncheckedUpdateOneWithoutAccountNestedInput
+    coinLedger?: CoinLedgerUncheckedUpdateManyWithoutAccountNestedInput
+    transactions?: TransactionUncheckedUpdateManyWithoutAccountNestedInput
+    reviews?: ReviewUncheckedUpdateManyWithoutAccountNestedInput
+    demoParticipations?: DemoParticipationUncheckedUpdateManyWithoutAccountNestedInput
+    redeemGrants?: RedeemGrantUncheckedUpdateManyWithoutAccountNestedInput
+    entitlements?: EntitlementUncheckedUpdateManyWithoutAccountNestedInput
+    refundRequests?: RefundRequestUncheckedUpdateManyWithoutRequesterNestedInput
+    friendshipsSent?: FriendshipUncheckedUpdateManyWithoutRequesterNestedInput
+    friendshipsReceived?: FriendshipUncheckedUpdateManyWithoutAddresseeNestedInput
+    scores?: ScoreUncheckedUpdateManyWithoutAccountNestedInput
+    achievementUnlocks?: AchievementUnlockUncheckedUpdateManyWithoutAccountNestedInput
+    gameStatuses?: GameStatusUncheckedUpdateManyWithoutAccountNestedInput
+    notificationSettings?: NotificationSettingUncheckedUpdateManyWithoutAccountNestedInput
+    reminders?: ReminderUncheckedUpdateManyWithoutAccountNestedInput
+    consents?: ConsentUncheckedUpdateManyWithoutAccountNestedInput
+    auditLogs?: AuditLogUncheckedUpdateManyWithoutActorNestedInput
+    chatParticipations?: ChatParticipantUncheckedUpdateManyWithoutAccountNestedInput
+    sentMessages?: ChatMessageUncheckedUpdateManyWithoutSenderNestedInput
+    assignedTickets?: TicketMetaUncheckedUpdateManyWithoutAssigneeNestedInput
+    calendarEvents?: CalendarEventUncheckedUpdateManyWithoutOwnerNestedInput
+    tasks?: TaskUncheckedUpdateManyWithoutAssigneeNestedInput
+    documentVersions?: DocumentVersionUncheckedUpdateManyWithoutAuthorNestedInput
+    documentShares?: DocumentShareUncheckedUpdateManyWithoutMemberNestedInput
+    rollbackRequests?: RollbackRequestUncheckedUpdateManyWithoutByNestedInput
+  }
+
+  export type VersionCommentUpsertWithoutRepliesInput = {
+    update: XOR<VersionCommentUpdateWithoutRepliesInput, VersionCommentUncheckedUpdateWithoutRepliesInput>
+    create: XOR<VersionCommentCreateWithoutRepliesInput, VersionCommentUncheckedCreateWithoutRepliesInput>
+    where?: VersionCommentWhereInput
+  }
+
+  export type VersionCommentUpdateToOneWithWhereWithoutRepliesInput = {
+    where?: VersionCommentWhereInput
+    data: XOR<VersionCommentUpdateWithoutRepliesInput, VersionCommentUncheckedUpdateWithoutRepliesInput>
+  }
+
+  export type VersionCommentUpdateWithoutRepliesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    body?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    documentVersion?: DocumentVersionUpdateOneRequiredWithoutCommentsNestedInput
+    author?: AccountUpdateOneRequiredWithoutVersionCommentsNestedInput
+    parent?: VersionCommentUpdateOneWithoutRepliesNestedInput
+  }
+
+  export type VersionCommentUncheckedUpdateWithoutRepliesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    documentId?: StringFieldUpdateOperationsInput | string
+    version?: IntFieldUpdateOperationsInput | number
+    authorId?: StringFieldUpdateOperationsInput | string
+    body?: StringFieldUpdateOperationsInput | string
+    parentId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type VersionCommentUpsertWithWhereUniqueWithoutParentInput = {
+    where: VersionCommentWhereUniqueInput
+    update: XOR<VersionCommentUpdateWithoutParentInput, VersionCommentUncheckedUpdateWithoutParentInput>
+    create: XOR<VersionCommentCreateWithoutParentInput, VersionCommentUncheckedCreateWithoutParentInput>
+  }
+
+  export type VersionCommentUpdateWithWhereUniqueWithoutParentInput = {
+    where: VersionCommentWhereUniqueInput
+    data: XOR<VersionCommentUpdateWithoutParentInput, VersionCommentUncheckedUpdateWithoutParentInput>
+  }
+
+  export type VersionCommentUpdateManyWithWhereWithoutParentInput = {
+    where: VersionCommentScalarWhereInput
+    data: XOR<VersionCommentUpdateManyMutationInput, VersionCommentUncheckedUpdateManyWithoutParentInput>
   }
 
   export type SessionCreateManyAccountInput = {
@@ -101474,6 +103830,15 @@ export namespace Prisma {
     docId: string
     targetVersion: number
     status?: $Enums.RollbackStatus
+  }
+
+  export type VersionCommentCreateManyAuthorInput = {
+    id?: string
+    documentId: string
+    version: number
+    body: string
+    parentId?: string | null
+    createdAt?: Date | string
   }
 
   export type SessionUpdateWithoutAccountInput = {
@@ -101940,6 +104305,7 @@ export namespace Prisma {
     blobRef?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     document?: DocumentUpdateOneRequiredWithoutVersionsNestedInput
+    comments?: VersionCommentUpdateManyWithoutDocumentVersionNestedInput
   }
 
   export type DocumentVersionUncheckedUpdateWithoutAuthorInput = {
@@ -101947,6 +104313,7 @@ export namespace Prisma {
     version?: IntFieldUpdateOperationsInput | number
     blobRef?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    comments?: VersionCommentUncheckedUpdateManyWithoutDocumentVersionNestedInput
   }
 
   export type DocumentVersionUncheckedUpdateManyWithoutAuthorInput = {
@@ -101990,6 +104357,34 @@ export namespace Prisma {
     docId?: StringFieldUpdateOperationsInput | string
     targetVersion?: IntFieldUpdateOperationsInput | number
     status?: EnumRollbackStatusFieldUpdateOperationsInput | $Enums.RollbackStatus
+  }
+
+  export type VersionCommentUpdateWithoutAuthorInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    body?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    documentVersion?: DocumentVersionUpdateOneRequiredWithoutCommentsNestedInput
+    parent?: VersionCommentUpdateOneWithoutRepliesNestedInput
+    replies?: VersionCommentUpdateManyWithoutParentNestedInput
+  }
+
+  export type VersionCommentUncheckedUpdateWithoutAuthorInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    documentId?: StringFieldUpdateOperationsInput | string
+    version?: IntFieldUpdateOperationsInput | number
+    body?: StringFieldUpdateOperationsInput | string
+    parentId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    replies?: VersionCommentUncheckedUpdateManyWithoutParentNestedInput
+  }
+
+  export type VersionCommentUncheckedUpdateManyWithoutAuthorInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    documentId?: StringFieldUpdateOperationsInput | string
+    version?: IntFieldUpdateOperationsInput | number
+    body?: StringFieldUpdateOperationsInput | string
+    parentId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ProjectCreateManyOrgInput = {
@@ -102912,6 +105307,7 @@ export namespace Prisma {
     blobRef?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     author?: AccountUpdateOneRequiredWithoutDocumentVersionsNestedInput
+    comments?: VersionCommentUpdateManyWithoutDocumentVersionNestedInput
   }
 
   export type DocumentVersionUncheckedUpdateWithoutDocumentInput = {
@@ -102919,6 +105315,7 @@ export namespace Prisma {
     blobRef?: StringFieldUpdateOperationsInput | string
     authorId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    comments?: VersionCommentUncheckedUpdateManyWithoutDocumentVersionNestedInput
   }
 
   export type DocumentVersionUncheckedUpdateManyWithoutDocumentInput = {
@@ -102962,6 +105359,77 @@ export namespace Prisma {
     targetVersion?: IntFieldUpdateOperationsInput | number
     byId?: StringFieldUpdateOperationsInput | string
     status?: EnumRollbackStatusFieldUpdateOperationsInput | $Enums.RollbackStatus
+  }
+
+  export type VersionCommentCreateManyDocumentVersionInput = {
+    id?: string
+    authorId: string
+    body: string
+    parentId?: string | null
+    createdAt?: Date | string
+  }
+
+  export type VersionCommentUpdateWithoutDocumentVersionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    body?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    author?: AccountUpdateOneRequiredWithoutVersionCommentsNestedInput
+    parent?: VersionCommentUpdateOneWithoutRepliesNestedInput
+    replies?: VersionCommentUpdateManyWithoutParentNestedInput
+  }
+
+  export type VersionCommentUncheckedUpdateWithoutDocumentVersionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    authorId?: StringFieldUpdateOperationsInput | string
+    body?: StringFieldUpdateOperationsInput | string
+    parentId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    replies?: VersionCommentUncheckedUpdateManyWithoutParentNestedInput
+  }
+
+  export type VersionCommentUncheckedUpdateManyWithoutDocumentVersionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    authorId?: StringFieldUpdateOperationsInput | string
+    body?: StringFieldUpdateOperationsInput | string
+    parentId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type VersionCommentCreateManyParentInput = {
+    id?: string
+    documentId: string
+    version: number
+    authorId: string
+    body: string
+    createdAt?: Date | string
+  }
+
+  export type VersionCommentUpdateWithoutParentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    body?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    documentVersion?: DocumentVersionUpdateOneRequiredWithoutCommentsNestedInput
+    author?: AccountUpdateOneRequiredWithoutVersionCommentsNestedInput
+    replies?: VersionCommentUpdateManyWithoutParentNestedInput
+  }
+
+  export type VersionCommentUncheckedUpdateWithoutParentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    documentId?: StringFieldUpdateOperationsInput | string
+    version?: IntFieldUpdateOperationsInput | number
+    authorId?: StringFieldUpdateOperationsInput | string
+    body?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    replies?: VersionCommentUncheckedUpdateManyWithoutParentNestedInput
+  }
+
+  export type VersionCommentUncheckedUpdateManyWithoutParentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    documentId?: StringFieldUpdateOperationsInput | string
+    version?: IntFieldUpdateOperationsInput | number
+    authorId?: StringFieldUpdateOperationsInput | string
+    body?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 

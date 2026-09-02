@@ -200,6 +200,7 @@ model Account {
   documentVersions   DocumentVersion[]
   documentShares     DocumentShare[]
   rollbackRequests   RollbackRequest[]
+  versionComments    VersionComment[]
 
   authProvider        AuthProvider @default(MANUAL)
   externalId          String?      @unique
@@ -776,6 +777,7 @@ model DocumentVersion {
   authorId   String
   author     Account  @relation(fields: [authorId], references: [id])
   createdAt  DateTime @default(now())
+  comments   VersionComment[]
 
   @@id([documentId, version])
 }
@@ -798,4 +800,18 @@ model RollbackRequest {
   byId          String
   by            Account        @relation(fields: [byId], references: [id])
   status        RollbackStatus @default(PENDING)
+}
+
+model VersionComment {
+  id              String          @id @default(cuid())
+  documentId      String
+  version         Int
+  documentVersion DocumentVersion @relation(fields: [documentId, version], references: [documentId, version])
+  authorId        String
+  author          Account         @relation(fields: [authorId], references: [id])
+  body            String
+  parentId        String?
+  parent          VersionComment? @relation("CommentReplies", fields: [parentId], references: [id])
+  replies         VersionComment[] @relation("CommentReplies")
+  createdAt       DateTime        @default(now())
 }
