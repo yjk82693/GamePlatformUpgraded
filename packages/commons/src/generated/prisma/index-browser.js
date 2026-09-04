@@ -134,7 +134,8 @@ exports.Prisma.AccountScalarFieldEnum = {
 
 exports.Prisma.OrgScalarFieldEnum = {
   id: 'id',
-  name: 'name'
+  name: 'name',
+  domain: 'domain'
 };
 
 exports.Prisma.ProjectScalarFieldEnum = {
@@ -189,7 +190,8 @@ exports.Prisma.MemberScalarFieldEnum = {
 exports.Prisma.RoleScalarFieldEnum = {
   id: 'id',
   name: 'name',
-  level: 'level'
+  level: 'level',
+  orgId: 'orgId'
 };
 
 exports.Prisma.MemberRoleScalarFieldEnum = {
@@ -266,7 +268,8 @@ exports.Prisma.TransactionScalarFieldEnum = {
 exports.Prisma.MerchantScalarFieldEnum = {
   id: 'id',
   name: 'name',
-  config: 'config'
+  config: 'config',
+  orgId: 'orgId'
 };
 
 exports.Prisma.PaymentMethodScalarFieldEnum = {
@@ -326,7 +329,8 @@ exports.Prisma.RedeemCodeScalarFieldEnum = {
   code: 'code',
   reward: 'reward',
   usesLeft: 'usesLeft',
-  expiry: 'expiry'
+  expiry: 'expiry',
+  orgId: 'orgId'
 };
 
 exports.Prisma.RedeemGrantScalarFieldEnum = {
@@ -466,7 +470,8 @@ exports.Prisma.TermsScalarFieldEnum = {
   version: 'version',
   content: 'content',
   effectiveDate: 'effectiveDate',
-  active: 'active'
+  active: 'active',
+  orgId: 'orgId'
 };
 
 exports.Prisma.ConsentScalarFieldEnum = {

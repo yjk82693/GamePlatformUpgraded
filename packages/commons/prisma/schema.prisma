@@ -209,11 +209,16 @@ model Account {
 }
 
 model Org {
-  id       String    @id @default(cuid())
-  name     String
-  projects Project[]
-  apps     App[]
-  members  Member[]
+  id          String        @id @default(cuid())
+  name        String
+  domain      String?       @unique
+  projects    Project[]
+  apps        App[]
+  members     Member[]
+  roles       Role[]
+  redeemCodes RedeemCode[]
+  merchants   Merchant[]
+  terms       Terms[]
 }
 
 model Project {
@@ -300,6 +305,8 @@ model Role {
   id          String       @id @default(cuid())
   name        String
   level       RoleLevel
+  orgId       String?
+  org         Org?         @relation(fields: [orgId], references: [id])
   permissions Permission[]
   memberRoles MemberRole[]
 }
@@ -402,6 +409,8 @@ model Merchant {
   name           String
   config         Json?
   paymentMethods PaymentMethod[]
+  orgId          String?
+  org            Org?            @relation(fields: [orgId], references: [id])
 }
 
 model PaymentMethod {
@@ -475,6 +484,8 @@ model RedeemCode {
   usesLeft Int
   expiry   DateTime?
   grants   RedeemGrant[]
+  orgId    String?
+  org      Org?          @relation(fields: [orgId], references: [id])
 }
 
 model RedeemGrant {
@@ -658,11 +669,15 @@ model Reminder {
 
 model Terms {
   id            String    @id @default(cuid())
-  version       String    @unique
+  version       String
   content       String
   effectiveDate DateTime
   active        Boolean   @default(false)
   consents      Consent[]
+  orgId         String?
+  org           Org?      @relation(fields: [orgId], references: [id])
+
+  @@unique([orgId, version])
 }
 
 model Consent {

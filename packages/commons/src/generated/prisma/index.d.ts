@@ -7173,12 +7173,20 @@ export namespace Prisma {
     projects: number
     apps: number
     members: number
+    roles: number
+    redeemCodes: number
+    merchants: number
+    terms: number
   }
 
   export type OrgCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     projects?: boolean | OrgCountOutputTypeCountProjectsArgs
     apps?: boolean | OrgCountOutputTypeCountAppsArgs
     members?: boolean | OrgCountOutputTypeCountMembersArgs
+    roles?: boolean | OrgCountOutputTypeCountRolesArgs
+    redeemCodes?: boolean | OrgCountOutputTypeCountRedeemCodesArgs
+    merchants?: boolean | OrgCountOutputTypeCountMerchantsArgs
+    terms?: boolean | OrgCountOutputTypeCountTermsArgs
   }
 
   // Custom InputTypes
@@ -7211,6 +7219,34 @@ export namespace Prisma {
    */
   export type OrgCountOutputTypeCountMembersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: MemberWhereInput
+  }
+
+  /**
+   * OrgCountOutputType without action
+   */
+  export type OrgCountOutputTypeCountRolesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RoleWhereInput
+  }
+
+  /**
+   * OrgCountOutputType without action
+   */
+  export type OrgCountOutputTypeCountRedeemCodesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RedeemCodeWhereInput
+  }
+
+  /**
+   * OrgCountOutputType without action
+   */
+  export type OrgCountOutputTypeCountMerchantsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MerchantWhereInput
+  }
+
+  /**
+   * OrgCountOutputType without action
+   */
+  export type OrgCountOutputTypeCountTermsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TermsWhereInput
   }
 
 
@@ -9946,16 +9982,19 @@ export namespace Prisma {
   export type OrgMinAggregateOutputType = {
     id: string | null
     name: string | null
+    domain: string | null
   }
 
   export type OrgMaxAggregateOutputType = {
     id: string | null
     name: string | null
+    domain: string | null
   }
 
   export type OrgCountAggregateOutputType = {
     id: number
     name: number
+    domain: number
     _all: number
   }
 
@@ -9963,16 +10002,19 @@ export namespace Prisma {
   export type OrgMinAggregateInputType = {
     id?: true
     name?: true
+    domain?: true
   }
 
   export type OrgMaxAggregateInputType = {
     id?: true
     name?: true
+    domain?: true
   }
 
   export type OrgCountAggregateInputType = {
     id?: true
     name?: true
+    domain?: true
     _all?: true
   }
 
@@ -10051,6 +10093,7 @@ export namespace Prisma {
   export type OrgGroupByOutputType = {
     id: string
     name: string
+    domain: string | null
     _count: OrgCountAggregateOutputType | null
     _min: OrgMinAggregateOutputType | null
     _max: OrgMaxAggregateOutputType | null
@@ -10073,32 +10116,44 @@ export namespace Prisma {
   export type OrgSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
+    domain?: boolean
     projects?: boolean | Org$projectsArgs<ExtArgs>
     apps?: boolean | Org$appsArgs<ExtArgs>
     members?: boolean | Org$membersArgs<ExtArgs>
+    roles?: boolean | Org$rolesArgs<ExtArgs>
+    redeemCodes?: boolean | Org$redeemCodesArgs<ExtArgs>
+    merchants?: boolean | Org$merchantsArgs<ExtArgs>
+    terms?: boolean | Org$termsArgs<ExtArgs>
     _count?: boolean | OrgCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["org"]>
 
   export type OrgSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
+    domain?: boolean
   }, ExtArgs["result"]["org"]>
 
   export type OrgSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
+    domain?: boolean
   }, ExtArgs["result"]["org"]>
 
   export type OrgSelectScalar = {
     id?: boolean
     name?: boolean
+    domain?: boolean
   }
 
-  export type OrgOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name", ExtArgs["result"]["org"]>
+  export type OrgOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "domain", ExtArgs["result"]["org"]>
   export type OrgInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     projects?: boolean | Org$projectsArgs<ExtArgs>
     apps?: boolean | Org$appsArgs<ExtArgs>
     members?: boolean | Org$membersArgs<ExtArgs>
+    roles?: boolean | Org$rolesArgs<ExtArgs>
+    redeemCodes?: boolean | Org$redeemCodesArgs<ExtArgs>
+    merchants?: boolean | Org$merchantsArgs<ExtArgs>
+    terms?: boolean | Org$termsArgs<ExtArgs>
     _count?: boolean | OrgCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type OrgIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -10110,10 +10165,15 @@ export namespace Prisma {
       projects: Prisma.$ProjectPayload<ExtArgs>[]
       apps: Prisma.$AppPayload<ExtArgs>[]
       members: Prisma.$MemberPayload<ExtArgs>[]
+      roles: Prisma.$RolePayload<ExtArgs>[]
+      redeemCodes: Prisma.$RedeemCodePayload<ExtArgs>[]
+      merchants: Prisma.$MerchantPayload<ExtArgs>[]
+      terms: Prisma.$TermsPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       name: string
+      domain: string | null
     }, ExtArgs["result"]["org"]>
     composites: {}
   }
@@ -10511,6 +10571,10 @@ export namespace Prisma {
     projects<T extends Org$projectsArgs<ExtArgs> = {}>(args?: Subset<T, Org$projectsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     apps<T extends Org$appsArgs<ExtArgs> = {}>(args?: Subset<T, Org$appsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AppPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     members<T extends Org$membersArgs<ExtArgs> = {}>(args?: Subset<T, Org$membersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MemberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    roles<T extends Org$rolesArgs<ExtArgs> = {}>(args?: Subset<T, Org$rolesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RolePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    redeemCodes<T extends Org$redeemCodesArgs<ExtArgs> = {}>(args?: Subset<T, Org$redeemCodesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RedeemCodePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    merchants<T extends Org$merchantsArgs<ExtArgs> = {}>(args?: Subset<T, Org$merchantsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MerchantPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    terms<T extends Org$termsArgs<ExtArgs> = {}>(args?: Subset<T, Org$termsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TermsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -10542,6 +10606,7 @@ export namespace Prisma {
   interface OrgFieldRefs {
     readonly id: FieldRef<"Org", 'String'>
     readonly name: FieldRef<"Org", 'String'>
+    readonly domain: FieldRef<"Org", 'String'>
   }
     
 
@@ -11004,6 +11069,102 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: MemberScalarFieldEnum | MemberScalarFieldEnum[]
+  }
+
+  /**
+   * Org.roles
+   */
+  export type Org$rolesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Role
+     */
+    select?: RoleSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Role
+     */
+    omit?: RoleOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RoleInclude<ExtArgs> | null
+    where?: RoleWhereInput
+    orderBy?: RoleOrderByWithRelationInput | RoleOrderByWithRelationInput[]
+    cursor?: RoleWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: RoleScalarFieldEnum | RoleScalarFieldEnum[]
+  }
+
+  /**
+   * Org.redeemCodes
+   */
+  export type Org$redeemCodesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RedeemCode
+     */
+    select?: RedeemCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RedeemCode
+     */
+    omit?: RedeemCodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RedeemCodeInclude<ExtArgs> | null
+    where?: RedeemCodeWhereInput
+    orderBy?: RedeemCodeOrderByWithRelationInput | RedeemCodeOrderByWithRelationInput[]
+    cursor?: RedeemCodeWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: RedeemCodeScalarFieldEnum | RedeemCodeScalarFieldEnum[]
+  }
+
+  /**
+   * Org.merchants
+   */
+  export type Org$merchantsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Merchant
+     */
+    select?: MerchantSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Merchant
+     */
+    omit?: MerchantOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MerchantInclude<ExtArgs> | null
+    where?: MerchantWhereInput
+    orderBy?: MerchantOrderByWithRelationInput | MerchantOrderByWithRelationInput[]
+    cursor?: MerchantWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: MerchantScalarFieldEnum | MerchantScalarFieldEnum[]
+  }
+
+  /**
+   * Org.terms
+   */
+  export type Org$termsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Terms
+     */
+    select?: TermsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Terms
+     */
+    omit?: TermsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TermsInclude<ExtArgs> | null
+    where?: TermsWhereInput
+    orderBy?: TermsOrderByWithRelationInput | TermsOrderByWithRelationInput[]
+    cursor?: TermsWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: TermsScalarFieldEnum | TermsScalarFieldEnum[]
   }
 
   /**
@@ -18822,18 +18983,21 @@ export namespace Prisma {
     id: string | null
     name: string | null
     level: $Enums.RoleLevel | null
+    orgId: string | null
   }
 
   export type RoleMaxAggregateOutputType = {
     id: string | null
     name: string | null
     level: $Enums.RoleLevel | null
+    orgId: string | null
   }
 
   export type RoleCountAggregateOutputType = {
     id: number
     name: number
     level: number
+    orgId: number
     _all: number
   }
 
@@ -18842,18 +19006,21 @@ export namespace Prisma {
     id?: true
     name?: true
     level?: true
+    orgId?: true
   }
 
   export type RoleMaxAggregateInputType = {
     id?: true
     name?: true
     level?: true
+    orgId?: true
   }
 
   export type RoleCountAggregateInputType = {
     id?: true
     name?: true
     level?: true
+    orgId?: true
     _all?: true
   }
 
@@ -18933,6 +19100,7 @@ export namespace Prisma {
     id: string
     name: string
     level: $Enums.RoleLevel
+    orgId: string | null
     _count: RoleCountAggregateOutputType | null
     _min: RoleMinAggregateOutputType | null
     _max: RoleMaxAggregateOutputType | null
@@ -18956,6 +19124,8 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     level?: boolean
+    orgId?: boolean
+    org?: boolean | Role$orgArgs<ExtArgs>
     permissions?: boolean | Role$permissionsArgs<ExtArgs>
     memberRoles?: boolean | Role$memberRolesArgs<ExtArgs>
     _count?: boolean | RoleCountOutputTypeDefaultArgs<ExtArgs>
@@ -18965,32 +19135,43 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     level?: boolean
+    orgId?: boolean
+    org?: boolean | Role$orgArgs<ExtArgs>
   }, ExtArgs["result"]["role"]>
 
   export type RoleSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
     level?: boolean
+    orgId?: boolean
+    org?: boolean | Role$orgArgs<ExtArgs>
   }, ExtArgs["result"]["role"]>
 
   export type RoleSelectScalar = {
     id?: boolean
     name?: boolean
     level?: boolean
+    orgId?: boolean
   }
 
-  export type RoleOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "level", ExtArgs["result"]["role"]>
+  export type RoleOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "level" | "orgId", ExtArgs["result"]["role"]>
   export type RoleInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    org?: boolean | Role$orgArgs<ExtArgs>
     permissions?: boolean | Role$permissionsArgs<ExtArgs>
     memberRoles?: boolean | Role$memberRolesArgs<ExtArgs>
     _count?: boolean | RoleCountOutputTypeDefaultArgs<ExtArgs>
   }
-  export type RoleIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
-  export type RoleIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type RoleIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    org?: boolean | Role$orgArgs<ExtArgs>
+  }
+  export type RoleIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    org?: boolean | Role$orgArgs<ExtArgs>
+  }
 
   export type $RolePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Role"
     objects: {
+      org: Prisma.$OrgPayload<ExtArgs> | null
       permissions: Prisma.$PermissionPayload<ExtArgs>[]
       memberRoles: Prisma.$MemberRolePayload<ExtArgs>[]
     }
@@ -18998,6 +19179,7 @@ export namespace Prisma {
       id: string
       name: string
       level: $Enums.RoleLevel
+      orgId: string | null
     }, ExtArgs["result"]["role"]>
     composites: {}
   }
@@ -19392,6 +19574,7 @@ export namespace Prisma {
    */
   export interface Prisma__RoleClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    org<T extends Role$orgArgs<ExtArgs> = {}>(args?: Subset<T, Role$orgArgs<ExtArgs>>): Prisma__OrgClient<$Result.GetResult<Prisma.$OrgPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     permissions<T extends Role$permissionsArgs<ExtArgs> = {}>(args?: Subset<T, Role$permissionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PermissionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     memberRoles<T extends Role$memberRolesArgs<ExtArgs> = {}>(args?: Subset<T, Role$memberRolesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MemberRolePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
@@ -19426,6 +19609,7 @@ export namespace Prisma {
     readonly id: FieldRef<"Role", 'String'>
     readonly name: FieldRef<"Role", 'String'>
     readonly level: FieldRef<"Role", 'RoleLevel'>
+    readonly orgId: FieldRef<"Role", 'String'>
   }
     
 
@@ -19680,6 +19864,10 @@ export namespace Prisma {
      */
     data: RoleCreateManyInput | RoleCreateManyInput[]
     skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RoleIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -19750,6 +19938,10 @@ export namespace Prisma {
      * Limit how many Roles to update.
      */
     limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RoleIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -19816,6 +20008,25 @@ export namespace Prisma {
      * Limit how many Roles to delete.
      */
     limit?: number
+  }
+
+  /**
+   * Role.org
+   */
+  export type Role$orgArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Org
+     */
+    select?: OrgSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Org
+     */
+    omit?: OrgOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrgInclude<ExtArgs> | null
+    where?: OrgWhereInput
   }
 
   /**
@@ -30587,17 +30798,20 @@ export namespace Prisma {
   export type MerchantMinAggregateOutputType = {
     id: string | null
     name: string | null
+    orgId: string | null
   }
 
   export type MerchantMaxAggregateOutputType = {
     id: string | null
     name: string | null
+    orgId: string | null
   }
 
   export type MerchantCountAggregateOutputType = {
     id: number
     name: number
     config: number
+    orgId: number
     _all: number
   }
 
@@ -30605,17 +30819,20 @@ export namespace Prisma {
   export type MerchantMinAggregateInputType = {
     id?: true
     name?: true
+    orgId?: true
   }
 
   export type MerchantMaxAggregateInputType = {
     id?: true
     name?: true
+    orgId?: true
   }
 
   export type MerchantCountAggregateInputType = {
     id?: true
     name?: true
     config?: true
+    orgId?: true
     _all?: true
   }
 
@@ -30695,6 +30912,7 @@ export namespace Prisma {
     id: string
     name: string
     config: JsonValue | null
+    orgId: string | null
     _count: MerchantCountAggregateOutputType | null
     _min: MerchantMinAggregateOutputType | null
     _max: MerchantMaxAggregateOutputType | null
@@ -30718,7 +30936,9 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     config?: boolean
+    orgId?: boolean
     paymentMethods?: boolean | Merchant$paymentMethodsArgs<ExtArgs>
+    org?: boolean | Merchant$orgArgs<ExtArgs>
     _count?: boolean | MerchantCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["merchant"]>
 
@@ -30726,37 +30946,49 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     config?: boolean
+    orgId?: boolean
+    org?: boolean | Merchant$orgArgs<ExtArgs>
   }, ExtArgs["result"]["merchant"]>
 
   export type MerchantSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
     config?: boolean
+    orgId?: boolean
+    org?: boolean | Merchant$orgArgs<ExtArgs>
   }, ExtArgs["result"]["merchant"]>
 
   export type MerchantSelectScalar = {
     id?: boolean
     name?: boolean
     config?: boolean
+    orgId?: boolean
   }
 
-  export type MerchantOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "config", ExtArgs["result"]["merchant"]>
+  export type MerchantOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "config" | "orgId", ExtArgs["result"]["merchant"]>
   export type MerchantInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     paymentMethods?: boolean | Merchant$paymentMethodsArgs<ExtArgs>
+    org?: boolean | Merchant$orgArgs<ExtArgs>
     _count?: boolean | MerchantCountOutputTypeDefaultArgs<ExtArgs>
   }
-  export type MerchantIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
-  export type MerchantIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type MerchantIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    org?: boolean | Merchant$orgArgs<ExtArgs>
+  }
+  export type MerchantIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    org?: boolean | Merchant$orgArgs<ExtArgs>
+  }
 
   export type $MerchantPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Merchant"
     objects: {
       paymentMethods: Prisma.$PaymentMethodPayload<ExtArgs>[]
+      org: Prisma.$OrgPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       name: string
       config: Prisma.JsonValue | null
+      orgId: string | null
     }, ExtArgs["result"]["merchant"]>
     composites: {}
   }
@@ -31152,6 +31384,7 @@ export namespace Prisma {
   export interface Prisma__MerchantClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     paymentMethods<T extends Merchant$paymentMethodsArgs<ExtArgs> = {}>(args?: Subset<T, Merchant$paymentMethodsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PaymentMethodPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    org<T extends Merchant$orgArgs<ExtArgs> = {}>(args?: Subset<T, Merchant$orgArgs<ExtArgs>>): Prisma__OrgClient<$Result.GetResult<Prisma.$OrgPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -31184,6 +31417,7 @@ export namespace Prisma {
     readonly id: FieldRef<"Merchant", 'String'>
     readonly name: FieldRef<"Merchant", 'String'>
     readonly config: FieldRef<"Merchant", 'Json'>
+    readonly orgId: FieldRef<"Merchant", 'String'>
   }
     
 
@@ -31438,6 +31672,10 @@ export namespace Prisma {
      */
     data: MerchantCreateManyInput | MerchantCreateManyInput[]
     skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MerchantIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -31508,6 +31746,10 @@ export namespace Prisma {
      * Limit how many Merchants to update.
      */
     limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MerchantIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -31598,6 +31840,25 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: PaymentMethodScalarFieldEnum | PaymentMethodScalarFieldEnum[]
+  }
+
+  /**
+   * Merchant.org
+   */
+  export type Merchant$orgArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Org
+     */
+    select?: OrgSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Org
+     */
+    omit?: OrgOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrgInclude<ExtArgs> | null
+    where?: OrgWhereInput
   }
 
   /**
@@ -39891,6 +40152,7 @@ export namespace Prisma {
     code: string | null
     usesLeft: number | null
     expiry: Date | null
+    orgId: string | null
   }
 
   export type RedeemCodeMaxAggregateOutputType = {
@@ -39898,6 +40160,7 @@ export namespace Prisma {
     code: string | null
     usesLeft: number | null
     expiry: Date | null
+    orgId: string | null
   }
 
   export type RedeemCodeCountAggregateOutputType = {
@@ -39906,6 +40169,7 @@ export namespace Prisma {
     reward: number
     usesLeft: number
     expiry: number
+    orgId: number
     _all: number
   }
 
@@ -39923,6 +40187,7 @@ export namespace Prisma {
     code?: true
     usesLeft?: true
     expiry?: true
+    orgId?: true
   }
 
   export type RedeemCodeMaxAggregateInputType = {
@@ -39930,6 +40195,7 @@ export namespace Prisma {
     code?: true
     usesLeft?: true
     expiry?: true
+    orgId?: true
   }
 
   export type RedeemCodeCountAggregateInputType = {
@@ -39938,6 +40204,7 @@ export namespace Prisma {
     reward?: true
     usesLeft?: true
     expiry?: true
+    orgId?: true
     _all?: true
   }
 
@@ -40033,6 +40300,7 @@ export namespace Prisma {
     reward: JsonValue
     usesLeft: number
     expiry: Date | null
+    orgId: string | null
     _count: RedeemCodeCountAggregateOutputType | null
     _avg: RedeemCodeAvgAggregateOutputType | null
     _sum: RedeemCodeSumAggregateOutputType | null
@@ -40060,7 +40328,9 @@ export namespace Prisma {
     reward?: boolean
     usesLeft?: boolean
     expiry?: boolean
+    orgId?: boolean
     grants?: boolean | RedeemCode$grantsArgs<ExtArgs>
+    org?: boolean | RedeemCode$orgArgs<ExtArgs>
     _count?: boolean | RedeemCodeCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["redeemCode"]>
 
@@ -40070,6 +40340,8 @@ export namespace Prisma {
     reward?: boolean
     usesLeft?: boolean
     expiry?: boolean
+    orgId?: boolean
+    org?: boolean | RedeemCode$orgArgs<ExtArgs>
   }, ExtArgs["result"]["redeemCode"]>
 
   export type RedeemCodeSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -40078,6 +40350,8 @@ export namespace Prisma {
     reward?: boolean
     usesLeft?: boolean
     expiry?: boolean
+    orgId?: boolean
+    org?: boolean | RedeemCode$orgArgs<ExtArgs>
   }, ExtArgs["result"]["redeemCode"]>
 
   export type RedeemCodeSelectScalar = {
@@ -40086,20 +40360,27 @@ export namespace Prisma {
     reward?: boolean
     usesLeft?: boolean
     expiry?: boolean
+    orgId?: boolean
   }
 
-  export type RedeemCodeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "code" | "reward" | "usesLeft" | "expiry", ExtArgs["result"]["redeemCode"]>
+  export type RedeemCodeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "code" | "reward" | "usesLeft" | "expiry" | "orgId", ExtArgs["result"]["redeemCode"]>
   export type RedeemCodeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     grants?: boolean | RedeemCode$grantsArgs<ExtArgs>
+    org?: boolean | RedeemCode$orgArgs<ExtArgs>
     _count?: boolean | RedeemCodeCountOutputTypeDefaultArgs<ExtArgs>
   }
-  export type RedeemCodeIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
-  export type RedeemCodeIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type RedeemCodeIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    org?: boolean | RedeemCode$orgArgs<ExtArgs>
+  }
+  export type RedeemCodeIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    org?: boolean | RedeemCode$orgArgs<ExtArgs>
+  }
 
   export type $RedeemCodePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "RedeemCode"
     objects: {
       grants: Prisma.$RedeemGrantPayload<ExtArgs>[]
+      org: Prisma.$OrgPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -40107,6 +40388,7 @@ export namespace Prisma {
       reward: Prisma.JsonValue
       usesLeft: number
       expiry: Date | null
+      orgId: string | null
     }, ExtArgs["result"]["redeemCode"]>
     composites: {}
   }
@@ -40502,6 +40784,7 @@ export namespace Prisma {
   export interface Prisma__RedeemCodeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     grants<T extends RedeemCode$grantsArgs<ExtArgs> = {}>(args?: Subset<T, RedeemCode$grantsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RedeemGrantPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    org<T extends RedeemCode$orgArgs<ExtArgs> = {}>(args?: Subset<T, RedeemCode$orgArgs<ExtArgs>>): Prisma__OrgClient<$Result.GetResult<Prisma.$OrgPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -40536,6 +40819,7 @@ export namespace Prisma {
     readonly reward: FieldRef<"RedeemCode", 'Json'>
     readonly usesLeft: FieldRef<"RedeemCode", 'Int'>
     readonly expiry: FieldRef<"RedeemCode", 'DateTime'>
+    readonly orgId: FieldRef<"RedeemCode", 'String'>
   }
     
 
@@ -40790,6 +41074,10 @@ export namespace Prisma {
      */
     data: RedeemCodeCreateManyInput | RedeemCodeCreateManyInput[]
     skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RedeemCodeIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -40860,6 +41148,10 @@ export namespace Prisma {
      * Limit how many RedeemCodes to update.
      */
     limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RedeemCodeIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -40950,6 +41242,25 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: RedeemGrantScalarFieldEnum | RedeemGrantScalarFieldEnum[]
+  }
+
+  /**
+   * RedeemCode.org
+   */
+  export type RedeemCode$orgArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Org
+     */
+    select?: OrgSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Org
+     */
+    omit?: OrgOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrgInclude<ExtArgs> | null
+    where?: OrgWhereInput
   }
 
   /**
@@ -61128,6 +61439,7 @@ export namespace Prisma {
     content: string | null
     effectiveDate: Date | null
     active: boolean | null
+    orgId: string | null
   }
 
   export type TermsMaxAggregateOutputType = {
@@ -61136,6 +61448,7 @@ export namespace Prisma {
     content: string | null
     effectiveDate: Date | null
     active: boolean | null
+    orgId: string | null
   }
 
   export type TermsCountAggregateOutputType = {
@@ -61144,6 +61457,7 @@ export namespace Prisma {
     content: number
     effectiveDate: number
     active: number
+    orgId: number
     _all: number
   }
 
@@ -61154,6 +61468,7 @@ export namespace Prisma {
     content?: true
     effectiveDate?: true
     active?: true
+    orgId?: true
   }
 
   export type TermsMaxAggregateInputType = {
@@ -61162,6 +61477,7 @@ export namespace Prisma {
     content?: true
     effectiveDate?: true
     active?: true
+    orgId?: true
   }
 
   export type TermsCountAggregateInputType = {
@@ -61170,6 +61486,7 @@ export namespace Prisma {
     content?: true
     effectiveDate?: true
     active?: true
+    orgId?: true
     _all?: true
   }
 
@@ -61251,6 +61568,7 @@ export namespace Prisma {
     content: string
     effectiveDate: Date
     active: boolean
+    orgId: string | null
     _count: TermsCountAggregateOutputType | null
     _min: TermsMinAggregateOutputType | null
     _max: TermsMaxAggregateOutputType | null
@@ -61276,7 +61594,9 @@ export namespace Prisma {
     content?: boolean
     effectiveDate?: boolean
     active?: boolean
+    orgId?: boolean
     consents?: boolean | Terms$consentsArgs<ExtArgs>
+    org?: boolean | Terms$orgArgs<ExtArgs>
     _count?: boolean | TermsCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["terms"]>
 
@@ -61286,6 +61606,8 @@ export namespace Prisma {
     content?: boolean
     effectiveDate?: boolean
     active?: boolean
+    orgId?: boolean
+    org?: boolean | Terms$orgArgs<ExtArgs>
   }, ExtArgs["result"]["terms"]>
 
   export type TermsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -61294,6 +61616,8 @@ export namespace Prisma {
     content?: boolean
     effectiveDate?: boolean
     active?: boolean
+    orgId?: boolean
+    org?: boolean | Terms$orgArgs<ExtArgs>
   }, ExtArgs["result"]["terms"]>
 
   export type TermsSelectScalar = {
@@ -61302,20 +61626,27 @@ export namespace Prisma {
     content?: boolean
     effectiveDate?: boolean
     active?: boolean
+    orgId?: boolean
   }
 
-  export type TermsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "version" | "content" | "effectiveDate" | "active", ExtArgs["result"]["terms"]>
+  export type TermsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "version" | "content" | "effectiveDate" | "active" | "orgId", ExtArgs["result"]["terms"]>
   export type TermsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     consents?: boolean | Terms$consentsArgs<ExtArgs>
+    org?: boolean | Terms$orgArgs<ExtArgs>
     _count?: boolean | TermsCountOutputTypeDefaultArgs<ExtArgs>
   }
-  export type TermsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
-  export type TermsIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type TermsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    org?: boolean | Terms$orgArgs<ExtArgs>
+  }
+  export type TermsIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    org?: boolean | Terms$orgArgs<ExtArgs>
+  }
 
   export type $TermsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Terms"
     objects: {
       consents: Prisma.$ConsentPayload<ExtArgs>[]
+      org: Prisma.$OrgPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -61323,6 +61654,7 @@ export namespace Prisma {
       content: string
       effectiveDate: Date
       active: boolean
+      orgId: string | null
     }, ExtArgs["result"]["terms"]>
     composites: {}
   }
@@ -61718,6 +62050,7 @@ export namespace Prisma {
   export interface Prisma__TermsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     consents<T extends Terms$consentsArgs<ExtArgs> = {}>(args?: Subset<T, Terms$consentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConsentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    org<T extends Terms$orgArgs<ExtArgs> = {}>(args?: Subset<T, Terms$orgArgs<ExtArgs>>): Prisma__OrgClient<$Result.GetResult<Prisma.$OrgPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -61752,6 +62085,7 @@ export namespace Prisma {
     readonly content: FieldRef<"Terms", 'String'>
     readonly effectiveDate: FieldRef<"Terms", 'DateTime'>
     readonly active: FieldRef<"Terms", 'Boolean'>
+    readonly orgId: FieldRef<"Terms", 'String'>
   }
     
 
@@ -62006,6 +62340,10 @@ export namespace Prisma {
      */
     data: TermsCreateManyInput | TermsCreateManyInput[]
     skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TermsIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -62076,6 +62414,10 @@ export namespace Prisma {
      * Limit how many Terms to update.
      */
     limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TermsIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -62166,6 +62508,25 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ConsentScalarFieldEnum | ConsentScalarFieldEnum[]
+  }
+
+  /**
+   * Terms.org
+   */
+  export type Terms$orgArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Org
+     */
+    select?: OrgSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Org
+     */
+    omit?: OrgOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrgInclude<ExtArgs> | null
+    where?: OrgWhereInput
   }
 
   /**
@@ -77503,7 +77864,8 @@ export namespace Prisma {
 
   export const OrgScalarFieldEnum: {
     id: 'id',
-    name: 'name'
+    name: 'name',
+    domain: 'domain'
   };
 
   export type OrgScalarFieldEnum = (typeof OrgScalarFieldEnum)[keyof typeof OrgScalarFieldEnum]
@@ -77582,7 +77944,8 @@ export namespace Prisma {
   export const RoleScalarFieldEnum: {
     id: 'id',
     name: 'name',
-    level: 'level'
+    level: 'level',
+    orgId: 'orgId'
   };
 
   export type RoleScalarFieldEnum = (typeof RoleScalarFieldEnum)[keyof typeof RoleScalarFieldEnum]
@@ -77692,7 +78055,8 @@ export namespace Prisma {
   export const MerchantScalarFieldEnum: {
     id: 'id',
     name: 'name',
-    config: 'config'
+    config: 'config',
+    orgId: 'orgId'
   };
 
   export type MerchantScalarFieldEnum = (typeof MerchantScalarFieldEnum)[keyof typeof MerchantScalarFieldEnum]
@@ -77779,7 +78143,8 @@ export namespace Prisma {
     code: 'code',
     reward: 'reward',
     usesLeft: 'usesLeft',
-    expiry: 'expiry'
+    expiry: 'expiry',
+    orgId: 'orgId'
   };
 
   export type RedeemCodeScalarFieldEnum = (typeof RedeemCodeScalarFieldEnum)[keyof typeof RedeemCodeScalarFieldEnum]
@@ -77979,7 +78344,8 @@ export namespace Prisma {
     version: 'version',
     content: 'content',
     effectiveDate: 'effectiveDate',
-    active: 'active'
+    active: 'active',
+    orgId: 'orgId'
   };
 
   export type TermsScalarFieldEnum = (typeof TermsScalarFieldEnum)[keyof typeof TermsScalarFieldEnum]
@@ -78689,21 +79055,32 @@ export namespace Prisma {
     NOT?: OrgWhereInput | OrgWhereInput[]
     id?: StringFilter<"Org"> | string
     name?: StringFilter<"Org"> | string
+    domain?: StringNullableFilter<"Org"> | string | null
     projects?: ProjectListRelationFilter
     apps?: AppListRelationFilter
     members?: MemberListRelationFilter
+    roles?: RoleListRelationFilter
+    redeemCodes?: RedeemCodeListRelationFilter
+    merchants?: MerchantListRelationFilter
+    terms?: TermsListRelationFilter
   }
 
   export type OrgOrderByWithRelationInput = {
     id?: SortOrder
     name?: SortOrder
+    domain?: SortOrderInput | SortOrder
     projects?: ProjectOrderByRelationAggregateInput
     apps?: AppOrderByRelationAggregateInput
     members?: MemberOrderByRelationAggregateInput
+    roles?: RoleOrderByRelationAggregateInput
+    redeemCodes?: RedeemCodeOrderByRelationAggregateInput
+    merchants?: MerchantOrderByRelationAggregateInput
+    terms?: TermsOrderByRelationAggregateInput
   }
 
   export type OrgWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    domain?: string
     AND?: OrgWhereInput | OrgWhereInput[]
     OR?: OrgWhereInput[]
     NOT?: OrgWhereInput | OrgWhereInput[]
@@ -78711,11 +79088,16 @@ export namespace Prisma {
     projects?: ProjectListRelationFilter
     apps?: AppListRelationFilter
     members?: MemberListRelationFilter
-  }, "id">
+    roles?: RoleListRelationFilter
+    redeemCodes?: RedeemCodeListRelationFilter
+    merchants?: MerchantListRelationFilter
+    terms?: TermsListRelationFilter
+  }, "id" | "domain">
 
   export type OrgOrderByWithAggregationInput = {
     id?: SortOrder
     name?: SortOrder
+    domain?: SortOrderInput | SortOrder
     _count?: OrgCountOrderByAggregateInput
     _max?: OrgMaxOrderByAggregateInput
     _min?: OrgMinOrderByAggregateInput
@@ -78727,6 +79109,7 @@ export namespace Prisma {
     NOT?: OrgScalarWhereWithAggregatesInput | OrgScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Org"> | string
     name?: StringWithAggregatesFilter<"Org"> | string
+    domain?: StringNullableWithAggregatesFilter<"Org"> | string | null
   }
 
   export type ProjectWhereInput = {
@@ -79135,6 +79518,8 @@ export namespace Prisma {
     id?: StringFilter<"Role"> | string
     name?: StringFilter<"Role"> | string
     level?: EnumRoleLevelFilter<"Role"> | $Enums.RoleLevel
+    orgId?: StringNullableFilter<"Role"> | string | null
+    org?: XOR<OrgNullableScalarRelationFilter, OrgWhereInput> | null
     permissions?: PermissionListRelationFilter
     memberRoles?: MemberRoleListRelationFilter
   }
@@ -79143,6 +79528,8 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     level?: SortOrder
+    orgId?: SortOrderInput | SortOrder
+    org?: OrgOrderByWithRelationInput
     permissions?: PermissionOrderByRelationAggregateInput
     memberRoles?: MemberRoleOrderByRelationAggregateInput
   }
@@ -79154,6 +79541,8 @@ export namespace Prisma {
     NOT?: RoleWhereInput | RoleWhereInput[]
     name?: StringFilter<"Role"> | string
     level?: EnumRoleLevelFilter<"Role"> | $Enums.RoleLevel
+    orgId?: StringNullableFilter<"Role"> | string | null
+    org?: XOR<OrgNullableScalarRelationFilter, OrgWhereInput> | null
     permissions?: PermissionListRelationFilter
     memberRoles?: MemberRoleListRelationFilter
   }, "id">
@@ -79162,6 +79551,7 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     level?: SortOrder
+    orgId?: SortOrderInput | SortOrder
     _count?: RoleCountOrderByAggregateInput
     _max?: RoleMaxOrderByAggregateInput
     _min?: RoleMinOrderByAggregateInput
@@ -79174,6 +79564,7 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"Role"> | string
     name?: StringWithAggregatesFilter<"Role"> | string
     level?: EnumRoleLevelWithAggregatesFilter<"Role"> | $Enums.RoleLevel
+    orgId?: StringNullableWithAggregatesFilter<"Role"> | string | null
   }
 
   export type MemberRoleWhereInput = {
@@ -79713,14 +80104,18 @@ export namespace Prisma {
     id?: StringFilter<"Merchant"> | string
     name?: StringFilter<"Merchant"> | string
     config?: JsonNullableFilter<"Merchant">
+    orgId?: StringNullableFilter<"Merchant"> | string | null
     paymentMethods?: PaymentMethodListRelationFilter
+    org?: XOR<OrgNullableScalarRelationFilter, OrgWhereInput> | null
   }
 
   export type MerchantOrderByWithRelationInput = {
     id?: SortOrder
     name?: SortOrder
     config?: SortOrderInput | SortOrder
+    orgId?: SortOrderInput | SortOrder
     paymentMethods?: PaymentMethodOrderByRelationAggregateInput
+    org?: OrgOrderByWithRelationInput
   }
 
   export type MerchantWhereUniqueInput = Prisma.AtLeast<{
@@ -79730,13 +80125,16 @@ export namespace Prisma {
     NOT?: MerchantWhereInput | MerchantWhereInput[]
     name?: StringFilter<"Merchant"> | string
     config?: JsonNullableFilter<"Merchant">
+    orgId?: StringNullableFilter<"Merchant"> | string | null
     paymentMethods?: PaymentMethodListRelationFilter
+    org?: XOR<OrgNullableScalarRelationFilter, OrgWhereInput> | null
   }, "id">
 
   export type MerchantOrderByWithAggregationInput = {
     id?: SortOrder
     name?: SortOrder
     config?: SortOrderInput | SortOrder
+    orgId?: SortOrderInput | SortOrder
     _count?: MerchantCountOrderByAggregateInput
     _max?: MerchantMaxOrderByAggregateInput
     _min?: MerchantMinOrderByAggregateInput
@@ -79749,6 +80147,7 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"Merchant"> | string
     name?: StringWithAggregatesFilter<"Merchant"> | string
     config?: JsonNullableWithAggregatesFilter<"Merchant">
+    orgId?: StringNullableWithAggregatesFilter<"Merchant"> | string | null
   }
 
   export type PaymentMethodWhereInput = {
@@ -80146,7 +80545,9 @@ export namespace Prisma {
     reward?: JsonFilter<"RedeemCode">
     usesLeft?: IntFilter<"RedeemCode"> | number
     expiry?: DateTimeNullableFilter<"RedeemCode"> | Date | string | null
+    orgId?: StringNullableFilter<"RedeemCode"> | string | null
     grants?: RedeemGrantListRelationFilter
+    org?: XOR<OrgNullableScalarRelationFilter, OrgWhereInput> | null
   }
 
   export type RedeemCodeOrderByWithRelationInput = {
@@ -80155,7 +80556,9 @@ export namespace Prisma {
     reward?: SortOrder
     usesLeft?: SortOrder
     expiry?: SortOrderInput | SortOrder
+    orgId?: SortOrderInput | SortOrder
     grants?: RedeemGrantOrderByRelationAggregateInput
+    org?: OrgOrderByWithRelationInput
   }
 
   export type RedeemCodeWhereUniqueInput = Prisma.AtLeast<{
@@ -80167,7 +80570,9 @@ export namespace Prisma {
     reward?: JsonFilter<"RedeemCode">
     usesLeft?: IntFilter<"RedeemCode"> | number
     expiry?: DateTimeNullableFilter<"RedeemCode"> | Date | string | null
+    orgId?: StringNullableFilter<"RedeemCode"> | string | null
     grants?: RedeemGrantListRelationFilter
+    org?: XOR<OrgNullableScalarRelationFilter, OrgWhereInput> | null
   }, "id" | "code">
 
   export type RedeemCodeOrderByWithAggregationInput = {
@@ -80176,6 +80581,7 @@ export namespace Prisma {
     reward?: SortOrder
     usesLeft?: SortOrder
     expiry?: SortOrderInput | SortOrder
+    orgId?: SortOrderInput | SortOrder
     _count?: RedeemCodeCountOrderByAggregateInput
     _avg?: RedeemCodeAvgOrderByAggregateInput
     _max?: RedeemCodeMaxOrderByAggregateInput
@@ -80192,6 +80598,7 @@ export namespace Prisma {
     reward?: JsonWithAggregatesFilter<"RedeemCode">
     usesLeft?: IntWithAggregatesFilter<"RedeemCode"> | number
     expiry?: DateTimeNullableWithAggregatesFilter<"RedeemCode"> | Date | string | null
+    orgId?: StringNullableWithAggregatesFilter<"RedeemCode"> | string | null
   }
 
   export type RedeemGrantWhereInput = {
@@ -81184,7 +81591,9 @@ export namespace Prisma {
     content?: StringFilter<"Terms"> | string
     effectiveDate?: DateTimeFilter<"Terms"> | Date | string
     active?: BoolFilter<"Terms"> | boolean
+    orgId?: StringNullableFilter<"Terms"> | string | null
     consents?: ConsentListRelationFilter
+    org?: XOR<OrgNullableScalarRelationFilter, OrgWhereInput> | null
   }
 
   export type TermsOrderByWithRelationInput = {
@@ -81193,20 +81602,25 @@ export namespace Prisma {
     content?: SortOrder
     effectiveDate?: SortOrder
     active?: SortOrder
+    orgId?: SortOrderInput | SortOrder
     consents?: ConsentOrderByRelationAggregateInput
+    org?: OrgOrderByWithRelationInput
   }
 
   export type TermsWhereUniqueInput = Prisma.AtLeast<{
     id?: string
-    version?: string
+    orgId_version?: TermsOrgIdVersionCompoundUniqueInput
     AND?: TermsWhereInput | TermsWhereInput[]
     OR?: TermsWhereInput[]
     NOT?: TermsWhereInput | TermsWhereInput[]
+    version?: StringFilter<"Terms"> | string
     content?: StringFilter<"Terms"> | string
     effectiveDate?: DateTimeFilter<"Terms"> | Date | string
     active?: BoolFilter<"Terms"> | boolean
+    orgId?: StringNullableFilter<"Terms"> | string | null
     consents?: ConsentListRelationFilter
-  }, "id" | "version">
+    org?: XOR<OrgNullableScalarRelationFilter, OrgWhereInput> | null
+  }, "id" | "orgId_version">
 
   export type TermsOrderByWithAggregationInput = {
     id?: SortOrder
@@ -81214,6 +81628,7 @@ export namespace Prisma {
     content?: SortOrder
     effectiveDate?: SortOrder
     active?: SortOrder
+    orgId?: SortOrderInput | SortOrder
     _count?: TermsCountOrderByAggregateInput
     _max?: TermsMaxOrderByAggregateInput
     _min?: TermsMinOrderByAggregateInput
@@ -81228,6 +81643,7 @@ export namespace Prisma {
     content?: StringWithAggregatesFilter<"Terms"> | string
     effectiveDate?: DateTimeWithAggregatesFilter<"Terms"> | Date | string
     active?: BoolWithAggregatesFilter<"Terms"> | boolean
+    orgId?: StringNullableWithAggregatesFilter<"Terms"> | string | null
   }
 
   export type ConsentWhereInput = {
@@ -82252,48 +82668,71 @@ export namespace Prisma {
   export type OrgCreateInput = {
     id?: string
     name: string
+    domain?: string | null
     projects?: ProjectCreateNestedManyWithoutOrgInput
     apps?: AppCreateNestedManyWithoutOwnerOrgInput
     members?: MemberCreateNestedManyWithoutOrgInput
+    roles?: RoleCreateNestedManyWithoutOrgInput
+    redeemCodes?: RedeemCodeCreateNestedManyWithoutOrgInput
+    merchants?: MerchantCreateNestedManyWithoutOrgInput
+    terms?: TermsCreateNestedManyWithoutOrgInput
   }
 
   export type OrgUncheckedCreateInput = {
     id?: string
     name: string
+    domain?: string | null
     projects?: ProjectUncheckedCreateNestedManyWithoutOrgInput
     apps?: AppUncheckedCreateNestedManyWithoutOwnerOrgInput
     members?: MemberUncheckedCreateNestedManyWithoutOrgInput
+    roles?: RoleUncheckedCreateNestedManyWithoutOrgInput
+    redeemCodes?: RedeemCodeUncheckedCreateNestedManyWithoutOrgInput
+    merchants?: MerchantUncheckedCreateNestedManyWithoutOrgInput
+    terms?: TermsUncheckedCreateNestedManyWithoutOrgInput
   }
 
   export type OrgUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    domain?: NullableStringFieldUpdateOperationsInput | string | null
     projects?: ProjectUpdateManyWithoutOrgNestedInput
     apps?: AppUpdateManyWithoutOwnerOrgNestedInput
     members?: MemberUpdateManyWithoutOrgNestedInput
+    roles?: RoleUpdateManyWithoutOrgNestedInput
+    redeemCodes?: RedeemCodeUpdateManyWithoutOrgNestedInput
+    merchants?: MerchantUpdateManyWithoutOrgNestedInput
+    terms?: TermsUpdateManyWithoutOrgNestedInput
   }
 
   export type OrgUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    domain?: NullableStringFieldUpdateOperationsInput | string | null
     projects?: ProjectUncheckedUpdateManyWithoutOrgNestedInput
     apps?: AppUncheckedUpdateManyWithoutOwnerOrgNestedInput
     members?: MemberUncheckedUpdateManyWithoutOrgNestedInput
+    roles?: RoleUncheckedUpdateManyWithoutOrgNestedInput
+    redeemCodes?: RedeemCodeUncheckedUpdateManyWithoutOrgNestedInput
+    merchants?: MerchantUncheckedUpdateManyWithoutOrgNestedInput
+    terms?: TermsUncheckedUpdateManyWithoutOrgNestedInput
   }
 
   export type OrgCreateManyInput = {
     id?: string
     name: string
+    domain?: string | null
   }
 
   export type OrgUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    domain?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type OrgUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    domain?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ProjectCreateInput = {
@@ -82681,6 +83120,7 @@ export namespace Prisma {
     id?: string
     name: string
     level: $Enums.RoleLevel
+    org?: OrgCreateNestedOneWithoutRolesInput
     permissions?: PermissionCreateNestedManyWithoutRoleInput
     memberRoles?: MemberRoleCreateNestedManyWithoutRoleInput
   }
@@ -82689,6 +83129,7 @@ export namespace Prisma {
     id?: string
     name: string
     level: $Enums.RoleLevel
+    orgId?: string | null
     permissions?: PermissionUncheckedCreateNestedManyWithoutRoleInput
     memberRoles?: MemberRoleUncheckedCreateNestedManyWithoutRoleInput
   }
@@ -82697,6 +83138,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     level?: EnumRoleLevelFieldUpdateOperationsInput | $Enums.RoleLevel
+    org?: OrgUpdateOneWithoutRolesNestedInput
     permissions?: PermissionUpdateManyWithoutRoleNestedInput
     memberRoles?: MemberRoleUpdateManyWithoutRoleNestedInput
   }
@@ -82705,6 +83147,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     level?: EnumRoleLevelFieldUpdateOperationsInput | $Enums.RoleLevel
+    orgId?: NullableStringFieldUpdateOperationsInput | string | null
     permissions?: PermissionUncheckedUpdateManyWithoutRoleNestedInput
     memberRoles?: MemberRoleUncheckedUpdateManyWithoutRoleNestedInput
   }
@@ -82713,6 +83156,7 @@ export namespace Prisma {
     id?: string
     name: string
     level: $Enums.RoleLevel
+    orgId?: string | null
   }
 
   export type RoleUpdateManyMutationInput = {
@@ -82725,6 +83169,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     level?: EnumRoleLevelFieldUpdateOperationsInput | $Enums.RoleLevel
+    orgId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type MemberRoleCreateInput = {
@@ -83244,12 +83689,14 @@ export namespace Prisma {
     name: string
     config?: NullableJsonNullValueInput | InputJsonValue
     paymentMethods?: PaymentMethodCreateNestedManyWithoutMerchantInput
+    org?: OrgCreateNestedOneWithoutMerchantsInput
   }
 
   export type MerchantUncheckedCreateInput = {
     id?: string
     name: string
     config?: NullableJsonNullValueInput | InputJsonValue
+    orgId?: string | null
     paymentMethods?: PaymentMethodUncheckedCreateNestedManyWithoutMerchantInput
   }
 
@@ -83258,12 +83705,14 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     config?: NullableJsonNullValueInput | InputJsonValue
     paymentMethods?: PaymentMethodUpdateManyWithoutMerchantNestedInput
+    org?: OrgUpdateOneWithoutMerchantsNestedInput
   }
 
   export type MerchantUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     config?: NullableJsonNullValueInput | InputJsonValue
+    orgId?: NullableStringFieldUpdateOperationsInput | string | null
     paymentMethods?: PaymentMethodUncheckedUpdateManyWithoutMerchantNestedInput
   }
 
@@ -83271,6 +83720,7 @@ export namespace Prisma {
     id?: string
     name: string
     config?: NullableJsonNullValueInput | InputJsonValue
+    orgId?: string | null
   }
 
   export type MerchantUpdateManyMutationInput = {
@@ -83283,6 +83733,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     config?: NullableJsonNullValueInput | InputJsonValue
+    orgId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type PaymentMethodCreateInput = {
@@ -83653,6 +84104,7 @@ export namespace Prisma {
     usesLeft: number
     expiry?: Date | string | null
     grants?: RedeemGrantCreateNestedManyWithoutCodeInput
+    org?: OrgCreateNestedOneWithoutRedeemCodesInput
   }
 
   export type RedeemCodeUncheckedCreateInput = {
@@ -83661,6 +84113,7 @@ export namespace Prisma {
     reward: JsonNullValueInput | InputJsonValue
     usesLeft: number
     expiry?: Date | string | null
+    orgId?: string | null
     grants?: RedeemGrantUncheckedCreateNestedManyWithoutCodeInput
   }
 
@@ -83671,6 +84124,7 @@ export namespace Prisma {
     usesLeft?: IntFieldUpdateOperationsInput | number
     expiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     grants?: RedeemGrantUpdateManyWithoutCodeNestedInput
+    org?: OrgUpdateOneWithoutRedeemCodesNestedInput
   }
 
   export type RedeemCodeUncheckedUpdateInput = {
@@ -83679,6 +84133,7 @@ export namespace Prisma {
     reward?: JsonNullValueInput | InputJsonValue
     usesLeft?: IntFieldUpdateOperationsInput | number
     expiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    orgId?: NullableStringFieldUpdateOperationsInput | string | null
     grants?: RedeemGrantUncheckedUpdateManyWithoutCodeNestedInput
   }
 
@@ -83688,6 +84143,7 @@ export namespace Prisma {
     reward: JsonNullValueInput | InputJsonValue
     usesLeft: number
     expiry?: Date | string | null
+    orgId?: string | null
   }
 
   export type RedeemCodeUpdateManyMutationInput = {
@@ -83704,6 +84160,7 @@ export namespace Prisma {
     reward?: JsonNullValueInput | InputJsonValue
     usesLeft?: IntFieldUpdateOperationsInput | number
     expiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    orgId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type RedeemGrantCreateInput = {
@@ -84637,6 +85094,7 @@ export namespace Prisma {
     effectiveDate: Date | string
     active?: boolean
     consents?: ConsentCreateNestedManyWithoutTermsInput
+    org?: OrgCreateNestedOneWithoutTermsInput
   }
 
   export type TermsUncheckedCreateInput = {
@@ -84645,6 +85103,7 @@ export namespace Prisma {
     content: string
     effectiveDate: Date | string
     active?: boolean
+    orgId?: string | null
     consents?: ConsentUncheckedCreateNestedManyWithoutTermsInput
   }
 
@@ -84655,6 +85114,7 @@ export namespace Prisma {
     effectiveDate?: DateTimeFieldUpdateOperationsInput | Date | string
     active?: BoolFieldUpdateOperationsInput | boolean
     consents?: ConsentUpdateManyWithoutTermsNestedInput
+    org?: OrgUpdateOneWithoutTermsNestedInput
   }
 
   export type TermsUncheckedUpdateInput = {
@@ -84663,6 +85123,7 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     effectiveDate?: DateTimeFieldUpdateOperationsInput | Date | string
     active?: BoolFieldUpdateOperationsInput | boolean
+    orgId?: NullableStringFieldUpdateOperationsInput | string | null
     consents?: ConsentUncheckedUpdateManyWithoutTermsNestedInput
   }
 
@@ -84672,6 +85133,7 @@ export namespace Prisma {
     content: string
     effectiveDate: Date | string
     active?: boolean
+    orgId?: string | null
   }
 
   export type TermsUpdateManyMutationInput = {
@@ -84688,6 +85150,7 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     effectiveDate?: DateTimeFieldUpdateOperationsInput | Date | string
     active?: BoolFieldUpdateOperationsInput | boolean
+    orgId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ConsentCreateInput = {
@@ -85949,6 +86412,30 @@ export namespace Prisma {
     none?: AppWhereInput
   }
 
+  export type RoleListRelationFilter = {
+    every?: RoleWhereInput
+    some?: RoleWhereInput
+    none?: RoleWhereInput
+  }
+
+  export type RedeemCodeListRelationFilter = {
+    every?: RedeemCodeWhereInput
+    some?: RedeemCodeWhereInput
+    none?: RedeemCodeWhereInput
+  }
+
+  export type MerchantListRelationFilter = {
+    every?: MerchantWhereInput
+    some?: MerchantWhereInput
+    none?: MerchantWhereInput
+  }
+
+  export type TermsListRelationFilter = {
+    every?: TermsWhereInput
+    some?: TermsWhereInput
+    none?: TermsWhereInput
+  }
+
   export type ProjectOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -85957,19 +86444,38 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
+  export type RoleOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type RedeemCodeOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type MerchantOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type TermsOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type OrgCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    domain?: SortOrder
   }
 
   export type OrgMaxOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    domain?: SortOrder
   }
 
   export type OrgMinOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    domain?: SortOrder
   }
 
   export type OrgScalarRelationFilter = {
@@ -86294,18 +86800,21 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     level?: SortOrder
+    orgId?: SortOrder
   }
 
   export type RoleMaxOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
     level?: SortOrder
+    orgId?: SortOrder
   }
 
   export type RoleMinOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
     level?: SortOrder
+    orgId?: SortOrder
   }
 
   export type EnumRoleLevelWithAggregatesFilter<$PrismaModel = never> = {
@@ -86754,16 +87263,19 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     config?: SortOrder
+    orgId?: SortOrder
   }
 
   export type MerchantMaxOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    orgId?: SortOrder
   }
 
   export type MerchantMinOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    orgId?: SortOrder
   }
   export type JsonNullableWithAggregatesFilter<$PrismaModel = never> =
     | PatchUndefined<
@@ -87063,6 +87575,7 @@ export namespace Prisma {
     reward?: SortOrder
     usesLeft?: SortOrder
     expiry?: SortOrder
+    orgId?: SortOrder
   }
 
   export type RedeemCodeAvgOrderByAggregateInput = {
@@ -87074,6 +87587,7 @@ export namespace Prisma {
     code?: SortOrder
     usesLeft?: SortOrder
     expiry?: SortOrder
+    orgId?: SortOrder
   }
 
   export type RedeemCodeMinOrderByAggregateInput = {
@@ -87081,6 +87595,7 @@ export namespace Prisma {
     code?: SortOrder
     usesLeft?: SortOrder
     expiry?: SortOrder
+    orgId?: SortOrder
   }
 
   export type RedeemCodeSumOrderByAggregateInput = {
@@ -87645,12 +88160,18 @@ export namespace Prisma {
     dueAt?: SortOrder
   }
 
+  export type TermsOrgIdVersionCompoundUniqueInput = {
+    orgId: string
+    version: string
+  }
+
   export type TermsCountOrderByAggregateInput = {
     id?: SortOrder
     version?: SortOrder
     content?: SortOrder
     effectiveDate?: SortOrder
     active?: SortOrder
+    orgId?: SortOrder
   }
 
   export type TermsMaxOrderByAggregateInput = {
@@ -87659,6 +88180,7 @@ export namespace Prisma {
     content?: SortOrder
     effectiveDate?: SortOrder
     active?: SortOrder
+    orgId?: SortOrder
   }
 
   export type TermsMinOrderByAggregateInput = {
@@ -87667,6 +88189,7 @@ export namespace Prisma {
     content?: SortOrder
     effectiveDate?: SortOrder
     active?: SortOrder
+    orgId?: SortOrder
   }
 
   export type TermsScalarRelationFilter = {
@@ -89471,6 +89994,34 @@ export namespace Prisma {
     connect?: MemberWhereUniqueInput | MemberWhereUniqueInput[]
   }
 
+  export type RoleCreateNestedManyWithoutOrgInput = {
+    create?: XOR<RoleCreateWithoutOrgInput, RoleUncheckedCreateWithoutOrgInput> | RoleCreateWithoutOrgInput[] | RoleUncheckedCreateWithoutOrgInput[]
+    connectOrCreate?: RoleCreateOrConnectWithoutOrgInput | RoleCreateOrConnectWithoutOrgInput[]
+    createMany?: RoleCreateManyOrgInputEnvelope
+    connect?: RoleWhereUniqueInput | RoleWhereUniqueInput[]
+  }
+
+  export type RedeemCodeCreateNestedManyWithoutOrgInput = {
+    create?: XOR<RedeemCodeCreateWithoutOrgInput, RedeemCodeUncheckedCreateWithoutOrgInput> | RedeemCodeCreateWithoutOrgInput[] | RedeemCodeUncheckedCreateWithoutOrgInput[]
+    connectOrCreate?: RedeemCodeCreateOrConnectWithoutOrgInput | RedeemCodeCreateOrConnectWithoutOrgInput[]
+    createMany?: RedeemCodeCreateManyOrgInputEnvelope
+    connect?: RedeemCodeWhereUniqueInput | RedeemCodeWhereUniqueInput[]
+  }
+
+  export type MerchantCreateNestedManyWithoutOrgInput = {
+    create?: XOR<MerchantCreateWithoutOrgInput, MerchantUncheckedCreateWithoutOrgInput> | MerchantCreateWithoutOrgInput[] | MerchantUncheckedCreateWithoutOrgInput[]
+    connectOrCreate?: MerchantCreateOrConnectWithoutOrgInput | MerchantCreateOrConnectWithoutOrgInput[]
+    createMany?: MerchantCreateManyOrgInputEnvelope
+    connect?: MerchantWhereUniqueInput | MerchantWhereUniqueInput[]
+  }
+
+  export type TermsCreateNestedManyWithoutOrgInput = {
+    create?: XOR<TermsCreateWithoutOrgInput, TermsUncheckedCreateWithoutOrgInput> | TermsCreateWithoutOrgInput[] | TermsUncheckedCreateWithoutOrgInput[]
+    connectOrCreate?: TermsCreateOrConnectWithoutOrgInput | TermsCreateOrConnectWithoutOrgInput[]
+    createMany?: TermsCreateManyOrgInputEnvelope
+    connect?: TermsWhereUniqueInput | TermsWhereUniqueInput[]
+  }
+
   export type ProjectUncheckedCreateNestedManyWithoutOrgInput = {
     create?: XOR<ProjectCreateWithoutOrgInput, ProjectUncheckedCreateWithoutOrgInput> | ProjectCreateWithoutOrgInput[] | ProjectUncheckedCreateWithoutOrgInput[]
     connectOrCreate?: ProjectCreateOrConnectWithoutOrgInput | ProjectCreateOrConnectWithoutOrgInput[]
@@ -89490,6 +90041,34 @@ export namespace Prisma {
     connectOrCreate?: MemberCreateOrConnectWithoutOrgInput | MemberCreateOrConnectWithoutOrgInput[]
     createMany?: MemberCreateManyOrgInputEnvelope
     connect?: MemberWhereUniqueInput | MemberWhereUniqueInput[]
+  }
+
+  export type RoleUncheckedCreateNestedManyWithoutOrgInput = {
+    create?: XOR<RoleCreateWithoutOrgInput, RoleUncheckedCreateWithoutOrgInput> | RoleCreateWithoutOrgInput[] | RoleUncheckedCreateWithoutOrgInput[]
+    connectOrCreate?: RoleCreateOrConnectWithoutOrgInput | RoleCreateOrConnectWithoutOrgInput[]
+    createMany?: RoleCreateManyOrgInputEnvelope
+    connect?: RoleWhereUniqueInput | RoleWhereUniqueInput[]
+  }
+
+  export type RedeemCodeUncheckedCreateNestedManyWithoutOrgInput = {
+    create?: XOR<RedeemCodeCreateWithoutOrgInput, RedeemCodeUncheckedCreateWithoutOrgInput> | RedeemCodeCreateWithoutOrgInput[] | RedeemCodeUncheckedCreateWithoutOrgInput[]
+    connectOrCreate?: RedeemCodeCreateOrConnectWithoutOrgInput | RedeemCodeCreateOrConnectWithoutOrgInput[]
+    createMany?: RedeemCodeCreateManyOrgInputEnvelope
+    connect?: RedeemCodeWhereUniqueInput | RedeemCodeWhereUniqueInput[]
+  }
+
+  export type MerchantUncheckedCreateNestedManyWithoutOrgInput = {
+    create?: XOR<MerchantCreateWithoutOrgInput, MerchantUncheckedCreateWithoutOrgInput> | MerchantCreateWithoutOrgInput[] | MerchantUncheckedCreateWithoutOrgInput[]
+    connectOrCreate?: MerchantCreateOrConnectWithoutOrgInput | MerchantCreateOrConnectWithoutOrgInput[]
+    createMany?: MerchantCreateManyOrgInputEnvelope
+    connect?: MerchantWhereUniqueInput | MerchantWhereUniqueInput[]
+  }
+
+  export type TermsUncheckedCreateNestedManyWithoutOrgInput = {
+    create?: XOR<TermsCreateWithoutOrgInput, TermsUncheckedCreateWithoutOrgInput> | TermsCreateWithoutOrgInput[] | TermsUncheckedCreateWithoutOrgInput[]
+    connectOrCreate?: TermsCreateOrConnectWithoutOrgInput | TermsCreateOrConnectWithoutOrgInput[]
+    createMany?: TermsCreateManyOrgInputEnvelope
+    connect?: TermsWhereUniqueInput | TermsWhereUniqueInput[]
   }
 
   export type ProjectUpdateManyWithoutOrgNestedInput = {
@@ -89534,6 +90113,62 @@ export namespace Prisma {
     deleteMany?: MemberScalarWhereInput | MemberScalarWhereInput[]
   }
 
+  export type RoleUpdateManyWithoutOrgNestedInput = {
+    create?: XOR<RoleCreateWithoutOrgInput, RoleUncheckedCreateWithoutOrgInput> | RoleCreateWithoutOrgInput[] | RoleUncheckedCreateWithoutOrgInput[]
+    connectOrCreate?: RoleCreateOrConnectWithoutOrgInput | RoleCreateOrConnectWithoutOrgInput[]
+    upsert?: RoleUpsertWithWhereUniqueWithoutOrgInput | RoleUpsertWithWhereUniqueWithoutOrgInput[]
+    createMany?: RoleCreateManyOrgInputEnvelope
+    set?: RoleWhereUniqueInput | RoleWhereUniqueInput[]
+    disconnect?: RoleWhereUniqueInput | RoleWhereUniqueInput[]
+    delete?: RoleWhereUniqueInput | RoleWhereUniqueInput[]
+    connect?: RoleWhereUniqueInput | RoleWhereUniqueInput[]
+    update?: RoleUpdateWithWhereUniqueWithoutOrgInput | RoleUpdateWithWhereUniqueWithoutOrgInput[]
+    updateMany?: RoleUpdateManyWithWhereWithoutOrgInput | RoleUpdateManyWithWhereWithoutOrgInput[]
+    deleteMany?: RoleScalarWhereInput | RoleScalarWhereInput[]
+  }
+
+  export type RedeemCodeUpdateManyWithoutOrgNestedInput = {
+    create?: XOR<RedeemCodeCreateWithoutOrgInput, RedeemCodeUncheckedCreateWithoutOrgInput> | RedeemCodeCreateWithoutOrgInput[] | RedeemCodeUncheckedCreateWithoutOrgInput[]
+    connectOrCreate?: RedeemCodeCreateOrConnectWithoutOrgInput | RedeemCodeCreateOrConnectWithoutOrgInput[]
+    upsert?: RedeemCodeUpsertWithWhereUniqueWithoutOrgInput | RedeemCodeUpsertWithWhereUniqueWithoutOrgInput[]
+    createMany?: RedeemCodeCreateManyOrgInputEnvelope
+    set?: RedeemCodeWhereUniqueInput | RedeemCodeWhereUniqueInput[]
+    disconnect?: RedeemCodeWhereUniqueInput | RedeemCodeWhereUniqueInput[]
+    delete?: RedeemCodeWhereUniqueInput | RedeemCodeWhereUniqueInput[]
+    connect?: RedeemCodeWhereUniqueInput | RedeemCodeWhereUniqueInput[]
+    update?: RedeemCodeUpdateWithWhereUniqueWithoutOrgInput | RedeemCodeUpdateWithWhereUniqueWithoutOrgInput[]
+    updateMany?: RedeemCodeUpdateManyWithWhereWithoutOrgInput | RedeemCodeUpdateManyWithWhereWithoutOrgInput[]
+    deleteMany?: RedeemCodeScalarWhereInput | RedeemCodeScalarWhereInput[]
+  }
+
+  export type MerchantUpdateManyWithoutOrgNestedInput = {
+    create?: XOR<MerchantCreateWithoutOrgInput, MerchantUncheckedCreateWithoutOrgInput> | MerchantCreateWithoutOrgInput[] | MerchantUncheckedCreateWithoutOrgInput[]
+    connectOrCreate?: MerchantCreateOrConnectWithoutOrgInput | MerchantCreateOrConnectWithoutOrgInput[]
+    upsert?: MerchantUpsertWithWhereUniqueWithoutOrgInput | MerchantUpsertWithWhereUniqueWithoutOrgInput[]
+    createMany?: MerchantCreateManyOrgInputEnvelope
+    set?: MerchantWhereUniqueInput | MerchantWhereUniqueInput[]
+    disconnect?: MerchantWhereUniqueInput | MerchantWhereUniqueInput[]
+    delete?: MerchantWhereUniqueInput | MerchantWhereUniqueInput[]
+    connect?: MerchantWhereUniqueInput | MerchantWhereUniqueInput[]
+    update?: MerchantUpdateWithWhereUniqueWithoutOrgInput | MerchantUpdateWithWhereUniqueWithoutOrgInput[]
+    updateMany?: MerchantUpdateManyWithWhereWithoutOrgInput | MerchantUpdateManyWithWhereWithoutOrgInput[]
+    deleteMany?: MerchantScalarWhereInput | MerchantScalarWhereInput[]
+  }
+
+  export type TermsUpdateManyWithoutOrgNestedInput = {
+    create?: XOR<TermsCreateWithoutOrgInput, TermsUncheckedCreateWithoutOrgInput> | TermsCreateWithoutOrgInput[] | TermsUncheckedCreateWithoutOrgInput[]
+    connectOrCreate?: TermsCreateOrConnectWithoutOrgInput | TermsCreateOrConnectWithoutOrgInput[]
+    upsert?: TermsUpsertWithWhereUniqueWithoutOrgInput | TermsUpsertWithWhereUniqueWithoutOrgInput[]
+    createMany?: TermsCreateManyOrgInputEnvelope
+    set?: TermsWhereUniqueInput | TermsWhereUniqueInput[]
+    disconnect?: TermsWhereUniqueInput | TermsWhereUniqueInput[]
+    delete?: TermsWhereUniqueInput | TermsWhereUniqueInput[]
+    connect?: TermsWhereUniqueInput | TermsWhereUniqueInput[]
+    update?: TermsUpdateWithWhereUniqueWithoutOrgInput | TermsUpdateWithWhereUniqueWithoutOrgInput[]
+    updateMany?: TermsUpdateManyWithWhereWithoutOrgInput | TermsUpdateManyWithWhereWithoutOrgInput[]
+    deleteMany?: TermsScalarWhereInput | TermsScalarWhereInput[]
+  }
+
   export type ProjectUncheckedUpdateManyWithoutOrgNestedInput = {
     create?: XOR<ProjectCreateWithoutOrgInput, ProjectUncheckedCreateWithoutOrgInput> | ProjectCreateWithoutOrgInput[] | ProjectUncheckedCreateWithoutOrgInput[]
     connectOrCreate?: ProjectCreateOrConnectWithoutOrgInput | ProjectCreateOrConnectWithoutOrgInput[]
@@ -89574,6 +90209,62 @@ export namespace Prisma {
     update?: MemberUpdateWithWhereUniqueWithoutOrgInput | MemberUpdateWithWhereUniqueWithoutOrgInput[]
     updateMany?: MemberUpdateManyWithWhereWithoutOrgInput | MemberUpdateManyWithWhereWithoutOrgInput[]
     deleteMany?: MemberScalarWhereInput | MemberScalarWhereInput[]
+  }
+
+  export type RoleUncheckedUpdateManyWithoutOrgNestedInput = {
+    create?: XOR<RoleCreateWithoutOrgInput, RoleUncheckedCreateWithoutOrgInput> | RoleCreateWithoutOrgInput[] | RoleUncheckedCreateWithoutOrgInput[]
+    connectOrCreate?: RoleCreateOrConnectWithoutOrgInput | RoleCreateOrConnectWithoutOrgInput[]
+    upsert?: RoleUpsertWithWhereUniqueWithoutOrgInput | RoleUpsertWithWhereUniqueWithoutOrgInput[]
+    createMany?: RoleCreateManyOrgInputEnvelope
+    set?: RoleWhereUniqueInput | RoleWhereUniqueInput[]
+    disconnect?: RoleWhereUniqueInput | RoleWhereUniqueInput[]
+    delete?: RoleWhereUniqueInput | RoleWhereUniqueInput[]
+    connect?: RoleWhereUniqueInput | RoleWhereUniqueInput[]
+    update?: RoleUpdateWithWhereUniqueWithoutOrgInput | RoleUpdateWithWhereUniqueWithoutOrgInput[]
+    updateMany?: RoleUpdateManyWithWhereWithoutOrgInput | RoleUpdateManyWithWhereWithoutOrgInput[]
+    deleteMany?: RoleScalarWhereInput | RoleScalarWhereInput[]
+  }
+
+  export type RedeemCodeUncheckedUpdateManyWithoutOrgNestedInput = {
+    create?: XOR<RedeemCodeCreateWithoutOrgInput, RedeemCodeUncheckedCreateWithoutOrgInput> | RedeemCodeCreateWithoutOrgInput[] | RedeemCodeUncheckedCreateWithoutOrgInput[]
+    connectOrCreate?: RedeemCodeCreateOrConnectWithoutOrgInput | RedeemCodeCreateOrConnectWithoutOrgInput[]
+    upsert?: RedeemCodeUpsertWithWhereUniqueWithoutOrgInput | RedeemCodeUpsertWithWhereUniqueWithoutOrgInput[]
+    createMany?: RedeemCodeCreateManyOrgInputEnvelope
+    set?: RedeemCodeWhereUniqueInput | RedeemCodeWhereUniqueInput[]
+    disconnect?: RedeemCodeWhereUniqueInput | RedeemCodeWhereUniqueInput[]
+    delete?: RedeemCodeWhereUniqueInput | RedeemCodeWhereUniqueInput[]
+    connect?: RedeemCodeWhereUniqueInput | RedeemCodeWhereUniqueInput[]
+    update?: RedeemCodeUpdateWithWhereUniqueWithoutOrgInput | RedeemCodeUpdateWithWhereUniqueWithoutOrgInput[]
+    updateMany?: RedeemCodeUpdateManyWithWhereWithoutOrgInput | RedeemCodeUpdateManyWithWhereWithoutOrgInput[]
+    deleteMany?: RedeemCodeScalarWhereInput | RedeemCodeScalarWhereInput[]
+  }
+
+  export type MerchantUncheckedUpdateManyWithoutOrgNestedInput = {
+    create?: XOR<MerchantCreateWithoutOrgInput, MerchantUncheckedCreateWithoutOrgInput> | MerchantCreateWithoutOrgInput[] | MerchantUncheckedCreateWithoutOrgInput[]
+    connectOrCreate?: MerchantCreateOrConnectWithoutOrgInput | MerchantCreateOrConnectWithoutOrgInput[]
+    upsert?: MerchantUpsertWithWhereUniqueWithoutOrgInput | MerchantUpsertWithWhereUniqueWithoutOrgInput[]
+    createMany?: MerchantCreateManyOrgInputEnvelope
+    set?: MerchantWhereUniqueInput | MerchantWhereUniqueInput[]
+    disconnect?: MerchantWhereUniqueInput | MerchantWhereUniqueInput[]
+    delete?: MerchantWhereUniqueInput | MerchantWhereUniqueInput[]
+    connect?: MerchantWhereUniqueInput | MerchantWhereUniqueInput[]
+    update?: MerchantUpdateWithWhereUniqueWithoutOrgInput | MerchantUpdateWithWhereUniqueWithoutOrgInput[]
+    updateMany?: MerchantUpdateManyWithWhereWithoutOrgInput | MerchantUpdateManyWithWhereWithoutOrgInput[]
+    deleteMany?: MerchantScalarWhereInput | MerchantScalarWhereInput[]
+  }
+
+  export type TermsUncheckedUpdateManyWithoutOrgNestedInput = {
+    create?: XOR<TermsCreateWithoutOrgInput, TermsUncheckedCreateWithoutOrgInput> | TermsCreateWithoutOrgInput[] | TermsUncheckedCreateWithoutOrgInput[]
+    connectOrCreate?: TermsCreateOrConnectWithoutOrgInput | TermsCreateOrConnectWithoutOrgInput[]
+    upsert?: TermsUpsertWithWhereUniqueWithoutOrgInput | TermsUpsertWithWhereUniqueWithoutOrgInput[]
+    createMany?: TermsCreateManyOrgInputEnvelope
+    set?: TermsWhereUniqueInput | TermsWhereUniqueInput[]
+    disconnect?: TermsWhereUniqueInput | TermsWhereUniqueInput[]
+    delete?: TermsWhereUniqueInput | TermsWhereUniqueInput[]
+    connect?: TermsWhereUniqueInput | TermsWhereUniqueInput[]
+    update?: TermsUpdateWithWhereUniqueWithoutOrgInput | TermsUpdateWithWhereUniqueWithoutOrgInput[]
+    updateMany?: TermsUpdateManyWithWhereWithoutOrgInput | TermsUpdateManyWithWhereWithoutOrgInput[]
+    deleteMany?: TermsScalarWhereInput | TermsScalarWhereInput[]
   }
 
   export type OrgCreateNestedOneWithoutProjectsInput = {
@@ -90248,6 +90939,12 @@ export namespace Prisma {
     deleteMany?: MemberRoleScalarWhereInput | MemberRoleScalarWhereInput[]
   }
 
+  export type OrgCreateNestedOneWithoutRolesInput = {
+    create?: XOR<OrgCreateWithoutRolesInput, OrgUncheckedCreateWithoutRolesInput>
+    connectOrCreate?: OrgCreateOrConnectWithoutRolesInput
+    connect?: OrgWhereUniqueInput
+  }
+
   export type PermissionCreateNestedManyWithoutRoleInput = {
     create?: XOR<PermissionCreateWithoutRoleInput, PermissionUncheckedCreateWithoutRoleInput> | PermissionCreateWithoutRoleInput[] | PermissionUncheckedCreateWithoutRoleInput[]
     connectOrCreate?: PermissionCreateOrConnectWithoutRoleInput | PermissionCreateOrConnectWithoutRoleInput[]
@@ -90278,6 +90975,16 @@ export namespace Prisma {
 
   export type EnumRoleLevelFieldUpdateOperationsInput = {
     set?: $Enums.RoleLevel
+  }
+
+  export type OrgUpdateOneWithoutRolesNestedInput = {
+    create?: XOR<OrgCreateWithoutRolesInput, OrgUncheckedCreateWithoutRolesInput>
+    connectOrCreate?: OrgCreateOrConnectWithoutRolesInput
+    upsert?: OrgUpsertWithoutRolesInput
+    disconnect?: OrgWhereInput | boolean
+    delete?: OrgWhereInput | boolean
+    connect?: OrgWhereUniqueInput
+    update?: XOR<XOR<OrgUpdateToOneWithWhereWithoutRolesInput, OrgUpdateWithoutRolesInput>, OrgUncheckedUpdateWithoutRolesInput>
   }
 
   export type PermissionUpdateManyWithoutRoleNestedInput = {
@@ -90759,6 +91466,12 @@ export namespace Prisma {
     connect?: PaymentMethodWhereUniqueInput | PaymentMethodWhereUniqueInput[]
   }
 
+  export type OrgCreateNestedOneWithoutMerchantsInput = {
+    create?: XOR<OrgCreateWithoutMerchantsInput, OrgUncheckedCreateWithoutMerchantsInput>
+    connectOrCreate?: OrgCreateOrConnectWithoutMerchantsInput
+    connect?: OrgWhereUniqueInput
+  }
+
   export type PaymentMethodUncheckedCreateNestedManyWithoutMerchantInput = {
     create?: XOR<PaymentMethodCreateWithoutMerchantInput, PaymentMethodUncheckedCreateWithoutMerchantInput> | PaymentMethodCreateWithoutMerchantInput[] | PaymentMethodUncheckedCreateWithoutMerchantInput[]
     connectOrCreate?: PaymentMethodCreateOrConnectWithoutMerchantInput | PaymentMethodCreateOrConnectWithoutMerchantInput[]
@@ -90778,6 +91491,16 @@ export namespace Prisma {
     update?: PaymentMethodUpdateWithWhereUniqueWithoutMerchantInput | PaymentMethodUpdateWithWhereUniqueWithoutMerchantInput[]
     updateMany?: PaymentMethodUpdateManyWithWhereWithoutMerchantInput | PaymentMethodUpdateManyWithWhereWithoutMerchantInput[]
     deleteMany?: PaymentMethodScalarWhereInput | PaymentMethodScalarWhereInput[]
+  }
+
+  export type OrgUpdateOneWithoutMerchantsNestedInput = {
+    create?: XOR<OrgCreateWithoutMerchantsInput, OrgUncheckedCreateWithoutMerchantsInput>
+    connectOrCreate?: OrgCreateOrConnectWithoutMerchantsInput
+    upsert?: OrgUpsertWithoutMerchantsInput
+    disconnect?: OrgWhereInput | boolean
+    delete?: OrgWhereInput | boolean
+    connect?: OrgWhereUniqueInput
+    update?: XOR<XOR<OrgUpdateToOneWithWhereWithoutMerchantsInput, OrgUpdateWithoutMerchantsInput>, OrgUncheckedUpdateWithoutMerchantsInput>
   }
 
   export type PaymentMethodUncheckedUpdateManyWithoutMerchantNestedInput = {
@@ -90949,6 +91672,12 @@ export namespace Prisma {
     connect?: RedeemGrantWhereUniqueInput | RedeemGrantWhereUniqueInput[]
   }
 
+  export type OrgCreateNestedOneWithoutRedeemCodesInput = {
+    create?: XOR<OrgCreateWithoutRedeemCodesInput, OrgUncheckedCreateWithoutRedeemCodesInput>
+    connectOrCreate?: OrgCreateOrConnectWithoutRedeemCodesInput
+    connect?: OrgWhereUniqueInput
+  }
+
   export type RedeemGrantUncheckedCreateNestedManyWithoutCodeInput = {
     create?: XOR<RedeemGrantCreateWithoutCodeInput, RedeemGrantUncheckedCreateWithoutCodeInput> | RedeemGrantCreateWithoutCodeInput[] | RedeemGrantUncheckedCreateWithoutCodeInput[]
     connectOrCreate?: RedeemGrantCreateOrConnectWithoutCodeInput | RedeemGrantCreateOrConnectWithoutCodeInput[]
@@ -90968,6 +91697,16 @@ export namespace Prisma {
     update?: RedeemGrantUpdateWithWhereUniqueWithoutCodeInput | RedeemGrantUpdateWithWhereUniqueWithoutCodeInput[]
     updateMany?: RedeemGrantUpdateManyWithWhereWithoutCodeInput | RedeemGrantUpdateManyWithWhereWithoutCodeInput[]
     deleteMany?: RedeemGrantScalarWhereInput | RedeemGrantScalarWhereInput[]
+  }
+
+  export type OrgUpdateOneWithoutRedeemCodesNestedInput = {
+    create?: XOR<OrgCreateWithoutRedeemCodesInput, OrgUncheckedCreateWithoutRedeemCodesInput>
+    connectOrCreate?: OrgCreateOrConnectWithoutRedeemCodesInput
+    upsert?: OrgUpsertWithoutRedeemCodesInput
+    disconnect?: OrgWhereInput | boolean
+    delete?: OrgWhereInput | boolean
+    connect?: OrgWhereUniqueInput
+    update?: XOR<XOR<OrgUpdateToOneWithWhereWithoutRedeemCodesInput, OrgUpdateWithoutRedeemCodesInput>, OrgUncheckedUpdateWithoutRedeemCodesInput>
   }
 
   export type RedeemGrantUncheckedUpdateManyWithoutCodeNestedInput = {
@@ -91523,6 +92262,12 @@ export namespace Prisma {
     connect?: ConsentWhereUniqueInput | ConsentWhereUniqueInput[]
   }
 
+  export type OrgCreateNestedOneWithoutTermsInput = {
+    create?: XOR<OrgCreateWithoutTermsInput, OrgUncheckedCreateWithoutTermsInput>
+    connectOrCreate?: OrgCreateOrConnectWithoutTermsInput
+    connect?: OrgWhereUniqueInput
+  }
+
   export type ConsentUncheckedCreateNestedManyWithoutTermsInput = {
     create?: XOR<ConsentCreateWithoutTermsInput, ConsentUncheckedCreateWithoutTermsInput> | ConsentCreateWithoutTermsInput[] | ConsentUncheckedCreateWithoutTermsInput[]
     connectOrCreate?: ConsentCreateOrConnectWithoutTermsInput | ConsentCreateOrConnectWithoutTermsInput[]
@@ -91542,6 +92287,16 @@ export namespace Prisma {
     update?: ConsentUpdateWithWhereUniqueWithoutTermsInput | ConsentUpdateWithWhereUniqueWithoutTermsInput[]
     updateMany?: ConsentUpdateManyWithWhereWithoutTermsInput | ConsentUpdateManyWithWhereWithoutTermsInput[]
     deleteMany?: ConsentScalarWhereInput | ConsentScalarWhereInput[]
+  }
+
+  export type OrgUpdateOneWithoutTermsNestedInput = {
+    create?: XOR<OrgCreateWithoutTermsInput, OrgUncheckedCreateWithoutTermsInput>
+    connectOrCreate?: OrgCreateOrConnectWithoutTermsInput
+    upsert?: OrgUpsertWithoutTermsInput
+    disconnect?: OrgWhereInput | boolean
+    delete?: OrgWhereInput | boolean
+    connect?: OrgWhereUniqueInput
+    update?: XOR<XOR<OrgUpdateToOneWithWhereWithoutTermsInput, OrgUpdateWithoutTermsInput>, OrgUncheckedUpdateWithoutTermsInput>
   }
 
   export type ConsentUncheckedUpdateManyWithoutTermsNestedInput = {
@@ -94367,6 +95122,112 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type RoleCreateWithoutOrgInput = {
+    id?: string
+    name: string
+    level: $Enums.RoleLevel
+    permissions?: PermissionCreateNestedManyWithoutRoleInput
+    memberRoles?: MemberRoleCreateNestedManyWithoutRoleInput
+  }
+
+  export type RoleUncheckedCreateWithoutOrgInput = {
+    id?: string
+    name: string
+    level: $Enums.RoleLevel
+    permissions?: PermissionUncheckedCreateNestedManyWithoutRoleInput
+    memberRoles?: MemberRoleUncheckedCreateNestedManyWithoutRoleInput
+  }
+
+  export type RoleCreateOrConnectWithoutOrgInput = {
+    where: RoleWhereUniqueInput
+    create: XOR<RoleCreateWithoutOrgInput, RoleUncheckedCreateWithoutOrgInput>
+  }
+
+  export type RoleCreateManyOrgInputEnvelope = {
+    data: RoleCreateManyOrgInput | RoleCreateManyOrgInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type RedeemCodeCreateWithoutOrgInput = {
+    id?: string
+    code: string
+    reward: JsonNullValueInput | InputJsonValue
+    usesLeft: number
+    expiry?: Date | string | null
+    grants?: RedeemGrantCreateNestedManyWithoutCodeInput
+  }
+
+  export type RedeemCodeUncheckedCreateWithoutOrgInput = {
+    id?: string
+    code: string
+    reward: JsonNullValueInput | InputJsonValue
+    usesLeft: number
+    expiry?: Date | string | null
+    grants?: RedeemGrantUncheckedCreateNestedManyWithoutCodeInput
+  }
+
+  export type RedeemCodeCreateOrConnectWithoutOrgInput = {
+    where: RedeemCodeWhereUniqueInput
+    create: XOR<RedeemCodeCreateWithoutOrgInput, RedeemCodeUncheckedCreateWithoutOrgInput>
+  }
+
+  export type RedeemCodeCreateManyOrgInputEnvelope = {
+    data: RedeemCodeCreateManyOrgInput | RedeemCodeCreateManyOrgInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type MerchantCreateWithoutOrgInput = {
+    id?: string
+    name: string
+    config?: NullableJsonNullValueInput | InputJsonValue
+    paymentMethods?: PaymentMethodCreateNestedManyWithoutMerchantInput
+  }
+
+  export type MerchantUncheckedCreateWithoutOrgInput = {
+    id?: string
+    name: string
+    config?: NullableJsonNullValueInput | InputJsonValue
+    paymentMethods?: PaymentMethodUncheckedCreateNestedManyWithoutMerchantInput
+  }
+
+  export type MerchantCreateOrConnectWithoutOrgInput = {
+    where: MerchantWhereUniqueInput
+    create: XOR<MerchantCreateWithoutOrgInput, MerchantUncheckedCreateWithoutOrgInput>
+  }
+
+  export type MerchantCreateManyOrgInputEnvelope = {
+    data: MerchantCreateManyOrgInput | MerchantCreateManyOrgInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type TermsCreateWithoutOrgInput = {
+    id?: string
+    version: string
+    content: string
+    effectiveDate: Date | string
+    active?: boolean
+    consents?: ConsentCreateNestedManyWithoutTermsInput
+  }
+
+  export type TermsUncheckedCreateWithoutOrgInput = {
+    id?: string
+    version: string
+    content: string
+    effectiveDate: Date | string
+    active?: boolean
+    consents?: ConsentUncheckedCreateNestedManyWithoutTermsInput
+  }
+
+  export type TermsCreateOrConnectWithoutOrgInput = {
+    where: TermsWhereUniqueInput
+    create: XOR<TermsCreateWithoutOrgInput, TermsUncheckedCreateWithoutOrgInput>
+  }
+
+  export type TermsCreateManyOrgInputEnvelope = {
+    data: TermsCreateManyOrgInput | TermsCreateManyOrgInput[]
+    skipDuplicates?: boolean
+  }
+
   export type ProjectUpsertWithWhereUniqueWithoutOrgInput = {
     where: ProjectWhereUniqueInput
     update: XOR<ProjectUpdateWithoutOrgInput, ProjectUncheckedUpdateWithoutOrgInput>
@@ -94434,18 +95295,136 @@ export namespace Prisma {
     data: XOR<MemberUpdateManyMutationInput, MemberUncheckedUpdateManyWithoutOrgInput>
   }
 
+  export type RoleUpsertWithWhereUniqueWithoutOrgInput = {
+    where: RoleWhereUniqueInput
+    update: XOR<RoleUpdateWithoutOrgInput, RoleUncheckedUpdateWithoutOrgInput>
+    create: XOR<RoleCreateWithoutOrgInput, RoleUncheckedCreateWithoutOrgInput>
+  }
+
+  export type RoleUpdateWithWhereUniqueWithoutOrgInput = {
+    where: RoleWhereUniqueInput
+    data: XOR<RoleUpdateWithoutOrgInput, RoleUncheckedUpdateWithoutOrgInput>
+  }
+
+  export type RoleUpdateManyWithWhereWithoutOrgInput = {
+    where: RoleScalarWhereInput
+    data: XOR<RoleUpdateManyMutationInput, RoleUncheckedUpdateManyWithoutOrgInput>
+  }
+
+  export type RoleScalarWhereInput = {
+    AND?: RoleScalarWhereInput | RoleScalarWhereInput[]
+    OR?: RoleScalarWhereInput[]
+    NOT?: RoleScalarWhereInput | RoleScalarWhereInput[]
+    id?: StringFilter<"Role"> | string
+    name?: StringFilter<"Role"> | string
+    level?: EnumRoleLevelFilter<"Role"> | $Enums.RoleLevel
+    orgId?: StringNullableFilter<"Role"> | string | null
+  }
+
+  export type RedeemCodeUpsertWithWhereUniqueWithoutOrgInput = {
+    where: RedeemCodeWhereUniqueInput
+    update: XOR<RedeemCodeUpdateWithoutOrgInput, RedeemCodeUncheckedUpdateWithoutOrgInput>
+    create: XOR<RedeemCodeCreateWithoutOrgInput, RedeemCodeUncheckedCreateWithoutOrgInput>
+  }
+
+  export type RedeemCodeUpdateWithWhereUniqueWithoutOrgInput = {
+    where: RedeemCodeWhereUniqueInput
+    data: XOR<RedeemCodeUpdateWithoutOrgInput, RedeemCodeUncheckedUpdateWithoutOrgInput>
+  }
+
+  export type RedeemCodeUpdateManyWithWhereWithoutOrgInput = {
+    where: RedeemCodeScalarWhereInput
+    data: XOR<RedeemCodeUpdateManyMutationInput, RedeemCodeUncheckedUpdateManyWithoutOrgInput>
+  }
+
+  export type RedeemCodeScalarWhereInput = {
+    AND?: RedeemCodeScalarWhereInput | RedeemCodeScalarWhereInput[]
+    OR?: RedeemCodeScalarWhereInput[]
+    NOT?: RedeemCodeScalarWhereInput | RedeemCodeScalarWhereInput[]
+    id?: StringFilter<"RedeemCode"> | string
+    code?: StringFilter<"RedeemCode"> | string
+    reward?: JsonFilter<"RedeemCode">
+    usesLeft?: IntFilter<"RedeemCode"> | number
+    expiry?: DateTimeNullableFilter<"RedeemCode"> | Date | string | null
+    orgId?: StringNullableFilter<"RedeemCode"> | string | null
+  }
+
+  export type MerchantUpsertWithWhereUniqueWithoutOrgInput = {
+    where: MerchantWhereUniqueInput
+    update: XOR<MerchantUpdateWithoutOrgInput, MerchantUncheckedUpdateWithoutOrgInput>
+    create: XOR<MerchantCreateWithoutOrgInput, MerchantUncheckedCreateWithoutOrgInput>
+  }
+
+  export type MerchantUpdateWithWhereUniqueWithoutOrgInput = {
+    where: MerchantWhereUniqueInput
+    data: XOR<MerchantUpdateWithoutOrgInput, MerchantUncheckedUpdateWithoutOrgInput>
+  }
+
+  export type MerchantUpdateManyWithWhereWithoutOrgInput = {
+    where: MerchantScalarWhereInput
+    data: XOR<MerchantUpdateManyMutationInput, MerchantUncheckedUpdateManyWithoutOrgInput>
+  }
+
+  export type MerchantScalarWhereInput = {
+    AND?: MerchantScalarWhereInput | MerchantScalarWhereInput[]
+    OR?: MerchantScalarWhereInput[]
+    NOT?: MerchantScalarWhereInput | MerchantScalarWhereInput[]
+    id?: StringFilter<"Merchant"> | string
+    name?: StringFilter<"Merchant"> | string
+    config?: JsonNullableFilter<"Merchant">
+    orgId?: StringNullableFilter<"Merchant"> | string | null
+  }
+
+  export type TermsUpsertWithWhereUniqueWithoutOrgInput = {
+    where: TermsWhereUniqueInput
+    update: XOR<TermsUpdateWithoutOrgInput, TermsUncheckedUpdateWithoutOrgInput>
+    create: XOR<TermsCreateWithoutOrgInput, TermsUncheckedCreateWithoutOrgInput>
+  }
+
+  export type TermsUpdateWithWhereUniqueWithoutOrgInput = {
+    where: TermsWhereUniqueInput
+    data: XOR<TermsUpdateWithoutOrgInput, TermsUncheckedUpdateWithoutOrgInput>
+  }
+
+  export type TermsUpdateManyWithWhereWithoutOrgInput = {
+    where: TermsScalarWhereInput
+    data: XOR<TermsUpdateManyMutationInput, TermsUncheckedUpdateManyWithoutOrgInput>
+  }
+
+  export type TermsScalarWhereInput = {
+    AND?: TermsScalarWhereInput | TermsScalarWhereInput[]
+    OR?: TermsScalarWhereInput[]
+    NOT?: TermsScalarWhereInput | TermsScalarWhereInput[]
+    id?: StringFilter<"Terms"> | string
+    version?: StringFilter<"Terms"> | string
+    content?: StringFilter<"Terms"> | string
+    effectiveDate?: DateTimeFilter<"Terms"> | Date | string
+    active?: BoolFilter<"Terms"> | boolean
+    orgId?: StringNullableFilter<"Terms"> | string | null
+  }
+
   export type OrgCreateWithoutProjectsInput = {
     id?: string
     name: string
+    domain?: string | null
     apps?: AppCreateNestedManyWithoutOwnerOrgInput
     members?: MemberCreateNestedManyWithoutOrgInput
+    roles?: RoleCreateNestedManyWithoutOrgInput
+    redeemCodes?: RedeemCodeCreateNestedManyWithoutOrgInput
+    merchants?: MerchantCreateNestedManyWithoutOrgInput
+    terms?: TermsCreateNestedManyWithoutOrgInput
   }
 
   export type OrgUncheckedCreateWithoutProjectsInput = {
     id?: string
     name: string
+    domain?: string | null
     apps?: AppUncheckedCreateNestedManyWithoutOwnerOrgInput
     members?: MemberUncheckedCreateNestedManyWithoutOrgInput
+    roles?: RoleUncheckedCreateNestedManyWithoutOrgInput
+    redeemCodes?: RedeemCodeUncheckedCreateNestedManyWithoutOrgInput
+    merchants?: MerchantUncheckedCreateNestedManyWithoutOrgInput
+    terms?: TermsUncheckedCreateNestedManyWithoutOrgInput
   }
 
   export type OrgCreateOrConnectWithoutProjectsInput = {
@@ -94513,15 +95492,25 @@ export namespace Prisma {
   export type OrgUpdateWithoutProjectsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    domain?: NullableStringFieldUpdateOperationsInput | string | null
     apps?: AppUpdateManyWithoutOwnerOrgNestedInput
     members?: MemberUpdateManyWithoutOrgNestedInput
+    roles?: RoleUpdateManyWithoutOrgNestedInput
+    redeemCodes?: RedeemCodeUpdateManyWithoutOrgNestedInput
+    merchants?: MerchantUpdateManyWithoutOrgNestedInput
+    terms?: TermsUpdateManyWithoutOrgNestedInput
   }
 
   export type OrgUncheckedUpdateWithoutProjectsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    domain?: NullableStringFieldUpdateOperationsInput | string | null
     apps?: AppUncheckedUpdateManyWithoutOwnerOrgNestedInput
     members?: MemberUncheckedUpdateManyWithoutOrgNestedInput
+    roles?: RoleUncheckedUpdateManyWithoutOrgNestedInput
+    redeemCodes?: RedeemCodeUncheckedUpdateManyWithoutOrgNestedInput
+    merchants?: MerchantUncheckedUpdateManyWithoutOrgNestedInput
+    terms?: TermsUncheckedUpdateManyWithoutOrgNestedInput
   }
 
   export type AppServiceUpsertWithWhereUniqueWithoutProjectInput = {
@@ -94649,15 +95638,25 @@ export namespace Prisma {
   export type OrgCreateWithoutAppsInput = {
     id?: string
     name: string
+    domain?: string | null
     projects?: ProjectCreateNestedManyWithoutOrgInput
     members?: MemberCreateNestedManyWithoutOrgInput
+    roles?: RoleCreateNestedManyWithoutOrgInput
+    redeemCodes?: RedeemCodeCreateNestedManyWithoutOrgInput
+    merchants?: MerchantCreateNestedManyWithoutOrgInput
+    terms?: TermsCreateNestedManyWithoutOrgInput
   }
 
   export type OrgUncheckedCreateWithoutAppsInput = {
     id?: string
     name: string
+    domain?: string | null
     projects?: ProjectUncheckedCreateNestedManyWithoutOrgInput
     members?: MemberUncheckedCreateNestedManyWithoutOrgInput
+    roles?: RoleUncheckedCreateNestedManyWithoutOrgInput
+    redeemCodes?: RedeemCodeUncheckedCreateNestedManyWithoutOrgInput
+    merchants?: MerchantUncheckedCreateNestedManyWithoutOrgInput
+    terms?: TermsUncheckedCreateNestedManyWithoutOrgInput
   }
 
   export type OrgCreateOrConnectWithoutAppsInput = {
@@ -94877,15 +95876,25 @@ export namespace Prisma {
   export type OrgUpdateWithoutAppsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    domain?: NullableStringFieldUpdateOperationsInput | string | null
     projects?: ProjectUpdateManyWithoutOrgNestedInput
     members?: MemberUpdateManyWithoutOrgNestedInput
+    roles?: RoleUpdateManyWithoutOrgNestedInput
+    redeemCodes?: RedeemCodeUpdateManyWithoutOrgNestedInput
+    merchants?: MerchantUpdateManyWithoutOrgNestedInput
+    terms?: TermsUpdateManyWithoutOrgNestedInput
   }
 
   export type OrgUncheckedUpdateWithoutAppsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    domain?: NullableStringFieldUpdateOperationsInput | string | null
     projects?: ProjectUncheckedUpdateManyWithoutOrgNestedInput
     members?: MemberUncheckedUpdateManyWithoutOrgNestedInput
+    roles?: RoleUncheckedUpdateManyWithoutOrgNestedInput
+    redeemCodes?: RedeemCodeUncheckedUpdateManyWithoutOrgNestedInput
+    merchants?: MerchantUncheckedUpdateManyWithoutOrgNestedInput
+    terms?: TermsUncheckedUpdateManyWithoutOrgNestedInput
   }
 
   export type AccountAppUpsertWithWhereUniqueWithoutAppInput = {
@@ -95789,15 +96798,25 @@ export namespace Prisma {
   export type OrgCreateWithoutMembersInput = {
     id?: string
     name: string
+    domain?: string | null
     projects?: ProjectCreateNestedManyWithoutOrgInput
     apps?: AppCreateNestedManyWithoutOwnerOrgInput
+    roles?: RoleCreateNestedManyWithoutOrgInput
+    redeemCodes?: RedeemCodeCreateNestedManyWithoutOrgInput
+    merchants?: MerchantCreateNestedManyWithoutOrgInput
+    terms?: TermsCreateNestedManyWithoutOrgInput
   }
 
   export type OrgUncheckedCreateWithoutMembersInput = {
     id?: string
     name: string
+    domain?: string | null
     projects?: ProjectUncheckedCreateNestedManyWithoutOrgInput
     apps?: AppUncheckedCreateNestedManyWithoutOwnerOrgInput
+    roles?: RoleUncheckedCreateNestedManyWithoutOrgInput
+    redeemCodes?: RedeemCodeUncheckedCreateNestedManyWithoutOrgInput
+    merchants?: MerchantUncheckedCreateNestedManyWithoutOrgInput
+    terms?: TermsUncheckedCreateNestedManyWithoutOrgInput
   }
 
   export type OrgCreateOrConnectWithoutMembersInput = {
@@ -95962,15 +96981,25 @@ export namespace Prisma {
   export type OrgUpdateWithoutMembersInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    domain?: NullableStringFieldUpdateOperationsInput | string | null
     projects?: ProjectUpdateManyWithoutOrgNestedInput
     apps?: AppUpdateManyWithoutOwnerOrgNestedInput
+    roles?: RoleUpdateManyWithoutOrgNestedInput
+    redeemCodes?: RedeemCodeUpdateManyWithoutOrgNestedInput
+    merchants?: MerchantUpdateManyWithoutOrgNestedInput
+    terms?: TermsUpdateManyWithoutOrgNestedInput
   }
 
   export type OrgUncheckedUpdateWithoutMembersInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    domain?: NullableStringFieldUpdateOperationsInput | string | null
     projects?: ProjectUncheckedUpdateManyWithoutOrgNestedInput
     apps?: AppUncheckedUpdateManyWithoutOwnerOrgNestedInput
+    roles?: RoleUncheckedUpdateManyWithoutOrgNestedInput
+    redeemCodes?: RedeemCodeUncheckedUpdateManyWithoutOrgNestedInput
+    merchants?: MerchantUncheckedUpdateManyWithoutOrgNestedInput
+    terms?: TermsUncheckedUpdateManyWithoutOrgNestedInput
   }
 
   export type ProjectUpsertWithoutMembersInput = {
@@ -96041,6 +97070,35 @@ export namespace Prisma {
     roleId?: StringFilter<"MemberRole"> | string
   }
 
+  export type OrgCreateWithoutRolesInput = {
+    id?: string
+    name: string
+    domain?: string | null
+    projects?: ProjectCreateNestedManyWithoutOrgInput
+    apps?: AppCreateNestedManyWithoutOwnerOrgInput
+    members?: MemberCreateNestedManyWithoutOrgInput
+    redeemCodes?: RedeemCodeCreateNestedManyWithoutOrgInput
+    merchants?: MerchantCreateNestedManyWithoutOrgInput
+    terms?: TermsCreateNestedManyWithoutOrgInput
+  }
+
+  export type OrgUncheckedCreateWithoutRolesInput = {
+    id?: string
+    name: string
+    domain?: string | null
+    projects?: ProjectUncheckedCreateNestedManyWithoutOrgInput
+    apps?: AppUncheckedCreateNestedManyWithoutOwnerOrgInput
+    members?: MemberUncheckedCreateNestedManyWithoutOrgInput
+    redeemCodes?: RedeemCodeUncheckedCreateNestedManyWithoutOrgInput
+    merchants?: MerchantUncheckedCreateNestedManyWithoutOrgInput
+    terms?: TermsUncheckedCreateNestedManyWithoutOrgInput
+  }
+
+  export type OrgCreateOrConnectWithoutRolesInput = {
+    where: OrgWhereUniqueInput
+    create: XOR<OrgCreateWithoutRolesInput, OrgUncheckedCreateWithoutRolesInput>
+  }
+
   export type PermissionCreateWithoutRoleInput = {
     id?: string
     action: $Enums.Action
@@ -96079,6 +97137,41 @@ export namespace Prisma {
   export type MemberRoleCreateManyRoleInputEnvelope = {
     data: MemberRoleCreateManyRoleInput | MemberRoleCreateManyRoleInput[]
     skipDuplicates?: boolean
+  }
+
+  export type OrgUpsertWithoutRolesInput = {
+    update: XOR<OrgUpdateWithoutRolesInput, OrgUncheckedUpdateWithoutRolesInput>
+    create: XOR<OrgCreateWithoutRolesInput, OrgUncheckedCreateWithoutRolesInput>
+    where?: OrgWhereInput
+  }
+
+  export type OrgUpdateToOneWithWhereWithoutRolesInput = {
+    where?: OrgWhereInput
+    data: XOR<OrgUpdateWithoutRolesInput, OrgUncheckedUpdateWithoutRolesInput>
+  }
+
+  export type OrgUpdateWithoutRolesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    domain?: NullableStringFieldUpdateOperationsInput | string | null
+    projects?: ProjectUpdateManyWithoutOrgNestedInput
+    apps?: AppUpdateManyWithoutOwnerOrgNestedInput
+    members?: MemberUpdateManyWithoutOrgNestedInput
+    redeemCodes?: RedeemCodeUpdateManyWithoutOrgNestedInput
+    merchants?: MerchantUpdateManyWithoutOrgNestedInput
+    terms?: TermsUpdateManyWithoutOrgNestedInput
+  }
+
+  export type OrgUncheckedUpdateWithoutRolesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    domain?: NullableStringFieldUpdateOperationsInput | string | null
+    projects?: ProjectUncheckedUpdateManyWithoutOrgNestedInput
+    apps?: AppUncheckedUpdateManyWithoutOwnerOrgNestedInput
+    members?: MemberUncheckedUpdateManyWithoutOrgNestedInput
+    redeemCodes?: RedeemCodeUncheckedUpdateManyWithoutOrgNestedInput
+    merchants?: MerchantUncheckedUpdateManyWithoutOrgNestedInput
+    terms?: TermsUncheckedUpdateManyWithoutOrgNestedInput
   }
 
   export type PermissionUpsertWithWhereUniqueWithoutRoleInput = {
@@ -96148,6 +97241,7 @@ export namespace Prisma {
     id?: string
     name: string
     level: $Enums.RoleLevel
+    org?: OrgCreateNestedOneWithoutRolesInput
     permissions?: PermissionCreateNestedManyWithoutRoleInput
   }
 
@@ -96155,6 +97249,7 @@ export namespace Prisma {
     id?: string
     name: string
     level: $Enums.RoleLevel
+    orgId?: string | null
     permissions?: PermissionUncheckedCreateNestedManyWithoutRoleInput
   }
 
@@ -96205,6 +97300,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     level?: EnumRoleLevelFieldUpdateOperationsInput | $Enums.RoleLevel
+    org?: OrgUpdateOneWithoutRolesNestedInput
     permissions?: PermissionUpdateManyWithoutRoleNestedInput
   }
 
@@ -96212,6 +97308,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     level?: EnumRoleLevelFieldUpdateOperationsInput | $Enums.RoleLevel
+    orgId?: NullableStringFieldUpdateOperationsInput | string | null
     permissions?: PermissionUncheckedUpdateManyWithoutRoleNestedInput
   }
 
@@ -96219,6 +97316,7 @@ export namespace Prisma {
     id?: string
     name: string
     level: $Enums.RoleLevel
+    org?: OrgCreateNestedOneWithoutRolesInput
     memberRoles?: MemberRoleCreateNestedManyWithoutRoleInput
   }
 
@@ -96226,6 +97324,7 @@ export namespace Prisma {
     id?: string
     name: string
     level: $Enums.RoleLevel
+    orgId?: string | null
     memberRoles?: MemberRoleUncheckedCreateNestedManyWithoutRoleInput
   }
 
@@ -96249,6 +97348,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     level?: EnumRoleLevelFieldUpdateOperationsInput | $Enums.RoleLevel
+    org?: OrgUpdateOneWithoutRolesNestedInput
     memberRoles?: MemberRoleUpdateManyWithoutRoleNestedInput
   }
 
@@ -96256,6 +97356,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     level?: EnumRoleLevelFieldUpdateOperationsInput | $Enums.RoleLevel
+    orgId?: NullableStringFieldUpdateOperationsInput | string | null
     memberRoles?: MemberRoleUncheckedUpdateManyWithoutRoleNestedInput
   }
 
@@ -97325,6 +98426,35 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type OrgCreateWithoutMerchantsInput = {
+    id?: string
+    name: string
+    domain?: string | null
+    projects?: ProjectCreateNestedManyWithoutOrgInput
+    apps?: AppCreateNestedManyWithoutOwnerOrgInput
+    members?: MemberCreateNestedManyWithoutOrgInput
+    roles?: RoleCreateNestedManyWithoutOrgInput
+    redeemCodes?: RedeemCodeCreateNestedManyWithoutOrgInput
+    terms?: TermsCreateNestedManyWithoutOrgInput
+  }
+
+  export type OrgUncheckedCreateWithoutMerchantsInput = {
+    id?: string
+    name: string
+    domain?: string | null
+    projects?: ProjectUncheckedCreateNestedManyWithoutOrgInput
+    apps?: AppUncheckedCreateNestedManyWithoutOwnerOrgInput
+    members?: MemberUncheckedCreateNestedManyWithoutOrgInput
+    roles?: RoleUncheckedCreateNestedManyWithoutOrgInput
+    redeemCodes?: RedeemCodeUncheckedCreateNestedManyWithoutOrgInput
+    terms?: TermsUncheckedCreateNestedManyWithoutOrgInput
+  }
+
+  export type OrgCreateOrConnectWithoutMerchantsInput = {
+    where: OrgWhereUniqueInput
+    create: XOR<OrgCreateWithoutMerchantsInput, OrgUncheckedCreateWithoutMerchantsInput>
+  }
+
   export type PaymentMethodUpsertWithWhereUniqueWithoutMerchantInput = {
     where: PaymentMethodWhereUniqueInput
     update: XOR<PaymentMethodUpdateWithoutMerchantInput, PaymentMethodUncheckedUpdateWithoutMerchantInput>
@@ -97350,16 +98480,53 @@ export namespace Prisma {
     type?: StringFilter<"PaymentMethod"> | string
   }
 
+  export type OrgUpsertWithoutMerchantsInput = {
+    update: XOR<OrgUpdateWithoutMerchantsInput, OrgUncheckedUpdateWithoutMerchantsInput>
+    create: XOR<OrgCreateWithoutMerchantsInput, OrgUncheckedCreateWithoutMerchantsInput>
+    where?: OrgWhereInput
+  }
+
+  export type OrgUpdateToOneWithWhereWithoutMerchantsInput = {
+    where?: OrgWhereInput
+    data: XOR<OrgUpdateWithoutMerchantsInput, OrgUncheckedUpdateWithoutMerchantsInput>
+  }
+
+  export type OrgUpdateWithoutMerchantsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    domain?: NullableStringFieldUpdateOperationsInput | string | null
+    projects?: ProjectUpdateManyWithoutOrgNestedInput
+    apps?: AppUpdateManyWithoutOwnerOrgNestedInput
+    members?: MemberUpdateManyWithoutOrgNestedInput
+    roles?: RoleUpdateManyWithoutOrgNestedInput
+    redeemCodes?: RedeemCodeUpdateManyWithoutOrgNestedInput
+    terms?: TermsUpdateManyWithoutOrgNestedInput
+  }
+
+  export type OrgUncheckedUpdateWithoutMerchantsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    domain?: NullableStringFieldUpdateOperationsInput | string | null
+    projects?: ProjectUncheckedUpdateManyWithoutOrgNestedInput
+    apps?: AppUncheckedUpdateManyWithoutOwnerOrgNestedInput
+    members?: MemberUncheckedUpdateManyWithoutOrgNestedInput
+    roles?: RoleUncheckedUpdateManyWithoutOrgNestedInput
+    redeemCodes?: RedeemCodeUncheckedUpdateManyWithoutOrgNestedInput
+    terms?: TermsUncheckedUpdateManyWithoutOrgNestedInput
+  }
+
   export type MerchantCreateWithoutPaymentMethodsInput = {
     id?: string
     name: string
     config?: NullableJsonNullValueInput | InputJsonValue
+    org?: OrgCreateNestedOneWithoutMerchantsInput
   }
 
   export type MerchantUncheckedCreateWithoutPaymentMethodsInput = {
     id?: string
     name: string
     config?: NullableJsonNullValueInput | InputJsonValue
+    orgId?: string | null
   }
 
   export type MerchantCreateOrConnectWithoutPaymentMethodsInput = {
@@ -97382,12 +98549,14 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     config?: NullableJsonNullValueInput | InputJsonValue
+    org?: OrgUpdateOneWithoutMerchantsNestedInput
   }
 
   export type MerchantUncheckedUpdateWithoutPaymentMethodsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     config?: NullableJsonNullValueInput | InputJsonValue
+    orgId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type TransactionCreateWithoutRefundRequestInput = {
@@ -98140,6 +99309,35 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type OrgCreateWithoutRedeemCodesInput = {
+    id?: string
+    name: string
+    domain?: string | null
+    projects?: ProjectCreateNestedManyWithoutOrgInput
+    apps?: AppCreateNestedManyWithoutOwnerOrgInput
+    members?: MemberCreateNestedManyWithoutOrgInput
+    roles?: RoleCreateNestedManyWithoutOrgInput
+    merchants?: MerchantCreateNestedManyWithoutOrgInput
+    terms?: TermsCreateNestedManyWithoutOrgInput
+  }
+
+  export type OrgUncheckedCreateWithoutRedeemCodesInput = {
+    id?: string
+    name: string
+    domain?: string | null
+    projects?: ProjectUncheckedCreateNestedManyWithoutOrgInput
+    apps?: AppUncheckedCreateNestedManyWithoutOwnerOrgInput
+    members?: MemberUncheckedCreateNestedManyWithoutOrgInput
+    roles?: RoleUncheckedCreateNestedManyWithoutOrgInput
+    merchants?: MerchantUncheckedCreateNestedManyWithoutOrgInput
+    terms?: TermsUncheckedCreateNestedManyWithoutOrgInput
+  }
+
+  export type OrgCreateOrConnectWithoutRedeemCodesInput = {
+    where: OrgWhereUniqueInput
+    create: XOR<OrgCreateWithoutRedeemCodesInput, OrgUncheckedCreateWithoutRedeemCodesInput>
+  }
+
   export type RedeemGrantUpsertWithWhereUniqueWithoutCodeInput = {
     where: RedeemGrantWhereUniqueInput
     update: XOR<RedeemGrantUpdateWithoutCodeInput, RedeemGrantUncheckedUpdateWithoutCodeInput>
@@ -98156,12 +99354,48 @@ export namespace Prisma {
     data: XOR<RedeemGrantUpdateManyMutationInput, RedeemGrantUncheckedUpdateManyWithoutCodeInput>
   }
 
+  export type OrgUpsertWithoutRedeemCodesInput = {
+    update: XOR<OrgUpdateWithoutRedeemCodesInput, OrgUncheckedUpdateWithoutRedeemCodesInput>
+    create: XOR<OrgCreateWithoutRedeemCodesInput, OrgUncheckedCreateWithoutRedeemCodesInput>
+    where?: OrgWhereInput
+  }
+
+  export type OrgUpdateToOneWithWhereWithoutRedeemCodesInput = {
+    where?: OrgWhereInput
+    data: XOR<OrgUpdateWithoutRedeemCodesInput, OrgUncheckedUpdateWithoutRedeemCodesInput>
+  }
+
+  export type OrgUpdateWithoutRedeemCodesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    domain?: NullableStringFieldUpdateOperationsInput | string | null
+    projects?: ProjectUpdateManyWithoutOrgNestedInput
+    apps?: AppUpdateManyWithoutOwnerOrgNestedInput
+    members?: MemberUpdateManyWithoutOrgNestedInput
+    roles?: RoleUpdateManyWithoutOrgNestedInput
+    merchants?: MerchantUpdateManyWithoutOrgNestedInput
+    terms?: TermsUpdateManyWithoutOrgNestedInput
+  }
+
+  export type OrgUncheckedUpdateWithoutRedeemCodesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    domain?: NullableStringFieldUpdateOperationsInput | string | null
+    projects?: ProjectUncheckedUpdateManyWithoutOrgNestedInput
+    apps?: AppUncheckedUpdateManyWithoutOwnerOrgNestedInput
+    members?: MemberUncheckedUpdateManyWithoutOrgNestedInput
+    roles?: RoleUncheckedUpdateManyWithoutOrgNestedInput
+    merchants?: MerchantUncheckedUpdateManyWithoutOrgNestedInput
+    terms?: TermsUncheckedUpdateManyWithoutOrgNestedInput
+  }
+
   export type RedeemCodeCreateWithoutGrantsInput = {
     id?: string
     code: string
     reward: JsonNullValueInput | InputJsonValue
     usesLeft: number
     expiry?: Date | string | null
+    org?: OrgCreateNestedOneWithoutRedeemCodesInput
   }
 
   export type RedeemCodeUncheckedCreateWithoutGrantsInput = {
@@ -98170,6 +99404,7 @@ export namespace Prisma {
     reward: JsonNullValueInput | InputJsonValue
     usesLeft: number
     expiry?: Date | string | null
+    orgId?: string | null
   }
 
   export type RedeemCodeCreateOrConnectWithoutGrantsInput = {
@@ -98281,6 +99516,7 @@ export namespace Prisma {
     reward?: JsonNullValueInput | InputJsonValue
     usesLeft?: IntFieldUpdateOperationsInput | number
     expiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    org?: OrgUpdateOneWithoutRedeemCodesNestedInput
   }
 
   export type RedeemCodeUncheckedUpdateWithoutGrantsInput = {
@@ -98289,6 +99525,7 @@ export namespace Prisma {
     reward?: JsonNullValueInput | InputJsonValue
     usesLeft?: IntFieldUpdateOperationsInput | number
     expiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    orgId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type AccountUpsertWithoutRedeemGrantsInput = {
@@ -100799,6 +102036,35 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type OrgCreateWithoutTermsInput = {
+    id?: string
+    name: string
+    domain?: string | null
+    projects?: ProjectCreateNestedManyWithoutOrgInput
+    apps?: AppCreateNestedManyWithoutOwnerOrgInput
+    members?: MemberCreateNestedManyWithoutOrgInput
+    roles?: RoleCreateNestedManyWithoutOrgInput
+    redeemCodes?: RedeemCodeCreateNestedManyWithoutOrgInput
+    merchants?: MerchantCreateNestedManyWithoutOrgInput
+  }
+
+  export type OrgUncheckedCreateWithoutTermsInput = {
+    id?: string
+    name: string
+    domain?: string | null
+    projects?: ProjectUncheckedCreateNestedManyWithoutOrgInput
+    apps?: AppUncheckedCreateNestedManyWithoutOwnerOrgInput
+    members?: MemberUncheckedCreateNestedManyWithoutOrgInput
+    roles?: RoleUncheckedCreateNestedManyWithoutOrgInput
+    redeemCodes?: RedeemCodeUncheckedCreateNestedManyWithoutOrgInput
+    merchants?: MerchantUncheckedCreateNestedManyWithoutOrgInput
+  }
+
+  export type OrgCreateOrConnectWithoutTermsInput = {
+    where: OrgWhereUniqueInput
+    create: XOR<OrgCreateWithoutTermsInput, OrgUncheckedCreateWithoutTermsInput>
+  }
+
   export type ConsentUpsertWithWhereUniqueWithoutTermsInput = {
     where: ConsentWhereUniqueInput
     update: XOR<ConsentUpdateWithoutTermsInput, ConsentUncheckedUpdateWithoutTermsInput>
@@ -100813,6 +102079,41 @@ export namespace Prisma {
   export type ConsentUpdateManyWithWhereWithoutTermsInput = {
     where: ConsentScalarWhereInput
     data: XOR<ConsentUpdateManyMutationInput, ConsentUncheckedUpdateManyWithoutTermsInput>
+  }
+
+  export type OrgUpsertWithoutTermsInput = {
+    update: XOR<OrgUpdateWithoutTermsInput, OrgUncheckedUpdateWithoutTermsInput>
+    create: XOR<OrgCreateWithoutTermsInput, OrgUncheckedCreateWithoutTermsInput>
+    where?: OrgWhereInput
+  }
+
+  export type OrgUpdateToOneWithWhereWithoutTermsInput = {
+    where?: OrgWhereInput
+    data: XOR<OrgUpdateWithoutTermsInput, OrgUncheckedUpdateWithoutTermsInput>
+  }
+
+  export type OrgUpdateWithoutTermsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    domain?: NullableStringFieldUpdateOperationsInput | string | null
+    projects?: ProjectUpdateManyWithoutOrgNestedInput
+    apps?: AppUpdateManyWithoutOwnerOrgNestedInput
+    members?: MemberUpdateManyWithoutOrgNestedInput
+    roles?: RoleUpdateManyWithoutOrgNestedInput
+    redeemCodes?: RedeemCodeUpdateManyWithoutOrgNestedInput
+    merchants?: MerchantUpdateManyWithoutOrgNestedInput
+  }
+
+  export type OrgUncheckedUpdateWithoutTermsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    domain?: NullableStringFieldUpdateOperationsInput | string | null
+    projects?: ProjectUncheckedUpdateManyWithoutOrgNestedInput
+    apps?: AppUncheckedUpdateManyWithoutOwnerOrgNestedInput
+    members?: MemberUncheckedUpdateManyWithoutOrgNestedInput
+    roles?: RoleUncheckedUpdateManyWithoutOrgNestedInput
+    redeemCodes?: RedeemCodeUncheckedUpdateManyWithoutOrgNestedInput
+    merchants?: MerchantUncheckedUpdateManyWithoutOrgNestedInput
   }
 
   export type AccountCreateWithoutConsentsInput = {
@@ -100908,6 +102209,7 @@ export namespace Prisma {
     content: string
     effectiveDate: Date | string
     active?: boolean
+    org?: OrgCreateNestedOneWithoutTermsInput
   }
 
   export type TermsUncheckedCreateWithoutConsentsInput = {
@@ -100916,6 +102218,7 @@ export namespace Prisma {
     content: string
     effectiveDate: Date | string
     active?: boolean
+    orgId?: string | null
   }
 
   export type TermsCreateOrConnectWithoutConsentsInput = {
@@ -101033,6 +102336,7 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     effectiveDate?: DateTimeFieldUpdateOperationsInput | Date | string
     active?: BoolFieldUpdateOperationsInput | boolean
+    org?: OrgUpdateOneWithoutTermsNestedInput
   }
 
   export type TermsUncheckedUpdateWithoutConsentsInput = {
@@ -101041,6 +102345,7 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     effectiveDate?: DateTimeFieldUpdateOperationsInput | Date | string
     active?: BoolFieldUpdateOperationsInput | boolean
+    orgId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type AccountCreateWithoutAuditLogsInput = {
@@ -104405,6 +105710,34 @@ export namespace Prisma {
     appServiceId?: string | null
   }
 
+  export type RoleCreateManyOrgInput = {
+    id?: string
+    name: string
+    level: $Enums.RoleLevel
+  }
+
+  export type RedeemCodeCreateManyOrgInput = {
+    id?: string
+    code: string
+    reward: JsonNullValueInput | InputJsonValue
+    usesLeft: number
+    expiry?: Date | string | null
+  }
+
+  export type MerchantCreateManyOrgInput = {
+    id?: string
+    name: string
+    config?: NullableJsonNullValueInput | InputJsonValue
+  }
+
+  export type TermsCreateManyOrgInput = {
+    id?: string
+    version: string
+    content: string
+    effectiveDate: Date | string
+    active?: boolean
+  }
+
   export type ProjectUpdateWithoutOrgInput = {
     id?: StringFieldUpdateOperationsInput | string
     services?: AppServiceUpdateManyWithoutProjectNestedInput
@@ -104479,6 +105812,100 @@ export namespace Prisma {
     accountId?: StringFieldUpdateOperationsInput | string
     projectId?: NullableStringFieldUpdateOperationsInput | string | null
     appServiceId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type RoleUpdateWithoutOrgInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    level?: EnumRoleLevelFieldUpdateOperationsInput | $Enums.RoleLevel
+    permissions?: PermissionUpdateManyWithoutRoleNestedInput
+    memberRoles?: MemberRoleUpdateManyWithoutRoleNestedInput
+  }
+
+  export type RoleUncheckedUpdateWithoutOrgInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    level?: EnumRoleLevelFieldUpdateOperationsInput | $Enums.RoleLevel
+    permissions?: PermissionUncheckedUpdateManyWithoutRoleNestedInput
+    memberRoles?: MemberRoleUncheckedUpdateManyWithoutRoleNestedInput
+  }
+
+  export type RoleUncheckedUpdateManyWithoutOrgInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    level?: EnumRoleLevelFieldUpdateOperationsInput | $Enums.RoleLevel
+  }
+
+  export type RedeemCodeUpdateWithoutOrgInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    reward?: JsonNullValueInput | InputJsonValue
+    usesLeft?: IntFieldUpdateOperationsInput | number
+    expiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    grants?: RedeemGrantUpdateManyWithoutCodeNestedInput
+  }
+
+  export type RedeemCodeUncheckedUpdateWithoutOrgInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    reward?: JsonNullValueInput | InputJsonValue
+    usesLeft?: IntFieldUpdateOperationsInput | number
+    expiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    grants?: RedeemGrantUncheckedUpdateManyWithoutCodeNestedInput
+  }
+
+  export type RedeemCodeUncheckedUpdateManyWithoutOrgInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    reward?: JsonNullValueInput | InputJsonValue
+    usesLeft?: IntFieldUpdateOperationsInput | number
+    expiry?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type MerchantUpdateWithoutOrgInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    config?: NullableJsonNullValueInput | InputJsonValue
+    paymentMethods?: PaymentMethodUpdateManyWithoutMerchantNestedInput
+  }
+
+  export type MerchantUncheckedUpdateWithoutOrgInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    config?: NullableJsonNullValueInput | InputJsonValue
+    paymentMethods?: PaymentMethodUncheckedUpdateManyWithoutMerchantNestedInput
+  }
+
+  export type MerchantUncheckedUpdateManyWithoutOrgInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    config?: NullableJsonNullValueInput | InputJsonValue
+  }
+
+  export type TermsUpdateWithoutOrgInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    version?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    effectiveDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    active?: BoolFieldUpdateOperationsInput | boolean
+    consents?: ConsentUpdateManyWithoutTermsNestedInput
+  }
+
+  export type TermsUncheckedUpdateWithoutOrgInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    version?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    effectiveDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    active?: BoolFieldUpdateOperationsInput | boolean
+    consents?: ConsentUncheckedUpdateManyWithoutTermsNestedInput
+  }
+
+  export type TermsUncheckedUpdateManyWithoutOrgInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    version?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    effectiveDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    active?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type AppServiceCreateManyProjectInput = {

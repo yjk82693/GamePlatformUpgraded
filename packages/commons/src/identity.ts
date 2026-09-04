@@ -132,3 +132,109 @@ export async function getAccountType(accountId: string) {
   ]);
   return { isPlayer: !!playerProfile, isStaff: !!membership };
 }
+
+const OWNER_PERMISSIONS: { action: string; targetType: string }[] = [
+  { action: "CREATE", targetType: "PRODUCT" },
+  { action: "UPDATE", targetType: "PRODUCT" },
+  { action: "DELETE", targetType: "PRODUCT" },
+  { action: "READ", targetType: "PRODUCT" },
+  { action: "UPDATE", targetType: "CATEGORY" },
+  { action: "READ", targetType: "MEMBER" },
+  { action: "READ", targetType: "ROLE" },
+  { action: "INVITE", targetType: "MEMBER" },
+  { action: "GRANT_ROLE", targetType: "ROLE" },
+  { action: "REVOKE_ROLE", targetType: "ROLE" },
+  { action: "RESET_PASSWORD", targetType: "MEMBER" },
+  { action: "SUSPEND_MEMBER", targetType: "MEMBER" },
+  { action: "UNSUSPEND_MEMBER", targetType: "MEMBER" },
+  { action: "REVOKE_MEMBER", targetType: "MEMBER" },
+  { action: "PUBLISH", targetType: "APP" },
+  { action: "UPDATE", targetType: "APP" },
+  { action: "CREATE", targetType: "NOTIFICATION_SETTING" },
+  { action: "UPDATE", targetType: "MERCHANT" },
+  { action: "UPDATE", targetType: "PAYMENT_METHOD" },
+  { action: "REFUND", targetType: "TRANSACTION" },
+  { action: "APPROVE", targetType: "TRANSACTION" },
+  { action: "READ", targetType: "SETTLEMENT" },
+  { action: "UPDATE", targetType: "SETTLEMENT" },
+  { action: "EXPORT", targetType: "TRANSACTION" },
+  { action: "READ", targetType: "ANALYTICS" },
+  { action: "EXPORT", targetType: "ANALYTICS" },
+  { action: "UPDATE", targetType: "ANALYTICS" },
+  { action: "CREATE", targetType: "ANALYTICS" },
+  { action: "CREATE", targetType: "SETTING" },
+  { action: "UPDATE", targetType: "SETTING" },
+  { action: "READ", targetType: "SETTING" },
+  { action: "EXPORT", targetType: "SETTING" },
+];
+
+export async function registerCompany(
+  email: string,
+  password: string,
+  companyName: string,
+  domain: string
+) {
+  if (!checkStrong(password)) {
+    throw new Error("Password too weak");
+  }
+  const existingAccount = await prisma.account.findUnique({ where: { email } });
+  if (existingAccount) {
+    throw new Error("Account already exists");
+  }
+  const existingOrg = await prisma.org.findUnique({ where: { domain } });
+  if (existingOrg) {
+    throw new Error("A company with this domain already exists");
+  }
+
+  const passwordHash = await bcrypt.hash(password, 10);
+  const account = await prisma.account.create({
+    data: { email, passwordHash, authProvider: "MANUAL" },
+  });
+
+  const org = await prisma.org.create({ data: { name: companyName, domain } });
+
+  const role = await prisma.role.create({
+    data: { name: "Owner", level: "ORG", orgId: org.id },
+  });
+  await prisma.permission.createMany({
+    data: OWNER_PERMISSIONS.map((p) => ({
+      roleId: role.id,
+      action: p.action as any,
+      targetType: p.targetType as any,
+    })),
+  });
+
+  const member = await prisma.member.create({ data: { accountId: account.id, orgId: org.id } });
+  await prisma.memberRole.create({ data: { memberId: member.id, roleId: role.id } });
+
+  return { account, org };
+}
+
+export async function registerStaffByDomain(
+  email: string,
+  password: string,
+  domain: string
+) {
+  if (!checkStrong(password)) {
+    throw new Error("Password too weak");
+  }
+  const existingAccount = await prisma.account.findUnique({ where: { email } });
+  if (existingAccount) {
+    throw new Error("Account already exists");
+  }
+  const org = await prisma.org.findUnique({ where: { domain } });
+  if (!org) {
+    throw new Error("No company found with that domain");
+  }
+
+  const passwordHash = await bcrypt.hash(password, 10);
+  const account = await prisma.account.create({
+    data: { email, passwordHash, authProvider: "MANUAL" },
+  });
+
+  const member = await prisma.member.create({ data: { accountId: account.id, orgId: org.id } });
+  // No role granted yet — an existing Owner/Admin must grant one via
+  // Members & Roles, matching how inviteMember/grantRole already work.
+
+  return { account, org, member };
+}
