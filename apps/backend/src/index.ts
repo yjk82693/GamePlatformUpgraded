@@ -1,7 +1,7 @@
 import "dotenv/config";
 import express from "express";
 import cors from "cors";
-import { registerManual, login, logout, getAccountType } from "@game-platform/commons";
+import { registerManual, registerCompany, registerStaffByDomain, login, logout, getAccountType } from "@game-platform/commons";
 import { requireAuth, type AuthedRequest } from "./middleware/auth.js";
 
 import shopRoutes from "./routes/shop.js";
@@ -37,6 +37,26 @@ app.post("/auth/register", async (req, res) => {
     const { email, password } = req.body;
     const account = await registerManual(email, password);
     res.json({ id: account.id, email: account.email });
+  } catch (err) {
+    res.status(400).json({ error: (err as Error).message });
+  }
+});
+
+app.post("/auth/register-company", async (req, res) => {
+  try {
+    const { email, password, companyName, domain } = req.body;
+    const result = await registerCompany(email, password, companyName, domain);
+    res.json({ id: result.account.id, email: result.account.email, orgId: result.org.id, orgName: result.org.name });
+  } catch (err) {
+    res.status(400).json({ error: (err as Error).message });
+  }
+});
+
+app.post("/auth/register-staff", async (req, res) => {
+  try {
+    const { email, password, domain } = req.body;
+    const result = await registerStaffByDomain(email, password, domain);
+    res.json({ id: result.account.id, email: result.account.email, orgId: result.org.id, orgName: result.org.name });
   } catch (err) {
     res.status(400).json({ error: (err as Error).message });
   }
