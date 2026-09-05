@@ -1,13 +1,11 @@
-import { prisma, requirePermission } from "@game-platform/commons";
-import type { Prisma } from "@game-platform/commons";
+import { prisma, requirePermission, getMyOrgId } from "@game-platform/commons";
 
-// ── Leaderboard config ──
 export async function createBoard(actorId: string, appId: string, name: string) {
   await requirePermission(actorId, "CREATE", "ANALYTICS");
   return prisma.leaderboard.create({ data: { appId, name } });
 }
 
-export async function configureBoard(actorId: string, boardId: string, data: { name?: string }) {
+export async function configureBoard(actorId: string, boardId: string, data: { name?: string; season?: number }) {
   await requirePermission(actorId, "UPDATE", "ANALYTICS");
   return prisma.leaderboard.update({ where: { id: boardId }, data });
 }
@@ -27,59 +25,49 @@ export async function closeSeason(actorId: string, boardId: string) {
   return prisma.leaderboard.update({ where: { id: boardId }, data: { closed: true } });
 }
 
-// ── Terms ──
-export async function registerTerms(
-  actorId: string,
-  content: string,
-  version: string,
-  effectiveDate: Date
-) {
-  await requirePermission(actorId, "CREATE", "SETTING");
+export async function registerTerms(actorId: string, content: string, version: string, effectiveDate: Date) {
+  const myOrgId = await getMyOrgId(actorId);
+  await requirePermission(actorId, "CREATE", "SETTING", myOrgId ?? undefined);
   return prisma.terms.create({
-    data: { content, version, effectiveDate, active: false },
+    data: { content, version, effectiveDate, ...(myOrgId ? { orgId: myOrgId } : {}) },
   });
 }
 
 export async function activateTerms(actorId: string, version: string) {
-  await requirePermission(actorId, "UPDATE", "SETTING");
-  await prisma.terms.updateMany({ data: { active: false }, where: {} });
-  return prisma.terms.update({ where: { version }, data: { active: true } });
-}
+  const myOrgId = await getMyOrgId(actorId);
+  await requirePermission(actorId, "UPDATE", "SETTING", myOrgId ?? undefined);
+  if (!myOrgId) throw new Error("No organization found for this account");
 
-// ── Redeem generation ──
-export interface RewardLine {
-  itemId: string;
-  amount: number;
-}
-
-export async function generateCode(
-  actorId: string,
-  reward: RewardLine[],
-  usesLeft: number,
-  expiry?: Date
-) {
-  await requirePermission(actorId, "CREATE", "PRODUCT");
-  const code = crypto.randomUUID().slice(0, 8).toUpperCase();
-  return prisma.redeemCode.create({
-    data: {
-      code,
-      reward: reward as unknown as Prisma.InputJsonValue,
-      usesLeft,
-      ...(expiry ? { expiry } : {}),
-    },
+  await prisma.terms.updateMany({
+    where: { orgId: myOrgId },
+    data: { active: false },
+  });
+  return prisma.terms.update({
+    where: { orgId_version: { orgId: myOrgId, version } },
+    data: { active: true },
   });
 }
 
-export async function batchGenerate(
-  actorId: string,
-  reward: RewardLine[],
-  count: number,
-  usesLeft: number,
-  expiry?: Date
-) {
+export async function generateCode(actorId: string, reward: any, usesLeft: number, expiry?: Date) {
+  const myOrgId = await getMyOrgId(actorId);
+  await requirePermission(actorId, "CREATE", "PRODUCT", myOrgId ?? undefined);
+  const code = Math.random().toString(36).slice(2, 10).toUpperCase();
+  return prisma.redeemCode.create({
+    data: { code, reward, usesLeft, ...(expiry ? { expiry } : {}), ...(myOrgId ? { orgId: myOrgId } : {}) },
+  });
+}
+
+export async function batchGenerate(actorId: string, reward: any, count: number, usesLeft: number, expiry?: Date) {
+  const myOrgId = await getMyOrgId(actorId);
+  await requirePermission(actorId, "CREATE", "PRODUCT", myOrgId ?? undefined);
   const codes = [];
   for (let i = 0; i < count; i++) {
-    codes.push(await generateCode(actorId, reward, usesLeft, expiry));
+    const code = Math.random().toString(36).slice(2, 10).toUpperCase();
+    codes.push(
+      await prisma.redeemCode.create({
+        data: { code, reward, usesLeft, ...(expiry ? { expiry } : {}), ...(myOrgId ? { orgId: myOrgId } : {}) },
+      })
+    );
   }
   return codes;
 }
@@ -100,20 +88,30 @@ export async function listBoardsForApp(actorId: string, appId: string) {
 }
 
 export async function listTerms(actorId: string) {
-  await requirePermission(actorId, "READ", "SETTING");
-  return prisma.terms.findMany({ orderBy: { effectiveDate: "desc" } });
+  const myOrgId = await getMyOrgId(actorId);
+  await requirePermission(actorId, "READ", "SETTING", myOrgId ?? undefined);
+  return prisma.terms.findMany({
+    where: { ...(myOrgId ? { orgId: myOrgId } : {}) },
+    orderBy: { effectiveDate: "desc" },
+  });
 }
 
 export async function listRedeemCodes(actorId: string) {
-  await requirePermission(actorId, "READ", "PRODUCT");
-  return prisma.redeemCode.findMany({ orderBy: { id: "desc" } });
+  const myOrgId = await getMyOrgId(actorId);
+  await requirePermission(actorId, "READ", "PRODUCT", myOrgId ?? undefined);
+  return prisma.redeemCode.findMany({
+    where: { ...(myOrgId ? { orgId: myOrgId } : {}) },
+    orderBy: { id: "desc" },
+  });
 }
 
 export async function listMultiplayerApps(actorId: string) {
-  await requirePermission(actorId, "READ", "ANALYTICS");
+  const myOrgId = await getMyOrgId(actorId);
+  await requirePermission(actorId, "READ", "ANALYTICS", myOrgId ?? undefined);
   const boards = await prisma.leaderboard.findMany({
     distinct: ["appId"],
     include: { app: true },
+    where: { ...(myOrgId ? { app: { ownerOrgId: myOrgId } } : {}) },
   });
   return boards.map((b) => ({ id: b.app.id, name: b.app.name }));
 }

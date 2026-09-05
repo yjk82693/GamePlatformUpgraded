@@ -1,9 +1,13 @@
-import { prisma, requirePermission, sendMessage } from "@game-platform/commons";
+import { prisma, requirePermission, sendMessage, getMyOrgId } from "@game-platform/commons";
 import type { Prisma } from "@game-platform/commons";
 
 export async function listTickets(actorId: string, filter?: { status?: "OPEN" | "SOLVED" }) {
-  await requirePermission(actorId, "READ", "SETTING");
-  const where: Prisma.ChatThreadWhereInput = { kind: "SUPPORT" };
+  const myOrgId = await getMyOrgId(actorId);
+  await requirePermission(actorId, "READ", "SETTING", myOrgId ?? undefined);
+  const where: Prisma.ChatThreadWhereInput = {
+    kind: "SUPPORT",
+    ...(myOrgId ? { orgId: myOrgId } : {}),
+  };
   if (filter?.status) {
     where.ticketMeta = { status: filter.status };
   }

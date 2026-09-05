@@ -1,4 +1,4 @@
-import { prisma, requirePermission } from "@game-platform/commons";
+import { prisma, requirePermission, getMyOrgId } from "@game-platform/commons";
 
 export async function createProduct(
   actorId: string,
@@ -50,6 +50,15 @@ export async function listProductsForApp(actorId: string, appId: string) {
   await requirePermission(actorId, "READ", "PRODUCT");
   return prisma.product.findMany({
     where: { appId },
+    orderBy: { name: "asc" },
+  });
+}
+
+export async function listAppsForOrg(actorId: string) {
+  const myOrgId = await getMyOrgId(actorId);
+  await requirePermission(actorId, "READ", "PRODUCT", myOrgId ?? undefined);
+  return prisma.app.findMany({
+    where: { ...(myOrgId ? { ownerOrgId: myOrgId } : {}) },
     orderBy: { name: "asc" },
   });
 }

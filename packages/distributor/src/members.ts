@@ -1,4 +1,4 @@
-import { prisma, requirePermission } from "@game-platform/commons";
+import { prisma, requirePermission, getMyOrgId } from "@game-platform/commons";
 import type { RoleLevel } from "@game-platform/commons";
 
 function generateToken(): string {
@@ -7,8 +7,6 @@ function generateToken(): string {
 
 export async function inviteMember(actorId: string, email: string, scope: { level: RoleLevel; scopeId: string }) {
   await requirePermission(actorId, "INVITE", "MEMBER");
-  // A real invite flow would send an email with a signed link; here we
-  // create the Member row directly against an existing Account by email.
   const account = await prisma.account.findUnique({ where: { email } });
   if (!account) throw new Error("No account with that email");
 
@@ -50,7 +48,6 @@ export async function revokeRole(actorId: string, memberId: string, roleId: stri
 
 export async function resetMemberPassword(actorId: string, memberAccountId: string) {
   await requirePermission(actorId, "RESET_PASSWORD", "MEMBER");
-  // Reuses commons' password reset flow — generates and stores a reset code.
   const account = await prisma.account.findUnique({ where: { id: memberAccountId } });
   if (!account) throw new Error("Account not found");
   const code = Math.random().toString().slice(2, 8);
@@ -80,13 +77,18 @@ export async function kickMember(actorId: string, playerId: string, appId: strin
 }
 
 export async function listMembers(actorId: string) {
-  await requirePermission(actorId, "READ", "MEMBER");
+  const myOrgId = await getMyOrgId(actorId);
+  await requirePermission(actorId, "READ", "MEMBER", myOrgId ?? undefined);
   return prisma.member.findMany({
+    where: { ...(myOrgId ? { orgId: myOrgId } : {}) },
     include: { account: true, org: true, roles: { include: { role: true } } },
   });
 }
 
 export async function listRoles(actorId: string) {
-  await requirePermission(actorId, "READ", "ROLE");
-  return prisma.role.findMany();
+  const myOrgId = await getMyOrgId(actorId);
+  await requirePermission(actorId, "READ", "ROLE", myOrgId ?? undefined);
+  return prisma.role.findMany({
+    where: { ...(myOrgId ? { orgId: myOrgId } : {}) },
+  });
 }

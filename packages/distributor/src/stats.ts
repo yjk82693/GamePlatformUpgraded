@@ -1,4 +1,4 @@
-import { prisma, requirePermission } from "@game-platform/commons";
+import { prisma, requirePermission, getMyOrgId } from "@game-platform/commons";
 import type { Prisma } from "@game-platform/commons";
 
 export interface MetricQuery {
@@ -111,8 +111,13 @@ export async function analyzeDashboard(actorId: string, dashboardId: string) {
   };
 }
 
-export async function getOrCreateDashboard(actorId: string, ownerScope: string) {
-  await requirePermission(actorId, "READ", "ANALYTICS");
+export async function getOrCreateDashboard(actorId: string) {
+  const myOrgId = await getMyOrgId(actorId);
+  await requirePermission(actorId, "READ", "ANALYTICS", myOrgId ?? undefined);
+  // Ignore any caller-supplied scope and always derive it from the
+  // actor's own org, so a company can never read/create another
+  // company's dashboard by passing a different ownerScope value.
+  const ownerScope = myOrgId ?? "global";
   const existing = await prisma.dashboard.findFirst({ where: { ownerScope } });
   if (existing) return existing;
   return prisma.dashboard.create({ data: { ownerScope } });

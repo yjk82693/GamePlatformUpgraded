@@ -1,19 +1,10 @@
-import { prisma, requirePermission } from "@game-platform/commons";
-import type { Prisma } from "@game-platform/commons";
+import { prisma, requirePermission, getMyOrgId } from "@game-platform/commons";
 
-export async function configureMerchant(
-  actorId: string,
-  data: { id?: string; name: string; config?: Prisma.InputJsonValue }
-) {
-  await requirePermission(actorId, "UPDATE", "MERCHANT");
-  if (data.id) {
-    return prisma.merchant.update({
-      where: { id: data.id },
-      data: { name: data.name, ...(data.config !== undefined ? { config: data.config } : {}) },
-    });
-  }
+export async function configureMerchant(actorId: string, data: { name: string; config?: any }) {
+  const myOrgId = await getMyOrgId(actorId);
+  await requirePermission(actorId, "UPDATE", "MERCHANT", myOrgId ?? undefined);
   return prisma.merchant.create({
-    data: { name: data.name, ...(data.config !== undefined ? { config: data.config } : {}) },
+    data: { name: data.name, config: data.config, ...(myOrgId ? { orgId: myOrgId } : {}) },
   });
 }
 
@@ -24,36 +15,22 @@ export async function setPaymentMethod(actorId: string, merchantId: string, type
 
 export async function issueRefund(actorId: string, txnId: string) {
   await requirePermission(actorId, "REFUND", "TRANSACTION");
-  const result = await prisma.transaction.updateMany({
-    where: { id: txnId, state: "PAID" },
-    data: { state: "REFUND_PENDING" },
-  });
-  if (result.count === 0) throw new Error("Transaction not refundable");
-  await prisma.refundRequest.create({ data: { txnId, requestedBy: actorId } });
-  return prisma.transaction.findUnique({ where: { id: txnId } });
+  const txn = await prisma.transaction.findUnique({ where: { id: txnId } });
+  if (!txn) throw new Error("Transaction not found");
+  if (txn.state !== "PAID") throw new Error("Transaction not refundable");
+  await prisma.transaction.update({ where: { id: txnId }, data: { state: "REFUND_PENDING" } });
+  return prisma.refundRequest.create({ data: { txnId, requestedBy: actorId } });
 }
 
-export async function approveRefund(approverId: string, txnId: string) {
-  await requirePermission(approverId, "APPROVE", "TRANSACTION");
+export async function approveRefund(actorId: string, txnId: string) {
+  await requirePermission(actorId, "APPROVE", "TRANSACTION");
   const request = await prisma.refundRequest.findUnique({ where: { txnId } });
   if (!request) throw new Error("No refund request found");
-  if (request.requestedBy === approverId) {
+  if (request.requestedBy === actorId) {
     throw new Error("Separation of duties: approver cannot be the requester");
   }
-
-  const result = await prisma.transaction.updateMany({
-    where: { id: txnId, state: "REFUND_PENDING" },
-    data: { state: "REFUNDED" },
-  });
-  if (result.count === 0) throw new Error("No pending refund for this transaction");
-
-  const txn = await prisma.transaction.findUnique({ where: { id: txnId } });
-  if (txn) {
-    await prisma.entitlement.deleteMany({
-      where: { accountId: txn.accountId, productId: txn.productId },
-    });
-  }
-  return txn;
+  await prisma.transaction.update({ where: { id: txnId }, data: { state: "REFUNDED" } });
+  return request;
 }
 
 export async function viewSettlement(actorId: string, period: string) {
@@ -62,31 +39,33 @@ export async function viewSettlement(actorId: string, period: string) {
 }
 
 export async function reconcile(actorId: string, period: string) {
-  await requirePermission(actorId, "READ", "SETTLEMENT");
+  const myOrgId = await getMyOrgId(actorId);
+  await requirePermission(actorId, "UPDATE", "SETTLEMENT", myOrgId ?? undefined);
   const transactions = await prisma.transaction.findMany({
-    where: { occurredAt: { gte: new Date(period) } },
+    where: { ...(myOrgId ? { product: { app: { ownerOrgId: myOrgId } } } : {}) },
   });
-  // real reconciliation would compare against a processor report;
-  // here we just return the transaction set for the period as a stub
-  return { period, transactionCount: transactions.length, transactions };
+  return { transactionCount: transactions.length };
 }
 
 export async function payout(actorId: string, period: string, amount: bigint) {
   await requirePermission(actorId, "UPDATE", "SETTLEMENT");
-  const existing = await prisma.payout.findFirst({ where: { period } });
-  if (existing) return existing;
   return prisma.payout.create({ data: { period, amount } });
 }
 
-export async function exportTransactions(actorId: string, filter?: { accountId?: string }) {
-  await requirePermission(actorId, "EXPORT", "TRANSACTION");
+export async function exportTransactions(actorId: string) {
+  const myOrgId = await getMyOrgId(actorId);
+  await requirePermission(actorId, "EXPORT", "TRANSACTION", myOrgId ?? undefined);
   return prisma.transaction.findMany({
-    where: filter?.accountId ? { accountId: filter.accountId } : {},
+    where: { ...(myOrgId ? { product: { app: { ownerOrgId: myOrgId } } } : {}) },
     orderBy: { occurredAt: "desc" },
   });
 }
 
 export async function listMerchants(actorId: string) {
-  await requirePermission(actorId, "READ", "SETTLEMENT");
-  return prisma.merchant.findMany({ include: { paymentMethods: true } });
+  const myOrgId = await getMyOrgId(actorId);
+  await requirePermission(actorId, "READ", "SETTLEMENT", myOrgId ?? undefined);
+  return prisma.merchant.findMany({
+    where: { ...(myOrgId ? { orgId: myOrgId } : {}) },
+    include: { paymentMethods: true },
+  });
 }
