@@ -9,7 +9,14 @@ interface Ticket {
   messages?: { id: string; senderId: string; body: string; createdAt: string }[]
 }
 
+interface Game {
+  id: string
+  name: string
+}
+
 export default function SupportPage() {
+  const [games, setGames] = useState<Game[]>([])
+  const [selectedGame, setSelectedGame] = useState('')
   const [tickets, setTickets] = useState<Ticket[]>([])
   const [selectedTicket, setSelectedTicket] = useState<Ticket | null>(null)
   const [subject, setSubject] = useState('')
@@ -21,7 +28,23 @@ export default function SupportPage() {
 
   useEffect(() => {
     loadTickets()
+    loadGames()
   }, [])
+
+  async function loadGames() {
+    try {
+      const data = await apiFetch('/player/shop/browse')
+      const seen = new Map<string, Game>()
+      for (const p of data) {
+        if (p.app && !seen.has(p.appId)) seen.set(p.appId, { id: p.appId, name: p.app.name })
+      }
+      const list = Array.from(seen.values())
+      setGames(list)
+      if (list.length > 0) setSelectedGame(list[0].id)
+    } catch (err) {
+      // game list is only needed for ticket creation; ignore failure here
+    }
+  }
 
   async function loadTickets() {
     setLoading(true)
@@ -42,7 +65,7 @@ export default function SupportPage() {
     try {
       await apiFetch('/player/tickets', {
         method: 'POST',
-        body: JSON.stringify({ subject, body }),
+        body: JSON.stringify({ appId: selectedGame, subject, body }),
       })
       setSubject('')
       setBody('')
@@ -99,6 +122,17 @@ export default function SupportPage() {
 
       <Card style={{ maxWidth: 420, marginTop: 16, marginBottom: 32 }}>
         <form onSubmit={handleCreate} style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+          <select
+            value={selectedGame}
+            onChange={(e) => setSelectedGame(e.target.value)}
+            required
+            style={inputStyle}
+          >
+            <option value="" disabled>Which game is this about?</option>
+            {games.map((g) => (
+              <option key={g.id} value={g.id}>{g.name}</option>
+            ))}
+          </select>
           <input
             placeholder="Subject"
             value={subject}

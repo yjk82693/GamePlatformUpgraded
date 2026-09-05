@@ -34,12 +34,7 @@ export default function CatalogPage() {
 
   async function loadApps() {
     try {
-      const data = await apiFetch('/player/shop/browse')
-      const seen = new Map<string, App>()
-      for (const p of data) {
-        if (p.app && !seen.has(p.appId)) seen.set(p.appId, { id: p.appId, name: p.app.name })
-      }
-      const list = Array.from(seen.values())
+      const list = await apiFetch('/distributor/catalog/apps')
       setApps(list)
       if (list.length > 0) setSelectedApp(list[0].id)
     } catch (err) {
