@@ -6,8 +6,12 @@ const router = Router();
 router.use(requireAuth);
 
 router.post("/", async (req: AuthedRequest, res) => {
-  const { subject, body } = req.body;
-  res.json(await createTicket(req.accountId!, subject, body));
+  try {
+    const { appId, subject, body } = req.body;
+    res.json(await createTicket(req.accountId!, appId, subject, body));
+  } catch (err) {
+    res.status(400).json({ error: (err as Error).message });
+  }
 });
 
 router.get("/", async (req: AuthedRequest, res) => {

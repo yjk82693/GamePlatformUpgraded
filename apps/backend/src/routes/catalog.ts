@@ -1,9 +1,17 @@
 import { Router } from "express";
-import { createProduct, updateProduct, deleteProduct, enableItem, disableItem, manageCategory, listProductsForApp } from "@game-platform/distributor";
+import { createProduct, updateProduct, deleteProduct, enableItem, disableItem, manageCategory, listProductsForApp, listAppsForOrg } from "@game-platform/distributor";
 import { requireAuth, type AuthedRequest } from "../middleware/auth.js";
 
 const router = Router();
 router.use(requireAuth);
+
+router.get("/apps", async (req: AuthedRequest, res) => {
+  try {
+    res.json(await listAppsForOrg(req.accountId!));
+  } catch (err) {
+    res.status(403).json({ error: (err as Error).message });
+  }
+});
 
 router.get("/products/app/:appId", async (req: AuthedRequest, res) => {
   try {

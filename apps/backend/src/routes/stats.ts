@@ -7,8 +7,7 @@ router.use(requireAuth);
 
 router.get("/dashboard", async (req: AuthedRequest, res) => {
   try {
-    const ownerScope = (req.query.ownerScope as string) ?? "default";
-    res.json(await getOrCreateDashboard(req.accountId!, ownerScope));
+    res.json(await getOrCreateDashboard(req.accountId!));
   } catch (err) {
     res.status(403).json({ error: (err as Error).message });
   }
