@@ -219,6 +219,7 @@ model Org {
   redeemCodes RedeemCode[]
   merchants   Merchant[]
   terms       Terms[]
+  chatThreads ChatThread[]
 }
 
 model Project {
@@ -720,6 +721,8 @@ model ChatThread {
   participants ChatParticipant[]
   messages     ChatMessage[]
   ticketMeta   TicketMeta?
+  orgId        String?
+  org          Org?              @relation(fields: [orgId], references: [id])
 }
 
 model ChatParticipant {

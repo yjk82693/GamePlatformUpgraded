@@ -7177,6 +7177,7 @@ export namespace Prisma {
     redeemCodes: number
     merchants: number
     terms: number
+    chatThreads: number
   }
 
   export type OrgCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -7187,6 +7188,7 @@ export namespace Prisma {
     redeemCodes?: boolean | OrgCountOutputTypeCountRedeemCodesArgs
     merchants?: boolean | OrgCountOutputTypeCountMerchantsArgs
     terms?: boolean | OrgCountOutputTypeCountTermsArgs
+    chatThreads?: boolean | OrgCountOutputTypeCountChatThreadsArgs
   }
 
   // Custom InputTypes
@@ -7247,6 +7249,13 @@ export namespace Prisma {
    */
   export type OrgCountOutputTypeCountTermsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: TermsWhereInput
+  }
+
+  /**
+   * OrgCountOutputType without action
+   */
+  export type OrgCountOutputTypeCountChatThreadsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ChatThreadWhereInput
   }
 
 
@@ -10124,6 +10133,7 @@ export namespace Prisma {
     redeemCodes?: boolean | Org$redeemCodesArgs<ExtArgs>
     merchants?: boolean | Org$merchantsArgs<ExtArgs>
     terms?: boolean | Org$termsArgs<ExtArgs>
+    chatThreads?: boolean | Org$chatThreadsArgs<ExtArgs>
     _count?: boolean | OrgCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["org"]>
 
@@ -10154,6 +10164,7 @@ export namespace Prisma {
     redeemCodes?: boolean | Org$redeemCodesArgs<ExtArgs>
     merchants?: boolean | Org$merchantsArgs<ExtArgs>
     terms?: boolean | Org$termsArgs<ExtArgs>
+    chatThreads?: boolean | Org$chatThreadsArgs<ExtArgs>
     _count?: boolean | OrgCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type OrgIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -10169,6 +10180,7 @@ export namespace Prisma {
       redeemCodes: Prisma.$RedeemCodePayload<ExtArgs>[]
       merchants: Prisma.$MerchantPayload<ExtArgs>[]
       terms: Prisma.$TermsPayload<ExtArgs>[]
+      chatThreads: Prisma.$ChatThreadPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -10575,6 +10587,7 @@ export namespace Prisma {
     redeemCodes<T extends Org$redeemCodesArgs<ExtArgs> = {}>(args?: Subset<T, Org$redeemCodesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RedeemCodePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     merchants<T extends Org$merchantsArgs<ExtArgs> = {}>(args?: Subset<T, Org$merchantsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MerchantPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     terms<T extends Org$termsArgs<ExtArgs> = {}>(args?: Subset<T, Org$termsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TermsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    chatThreads<T extends Org$chatThreadsArgs<ExtArgs> = {}>(args?: Subset<T, Org$chatThreadsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ChatThreadPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -11165,6 +11178,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: TermsScalarFieldEnum | TermsScalarFieldEnum[]
+  }
+
+  /**
+   * Org.chatThreads
+   */
+  export type Org$chatThreadsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ChatThread
+     */
+    select?: ChatThreadSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ChatThread
+     */
+    omit?: ChatThreadOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChatThreadInclude<ExtArgs> | null
+    where?: ChatThreadWhereInput
+    orderBy?: ChatThreadOrderByWithRelationInput | ChatThreadOrderByWithRelationInput[]
+    cursor?: ChatThreadWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ChatThreadScalarFieldEnum | ChatThreadScalarFieldEnum[]
   }
 
   /**
@@ -65688,18 +65725,21 @@ export namespace Prisma {
     id: string | null
     kind: $Enums.ChatKind | null
     scope: string | null
+    orgId: string | null
   }
 
   export type ChatThreadMaxAggregateOutputType = {
     id: string | null
     kind: $Enums.ChatKind | null
     scope: string | null
+    orgId: string | null
   }
 
   export type ChatThreadCountAggregateOutputType = {
     id: number
     kind: number
     scope: number
+    orgId: number
     _all: number
   }
 
@@ -65708,18 +65748,21 @@ export namespace Prisma {
     id?: true
     kind?: true
     scope?: true
+    orgId?: true
   }
 
   export type ChatThreadMaxAggregateInputType = {
     id?: true
     kind?: true
     scope?: true
+    orgId?: true
   }
 
   export type ChatThreadCountAggregateInputType = {
     id?: true
     kind?: true
     scope?: true
+    orgId?: true
     _all?: true
   }
 
@@ -65799,6 +65842,7 @@ export namespace Prisma {
     id: string
     kind: $Enums.ChatKind
     scope: string | null
+    orgId: string | null
     _count: ChatThreadCountAggregateOutputType | null
     _min: ChatThreadMinAggregateOutputType | null
     _max: ChatThreadMaxAggregateOutputType | null
@@ -65822,9 +65866,11 @@ export namespace Prisma {
     id?: boolean
     kind?: boolean
     scope?: boolean
+    orgId?: boolean
     participants?: boolean | ChatThread$participantsArgs<ExtArgs>
     messages?: boolean | ChatThread$messagesArgs<ExtArgs>
     ticketMeta?: boolean | ChatThread$ticketMetaArgs<ExtArgs>
+    org?: boolean | ChatThread$orgArgs<ExtArgs>
     _count?: boolean | ChatThreadCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["chatThread"]>
 
@@ -65832,29 +65878,39 @@ export namespace Prisma {
     id?: boolean
     kind?: boolean
     scope?: boolean
+    orgId?: boolean
+    org?: boolean | ChatThread$orgArgs<ExtArgs>
   }, ExtArgs["result"]["chatThread"]>
 
   export type ChatThreadSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     kind?: boolean
     scope?: boolean
+    orgId?: boolean
+    org?: boolean | ChatThread$orgArgs<ExtArgs>
   }, ExtArgs["result"]["chatThread"]>
 
   export type ChatThreadSelectScalar = {
     id?: boolean
     kind?: boolean
     scope?: boolean
+    orgId?: boolean
   }
 
-  export type ChatThreadOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "kind" | "scope", ExtArgs["result"]["chatThread"]>
+  export type ChatThreadOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "kind" | "scope" | "orgId", ExtArgs["result"]["chatThread"]>
   export type ChatThreadInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     participants?: boolean | ChatThread$participantsArgs<ExtArgs>
     messages?: boolean | ChatThread$messagesArgs<ExtArgs>
     ticketMeta?: boolean | ChatThread$ticketMetaArgs<ExtArgs>
+    org?: boolean | ChatThread$orgArgs<ExtArgs>
     _count?: boolean | ChatThreadCountOutputTypeDefaultArgs<ExtArgs>
   }
-  export type ChatThreadIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
-  export type ChatThreadIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type ChatThreadIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    org?: boolean | ChatThread$orgArgs<ExtArgs>
+  }
+  export type ChatThreadIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    org?: boolean | ChatThread$orgArgs<ExtArgs>
+  }
 
   export type $ChatThreadPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "ChatThread"
@@ -65862,11 +65918,13 @@ export namespace Prisma {
       participants: Prisma.$ChatParticipantPayload<ExtArgs>[]
       messages: Prisma.$ChatMessagePayload<ExtArgs>[]
       ticketMeta: Prisma.$TicketMetaPayload<ExtArgs> | null
+      org: Prisma.$OrgPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       kind: $Enums.ChatKind
       scope: string | null
+      orgId: string | null
     }, ExtArgs["result"]["chatThread"]>
     composites: {}
   }
@@ -66264,6 +66322,7 @@ export namespace Prisma {
     participants<T extends ChatThread$participantsArgs<ExtArgs> = {}>(args?: Subset<T, ChatThread$participantsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ChatParticipantPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     messages<T extends ChatThread$messagesArgs<ExtArgs> = {}>(args?: Subset<T, ChatThread$messagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ChatMessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     ticketMeta<T extends ChatThread$ticketMetaArgs<ExtArgs> = {}>(args?: Subset<T, ChatThread$ticketMetaArgs<ExtArgs>>): Prisma__TicketMetaClient<$Result.GetResult<Prisma.$TicketMetaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    org<T extends ChatThread$orgArgs<ExtArgs> = {}>(args?: Subset<T, ChatThread$orgArgs<ExtArgs>>): Prisma__OrgClient<$Result.GetResult<Prisma.$OrgPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -66296,6 +66355,7 @@ export namespace Prisma {
     readonly id: FieldRef<"ChatThread", 'String'>
     readonly kind: FieldRef<"ChatThread", 'ChatKind'>
     readonly scope: FieldRef<"ChatThread", 'String'>
+    readonly orgId: FieldRef<"ChatThread", 'String'>
   }
     
 
@@ -66550,6 +66610,10 @@ export namespace Prisma {
      */
     data: ChatThreadCreateManyInput | ChatThreadCreateManyInput[]
     skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChatThreadIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -66620,6 +66684,10 @@ export namespace Prisma {
      * Limit how many ChatThreads to update.
      */
     limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChatThreadIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -66753,6 +66821,25 @@ export namespace Prisma {
      */
     include?: TicketMetaInclude<ExtArgs> | null
     where?: TicketMetaWhereInput
+  }
+
+  /**
+   * ChatThread.org
+   */
+  export type ChatThread$orgArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Org
+     */
+    select?: OrgSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Org
+     */
+    omit?: OrgOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrgInclude<ExtArgs> | null
+    where?: OrgWhereInput
   }
 
   /**
@@ -78387,7 +78474,8 @@ export namespace Prisma {
   export const ChatThreadScalarFieldEnum: {
     id: 'id',
     kind: 'kind',
-    scope: 'scope'
+    scope: 'scope',
+    orgId: 'orgId'
   };
 
   export type ChatThreadScalarFieldEnum = (typeof ChatThreadScalarFieldEnum)[keyof typeof ChatThreadScalarFieldEnum]
@@ -79063,6 +79151,7 @@ export namespace Prisma {
     redeemCodes?: RedeemCodeListRelationFilter
     merchants?: MerchantListRelationFilter
     terms?: TermsListRelationFilter
+    chatThreads?: ChatThreadListRelationFilter
   }
 
   export type OrgOrderByWithRelationInput = {
@@ -79076,6 +79165,7 @@ export namespace Prisma {
     redeemCodes?: RedeemCodeOrderByRelationAggregateInput
     merchants?: MerchantOrderByRelationAggregateInput
     terms?: TermsOrderByRelationAggregateInput
+    chatThreads?: ChatThreadOrderByRelationAggregateInput
   }
 
   export type OrgWhereUniqueInput = Prisma.AtLeast<{
@@ -79092,6 +79182,7 @@ export namespace Prisma {
     redeemCodes?: RedeemCodeListRelationFilter
     merchants?: MerchantListRelationFilter
     terms?: TermsListRelationFilter
+    chatThreads?: ChatThreadListRelationFilter
   }, "id" | "domain">
 
   export type OrgOrderByWithAggregationInput = {
@@ -81819,18 +81910,22 @@ export namespace Prisma {
     id?: StringFilter<"ChatThread"> | string
     kind?: EnumChatKindFilter<"ChatThread"> | $Enums.ChatKind
     scope?: StringNullableFilter<"ChatThread"> | string | null
+    orgId?: StringNullableFilter<"ChatThread"> | string | null
     participants?: ChatParticipantListRelationFilter
     messages?: ChatMessageListRelationFilter
     ticketMeta?: XOR<TicketMetaNullableScalarRelationFilter, TicketMetaWhereInput> | null
+    org?: XOR<OrgNullableScalarRelationFilter, OrgWhereInput> | null
   }
 
   export type ChatThreadOrderByWithRelationInput = {
     id?: SortOrder
     kind?: SortOrder
     scope?: SortOrderInput | SortOrder
+    orgId?: SortOrderInput | SortOrder
     participants?: ChatParticipantOrderByRelationAggregateInput
     messages?: ChatMessageOrderByRelationAggregateInput
     ticketMeta?: TicketMetaOrderByWithRelationInput
+    org?: OrgOrderByWithRelationInput
   }
 
   export type ChatThreadWhereUniqueInput = Prisma.AtLeast<{
@@ -81840,15 +81935,18 @@ export namespace Prisma {
     NOT?: ChatThreadWhereInput | ChatThreadWhereInput[]
     kind?: EnumChatKindFilter<"ChatThread"> | $Enums.ChatKind
     scope?: StringNullableFilter<"ChatThread"> | string | null
+    orgId?: StringNullableFilter<"ChatThread"> | string | null
     participants?: ChatParticipantListRelationFilter
     messages?: ChatMessageListRelationFilter
     ticketMeta?: XOR<TicketMetaNullableScalarRelationFilter, TicketMetaWhereInput> | null
+    org?: XOR<OrgNullableScalarRelationFilter, OrgWhereInput> | null
   }, "id">
 
   export type ChatThreadOrderByWithAggregationInput = {
     id?: SortOrder
     kind?: SortOrder
     scope?: SortOrderInput | SortOrder
+    orgId?: SortOrderInput | SortOrder
     _count?: ChatThreadCountOrderByAggregateInput
     _max?: ChatThreadMaxOrderByAggregateInput
     _min?: ChatThreadMinOrderByAggregateInput
@@ -81861,6 +81959,7 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"ChatThread"> | string
     kind?: EnumChatKindWithAggregatesFilter<"ChatThread"> | $Enums.ChatKind
     scope?: StringNullableWithAggregatesFilter<"ChatThread"> | string | null
+    orgId?: StringNullableWithAggregatesFilter<"ChatThread"> | string | null
   }
 
   export type ChatParticipantWhereInput = {
@@ -82676,6 +82775,7 @@ export namespace Prisma {
     redeemCodes?: RedeemCodeCreateNestedManyWithoutOrgInput
     merchants?: MerchantCreateNestedManyWithoutOrgInput
     terms?: TermsCreateNestedManyWithoutOrgInput
+    chatThreads?: ChatThreadCreateNestedManyWithoutOrgInput
   }
 
   export type OrgUncheckedCreateInput = {
@@ -82689,6 +82789,7 @@ export namespace Prisma {
     redeemCodes?: RedeemCodeUncheckedCreateNestedManyWithoutOrgInput
     merchants?: MerchantUncheckedCreateNestedManyWithoutOrgInput
     terms?: TermsUncheckedCreateNestedManyWithoutOrgInput
+    chatThreads?: ChatThreadUncheckedCreateNestedManyWithoutOrgInput
   }
 
   export type OrgUpdateInput = {
@@ -82702,6 +82803,7 @@ export namespace Prisma {
     redeemCodes?: RedeemCodeUpdateManyWithoutOrgNestedInput
     merchants?: MerchantUpdateManyWithoutOrgNestedInput
     terms?: TermsUpdateManyWithoutOrgNestedInput
+    chatThreads?: ChatThreadUpdateManyWithoutOrgNestedInput
   }
 
   export type OrgUncheckedUpdateInput = {
@@ -82715,6 +82817,7 @@ export namespace Prisma {
     redeemCodes?: RedeemCodeUncheckedUpdateManyWithoutOrgNestedInput
     merchants?: MerchantUncheckedUpdateManyWithoutOrgNestedInput
     terms?: TermsUncheckedUpdateManyWithoutOrgNestedInput
+    chatThreads?: ChatThreadUncheckedUpdateManyWithoutOrgNestedInput
   }
 
   export type OrgCreateManyInput = {
@@ -85325,12 +85428,14 @@ export namespace Prisma {
     participants?: ChatParticipantCreateNestedManyWithoutThreadInput
     messages?: ChatMessageCreateNestedManyWithoutThreadInput
     ticketMeta?: TicketMetaCreateNestedOneWithoutThreadInput
+    org?: OrgCreateNestedOneWithoutChatThreadsInput
   }
 
   export type ChatThreadUncheckedCreateInput = {
     id?: string
     kind: $Enums.ChatKind
     scope?: string | null
+    orgId?: string | null
     participants?: ChatParticipantUncheckedCreateNestedManyWithoutThreadInput
     messages?: ChatMessageUncheckedCreateNestedManyWithoutThreadInput
     ticketMeta?: TicketMetaUncheckedCreateNestedOneWithoutThreadInput
@@ -85343,12 +85448,14 @@ export namespace Prisma {
     participants?: ChatParticipantUpdateManyWithoutThreadNestedInput
     messages?: ChatMessageUpdateManyWithoutThreadNestedInput
     ticketMeta?: TicketMetaUpdateOneWithoutThreadNestedInput
+    org?: OrgUpdateOneWithoutChatThreadsNestedInput
   }
 
   export type ChatThreadUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     kind?: EnumChatKindFieldUpdateOperationsInput | $Enums.ChatKind
     scope?: NullableStringFieldUpdateOperationsInput | string | null
+    orgId?: NullableStringFieldUpdateOperationsInput | string | null
     participants?: ChatParticipantUncheckedUpdateManyWithoutThreadNestedInput
     messages?: ChatMessageUncheckedUpdateManyWithoutThreadNestedInput
     ticketMeta?: TicketMetaUncheckedUpdateOneWithoutThreadNestedInput
@@ -85358,6 +85465,7 @@ export namespace Prisma {
     id?: string
     kind: $Enums.ChatKind
     scope?: string | null
+    orgId?: string | null
   }
 
   export type ChatThreadUpdateManyMutationInput = {
@@ -85370,6 +85478,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     kind?: EnumChatKindFieldUpdateOperationsInput | $Enums.ChatKind
     scope?: NullableStringFieldUpdateOperationsInput | string | null
+    orgId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ChatParticipantCreateInput = {
@@ -86436,6 +86545,12 @@ export namespace Prisma {
     none?: TermsWhereInput
   }
 
+  export type ChatThreadListRelationFilter = {
+    every?: ChatThreadWhereInput
+    some?: ChatThreadWhereInput
+    none?: ChatThreadWhereInput
+  }
+
   export type ProjectOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -86457,6 +86572,10 @@ export namespace Prisma {
   }
 
   export type TermsOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ChatThreadOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -88286,18 +88405,21 @@ export namespace Prisma {
     id?: SortOrder
     kind?: SortOrder
     scope?: SortOrder
+    orgId?: SortOrder
   }
 
   export type ChatThreadMaxOrderByAggregateInput = {
     id?: SortOrder
     kind?: SortOrder
     scope?: SortOrder
+    orgId?: SortOrder
   }
 
   export type ChatThreadMinOrderByAggregateInput = {
     id?: SortOrder
     kind?: SortOrder
     scope?: SortOrder
+    orgId?: SortOrder
   }
 
   export type EnumChatKindWithAggregatesFilter<$PrismaModel = never> = {
@@ -90022,6 +90144,13 @@ export namespace Prisma {
     connect?: TermsWhereUniqueInput | TermsWhereUniqueInput[]
   }
 
+  export type ChatThreadCreateNestedManyWithoutOrgInput = {
+    create?: XOR<ChatThreadCreateWithoutOrgInput, ChatThreadUncheckedCreateWithoutOrgInput> | ChatThreadCreateWithoutOrgInput[] | ChatThreadUncheckedCreateWithoutOrgInput[]
+    connectOrCreate?: ChatThreadCreateOrConnectWithoutOrgInput | ChatThreadCreateOrConnectWithoutOrgInput[]
+    createMany?: ChatThreadCreateManyOrgInputEnvelope
+    connect?: ChatThreadWhereUniqueInput | ChatThreadWhereUniqueInput[]
+  }
+
   export type ProjectUncheckedCreateNestedManyWithoutOrgInput = {
     create?: XOR<ProjectCreateWithoutOrgInput, ProjectUncheckedCreateWithoutOrgInput> | ProjectCreateWithoutOrgInput[] | ProjectUncheckedCreateWithoutOrgInput[]
     connectOrCreate?: ProjectCreateOrConnectWithoutOrgInput | ProjectCreateOrConnectWithoutOrgInput[]
@@ -90069,6 +90198,13 @@ export namespace Prisma {
     connectOrCreate?: TermsCreateOrConnectWithoutOrgInput | TermsCreateOrConnectWithoutOrgInput[]
     createMany?: TermsCreateManyOrgInputEnvelope
     connect?: TermsWhereUniqueInput | TermsWhereUniqueInput[]
+  }
+
+  export type ChatThreadUncheckedCreateNestedManyWithoutOrgInput = {
+    create?: XOR<ChatThreadCreateWithoutOrgInput, ChatThreadUncheckedCreateWithoutOrgInput> | ChatThreadCreateWithoutOrgInput[] | ChatThreadUncheckedCreateWithoutOrgInput[]
+    connectOrCreate?: ChatThreadCreateOrConnectWithoutOrgInput | ChatThreadCreateOrConnectWithoutOrgInput[]
+    createMany?: ChatThreadCreateManyOrgInputEnvelope
+    connect?: ChatThreadWhereUniqueInput | ChatThreadWhereUniqueInput[]
   }
 
   export type ProjectUpdateManyWithoutOrgNestedInput = {
@@ -90169,6 +90305,20 @@ export namespace Prisma {
     deleteMany?: TermsScalarWhereInput | TermsScalarWhereInput[]
   }
 
+  export type ChatThreadUpdateManyWithoutOrgNestedInput = {
+    create?: XOR<ChatThreadCreateWithoutOrgInput, ChatThreadUncheckedCreateWithoutOrgInput> | ChatThreadCreateWithoutOrgInput[] | ChatThreadUncheckedCreateWithoutOrgInput[]
+    connectOrCreate?: ChatThreadCreateOrConnectWithoutOrgInput | ChatThreadCreateOrConnectWithoutOrgInput[]
+    upsert?: ChatThreadUpsertWithWhereUniqueWithoutOrgInput | ChatThreadUpsertWithWhereUniqueWithoutOrgInput[]
+    createMany?: ChatThreadCreateManyOrgInputEnvelope
+    set?: ChatThreadWhereUniqueInput | ChatThreadWhereUniqueInput[]
+    disconnect?: ChatThreadWhereUniqueInput | ChatThreadWhereUniqueInput[]
+    delete?: ChatThreadWhereUniqueInput | ChatThreadWhereUniqueInput[]
+    connect?: ChatThreadWhereUniqueInput | ChatThreadWhereUniqueInput[]
+    update?: ChatThreadUpdateWithWhereUniqueWithoutOrgInput | ChatThreadUpdateWithWhereUniqueWithoutOrgInput[]
+    updateMany?: ChatThreadUpdateManyWithWhereWithoutOrgInput | ChatThreadUpdateManyWithWhereWithoutOrgInput[]
+    deleteMany?: ChatThreadScalarWhereInput | ChatThreadScalarWhereInput[]
+  }
+
   export type ProjectUncheckedUpdateManyWithoutOrgNestedInput = {
     create?: XOR<ProjectCreateWithoutOrgInput, ProjectUncheckedCreateWithoutOrgInput> | ProjectCreateWithoutOrgInput[] | ProjectUncheckedCreateWithoutOrgInput[]
     connectOrCreate?: ProjectCreateOrConnectWithoutOrgInput | ProjectCreateOrConnectWithoutOrgInput[]
@@ -90265,6 +90415,20 @@ export namespace Prisma {
     update?: TermsUpdateWithWhereUniqueWithoutOrgInput | TermsUpdateWithWhereUniqueWithoutOrgInput[]
     updateMany?: TermsUpdateManyWithWhereWithoutOrgInput | TermsUpdateManyWithWhereWithoutOrgInput[]
     deleteMany?: TermsScalarWhereInput | TermsScalarWhereInput[]
+  }
+
+  export type ChatThreadUncheckedUpdateManyWithoutOrgNestedInput = {
+    create?: XOR<ChatThreadCreateWithoutOrgInput, ChatThreadUncheckedCreateWithoutOrgInput> | ChatThreadCreateWithoutOrgInput[] | ChatThreadUncheckedCreateWithoutOrgInput[]
+    connectOrCreate?: ChatThreadCreateOrConnectWithoutOrgInput | ChatThreadCreateOrConnectWithoutOrgInput[]
+    upsert?: ChatThreadUpsertWithWhereUniqueWithoutOrgInput | ChatThreadUpsertWithWhereUniqueWithoutOrgInput[]
+    createMany?: ChatThreadCreateManyOrgInputEnvelope
+    set?: ChatThreadWhereUniqueInput | ChatThreadWhereUniqueInput[]
+    disconnect?: ChatThreadWhereUniqueInput | ChatThreadWhereUniqueInput[]
+    delete?: ChatThreadWhereUniqueInput | ChatThreadWhereUniqueInput[]
+    connect?: ChatThreadWhereUniqueInput | ChatThreadWhereUniqueInput[]
+    update?: ChatThreadUpdateWithWhereUniqueWithoutOrgInput | ChatThreadUpdateWithWhereUniqueWithoutOrgInput[]
+    updateMany?: ChatThreadUpdateManyWithWhereWithoutOrgInput | ChatThreadUpdateManyWithWhereWithoutOrgInput[]
+    deleteMany?: ChatThreadScalarWhereInput | ChatThreadScalarWhereInput[]
   }
 
   export type OrgCreateNestedOneWithoutProjectsInput = {
@@ -92375,6 +92539,12 @@ export namespace Prisma {
     connect?: TicketMetaWhereUniqueInput
   }
 
+  export type OrgCreateNestedOneWithoutChatThreadsInput = {
+    create?: XOR<OrgCreateWithoutChatThreadsInput, OrgUncheckedCreateWithoutChatThreadsInput>
+    connectOrCreate?: OrgCreateOrConnectWithoutChatThreadsInput
+    connect?: OrgWhereUniqueInput
+  }
+
   export type ChatParticipantUncheckedCreateNestedManyWithoutThreadInput = {
     create?: XOR<ChatParticipantCreateWithoutThreadInput, ChatParticipantUncheckedCreateWithoutThreadInput> | ChatParticipantCreateWithoutThreadInput[] | ChatParticipantUncheckedCreateWithoutThreadInput[]
     connectOrCreate?: ChatParticipantCreateOrConnectWithoutThreadInput | ChatParticipantCreateOrConnectWithoutThreadInput[]
@@ -92435,6 +92605,16 @@ export namespace Prisma {
     delete?: TicketMetaWhereInput | boolean
     connect?: TicketMetaWhereUniqueInput
     update?: XOR<XOR<TicketMetaUpdateToOneWithWhereWithoutThreadInput, TicketMetaUpdateWithoutThreadInput>, TicketMetaUncheckedUpdateWithoutThreadInput>
+  }
+
+  export type OrgUpdateOneWithoutChatThreadsNestedInput = {
+    create?: XOR<OrgCreateWithoutChatThreadsInput, OrgUncheckedCreateWithoutChatThreadsInput>
+    connectOrCreate?: OrgCreateOrConnectWithoutChatThreadsInput
+    upsert?: OrgUpsertWithoutChatThreadsInput
+    disconnect?: OrgWhereInput | boolean
+    delete?: OrgWhereInput | boolean
+    connect?: OrgWhereUniqueInput
+    update?: XOR<XOR<OrgUpdateToOneWithWhereWithoutChatThreadsInput, OrgUpdateWithoutChatThreadsInput>, OrgUncheckedUpdateWithoutChatThreadsInput>
   }
 
   export type ChatParticipantUncheckedUpdateManyWithoutThreadNestedInput = {
@@ -95228,6 +95408,34 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type ChatThreadCreateWithoutOrgInput = {
+    id?: string
+    kind: $Enums.ChatKind
+    scope?: string | null
+    participants?: ChatParticipantCreateNestedManyWithoutThreadInput
+    messages?: ChatMessageCreateNestedManyWithoutThreadInput
+    ticketMeta?: TicketMetaCreateNestedOneWithoutThreadInput
+  }
+
+  export type ChatThreadUncheckedCreateWithoutOrgInput = {
+    id?: string
+    kind: $Enums.ChatKind
+    scope?: string | null
+    participants?: ChatParticipantUncheckedCreateNestedManyWithoutThreadInput
+    messages?: ChatMessageUncheckedCreateNestedManyWithoutThreadInput
+    ticketMeta?: TicketMetaUncheckedCreateNestedOneWithoutThreadInput
+  }
+
+  export type ChatThreadCreateOrConnectWithoutOrgInput = {
+    where: ChatThreadWhereUniqueInput
+    create: XOR<ChatThreadCreateWithoutOrgInput, ChatThreadUncheckedCreateWithoutOrgInput>
+  }
+
+  export type ChatThreadCreateManyOrgInputEnvelope = {
+    data: ChatThreadCreateManyOrgInput | ChatThreadCreateManyOrgInput[]
+    skipDuplicates?: boolean
+  }
+
   export type ProjectUpsertWithWhereUniqueWithoutOrgInput = {
     where: ProjectWhereUniqueInput
     update: XOR<ProjectUpdateWithoutOrgInput, ProjectUncheckedUpdateWithoutOrgInput>
@@ -95403,6 +95611,32 @@ export namespace Prisma {
     orgId?: StringNullableFilter<"Terms"> | string | null
   }
 
+  export type ChatThreadUpsertWithWhereUniqueWithoutOrgInput = {
+    where: ChatThreadWhereUniqueInput
+    update: XOR<ChatThreadUpdateWithoutOrgInput, ChatThreadUncheckedUpdateWithoutOrgInput>
+    create: XOR<ChatThreadCreateWithoutOrgInput, ChatThreadUncheckedCreateWithoutOrgInput>
+  }
+
+  export type ChatThreadUpdateWithWhereUniqueWithoutOrgInput = {
+    where: ChatThreadWhereUniqueInput
+    data: XOR<ChatThreadUpdateWithoutOrgInput, ChatThreadUncheckedUpdateWithoutOrgInput>
+  }
+
+  export type ChatThreadUpdateManyWithWhereWithoutOrgInput = {
+    where: ChatThreadScalarWhereInput
+    data: XOR<ChatThreadUpdateManyMutationInput, ChatThreadUncheckedUpdateManyWithoutOrgInput>
+  }
+
+  export type ChatThreadScalarWhereInput = {
+    AND?: ChatThreadScalarWhereInput | ChatThreadScalarWhereInput[]
+    OR?: ChatThreadScalarWhereInput[]
+    NOT?: ChatThreadScalarWhereInput | ChatThreadScalarWhereInput[]
+    id?: StringFilter<"ChatThread"> | string
+    kind?: EnumChatKindFilter<"ChatThread"> | $Enums.ChatKind
+    scope?: StringNullableFilter<"ChatThread"> | string | null
+    orgId?: StringNullableFilter<"ChatThread"> | string | null
+  }
+
   export type OrgCreateWithoutProjectsInput = {
     id?: string
     name: string
@@ -95413,6 +95647,7 @@ export namespace Prisma {
     redeemCodes?: RedeemCodeCreateNestedManyWithoutOrgInput
     merchants?: MerchantCreateNestedManyWithoutOrgInput
     terms?: TermsCreateNestedManyWithoutOrgInput
+    chatThreads?: ChatThreadCreateNestedManyWithoutOrgInput
   }
 
   export type OrgUncheckedCreateWithoutProjectsInput = {
@@ -95425,6 +95660,7 @@ export namespace Prisma {
     redeemCodes?: RedeemCodeUncheckedCreateNestedManyWithoutOrgInput
     merchants?: MerchantUncheckedCreateNestedManyWithoutOrgInput
     terms?: TermsUncheckedCreateNestedManyWithoutOrgInput
+    chatThreads?: ChatThreadUncheckedCreateNestedManyWithoutOrgInput
   }
 
   export type OrgCreateOrConnectWithoutProjectsInput = {
@@ -95499,6 +95735,7 @@ export namespace Prisma {
     redeemCodes?: RedeemCodeUpdateManyWithoutOrgNestedInput
     merchants?: MerchantUpdateManyWithoutOrgNestedInput
     terms?: TermsUpdateManyWithoutOrgNestedInput
+    chatThreads?: ChatThreadUpdateManyWithoutOrgNestedInput
   }
 
   export type OrgUncheckedUpdateWithoutProjectsInput = {
@@ -95511,6 +95748,7 @@ export namespace Prisma {
     redeemCodes?: RedeemCodeUncheckedUpdateManyWithoutOrgNestedInput
     merchants?: MerchantUncheckedUpdateManyWithoutOrgNestedInput
     terms?: TermsUncheckedUpdateManyWithoutOrgNestedInput
+    chatThreads?: ChatThreadUncheckedUpdateManyWithoutOrgNestedInput
   }
 
   export type AppServiceUpsertWithWhereUniqueWithoutProjectInput = {
@@ -95645,6 +95883,7 @@ export namespace Prisma {
     redeemCodes?: RedeemCodeCreateNestedManyWithoutOrgInput
     merchants?: MerchantCreateNestedManyWithoutOrgInput
     terms?: TermsCreateNestedManyWithoutOrgInput
+    chatThreads?: ChatThreadCreateNestedManyWithoutOrgInput
   }
 
   export type OrgUncheckedCreateWithoutAppsInput = {
@@ -95657,6 +95896,7 @@ export namespace Prisma {
     redeemCodes?: RedeemCodeUncheckedCreateNestedManyWithoutOrgInput
     merchants?: MerchantUncheckedCreateNestedManyWithoutOrgInput
     terms?: TermsUncheckedCreateNestedManyWithoutOrgInput
+    chatThreads?: ChatThreadUncheckedCreateNestedManyWithoutOrgInput
   }
 
   export type OrgCreateOrConnectWithoutAppsInput = {
@@ -95883,6 +96123,7 @@ export namespace Prisma {
     redeemCodes?: RedeemCodeUpdateManyWithoutOrgNestedInput
     merchants?: MerchantUpdateManyWithoutOrgNestedInput
     terms?: TermsUpdateManyWithoutOrgNestedInput
+    chatThreads?: ChatThreadUpdateManyWithoutOrgNestedInput
   }
 
   export type OrgUncheckedUpdateWithoutAppsInput = {
@@ -95895,6 +96136,7 @@ export namespace Prisma {
     redeemCodes?: RedeemCodeUncheckedUpdateManyWithoutOrgNestedInput
     merchants?: MerchantUncheckedUpdateManyWithoutOrgNestedInput
     terms?: TermsUncheckedUpdateManyWithoutOrgNestedInput
+    chatThreads?: ChatThreadUncheckedUpdateManyWithoutOrgNestedInput
   }
 
   export type AccountAppUpsertWithWhereUniqueWithoutAppInput = {
@@ -96805,6 +97047,7 @@ export namespace Prisma {
     redeemCodes?: RedeemCodeCreateNestedManyWithoutOrgInput
     merchants?: MerchantCreateNestedManyWithoutOrgInput
     terms?: TermsCreateNestedManyWithoutOrgInput
+    chatThreads?: ChatThreadCreateNestedManyWithoutOrgInput
   }
 
   export type OrgUncheckedCreateWithoutMembersInput = {
@@ -96817,6 +97060,7 @@ export namespace Prisma {
     redeemCodes?: RedeemCodeUncheckedCreateNestedManyWithoutOrgInput
     merchants?: MerchantUncheckedCreateNestedManyWithoutOrgInput
     terms?: TermsUncheckedCreateNestedManyWithoutOrgInput
+    chatThreads?: ChatThreadUncheckedCreateNestedManyWithoutOrgInput
   }
 
   export type OrgCreateOrConnectWithoutMembersInput = {
@@ -96988,6 +97232,7 @@ export namespace Prisma {
     redeemCodes?: RedeemCodeUpdateManyWithoutOrgNestedInput
     merchants?: MerchantUpdateManyWithoutOrgNestedInput
     terms?: TermsUpdateManyWithoutOrgNestedInput
+    chatThreads?: ChatThreadUpdateManyWithoutOrgNestedInput
   }
 
   export type OrgUncheckedUpdateWithoutMembersInput = {
@@ -97000,6 +97245,7 @@ export namespace Prisma {
     redeemCodes?: RedeemCodeUncheckedUpdateManyWithoutOrgNestedInput
     merchants?: MerchantUncheckedUpdateManyWithoutOrgNestedInput
     terms?: TermsUncheckedUpdateManyWithoutOrgNestedInput
+    chatThreads?: ChatThreadUncheckedUpdateManyWithoutOrgNestedInput
   }
 
   export type ProjectUpsertWithoutMembersInput = {
@@ -97080,6 +97326,7 @@ export namespace Prisma {
     redeemCodes?: RedeemCodeCreateNestedManyWithoutOrgInput
     merchants?: MerchantCreateNestedManyWithoutOrgInput
     terms?: TermsCreateNestedManyWithoutOrgInput
+    chatThreads?: ChatThreadCreateNestedManyWithoutOrgInput
   }
 
   export type OrgUncheckedCreateWithoutRolesInput = {
@@ -97092,6 +97339,7 @@ export namespace Prisma {
     redeemCodes?: RedeemCodeUncheckedCreateNestedManyWithoutOrgInput
     merchants?: MerchantUncheckedCreateNestedManyWithoutOrgInput
     terms?: TermsUncheckedCreateNestedManyWithoutOrgInput
+    chatThreads?: ChatThreadUncheckedCreateNestedManyWithoutOrgInput
   }
 
   export type OrgCreateOrConnectWithoutRolesInput = {
@@ -97160,6 +97408,7 @@ export namespace Prisma {
     redeemCodes?: RedeemCodeUpdateManyWithoutOrgNestedInput
     merchants?: MerchantUpdateManyWithoutOrgNestedInput
     terms?: TermsUpdateManyWithoutOrgNestedInput
+    chatThreads?: ChatThreadUpdateManyWithoutOrgNestedInput
   }
 
   export type OrgUncheckedUpdateWithoutRolesInput = {
@@ -97172,6 +97421,7 @@ export namespace Prisma {
     redeemCodes?: RedeemCodeUncheckedUpdateManyWithoutOrgNestedInput
     merchants?: MerchantUncheckedUpdateManyWithoutOrgNestedInput
     terms?: TermsUncheckedUpdateManyWithoutOrgNestedInput
+    chatThreads?: ChatThreadUncheckedUpdateManyWithoutOrgNestedInput
   }
 
   export type PermissionUpsertWithWhereUniqueWithoutRoleInput = {
@@ -98436,6 +98686,7 @@ export namespace Prisma {
     roles?: RoleCreateNestedManyWithoutOrgInput
     redeemCodes?: RedeemCodeCreateNestedManyWithoutOrgInput
     terms?: TermsCreateNestedManyWithoutOrgInput
+    chatThreads?: ChatThreadCreateNestedManyWithoutOrgInput
   }
 
   export type OrgUncheckedCreateWithoutMerchantsInput = {
@@ -98448,6 +98699,7 @@ export namespace Prisma {
     roles?: RoleUncheckedCreateNestedManyWithoutOrgInput
     redeemCodes?: RedeemCodeUncheckedCreateNestedManyWithoutOrgInput
     terms?: TermsUncheckedCreateNestedManyWithoutOrgInput
+    chatThreads?: ChatThreadUncheckedCreateNestedManyWithoutOrgInput
   }
 
   export type OrgCreateOrConnectWithoutMerchantsInput = {
@@ -98501,6 +98753,7 @@ export namespace Prisma {
     roles?: RoleUpdateManyWithoutOrgNestedInput
     redeemCodes?: RedeemCodeUpdateManyWithoutOrgNestedInput
     terms?: TermsUpdateManyWithoutOrgNestedInput
+    chatThreads?: ChatThreadUpdateManyWithoutOrgNestedInput
   }
 
   export type OrgUncheckedUpdateWithoutMerchantsInput = {
@@ -98513,6 +98766,7 @@ export namespace Prisma {
     roles?: RoleUncheckedUpdateManyWithoutOrgNestedInput
     redeemCodes?: RedeemCodeUncheckedUpdateManyWithoutOrgNestedInput
     terms?: TermsUncheckedUpdateManyWithoutOrgNestedInput
+    chatThreads?: ChatThreadUncheckedUpdateManyWithoutOrgNestedInput
   }
 
   export type MerchantCreateWithoutPaymentMethodsInput = {
@@ -99319,6 +99573,7 @@ export namespace Prisma {
     roles?: RoleCreateNestedManyWithoutOrgInput
     merchants?: MerchantCreateNestedManyWithoutOrgInput
     terms?: TermsCreateNestedManyWithoutOrgInput
+    chatThreads?: ChatThreadCreateNestedManyWithoutOrgInput
   }
 
   export type OrgUncheckedCreateWithoutRedeemCodesInput = {
@@ -99331,6 +99586,7 @@ export namespace Prisma {
     roles?: RoleUncheckedCreateNestedManyWithoutOrgInput
     merchants?: MerchantUncheckedCreateNestedManyWithoutOrgInput
     terms?: TermsUncheckedCreateNestedManyWithoutOrgInput
+    chatThreads?: ChatThreadUncheckedCreateNestedManyWithoutOrgInput
   }
 
   export type OrgCreateOrConnectWithoutRedeemCodesInput = {
@@ -99375,6 +99631,7 @@ export namespace Prisma {
     roles?: RoleUpdateManyWithoutOrgNestedInput
     merchants?: MerchantUpdateManyWithoutOrgNestedInput
     terms?: TermsUpdateManyWithoutOrgNestedInput
+    chatThreads?: ChatThreadUpdateManyWithoutOrgNestedInput
   }
 
   export type OrgUncheckedUpdateWithoutRedeemCodesInput = {
@@ -99387,6 +99644,7 @@ export namespace Prisma {
     roles?: RoleUncheckedUpdateManyWithoutOrgNestedInput
     merchants?: MerchantUncheckedUpdateManyWithoutOrgNestedInput
     terms?: TermsUncheckedUpdateManyWithoutOrgNestedInput
+    chatThreads?: ChatThreadUncheckedUpdateManyWithoutOrgNestedInput
   }
 
   export type RedeemCodeCreateWithoutGrantsInput = {
@@ -102046,6 +102304,7 @@ export namespace Prisma {
     roles?: RoleCreateNestedManyWithoutOrgInput
     redeemCodes?: RedeemCodeCreateNestedManyWithoutOrgInput
     merchants?: MerchantCreateNestedManyWithoutOrgInput
+    chatThreads?: ChatThreadCreateNestedManyWithoutOrgInput
   }
 
   export type OrgUncheckedCreateWithoutTermsInput = {
@@ -102058,6 +102317,7 @@ export namespace Prisma {
     roles?: RoleUncheckedCreateNestedManyWithoutOrgInput
     redeemCodes?: RedeemCodeUncheckedCreateNestedManyWithoutOrgInput
     merchants?: MerchantUncheckedCreateNestedManyWithoutOrgInput
+    chatThreads?: ChatThreadUncheckedCreateNestedManyWithoutOrgInput
   }
 
   export type OrgCreateOrConnectWithoutTermsInput = {
@@ -102102,6 +102362,7 @@ export namespace Prisma {
     roles?: RoleUpdateManyWithoutOrgNestedInput
     redeemCodes?: RedeemCodeUpdateManyWithoutOrgNestedInput
     merchants?: MerchantUpdateManyWithoutOrgNestedInput
+    chatThreads?: ChatThreadUpdateManyWithoutOrgNestedInput
   }
 
   export type OrgUncheckedUpdateWithoutTermsInput = {
@@ -102114,6 +102375,7 @@ export namespace Prisma {
     roles?: RoleUncheckedUpdateManyWithoutOrgNestedInput
     redeemCodes?: RedeemCodeUncheckedUpdateManyWithoutOrgNestedInput
     merchants?: MerchantUncheckedUpdateManyWithoutOrgNestedInput
+    chatThreads?: ChatThreadUncheckedUpdateManyWithoutOrgNestedInput
   }
 
   export type AccountCreateWithoutConsentsInput = {
@@ -102585,6 +102847,37 @@ export namespace Prisma {
     create: XOR<TicketMetaCreateWithoutThreadInput, TicketMetaUncheckedCreateWithoutThreadInput>
   }
 
+  export type OrgCreateWithoutChatThreadsInput = {
+    id?: string
+    name: string
+    domain?: string | null
+    projects?: ProjectCreateNestedManyWithoutOrgInput
+    apps?: AppCreateNestedManyWithoutOwnerOrgInput
+    members?: MemberCreateNestedManyWithoutOrgInput
+    roles?: RoleCreateNestedManyWithoutOrgInput
+    redeemCodes?: RedeemCodeCreateNestedManyWithoutOrgInput
+    merchants?: MerchantCreateNestedManyWithoutOrgInput
+    terms?: TermsCreateNestedManyWithoutOrgInput
+  }
+
+  export type OrgUncheckedCreateWithoutChatThreadsInput = {
+    id?: string
+    name: string
+    domain?: string | null
+    projects?: ProjectUncheckedCreateNestedManyWithoutOrgInput
+    apps?: AppUncheckedCreateNestedManyWithoutOwnerOrgInput
+    members?: MemberUncheckedCreateNestedManyWithoutOrgInput
+    roles?: RoleUncheckedCreateNestedManyWithoutOrgInput
+    redeemCodes?: RedeemCodeUncheckedCreateNestedManyWithoutOrgInput
+    merchants?: MerchantUncheckedCreateNestedManyWithoutOrgInput
+    terms?: TermsUncheckedCreateNestedManyWithoutOrgInput
+  }
+
+  export type OrgCreateOrConnectWithoutChatThreadsInput = {
+    where: OrgWhereUniqueInput
+    create: XOR<OrgCreateWithoutChatThreadsInput, OrgUncheckedCreateWithoutChatThreadsInput>
+  }
+
   export type ChatParticipantUpsertWithWhereUniqueWithoutThreadInput = {
     where: ChatParticipantWhereUniqueInput
     update: XOR<ChatParticipantUpdateWithoutThreadInput, ChatParticipantUncheckedUpdateWithoutThreadInput>
@@ -102638,18 +102931,57 @@ export namespace Prisma {
     assigneeId?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
+  export type OrgUpsertWithoutChatThreadsInput = {
+    update: XOR<OrgUpdateWithoutChatThreadsInput, OrgUncheckedUpdateWithoutChatThreadsInput>
+    create: XOR<OrgCreateWithoutChatThreadsInput, OrgUncheckedCreateWithoutChatThreadsInput>
+    where?: OrgWhereInput
+  }
+
+  export type OrgUpdateToOneWithWhereWithoutChatThreadsInput = {
+    where?: OrgWhereInput
+    data: XOR<OrgUpdateWithoutChatThreadsInput, OrgUncheckedUpdateWithoutChatThreadsInput>
+  }
+
+  export type OrgUpdateWithoutChatThreadsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    domain?: NullableStringFieldUpdateOperationsInput | string | null
+    projects?: ProjectUpdateManyWithoutOrgNestedInput
+    apps?: AppUpdateManyWithoutOwnerOrgNestedInput
+    members?: MemberUpdateManyWithoutOrgNestedInput
+    roles?: RoleUpdateManyWithoutOrgNestedInput
+    redeemCodes?: RedeemCodeUpdateManyWithoutOrgNestedInput
+    merchants?: MerchantUpdateManyWithoutOrgNestedInput
+    terms?: TermsUpdateManyWithoutOrgNestedInput
+  }
+
+  export type OrgUncheckedUpdateWithoutChatThreadsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    domain?: NullableStringFieldUpdateOperationsInput | string | null
+    projects?: ProjectUncheckedUpdateManyWithoutOrgNestedInput
+    apps?: AppUncheckedUpdateManyWithoutOwnerOrgNestedInput
+    members?: MemberUncheckedUpdateManyWithoutOrgNestedInput
+    roles?: RoleUncheckedUpdateManyWithoutOrgNestedInput
+    redeemCodes?: RedeemCodeUncheckedUpdateManyWithoutOrgNestedInput
+    merchants?: MerchantUncheckedUpdateManyWithoutOrgNestedInput
+    terms?: TermsUncheckedUpdateManyWithoutOrgNestedInput
+  }
+
   export type ChatThreadCreateWithoutParticipantsInput = {
     id?: string
     kind: $Enums.ChatKind
     scope?: string | null
     messages?: ChatMessageCreateNestedManyWithoutThreadInput
     ticketMeta?: TicketMetaCreateNestedOneWithoutThreadInput
+    org?: OrgCreateNestedOneWithoutChatThreadsInput
   }
 
   export type ChatThreadUncheckedCreateWithoutParticipantsInput = {
     id?: string
     kind: $Enums.ChatKind
     scope?: string | null
+    orgId?: string | null
     messages?: ChatMessageUncheckedCreateNestedManyWithoutThreadInput
     ticketMeta?: TicketMetaUncheckedCreateNestedOneWithoutThreadInput
   }
@@ -102763,12 +103095,14 @@ export namespace Prisma {
     scope?: NullableStringFieldUpdateOperationsInput | string | null
     messages?: ChatMessageUpdateManyWithoutThreadNestedInput
     ticketMeta?: TicketMetaUpdateOneWithoutThreadNestedInput
+    org?: OrgUpdateOneWithoutChatThreadsNestedInput
   }
 
   export type ChatThreadUncheckedUpdateWithoutParticipantsInput = {
     id?: StringFieldUpdateOperationsInput | string
     kind?: EnumChatKindFieldUpdateOperationsInput | $Enums.ChatKind
     scope?: NullableStringFieldUpdateOperationsInput | string | null
+    orgId?: NullableStringFieldUpdateOperationsInput | string | null
     messages?: ChatMessageUncheckedUpdateManyWithoutThreadNestedInput
     ticketMeta?: TicketMetaUncheckedUpdateOneWithoutThreadNestedInput
   }
@@ -102872,12 +103206,14 @@ export namespace Prisma {
     scope?: string | null
     participants?: ChatParticipantCreateNestedManyWithoutThreadInput
     ticketMeta?: TicketMetaCreateNestedOneWithoutThreadInput
+    org?: OrgCreateNestedOneWithoutChatThreadsInput
   }
 
   export type ChatThreadUncheckedCreateWithoutMessagesInput = {
     id?: string
     kind: $Enums.ChatKind
     scope?: string | null
+    orgId?: string | null
     participants?: ChatParticipantUncheckedCreateNestedManyWithoutThreadInput
     ticketMeta?: TicketMetaUncheckedCreateNestedOneWithoutThreadInput
   }
@@ -102991,12 +103327,14 @@ export namespace Prisma {
     scope?: NullableStringFieldUpdateOperationsInput | string | null
     participants?: ChatParticipantUpdateManyWithoutThreadNestedInput
     ticketMeta?: TicketMetaUpdateOneWithoutThreadNestedInput
+    org?: OrgUpdateOneWithoutChatThreadsNestedInput
   }
 
   export type ChatThreadUncheckedUpdateWithoutMessagesInput = {
     id?: StringFieldUpdateOperationsInput | string
     kind?: EnumChatKindFieldUpdateOperationsInput | $Enums.ChatKind
     scope?: NullableStringFieldUpdateOperationsInput | string | null
+    orgId?: NullableStringFieldUpdateOperationsInput | string | null
     participants?: ChatParticipantUncheckedUpdateManyWithoutThreadNestedInput
     ticketMeta?: TicketMetaUncheckedUpdateOneWithoutThreadNestedInput
   }
@@ -103100,12 +103438,14 @@ export namespace Prisma {
     scope?: string | null
     participants?: ChatParticipantCreateNestedManyWithoutThreadInput
     messages?: ChatMessageCreateNestedManyWithoutThreadInput
+    org?: OrgCreateNestedOneWithoutChatThreadsInput
   }
 
   export type ChatThreadUncheckedCreateWithoutTicketMetaInput = {
     id?: string
     kind: $Enums.ChatKind
     scope?: string | null
+    orgId?: string | null
     participants?: ChatParticipantUncheckedCreateNestedManyWithoutThreadInput
     messages?: ChatMessageUncheckedCreateNestedManyWithoutThreadInput
   }
@@ -103219,12 +103559,14 @@ export namespace Prisma {
     scope?: NullableStringFieldUpdateOperationsInput | string | null
     participants?: ChatParticipantUpdateManyWithoutThreadNestedInput
     messages?: ChatMessageUpdateManyWithoutThreadNestedInput
+    org?: OrgUpdateOneWithoutChatThreadsNestedInput
   }
 
   export type ChatThreadUncheckedUpdateWithoutTicketMetaInput = {
     id?: StringFieldUpdateOperationsInput | string
     kind?: EnumChatKindFieldUpdateOperationsInput | $Enums.ChatKind
     scope?: NullableStringFieldUpdateOperationsInput | string | null
+    orgId?: NullableStringFieldUpdateOperationsInput | string | null
     participants?: ChatParticipantUncheckedUpdateManyWithoutThreadNestedInput
     messages?: ChatMessageUncheckedUpdateManyWithoutThreadNestedInput
   }
@@ -105738,6 +106080,12 @@ export namespace Prisma {
     active?: boolean
   }
 
+  export type ChatThreadCreateManyOrgInput = {
+    id?: string
+    kind: $Enums.ChatKind
+    scope?: string | null
+  }
+
   export type ProjectUpdateWithoutOrgInput = {
     id?: StringFieldUpdateOperationsInput | string
     services?: AppServiceUpdateManyWithoutProjectNestedInput
@@ -105906,6 +106254,30 @@ export namespace Prisma {
     content?: StringFieldUpdateOperationsInput | string
     effectiveDate?: DateTimeFieldUpdateOperationsInput | Date | string
     active?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type ChatThreadUpdateWithoutOrgInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    kind?: EnumChatKindFieldUpdateOperationsInput | $Enums.ChatKind
+    scope?: NullableStringFieldUpdateOperationsInput | string | null
+    participants?: ChatParticipantUpdateManyWithoutThreadNestedInput
+    messages?: ChatMessageUpdateManyWithoutThreadNestedInput
+    ticketMeta?: TicketMetaUpdateOneWithoutThreadNestedInput
+  }
+
+  export type ChatThreadUncheckedUpdateWithoutOrgInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    kind?: EnumChatKindFieldUpdateOperationsInput | $Enums.ChatKind
+    scope?: NullableStringFieldUpdateOperationsInput | string | null
+    participants?: ChatParticipantUncheckedUpdateManyWithoutThreadNestedInput
+    messages?: ChatMessageUncheckedUpdateManyWithoutThreadNestedInput
+    ticketMeta?: TicketMetaUncheckedUpdateOneWithoutThreadNestedInput
+  }
+
+  export type ChatThreadUncheckedUpdateManyWithoutOrgInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    kind?: EnumChatKindFieldUpdateOperationsInput | $Enums.ChatKind
+    scope?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type AppServiceCreateManyProjectInput = {

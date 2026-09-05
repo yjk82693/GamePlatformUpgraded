@@ -501,7 +501,8 @@ exports.Prisma.DeadLetterScalarFieldEnum = {
 exports.Prisma.ChatThreadScalarFieldEnum = {
   id: 'id',
   kind: 'kind',
-  scope: 'scope'
+  scope: 'scope',
+  orgId: 'orgId'
 };
 
 exports.Prisma.ChatParticipantScalarFieldEnum = {
