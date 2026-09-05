@@ -1,9 +1,13 @@
 import { prisma, sendMessage } from "@game-platform/commons";
 
-export async function createTicket(playerId: string, subject: string, body: string) {
+export async function createTicket(playerId: string, appId: string, subject: string, body: string) {
+  const app = await prisma.app.findUnique({ where: { id: appId } });
+  if (!app) throw new Error("Game not found");
+
   const thread = await prisma.chatThread.create({
     data: {
       kind: "SUPPORT",
+      orgId: app.ownerOrgId,
       participants: { create: { accountId: playerId } },
       ticketMeta: { create: { status: "OPEN" } },
     },
@@ -18,7 +22,7 @@ export async function listTickets(playerId: string) {
       kind: "SUPPORT",
       participants: { some: { accountId: playerId } },
     },
-    include: { ticketMeta: true },
+    include: { ticketMeta: true, org: true },
   });
 }
 
@@ -30,7 +34,7 @@ export async function viewTicket(playerId: string, threadId: string) {
 
   const thread = await prisma.chatThread.findUnique({
     where: { id: threadId },
-    include: { messages: true, ticketMeta: true },
+    include: { messages: true, ticketMeta: true, org: true },
   });
   if (!thread) throw new Error("Ticket not found");
   return thread;
