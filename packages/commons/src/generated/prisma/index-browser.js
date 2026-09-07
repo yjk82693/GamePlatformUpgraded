@@ -243,6 +243,7 @@ exports.Prisma.ProductScalarFieldEnum = {
   id: 'id',
   appId: 'appId',
   name: 'name',
+  kind: 'kind',
   enabled: 'enabled',
   priceCents: 'priceCents',
   priceCoins: 'priceCoins',
@@ -690,6 +691,12 @@ exports.Target = exports.$Enums.Target = {
   AUTH_IDP: 'AUTH_IDP',
   AUTH_API: 'AUTH_API',
   WEBSHOP_SETTING: 'WEBSHOP_SETTING'
+};
+
+exports.ProductKind = exports.$Enums.ProductKind = {
+  GAME: 'GAME',
+  DLC: 'DLC',
+  CONSUMABLE: 'CONSUMABLE'
 };
 
 exports.TxnState = exports.$Enums.TxnState = {

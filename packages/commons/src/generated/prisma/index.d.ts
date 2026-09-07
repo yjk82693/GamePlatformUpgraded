@@ -529,6 +529,15 @@ export const AuthProvider: {
 
 export type AuthProvider = (typeof AuthProvider)[keyof typeof AuthProvider]
 
+
+export const ProductKind: {
+  GAME: 'GAME',
+  DLC: 'DLC',
+  CONSUMABLE: 'CONSUMABLE'
+};
+
+export type ProductKind = (typeof ProductKind)[keyof typeof ProductKind]
+
 }
 
 export type AccountStatus = $Enums.AccountStatus
@@ -602,6 +611,10 @@ export const RollbackStatus: typeof $Enums.RollbackStatus
 export type AuthProvider = $Enums.AuthProvider
 
 export const AuthProvider: typeof $Enums.AuthProvider
+
+export type ProductKind = $Enums.ProductKind
+
+export const ProductKind: typeof $Enums.ProductKind
 
 /**
  * ##  Prisma Client ʲˢ
@@ -27423,6 +27436,7 @@ export namespace Prisma {
     id: string | null
     appId: string | null
     name: string | null
+    kind: $Enums.ProductKind | null
     enabled: boolean | null
     priceCents: number | null
     priceCoins: number | null
@@ -27433,6 +27447,7 @@ export namespace Prisma {
     id: string | null
     appId: string | null
     name: string | null
+    kind: $Enums.ProductKind | null
     enabled: boolean | null
     priceCents: number | null
     priceCoins: number | null
@@ -27443,6 +27458,7 @@ export namespace Prisma {
     id: number
     appId: number
     name: number
+    kind: number
     enabled: number
     priceCents: number
     priceCoins: number
@@ -27465,6 +27481,7 @@ export namespace Prisma {
     id?: true
     appId?: true
     name?: true
+    kind?: true
     enabled?: true
     priceCents?: true
     priceCoins?: true
@@ -27475,6 +27492,7 @@ export namespace Prisma {
     id?: true
     appId?: true
     name?: true
+    kind?: true
     enabled?: true
     priceCents?: true
     priceCoins?: true
@@ -27485,6 +27503,7 @@ export namespace Prisma {
     id?: true
     appId?: true
     name?: true
+    kind?: true
     enabled?: true
     priceCents?: true
     priceCoins?: true
@@ -27582,6 +27601,7 @@ export namespace Prisma {
     id: string
     appId: string
     name: string
+    kind: $Enums.ProductKind
     enabled: boolean
     priceCents: number | null
     priceCoins: number | null
@@ -27611,6 +27631,7 @@ export namespace Prisma {
     id?: boolean
     appId?: boolean
     name?: boolean
+    kind?: boolean
     enabled?: boolean
     priceCents?: boolean
     priceCoins?: boolean
@@ -27628,6 +27649,7 @@ export namespace Prisma {
     id?: boolean
     appId?: boolean
     name?: boolean
+    kind?: boolean
     enabled?: boolean
     priceCents?: boolean
     priceCoins?: boolean
@@ -27640,6 +27662,7 @@ export namespace Prisma {
     id?: boolean
     appId?: boolean
     name?: boolean
+    kind?: boolean
     enabled?: boolean
     priceCents?: boolean
     priceCoins?: boolean
@@ -27652,13 +27675,14 @@ export namespace Prisma {
     id?: boolean
     appId?: boolean
     name?: boolean
+    kind?: boolean
     enabled?: boolean
     priceCents?: boolean
     priceCoins?: boolean
     categoryId?: boolean
   }
 
-  export type ProductOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "appId" | "name" | "enabled" | "priceCents" | "priceCoins" | "categoryId", ExtArgs["result"]["product"]>
+  export type ProductOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "appId" | "name" | "kind" | "enabled" | "priceCents" | "priceCoins" | "categoryId", ExtArgs["result"]["product"]>
   export type ProductInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     app?: boolean | AppDefaultArgs<ExtArgs>
     category?: boolean | Product$categoryArgs<ExtArgs>
@@ -27691,6 +27715,7 @@ export namespace Prisma {
       id: string
       appId: string
       name: string
+      kind: $Enums.ProductKind
       enabled: boolean
       priceCents: number | null
       priceCoins: number | null
@@ -28127,6 +28152,7 @@ export namespace Prisma {
     readonly id: FieldRef<"Product", 'String'>
     readonly appId: FieldRef<"Product", 'String'>
     readonly name: FieldRef<"Product", 'String'>
+    readonly kind: FieldRef<"Product", 'ProductKind'>
     readonly enabled: FieldRef<"Product", 'Boolean'>
     readonly priceCents: FieldRef<"Product", 'Int'>
     readonly priceCoins: FieldRef<"Product", 'Int'>
@@ -78108,6 +78134,7 @@ export namespace Prisma {
     id: 'id',
     appId: 'appId',
     name: 'name',
+    kind: 'kind',
     enabled: 'enabled',
     priceCents: 'priceCents',
     priceCoins: 'priceCoins',
@@ -78780,6 +78807,20 @@ export namespace Prisma {
    * Reference to a field of type 'BigInt[]'
    */
   export type ListBigIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BigInt[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'ProductKind'
+   */
+  export type EnumProductKindFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ProductKind'>
+    
+
+
+  /**
+   * Reference to a field of type 'ProductKind[]'
+   */
+  export type ListEnumProductKindFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ProductKind[]'>
     
 
 
@@ -79997,6 +80038,7 @@ export namespace Prisma {
     id?: StringFilter<"Product"> | string
     appId?: StringFilter<"Product"> | string
     name?: StringFilter<"Product"> | string
+    kind?: EnumProductKindFilter<"Product"> | $Enums.ProductKind
     enabled?: BoolFilter<"Product"> | boolean
     priceCents?: IntNullableFilter<"Product"> | number | null
     priceCoins?: IntNullableFilter<"Product"> | number | null
@@ -80013,6 +80055,7 @@ export namespace Prisma {
     id?: SortOrder
     appId?: SortOrder
     name?: SortOrder
+    kind?: SortOrder
     enabled?: SortOrder
     priceCents?: SortOrderInput | SortOrder
     priceCoins?: SortOrderInput | SortOrder
@@ -80032,6 +80075,7 @@ export namespace Prisma {
     NOT?: ProductWhereInput | ProductWhereInput[]
     appId?: StringFilter<"Product"> | string
     name?: StringFilter<"Product"> | string
+    kind?: EnumProductKindFilter<"Product"> | $Enums.ProductKind
     enabled?: BoolFilter<"Product"> | boolean
     priceCents?: IntNullableFilter<"Product"> | number | null
     priceCoins?: IntNullableFilter<"Product"> | number | null
@@ -80048,6 +80092,7 @@ export namespace Prisma {
     id?: SortOrder
     appId?: SortOrder
     name?: SortOrder
+    kind?: SortOrder
     enabled?: SortOrder
     priceCents?: SortOrderInput | SortOrder
     priceCoins?: SortOrderInput | SortOrder
@@ -80066,6 +80111,7 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"Product"> | string
     appId?: StringWithAggregatesFilter<"Product"> | string
     name?: StringWithAggregatesFilter<"Product"> | string
+    kind?: EnumProductKindWithAggregatesFilter<"Product"> | $Enums.ProductKind
     enabled?: BoolWithAggregatesFilter<"Product"> | boolean
     priceCents?: IntNullableWithAggregatesFilter<"Product"> | number | null
     priceCoins?: IntNullableWithAggregatesFilter<"Product"> | number | null
@@ -83593,6 +83639,7 @@ export namespace Prisma {
   export type ProductCreateInput = {
     id?: string
     name: string
+    kind?: $Enums.ProductKind
     enabled?: boolean
     priceCents?: number | null
     priceCoins?: number | null
@@ -83608,6 +83655,7 @@ export namespace Prisma {
     id?: string
     appId: string
     name: string
+    kind?: $Enums.ProductKind
     enabled?: boolean
     priceCents?: number | null
     priceCoins?: number | null
@@ -83621,6 +83669,7 @@ export namespace Prisma {
   export type ProductUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    kind?: EnumProductKindFieldUpdateOperationsInput | $Enums.ProductKind
     enabled?: BoolFieldUpdateOperationsInput | boolean
     priceCents?: NullableIntFieldUpdateOperationsInput | number | null
     priceCoins?: NullableIntFieldUpdateOperationsInput | number | null
@@ -83636,6 +83685,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     appId?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    kind?: EnumProductKindFieldUpdateOperationsInput | $Enums.ProductKind
     enabled?: BoolFieldUpdateOperationsInput | boolean
     priceCents?: NullableIntFieldUpdateOperationsInput | number | null
     priceCoins?: NullableIntFieldUpdateOperationsInput | number | null
@@ -83650,6 +83700,7 @@ export namespace Prisma {
     id?: string
     appId: string
     name: string
+    kind?: $Enums.ProductKind
     enabled?: boolean
     priceCents?: number | null
     priceCoins?: number | null
@@ -83659,6 +83710,7 @@ export namespace Prisma {
   export type ProductUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    kind?: EnumProductKindFieldUpdateOperationsInput | $Enums.ProductKind
     enabled?: BoolFieldUpdateOperationsInput | boolean
     priceCents?: NullableIntFieldUpdateOperationsInput | number | null
     priceCoins?: NullableIntFieldUpdateOperationsInput | number | null
@@ -83668,6 +83720,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     appId?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    kind?: EnumProductKindFieldUpdateOperationsInput | $Enums.ProductKind
     enabled?: BoolFieldUpdateOperationsInput | boolean
     priceCents?: NullableIntFieldUpdateOperationsInput | number | null
     priceCoins?: NullableIntFieldUpdateOperationsInput | number | null
@@ -87175,6 +87228,13 @@ export namespace Prisma {
     name?: SortOrder
   }
 
+  export type EnumProductKindFilter<$PrismaModel = never> = {
+    equals?: $Enums.ProductKind | EnumProductKindFieldRefInput<$PrismaModel>
+    in?: $Enums.ProductKind[] | ListEnumProductKindFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ProductKind[] | ListEnumProductKindFieldRefInput<$PrismaModel>
+    not?: NestedEnumProductKindFilter<$PrismaModel> | $Enums.ProductKind
+  }
+
   export type BoolFilter<$PrismaModel = never> = {
     equals?: boolean | BooleanFieldRefInput<$PrismaModel>
     not?: NestedBoolFilter<$PrismaModel> | boolean
@@ -87210,6 +87270,7 @@ export namespace Prisma {
     id?: SortOrder
     appId?: SortOrder
     name?: SortOrder
+    kind?: SortOrder
     enabled?: SortOrder
     priceCents?: SortOrder
     priceCoins?: SortOrder
@@ -87225,6 +87286,7 @@ export namespace Prisma {
     id?: SortOrder
     appId?: SortOrder
     name?: SortOrder
+    kind?: SortOrder
     enabled?: SortOrder
     priceCents?: SortOrder
     priceCoins?: SortOrder
@@ -87235,6 +87297,7 @@ export namespace Prisma {
     id?: SortOrder
     appId?: SortOrder
     name?: SortOrder
+    kind?: SortOrder
     enabled?: SortOrder
     priceCents?: SortOrder
     priceCoins?: SortOrder
@@ -87244,6 +87307,16 @@ export namespace Prisma {
   export type ProductSumOrderByAggregateInput = {
     priceCents?: SortOrder
     priceCoins?: SortOrder
+  }
+
+  export type EnumProductKindWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ProductKind | EnumProductKindFieldRefInput<$PrismaModel>
+    in?: $Enums.ProductKind[] | ListEnumProductKindFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ProductKind[] | ListEnumProductKindFieldRefInput<$PrismaModel>
+    not?: NestedEnumProductKindWithAggregatesFilter<$PrismaModel> | $Enums.ProductKind
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumProductKindFilter<$PrismaModel>
+    _max?: NestedEnumProductKindFilter<$PrismaModel>
   }
 
   export type BoolWithAggregatesFilter<$PrismaModel = never> = {
@@ -91403,6 +91476,10 @@ export namespace Prisma {
     connect?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[]
   }
 
+  export type EnumProductKindFieldUpdateOperationsInput = {
+    set?: $Enums.ProductKind
+  }
+
   export type BoolFieldUpdateOperationsInput = {
     set?: boolean
   }
@@ -93478,9 +93555,26 @@ export namespace Prisma {
     not?: NestedFloatFilter<$PrismaModel> | number
   }
 
+  export type NestedEnumProductKindFilter<$PrismaModel = never> = {
+    equals?: $Enums.ProductKind | EnumProductKindFieldRefInput<$PrismaModel>
+    in?: $Enums.ProductKind[] | ListEnumProductKindFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ProductKind[] | ListEnumProductKindFieldRefInput<$PrismaModel>
+    not?: NestedEnumProductKindFilter<$PrismaModel> | $Enums.ProductKind
+  }
+
   export type NestedBoolFilter<$PrismaModel = never> = {
     equals?: boolean | BooleanFieldRefInput<$PrismaModel>
     not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type NestedEnumProductKindWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ProductKind | EnumProductKindFieldRefInput<$PrismaModel>
+    in?: $Enums.ProductKind[] | ListEnumProductKindFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ProductKind[] | ListEnumProductKindFieldRefInput<$PrismaModel>
+    not?: NestedEnumProductKindWithAggregatesFilter<$PrismaModel> | $Enums.ProductKind
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumProductKindFilter<$PrismaModel>
+    _max?: NestedEnumProductKindFilter<$PrismaModel>
   }
 
   export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
@@ -95949,6 +96043,7 @@ export namespace Prisma {
   export type ProductCreateWithoutAppInput = {
     id?: string
     name: string
+    kind?: $Enums.ProductKind
     enabled?: boolean
     priceCents?: number | null
     priceCoins?: number | null
@@ -95962,6 +96057,7 @@ export namespace Prisma {
   export type ProductUncheckedCreateWithoutAppInput = {
     id?: string
     name: string
+    kind?: $Enums.ProductKind
     enabled?: boolean
     priceCents?: number | null
     priceCoins?: number | null
@@ -96205,6 +96301,7 @@ export namespace Prisma {
     id?: StringFilter<"Product"> | string
     appId?: StringFilter<"Product"> | string
     name?: StringFilter<"Product"> | string
+    kind?: EnumProductKindFilter<"Product"> | $Enums.ProductKind
     enabled?: BoolFilter<"Product"> | boolean
     priceCents?: IntNullableFilter<"Product"> | number | null
     priceCoins?: IntNullableFilter<"Product"> | number | null
@@ -97973,6 +98070,7 @@ export namespace Prisma {
   export type ProductCreateWithoutCategoryInput = {
     id?: string
     name: string
+    kind?: $Enums.ProductKind
     enabled?: boolean
     priceCents?: number | null
     priceCoins?: number | null
@@ -97987,6 +98085,7 @@ export namespace Prisma {
     id?: string
     appId: string
     name: string
+    kind?: $Enums.ProductKind
     enabled?: boolean
     priceCents?: number | null
     priceCoins?: number | null
@@ -98303,6 +98402,7 @@ export namespace Prisma {
   export type ProductCreateWithoutItemsInput = {
     id?: string
     name: string
+    kind?: $Enums.ProductKind
     enabled?: boolean
     priceCents?: number | null
     priceCoins?: number | null
@@ -98317,6 +98417,7 @@ export namespace Prisma {
     id?: string
     appId: string
     name: string
+    kind?: $Enums.ProductKind
     enabled?: boolean
     priceCents?: number | null
     priceCoins?: number | null
@@ -98345,6 +98446,7 @@ export namespace Prisma {
   export type ProductUpdateWithoutItemsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    kind?: EnumProductKindFieldUpdateOperationsInput | $Enums.ProductKind
     enabled?: BoolFieldUpdateOperationsInput | boolean
     priceCents?: NullableIntFieldUpdateOperationsInput | number | null
     priceCoins?: NullableIntFieldUpdateOperationsInput | number | null
@@ -98359,6 +98461,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     appId?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    kind?: EnumProductKindFieldUpdateOperationsInput | $Enums.ProductKind
     enabled?: BoolFieldUpdateOperationsInput | boolean
     priceCents?: NullableIntFieldUpdateOperationsInput | number | null
     priceCoins?: NullableIntFieldUpdateOperationsInput | number | null
@@ -98458,6 +98561,7 @@ export namespace Prisma {
   export type ProductCreateWithoutTransactionsInput = {
     id?: string
     name: string
+    kind?: $Enums.ProductKind
     enabled?: boolean
     priceCents?: number | null
     priceCoins?: number | null
@@ -98472,6 +98576,7 @@ export namespace Prisma {
     id?: string
     appId: string
     name: string
+    kind?: $Enums.ProductKind
     enabled?: boolean
     priceCents?: number | null
     priceCoins?: number | null
@@ -98610,6 +98715,7 @@ export namespace Prisma {
   export type ProductUpdateWithoutTransactionsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    kind?: EnumProductKindFieldUpdateOperationsInput | $Enums.ProductKind
     enabled?: BoolFieldUpdateOperationsInput | boolean
     priceCents?: NullableIntFieldUpdateOperationsInput | number | null
     priceCoins?: NullableIntFieldUpdateOperationsInput | number | null
@@ -98624,6 +98730,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     appId?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    kind?: EnumProductKindFieldUpdateOperationsInput | $Enums.ProductKind
     enabled?: BoolFieldUpdateOperationsInput | boolean
     priceCents?: NullableIntFieldUpdateOperationsInput | number | null
     priceCoins?: NullableIntFieldUpdateOperationsInput | number | null
@@ -99135,6 +99242,7 @@ export namespace Prisma {
   export type ProductCreateWithoutReviewsInput = {
     id?: string
     name: string
+    kind?: $Enums.ProductKind
     enabled?: boolean
     priceCents?: number | null
     priceCoins?: number | null
@@ -99149,6 +99257,7 @@ export namespace Prisma {
     id?: string
     appId: string
     name: string
+    kind?: $Enums.ProductKind
     enabled?: boolean
     priceCents?: number | null
     priceCoins?: number | null
@@ -99270,6 +99379,7 @@ export namespace Prisma {
   export type ProductUpdateWithoutReviewsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    kind?: EnumProductKindFieldUpdateOperationsInput | $Enums.ProductKind
     enabled?: BoolFieldUpdateOperationsInput | boolean
     priceCents?: NullableIntFieldUpdateOperationsInput | number | null
     priceCoins?: NullableIntFieldUpdateOperationsInput | number | null
@@ -99284,6 +99394,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     appId?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    kind?: EnumProductKindFieldUpdateOperationsInput | $Enums.ProductKind
     enabled?: BoolFieldUpdateOperationsInput | boolean
     priceCents?: NullableIntFieldUpdateOperationsInput | number | null
     priceCoins?: NullableIntFieldUpdateOperationsInput | number | null
@@ -100045,6 +100156,7 @@ export namespace Prisma {
   export type ProductCreateWithoutEntitlementsInput = {
     id?: string
     name: string
+    kind?: $Enums.ProductKind
     enabled?: boolean
     priceCents?: number | null
     priceCoins?: number | null
@@ -100059,6 +100171,7 @@ export namespace Prisma {
     id?: string
     appId: string
     name: string
+    kind?: $Enums.ProductKind
     enabled?: boolean
     priceCents?: number | null
     priceCoins?: number | null
@@ -100180,6 +100293,7 @@ export namespace Prisma {
   export type ProductUpdateWithoutEntitlementsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    kind?: EnumProductKindFieldUpdateOperationsInput | $Enums.ProductKind
     enabled?: BoolFieldUpdateOperationsInput | boolean
     priceCents?: NullableIntFieldUpdateOperationsInput | number | null
     priceCoins?: NullableIntFieldUpdateOperationsInput | number | null
@@ -100194,6 +100308,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     appId?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    kind?: EnumProductKindFieldUpdateOperationsInput | $Enums.ProductKind
     enabled?: BoolFieldUpdateOperationsInput | boolean
     priceCents?: NullableIntFieldUpdateOperationsInput | number | null
     priceCoins?: NullableIntFieldUpdateOperationsInput | number | null
@@ -106372,6 +106487,7 @@ export namespace Prisma {
   export type ProductCreateManyAppInput = {
     id?: string
     name: string
+    kind?: $Enums.ProductKind
     enabled?: boolean
     priceCents?: number | null
     priceCoins?: number | null
@@ -106447,6 +106563,7 @@ export namespace Prisma {
   export type ProductUpdateWithoutAppInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    kind?: EnumProductKindFieldUpdateOperationsInput | $Enums.ProductKind
     enabled?: BoolFieldUpdateOperationsInput | boolean
     priceCents?: NullableIntFieldUpdateOperationsInput | number | null
     priceCoins?: NullableIntFieldUpdateOperationsInput | number | null
@@ -106460,6 +106577,7 @@ export namespace Prisma {
   export type ProductUncheckedUpdateWithoutAppInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    kind?: EnumProductKindFieldUpdateOperationsInput | $Enums.ProductKind
     enabled?: BoolFieldUpdateOperationsInput | boolean
     priceCents?: NullableIntFieldUpdateOperationsInput | number | null
     priceCoins?: NullableIntFieldUpdateOperationsInput | number | null
@@ -106473,6 +106591,7 @@ export namespace Prisma {
   export type ProductUncheckedUpdateManyWithoutAppInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    kind?: EnumProductKindFieldUpdateOperationsInput | $Enums.ProductKind
     enabled?: BoolFieldUpdateOperationsInput | boolean
     priceCents?: NullableIntFieldUpdateOperationsInput | number | null
     priceCoins?: NullableIntFieldUpdateOperationsInput | number | null
@@ -106642,6 +106761,7 @@ export namespace Prisma {
     id?: string
     appId: string
     name: string
+    kind?: $Enums.ProductKind
     enabled?: boolean
     priceCents?: number | null
     priceCoins?: number | null
@@ -106650,6 +106770,7 @@ export namespace Prisma {
   export type ProductUpdateWithoutCategoryInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    kind?: EnumProductKindFieldUpdateOperationsInput | $Enums.ProductKind
     enabled?: BoolFieldUpdateOperationsInput | boolean
     priceCents?: NullableIntFieldUpdateOperationsInput | number | null
     priceCoins?: NullableIntFieldUpdateOperationsInput | number | null
@@ -106664,6 +106785,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     appId?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    kind?: EnumProductKindFieldUpdateOperationsInput | $Enums.ProductKind
     enabled?: BoolFieldUpdateOperationsInput | boolean
     priceCents?: NullableIntFieldUpdateOperationsInput | number | null
     priceCoins?: NullableIntFieldUpdateOperationsInput | number | null
@@ -106677,6 +106799,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     appId?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    kind?: EnumProductKindFieldUpdateOperationsInput | $Enums.ProductKind
     enabled?: BoolFieldUpdateOperationsInput | boolean
     priceCents?: NullableIntFieldUpdateOperationsInput | number | null
     priceCoins?: NullableIntFieldUpdateOperationsInput | number | null

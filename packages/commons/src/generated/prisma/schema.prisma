@@ -369,11 +369,18 @@ model Category {
   products Product[]
 }
 
+enum ProductKind {
+  GAME
+  DLC
+  CONSUMABLE
+}
+
 model Product {
   id           String        @id @default(cuid())
   appId        String
   app          App           @relation(fields: [appId], references: [id])
   name         String
+  kind         ProductKind   @default(CONSUMABLE)
   enabled      Boolean       @default(false)
   priceCents   Int?
   priceCoins   Int?
