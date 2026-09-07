@@ -7356,6 +7356,7 @@ export namespace Prisma {
     achievementGroups: number
     notices: number
     liveEvents: number
+    reviews: number
   }
 
   export type AppCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -7367,6 +7368,7 @@ export namespace Prisma {
     achievementGroups?: boolean | AppCountOutputTypeCountAchievementGroupsArgs
     notices?: boolean | AppCountOutputTypeCountNoticesArgs
     liveEvents?: boolean | AppCountOutputTypeCountLiveEventsArgs
+    reviews?: boolean | AppCountOutputTypeCountReviewsArgs
   }
 
   // Custom InputTypes
@@ -7434,6 +7436,13 @@ export namespace Prisma {
    */
   export type AppCountOutputTypeCountLiveEventsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: LiveEventWhereInput
+  }
+
+  /**
+   * AppCountOutputType without action
+   */
+  export type AppCountOutputTypeCountReviewsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ReviewWhereInput
   }
 
 
@@ -13385,6 +13394,8 @@ export namespace Prisma {
   export type AppMinAggregateOutputType = {
     id: string | null
     name: string | null
+    description: string | null
+    genre: string | null
     status: $Enums.AppStatus | null
     releaseDate: Date | null
     ownerOrgId: string | null
@@ -13393,6 +13404,8 @@ export namespace Prisma {
   export type AppMaxAggregateOutputType = {
     id: string | null
     name: string | null
+    description: string | null
+    genre: string | null
     status: $Enums.AppStatus | null
     releaseDate: Date | null
     ownerOrgId: string | null
@@ -13401,6 +13414,8 @@ export namespace Prisma {
   export type AppCountAggregateOutputType = {
     id: number
     name: number
+    description: number
+    genre: number
     status: number
     releaseDate: number
     ownerOrgId: number
@@ -13411,6 +13426,8 @@ export namespace Prisma {
   export type AppMinAggregateInputType = {
     id?: true
     name?: true
+    description?: true
+    genre?: true
     status?: true
     releaseDate?: true
     ownerOrgId?: true
@@ -13419,6 +13436,8 @@ export namespace Prisma {
   export type AppMaxAggregateInputType = {
     id?: true
     name?: true
+    description?: true
+    genre?: true
     status?: true
     releaseDate?: true
     ownerOrgId?: true
@@ -13427,6 +13446,8 @@ export namespace Prisma {
   export type AppCountAggregateInputType = {
     id?: true
     name?: true
+    description?: true
+    genre?: true
     status?: true
     releaseDate?: true
     ownerOrgId?: true
@@ -13508,6 +13529,8 @@ export namespace Prisma {
   export type AppGroupByOutputType = {
     id: string
     name: string
+    description: string | null
+    genre: string | null
     status: $Enums.AppStatus
     releaseDate: Date | null
     ownerOrgId: string
@@ -13533,6 +13556,8 @@ export namespace Prisma {
   export type AppSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
+    description?: boolean
+    genre?: boolean
     status?: boolean
     releaseDate?: boolean
     ownerOrgId?: boolean
@@ -13545,12 +13570,15 @@ export namespace Prisma {
     achievementGroups?: boolean | App$achievementGroupsArgs<ExtArgs>
     notices?: boolean | App$noticesArgs<ExtArgs>
     liveEvents?: boolean | App$liveEventsArgs<ExtArgs>
+    reviews?: boolean | App$reviewsArgs<ExtArgs>
     _count?: boolean | AppCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["app"]>
 
   export type AppSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
+    description?: boolean
+    genre?: boolean
     status?: boolean
     releaseDate?: boolean
     ownerOrgId?: boolean
@@ -13560,6 +13588,8 @@ export namespace Prisma {
   export type AppSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
+    description?: boolean
+    genre?: boolean
     status?: boolean
     releaseDate?: boolean
     ownerOrgId?: boolean
@@ -13569,12 +13599,14 @@ export namespace Prisma {
   export type AppSelectScalar = {
     id?: boolean
     name?: boolean
+    description?: boolean
+    genre?: boolean
     status?: boolean
     releaseDate?: boolean
     ownerOrgId?: boolean
   }
 
-  export type AppOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "status" | "releaseDate" | "ownerOrgId", ExtArgs["result"]["app"]>
+  export type AppOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "genre" | "status" | "releaseDate" | "ownerOrgId", ExtArgs["result"]["app"]>
   export type AppInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     ownerOrg?: boolean | OrgDefaultArgs<ExtArgs>
     accountApps?: boolean | App$accountAppsArgs<ExtArgs>
@@ -13585,6 +13617,7 @@ export namespace Prisma {
     achievementGroups?: boolean | App$achievementGroupsArgs<ExtArgs>
     notices?: boolean | App$noticesArgs<ExtArgs>
     liveEvents?: boolean | App$liveEventsArgs<ExtArgs>
+    reviews?: boolean | App$reviewsArgs<ExtArgs>
     _count?: boolean | AppCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type AppIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -13606,10 +13639,13 @@ export namespace Prisma {
       achievementGroups: Prisma.$AchievementGroupPayload<ExtArgs>[]
       notices: Prisma.$NoticePayload<ExtArgs>[]
       liveEvents: Prisma.$LiveEventPayload<ExtArgs>[]
+      reviews: Prisma.$ReviewPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       name: string
+      description: string | null
+      genre: string | null
       status: $Enums.AppStatus
       releaseDate: Date | null
       ownerOrgId: string
@@ -14016,6 +14052,7 @@ export namespace Prisma {
     achievementGroups<T extends App$achievementGroupsArgs<ExtArgs> = {}>(args?: Subset<T, App$achievementGroupsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AchievementGroupPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     notices<T extends App$noticesArgs<ExtArgs> = {}>(args?: Subset<T, App$noticesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NoticePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     liveEvents<T extends App$liveEventsArgs<ExtArgs> = {}>(args?: Subset<T, App$liveEventsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LiveEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    reviews<T extends App$reviewsArgs<ExtArgs> = {}>(args?: Subset<T, App$reviewsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReviewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -14047,6 +14084,8 @@ export namespace Prisma {
   interface AppFieldRefs {
     readonly id: FieldRef<"App", 'String'>
     readonly name: FieldRef<"App", 'String'>
+    readonly description: FieldRef<"App", 'String'>
+    readonly genre: FieldRef<"App", 'String'>
     readonly status: FieldRef<"App", 'AppStatus'>
     readonly releaseDate: FieldRef<"App", 'DateTime'>
     readonly ownerOrgId: FieldRef<"App", 'String'>
@@ -14640,6 +14679,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: LiveEventScalarFieldEnum | LiveEventScalarFieldEnum[]
+  }
+
+  /**
+   * App.reviews
+   */
+  export type App$reviewsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Review
+     */
+    select?: ReviewSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Review
+     */
+    omit?: ReviewOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReviewInclude<ExtArgs> | null
+    where?: ReviewWhereInput
+    orderBy?: ReviewOrderByWithRelationInput | ReviewOrderByWithRelationInput[]
+    cursor?: ReviewWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ReviewScalarFieldEnum | ReviewScalarFieldEnum[]
   }
 
   /**
@@ -37036,6 +37099,7 @@ export namespace Prisma {
     id: string | null
     accountId: string | null
     productId: string | null
+    appId: string | null
     rating: number | null
     body: string | null
   }
@@ -37044,6 +37108,7 @@ export namespace Prisma {
     id: string | null
     accountId: string | null
     productId: string | null
+    appId: string | null
     rating: number | null
     body: string | null
   }
@@ -37052,6 +37117,7 @@ export namespace Prisma {
     id: number
     accountId: number
     productId: number
+    appId: number
     rating: number
     body: number
     _all: number
@@ -37070,6 +37136,7 @@ export namespace Prisma {
     id?: true
     accountId?: true
     productId?: true
+    appId?: true
     rating?: true
     body?: true
   }
@@ -37078,6 +37145,7 @@ export namespace Prisma {
     id?: true
     accountId?: true
     productId?: true
+    appId?: true
     rating?: true
     body?: true
   }
@@ -37086,6 +37154,7 @@ export namespace Prisma {
     id?: true
     accountId?: true
     productId?: true
+    appId?: true
     rating?: true
     body?: true
     _all?: true
@@ -37180,7 +37249,8 @@ export namespace Prisma {
   export type ReviewGroupByOutputType = {
     id: string
     accountId: string
-    productId: string
+    productId: string | null
+    appId: string | null
     rating: number
     body: string | null
     _count: ReviewCountAggregateOutputType | null
@@ -37208,64 +37278,76 @@ export namespace Prisma {
     id?: boolean
     accountId?: boolean
     productId?: boolean
+    appId?: boolean
     rating?: boolean
     body?: boolean
     account?: boolean | AccountDefaultArgs<ExtArgs>
-    product?: boolean | ProductDefaultArgs<ExtArgs>
+    product?: boolean | Review$productArgs<ExtArgs>
+    app?: boolean | Review$appArgs<ExtArgs>
   }, ExtArgs["result"]["review"]>
 
   export type ReviewSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     accountId?: boolean
     productId?: boolean
+    appId?: boolean
     rating?: boolean
     body?: boolean
     account?: boolean | AccountDefaultArgs<ExtArgs>
-    product?: boolean | ProductDefaultArgs<ExtArgs>
+    product?: boolean | Review$productArgs<ExtArgs>
+    app?: boolean | Review$appArgs<ExtArgs>
   }, ExtArgs["result"]["review"]>
 
   export type ReviewSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     accountId?: boolean
     productId?: boolean
+    appId?: boolean
     rating?: boolean
     body?: boolean
     account?: boolean | AccountDefaultArgs<ExtArgs>
-    product?: boolean | ProductDefaultArgs<ExtArgs>
+    product?: boolean | Review$productArgs<ExtArgs>
+    app?: boolean | Review$appArgs<ExtArgs>
   }, ExtArgs["result"]["review"]>
 
   export type ReviewSelectScalar = {
     id?: boolean
     accountId?: boolean
     productId?: boolean
+    appId?: boolean
     rating?: boolean
     body?: boolean
   }
 
-  export type ReviewOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "accountId" | "productId" | "rating" | "body", ExtArgs["result"]["review"]>
+  export type ReviewOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "accountId" | "productId" | "appId" | "rating" | "body", ExtArgs["result"]["review"]>
   export type ReviewInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     account?: boolean | AccountDefaultArgs<ExtArgs>
-    product?: boolean | ProductDefaultArgs<ExtArgs>
+    product?: boolean | Review$productArgs<ExtArgs>
+    app?: boolean | Review$appArgs<ExtArgs>
   }
   export type ReviewIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     account?: boolean | AccountDefaultArgs<ExtArgs>
-    product?: boolean | ProductDefaultArgs<ExtArgs>
+    product?: boolean | Review$productArgs<ExtArgs>
+    app?: boolean | Review$appArgs<ExtArgs>
   }
   export type ReviewIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     account?: boolean | AccountDefaultArgs<ExtArgs>
-    product?: boolean | ProductDefaultArgs<ExtArgs>
+    product?: boolean | Review$productArgs<ExtArgs>
+    app?: boolean | Review$appArgs<ExtArgs>
   }
 
   export type $ReviewPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Review"
     objects: {
       account: Prisma.$AccountPayload<ExtArgs>
-      product: Prisma.$ProductPayload<ExtArgs>
+      product: Prisma.$ProductPayload<ExtArgs> | null
+      app: Prisma.$AppPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       accountId: string
-      productId: string
+      productId: string | null
+      appId: string | null
       rating: number
       body: string | null
     }, ExtArgs["result"]["review"]>
@@ -37663,7 +37745,8 @@ export namespace Prisma {
   export interface Prisma__ReviewClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     account<T extends AccountDefaultArgs<ExtArgs> = {}>(args?: Subset<T, AccountDefaultArgs<ExtArgs>>): Prisma__AccountClient<$Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    product<T extends ProductDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ProductDefaultArgs<ExtArgs>>): Prisma__ProductClient<$Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    product<T extends Review$productArgs<ExtArgs> = {}>(args?: Subset<T, Review$productArgs<ExtArgs>>): Prisma__ProductClient<$Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    app<T extends Review$appArgs<ExtArgs> = {}>(args?: Subset<T, Review$appArgs<ExtArgs>>): Prisma__AppClient<$Result.GetResult<Prisma.$AppPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -37696,6 +37779,7 @@ export namespace Prisma {
     readonly id: FieldRef<"Review", 'String'>
     readonly accountId: FieldRef<"Review", 'String'>
     readonly productId: FieldRef<"Review", 'String'>
+    readonly appId: FieldRef<"Review", 'String'>
     readonly rating: FieldRef<"Review", 'Int'>
     readonly body: FieldRef<"Review", 'String'>
   }
@@ -38096,6 +38180,44 @@ export namespace Prisma {
      * Limit how many Reviews to delete.
      */
     limit?: number
+  }
+
+  /**
+   * Review.product
+   */
+  export type Review$productArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Product
+     */
+    select?: ProductSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Product
+     */
+    omit?: ProductOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductInclude<ExtArgs> | null
+    where?: ProductWhereInput
+  }
+
+  /**
+   * Review.app
+   */
+  export type Review$appArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the App
+     */
+    select?: AppSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the App
+     */
+    omit?: AppOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AppInclude<ExtArgs> | null
+    where?: AppWhereInput
   }
 
   /**
@@ -78003,6 +78125,8 @@ export namespace Prisma {
   export const AppScalarFieldEnum: {
     id: 'id',
     name: 'name',
+    description: 'description',
+    genre: 'genre',
     status: 'status',
     releaseDate: 'releaseDate',
     ownerOrgId: 'ownerOrgId'
@@ -78228,6 +78352,7 @@ export namespace Prisma {
     id: 'id',
     accountId: 'accountId',
     productId: 'productId',
+    appId: 'appId',
     rating: 'rating',
     body: 'body'
   };
@@ -79339,6 +79464,8 @@ export namespace Prisma {
     NOT?: AppWhereInput | AppWhereInput[]
     id?: StringFilter<"App"> | string
     name?: StringFilter<"App"> | string
+    description?: StringNullableFilter<"App"> | string | null
+    genre?: StringNullableFilter<"App"> | string | null
     status?: EnumAppStatusFilter<"App"> | $Enums.AppStatus
     releaseDate?: DateTimeNullableFilter<"App"> | Date | string | null
     ownerOrgId?: StringFilter<"App"> | string
@@ -79351,11 +79478,14 @@ export namespace Prisma {
     achievementGroups?: AchievementGroupListRelationFilter
     notices?: NoticeListRelationFilter
     liveEvents?: LiveEventListRelationFilter
+    reviews?: ReviewListRelationFilter
   }
 
   export type AppOrderByWithRelationInput = {
     id?: SortOrder
     name?: SortOrder
+    description?: SortOrderInput | SortOrder
+    genre?: SortOrderInput | SortOrder
     status?: SortOrder
     releaseDate?: SortOrderInput | SortOrder
     ownerOrgId?: SortOrder
@@ -79368,6 +79498,7 @@ export namespace Prisma {
     achievementGroups?: AchievementGroupOrderByRelationAggregateInput
     notices?: NoticeOrderByRelationAggregateInput
     liveEvents?: LiveEventOrderByRelationAggregateInput
+    reviews?: ReviewOrderByRelationAggregateInput
   }
 
   export type AppWhereUniqueInput = Prisma.AtLeast<{
@@ -79376,6 +79507,8 @@ export namespace Prisma {
     OR?: AppWhereInput[]
     NOT?: AppWhereInput | AppWhereInput[]
     name?: StringFilter<"App"> | string
+    description?: StringNullableFilter<"App"> | string | null
+    genre?: StringNullableFilter<"App"> | string | null
     status?: EnumAppStatusFilter<"App"> | $Enums.AppStatus
     releaseDate?: DateTimeNullableFilter<"App"> | Date | string | null
     ownerOrgId?: StringFilter<"App"> | string
@@ -79388,11 +79521,14 @@ export namespace Prisma {
     achievementGroups?: AchievementGroupListRelationFilter
     notices?: NoticeListRelationFilter
     liveEvents?: LiveEventListRelationFilter
+    reviews?: ReviewListRelationFilter
   }, "id">
 
   export type AppOrderByWithAggregationInput = {
     id?: SortOrder
     name?: SortOrder
+    description?: SortOrderInput | SortOrder
+    genre?: SortOrderInput | SortOrder
     status?: SortOrder
     releaseDate?: SortOrderInput | SortOrder
     ownerOrgId?: SortOrder
@@ -79407,6 +79543,8 @@ export namespace Prisma {
     NOT?: AppScalarWhereWithAggregatesInput | AppScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"App"> | string
     name?: StringWithAggregatesFilter<"App"> | string
+    description?: StringNullableWithAggregatesFilter<"App"> | string | null
+    genre?: StringNullableWithAggregatesFilter<"App"> | string | null
     status?: EnumAppStatusWithAggregatesFilter<"App"> | $Enums.AppStatus
     releaseDate?: DateTimeNullableWithAggregatesFilter<"App"> | Date | string | null
     ownerOrgId?: StringWithAggregatesFilter<"App"> | string
@@ -80529,41 +80667,49 @@ export namespace Prisma {
     NOT?: ReviewWhereInput | ReviewWhereInput[]
     id?: StringFilter<"Review"> | string
     accountId?: StringFilter<"Review"> | string
-    productId?: StringFilter<"Review"> | string
+    productId?: StringNullableFilter<"Review"> | string | null
+    appId?: StringNullableFilter<"Review"> | string | null
     rating?: IntFilter<"Review"> | number
     body?: StringNullableFilter<"Review"> | string | null
     account?: XOR<AccountScalarRelationFilter, AccountWhereInput>
-    product?: XOR<ProductScalarRelationFilter, ProductWhereInput>
+    product?: XOR<ProductNullableScalarRelationFilter, ProductWhereInput> | null
+    app?: XOR<AppNullableScalarRelationFilter, AppWhereInput> | null
   }
 
   export type ReviewOrderByWithRelationInput = {
     id?: SortOrder
     accountId?: SortOrder
-    productId?: SortOrder
+    productId?: SortOrderInput | SortOrder
+    appId?: SortOrderInput | SortOrder
     rating?: SortOrder
     body?: SortOrderInput | SortOrder
     account?: AccountOrderByWithRelationInput
     product?: ProductOrderByWithRelationInput
+    app?: AppOrderByWithRelationInput
   }
 
   export type ReviewWhereUniqueInput = Prisma.AtLeast<{
     id?: string
     accountId_productId?: ReviewAccountIdProductIdCompoundUniqueInput
+    accountId_appId?: ReviewAccountIdAppIdCompoundUniqueInput
     AND?: ReviewWhereInput | ReviewWhereInput[]
     OR?: ReviewWhereInput[]
     NOT?: ReviewWhereInput | ReviewWhereInput[]
     accountId?: StringFilter<"Review"> | string
-    productId?: StringFilter<"Review"> | string
+    productId?: StringNullableFilter<"Review"> | string | null
+    appId?: StringNullableFilter<"Review"> | string | null
     rating?: IntFilter<"Review"> | number
     body?: StringNullableFilter<"Review"> | string | null
     account?: XOR<AccountScalarRelationFilter, AccountWhereInput>
-    product?: XOR<ProductScalarRelationFilter, ProductWhereInput>
-  }, "id" | "accountId_productId">
+    product?: XOR<ProductNullableScalarRelationFilter, ProductWhereInput> | null
+    app?: XOR<AppNullableScalarRelationFilter, AppWhereInput> | null
+  }, "id" | "accountId_productId" | "accountId_appId">
 
   export type ReviewOrderByWithAggregationInput = {
     id?: SortOrder
     accountId?: SortOrder
-    productId?: SortOrder
+    productId?: SortOrderInput | SortOrder
+    appId?: SortOrderInput | SortOrder
     rating?: SortOrder
     body?: SortOrderInput | SortOrder
     _count?: ReviewCountOrderByAggregateInput
@@ -80579,7 +80725,8 @@ export namespace Prisma {
     NOT?: ReviewScalarWhereWithAggregatesInput | ReviewScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Review"> | string
     accountId?: StringWithAggregatesFilter<"Review"> | string
-    productId?: StringWithAggregatesFilter<"Review"> | string
+    productId?: StringNullableWithAggregatesFilter<"Review"> | string | null
+    appId?: StringNullableWithAggregatesFilter<"Review"> | string | null
     rating?: IntWithAggregatesFilter<"Review"> | number
     body?: StringNullableWithAggregatesFilter<"Review"> | string | null
   }
@@ -82967,6 +83114,8 @@ export namespace Prisma {
   export type AppCreateInput = {
     id?: string
     name: string
+    description?: string | null
+    genre?: string | null
     status?: $Enums.AppStatus
     releaseDate?: Date | string | null
     ownerOrg: OrgCreateNestedOneWithoutAppsInput
@@ -82978,11 +83127,14 @@ export namespace Prisma {
     achievementGroups?: AchievementGroupCreateNestedManyWithoutAppInput
     notices?: NoticeCreateNestedManyWithoutAppInput
     liveEvents?: LiveEventCreateNestedManyWithoutAppInput
+    reviews?: ReviewCreateNestedManyWithoutAppInput
   }
 
   export type AppUncheckedCreateInput = {
     id?: string
     name: string
+    description?: string | null
+    genre?: string | null
     status?: $Enums.AppStatus
     releaseDate?: Date | string | null
     ownerOrgId: string
@@ -82994,11 +83146,14 @@ export namespace Prisma {
     achievementGroups?: AchievementGroupUncheckedCreateNestedManyWithoutAppInput
     notices?: NoticeUncheckedCreateNestedManyWithoutAppInput
     liveEvents?: LiveEventUncheckedCreateNestedManyWithoutAppInput
+    reviews?: ReviewUncheckedCreateNestedManyWithoutAppInput
   }
 
   export type AppUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    genre?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumAppStatusFieldUpdateOperationsInput | $Enums.AppStatus
     releaseDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     ownerOrg?: OrgUpdateOneRequiredWithoutAppsNestedInput
@@ -83010,11 +83165,14 @@ export namespace Prisma {
     achievementGroups?: AchievementGroupUpdateManyWithoutAppNestedInput
     notices?: NoticeUpdateManyWithoutAppNestedInput
     liveEvents?: LiveEventUpdateManyWithoutAppNestedInput
+    reviews?: ReviewUpdateManyWithoutAppNestedInput
   }
 
   export type AppUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    genre?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumAppStatusFieldUpdateOperationsInput | $Enums.AppStatus
     releaseDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     ownerOrgId?: StringFieldUpdateOperationsInput | string
@@ -83026,11 +83184,14 @@ export namespace Prisma {
     achievementGroups?: AchievementGroupUncheckedUpdateManyWithoutAppNestedInput
     notices?: NoticeUncheckedUpdateManyWithoutAppNestedInput
     liveEvents?: LiveEventUncheckedUpdateManyWithoutAppNestedInput
+    reviews?: ReviewUncheckedUpdateManyWithoutAppNestedInput
   }
 
   export type AppCreateManyInput = {
     id?: string
     name: string
+    description?: string | null
+    genre?: string | null
     status?: $Enums.AppStatus
     releaseDate?: Date | string | null
     ownerOrgId: string
@@ -83039,6 +83200,8 @@ export namespace Prisma {
   export type AppUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    genre?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumAppStatusFieldUpdateOperationsInput | $Enums.AppStatus
     releaseDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
@@ -83046,6 +83209,8 @@ export namespace Prisma {
   export type AppUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    genre?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumAppStatusFieldUpdateOperationsInput | $Enums.AppStatus
     releaseDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     ownerOrgId?: StringFieldUpdateOperationsInput | string
@@ -84125,13 +84290,15 @@ export namespace Prisma {
     rating: number
     body?: string | null
     account: AccountCreateNestedOneWithoutReviewsInput
-    product: ProductCreateNestedOneWithoutReviewsInput
+    product?: ProductCreateNestedOneWithoutReviewsInput
+    app?: AppCreateNestedOneWithoutReviewsInput
   }
 
   export type ReviewUncheckedCreateInput = {
     id?: string
     accountId: string
-    productId: string
+    productId?: string | null
+    appId?: string | null
     rating: number
     body?: string | null
   }
@@ -84141,13 +84308,15 @@ export namespace Prisma {
     rating?: IntFieldUpdateOperationsInput | number
     body?: NullableStringFieldUpdateOperationsInput | string | null
     account?: AccountUpdateOneRequiredWithoutReviewsNestedInput
-    product?: ProductUpdateOneRequiredWithoutReviewsNestedInput
+    product?: ProductUpdateOneWithoutReviewsNestedInput
+    app?: AppUpdateOneWithoutReviewsNestedInput
   }
 
   export type ReviewUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     accountId?: StringFieldUpdateOperationsInput | string
-    productId?: StringFieldUpdateOperationsInput | string
+    productId?: NullableStringFieldUpdateOperationsInput | string | null
+    appId?: NullableStringFieldUpdateOperationsInput | string | null
     rating?: IntFieldUpdateOperationsInput | number
     body?: NullableStringFieldUpdateOperationsInput | string | null
   }
@@ -84155,7 +84324,8 @@ export namespace Prisma {
   export type ReviewCreateManyInput = {
     id?: string
     accountId: string
-    productId: string
+    productId?: string | null
+    appId?: string | null
     rating: number
     body?: string | null
   }
@@ -84169,7 +84339,8 @@ export namespace Prisma {
   export type ReviewUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     accountId?: StringFieldUpdateOperationsInput | string
-    productId?: StringFieldUpdateOperationsInput | string
+    productId?: NullableStringFieldUpdateOperationsInput | string | null
+    appId?: NullableStringFieldUpdateOperationsInput | string | null
     rating?: IntFieldUpdateOperationsInput | number
     body?: NullableStringFieldUpdateOperationsInput | string | null
   }
@@ -86770,6 +86941,8 @@ export namespace Prisma {
   export type AppCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    description?: SortOrder
+    genre?: SortOrder
     status?: SortOrder
     releaseDate?: SortOrder
     ownerOrgId?: SortOrder
@@ -86778,6 +86951,8 @@ export namespace Prisma {
   export type AppMaxOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    description?: SortOrder
+    genre?: SortOrder
     status?: SortOrder
     releaseDate?: SortOrder
     ownerOrgId?: SortOrder
@@ -86786,6 +86961,8 @@ export namespace Prisma {
   export type AppMinOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    description?: SortOrder
+    genre?: SortOrder
     status?: SortOrder
     releaseDate?: SortOrder
     ownerOrgId?: SortOrder
@@ -87620,15 +87797,31 @@ export namespace Prisma {
     not?: NestedIntFilter<$PrismaModel> | number
   }
 
+  export type ProductNullableScalarRelationFilter = {
+    is?: ProductWhereInput | null
+    isNot?: ProductWhereInput | null
+  }
+
+  export type AppNullableScalarRelationFilter = {
+    is?: AppWhereInput | null
+    isNot?: AppWhereInput | null
+  }
+
   export type ReviewAccountIdProductIdCompoundUniqueInput = {
     accountId: string
     productId: string
+  }
+
+  export type ReviewAccountIdAppIdCompoundUniqueInput = {
+    accountId: string
+    appId: string
   }
 
   export type ReviewCountOrderByAggregateInput = {
     id?: SortOrder
     accountId?: SortOrder
     productId?: SortOrder
+    appId?: SortOrder
     rating?: SortOrder
     body?: SortOrder
   }
@@ -87641,6 +87834,7 @@ export namespace Prisma {
     id?: SortOrder
     accountId?: SortOrder
     productId?: SortOrder
+    appId?: SortOrder
     rating?: SortOrder
     body?: SortOrder
   }
@@ -87649,6 +87843,7 @@ export namespace Prisma {
     id?: SortOrder
     accountId?: SortOrder
     productId?: SortOrder
+    appId?: SortOrder
     rating?: SortOrder
     body?: SortOrder
   }
@@ -87978,11 +88173,6 @@ export namespace Prisma {
 
   export type ScoreSumOrderByAggregateInput = {
     value?: SortOrder
-  }
-
-  export type AppNullableScalarRelationFilter = {
-    is?: AppWhereInput | null
-    isNot?: AppWhereInput | null
   }
 
   export type AchievementListRelationFilter = {
@@ -90720,6 +90910,13 @@ export namespace Prisma {
     connect?: LiveEventWhereUniqueInput | LiveEventWhereUniqueInput[]
   }
 
+  export type ReviewCreateNestedManyWithoutAppInput = {
+    create?: XOR<ReviewCreateWithoutAppInput, ReviewUncheckedCreateWithoutAppInput> | ReviewCreateWithoutAppInput[] | ReviewUncheckedCreateWithoutAppInput[]
+    connectOrCreate?: ReviewCreateOrConnectWithoutAppInput | ReviewCreateOrConnectWithoutAppInput[]
+    createMany?: ReviewCreateManyAppInputEnvelope
+    connect?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[]
+  }
+
   export type AccountAppUncheckedCreateNestedManyWithoutAppInput = {
     create?: XOR<AccountAppCreateWithoutAppInput, AccountAppUncheckedCreateWithoutAppInput> | AccountAppCreateWithoutAppInput[] | AccountAppUncheckedCreateWithoutAppInput[]
     connectOrCreate?: AccountAppCreateOrConnectWithoutAppInput | AccountAppCreateOrConnectWithoutAppInput[]
@@ -90774,6 +90971,13 @@ export namespace Prisma {
     connectOrCreate?: LiveEventCreateOrConnectWithoutAppInput | LiveEventCreateOrConnectWithoutAppInput[]
     createMany?: LiveEventCreateManyAppInputEnvelope
     connect?: LiveEventWhereUniqueInput | LiveEventWhereUniqueInput[]
+  }
+
+  export type ReviewUncheckedCreateNestedManyWithoutAppInput = {
+    create?: XOR<ReviewCreateWithoutAppInput, ReviewUncheckedCreateWithoutAppInput> | ReviewCreateWithoutAppInput[] | ReviewUncheckedCreateWithoutAppInput[]
+    connectOrCreate?: ReviewCreateOrConnectWithoutAppInput | ReviewCreateOrConnectWithoutAppInput[]
+    createMany?: ReviewCreateManyAppInputEnvelope
+    connect?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[]
   }
 
   export type EnumAppStatusFieldUpdateOperationsInput = {
@@ -90900,6 +91104,20 @@ export namespace Prisma {
     deleteMany?: LiveEventScalarWhereInput | LiveEventScalarWhereInput[]
   }
 
+  export type ReviewUpdateManyWithoutAppNestedInput = {
+    create?: XOR<ReviewCreateWithoutAppInput, ReviewUncheckedCreateWithoutAppInput> | ReviewCreateWithoutAppInput[] | ReviewUncheckedCreateWithoutAppInput[]
+    connectOrCreate?: ReviewCreateOrConnectWithoutAppInput | ReviewCreateOrConnectWithoutAppInput[]
+    upsert?: ReviewUpsertWithWhereUniqueWithoutAppInput | ReviewUpsertWithWhereUniqueWithoutAppInput[]
+    createMany?: ReviewCreateManyAppInputEnvelope
+    set?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[]
+    disconnect?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[]
+    delete?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[]
+    connect?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[]
+    update?: ReviewUpdateWithWhereUniqueWithoutAppInput | ReviewUpdateWithWhereUniqueWithoutAppInput[]
+    updateMany?: ReviewUpdateManyWithWhereWithoutAppInput | ReviewUpdateManyWithWhereWithoutAppInput[]
+    deleteMany?: ReviewScalarWhereInput | ReviewScalarWhereInput[]
+  }
+
   export type AccountAppUncheckedUpdateManyWithoutAppNestedInput = {
     create?: XOR<AccountAppCreateWithoutAppInput, AccountAppUncheckedCreateWithoutAppInput> | AccountAppCreateWithoutAppInput[] | AccountAppUncheckedCreateWithoutAppInput[]
     connectOrCreate?: AccountAppCreateOrConnectWithoutAppInput | AccountAppCreateOrConnectWithoutAppInput[]
@@ -91010,6 +91228,20 @@ export namespace Prisma {
     update?: LiveEventUpdateWithWhereUniqueWithoutAppInput | LiveEventUpdateWithWhereUniqueWithoutAppInput[]
     updateMany?: LiveEventUpdateManyWithWhereWithoutAppInput | LiveEventUpdateManyWithWhereWithoutAppInput[]
     deleteMany?: LiveEventScalarWhereInput | LiveEventScalarWhereInput[]
+  }
+
+  export type ReviewUncheckedUpdateManyWithoutAppNestedInput = {
+    create?: XOR<ReviewCreateWithoutAppInput, ReviewUncheckedCreateWithoutAppInput> | ReviewCreateWithoutAppInput[] | ReviewUncheckedCreateWithoutAppInput[]
+    connectOrCreate?: ReviewCreateOrConnectWithoutAppInput | ReviewCreateOrConnectWithoutAppInput[]
+    upsert?: ReviewUpsertWithWhereUniqueWithoutAppInput | ReviewUpsertWithWhereUniqueWithoutAppInput[]
+    createMany?: ReviewCreateManyAppInputEnvelope
+    set?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[]
+    disconnect?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[]
+    delete?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[]
+    connect?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[]
+    update?: ReviewUpdateWithWhereUniqueWithoutAppInput | ReviewUpdateWithWhereUniqueWithoutAppInput[]
+    updateMany?: ReviewUpdateManyWithWhereWithoutAppInput | ReviewUpdateManyWithWhereWithoutAppInput[]
+    deleteMany?: ReviewScalarWhereInput | ReviewScalarWhereInput[]
   }
 
   export type AccountCreateNestedOneWithoutAccountAppsInput = {
@@ -91812,6 +92044,12 @@ export namespace Prisma {
     connect?: ProductWhereUniqueInput
   }
 
+  export type AppCreateNestedOneWithoutReviewsInput = {
+    create?: XOR<AppCreateWithoutReviewsInput, AppUncheckedCreateWithoutReviewsInput>
+    connectOrCreate?: AppCreateOrConnectWithoutReviewsInput
+    connect?: AppWhereUniqueInput
+  }
+
   export type IntFieldUpdateOperationsInput = {
     set?: number
     increment?: number
@@ -91828,12 +92066,24 @@ export namespace Prisma {
     update?: XOR<XOR<AccountUpdateToOneWithWhereWithoutReviewsInput, AccountUpdateWithoutReviewsInput>, AccountUncheckedUpdateWithoutReviewsInput>
   }
 
-  export type ProductUpdateOneRequiredWithoutReviewsNestedInput = {
+  export type ProductUpdateOneWithoutReviewsNestedInput = {
     create?: XOR<ProductCreateWithoutReviewsInput, ProductUncheckedCreateWithoutReviewsInput>
     connectOrCreate?: ProductCreateOrConnectWithoutReviewsInput
     upsert?: ProductUpsertWithoutReviewsInput
+    disconnect?: ProductWhereInput | boolean
+    delete?: ProductWhereInput | boolean
     connect?: ProductWhereUniqueInput
     update?: XOR<XOR<ProductUpdateToOneWithWhereWithoutReviewsInput, ProductUpdateWithoutReviewsInput>, ProductUncheckedUpdateWithoutReviewsInput>
+  }
+
+  export type AppUpdateOneWithoutReviewsNestedInput = {
+    create?: XOR<AppCreateWithoutReviewsInput, AppUncheckedCreateWithoutReviewsInput>
+    connectOrCreate?: AppCreateOrConnectWithoutReviewsInput
+    upsert?: AppUpsertWithoutReviewsInput
+    disconnect?: AppWhereInput | boolean
+    delete?: AppWhereInput | boolean
+    connect?: AppWhereUniqueInput
+    update?: XOR<XOR<AppUpdateToOneWithWhereWithoutReviewsInput, AppUpdateWithoutReviewsInput>, AppUncheckedUpdateWithoutReviewsInput>
   }
 
   export type DemoParticipationCreateNestedManyWithoutDemoInput = {
@@ -94006,12 +94256,14 @@ export namespace Prisma {
     id?: string
     rating: number
     body?: string | null
-    product: ProductCreateNestedOneWithoutReviewsInput
+    product?: ProductCreateNestedOneWithoutReviewsInput
+    app?: AppCreateNestedOneWithoutReviewsInput
   }
 
   export type ReviewUncheckedCreateWithoutAccountInput = {
     id?: string
-    productId: string
+    productId?: string | null
+    appId?: string | null
     rating: number
     body?: string | null
   }
@@ -94734,7 +94986,8 @@ export namespace Prisma {
     NOT?: ReviewScalarWhereInput | ReviewScalarWhereInput[]
     id?: StringFilter<"Review"> | string
     accountId?: StringFilter<"Review"> | string
-    productId?: StringFilter<"Review"> | string
+    productId?: StringNullableFilter<"Review"> | string | null
+    appId?: StringNullableFilter<"Review"> | string | null
     rating?: IntFilter<"Review"> | number
     body?: StringNullableFilter<"Review"> | string | null
   }
@@ -95333,6 +95586,8 @@ export namespace Prisma {
   export type AppCreateWithoutOwnerOrgInput = {
     id?: string
     name: string
+    description?: string | null
+    genre?: string | null
     status?: $Enums.AppStatus
     releaseDate?: Date | string | null
     accountApps?: AccountAppCreateNestedManyWithoutAppInput
@@ -95343,11 +95598,14 @@ export namespace Prisma {
     achievementGroups?: AchievementGroupCreateNestedManyWithoutAppInput
     notices?: NoticeCreateNestedManyWithoutAppInput
     liveEvents?: LiveEventCreateNestedManyWithoutAppInput
+    reviews?: ReviewCreateNestedManyWithoutAppInput
   }
 
   export type AppUncheckedCreateWithoutOwnerOrgInput = {
     id?: string
     name: string
+    description?: string | null
+    genre?: string | null
     status?: $Enums.AppStatus
     releaseDate?: Date | string | null
     accountApps?: AccountAppUncheckedCreateNestedManyWithoutAppInput
@@ -95358,6 +95616,7 @@ export namespace Prisma {
     achievementGroups?: AchievementGroupUncheckedCreateNestedManyWithoutAppInput
     notices?: NoticeUncheckedCreateNestedManyWithoutAppInput
     liveEvents?: LiveEventUncheckedCreateNestedManyWithoutAppInput
+    reviews?: ReviewUncheckedCreateNestedManyWithoutAppInput
   }
 
   export type AppCreateOrConnectWithoutOwnerOrgInput = {
@@ -95576,6 +95835,8 @@ export namespace Prisma {
     NOT?: AppScalarWhereInput | AppScalarWhereInput[]
     id?: StringFilter<"App"> | string
     name?: StringFilter<"App"> | string
+    description?: StringNullableFilter<"App"> | string | null
+    genre?: StringNullableFilter<"App"> | string | null
     status?: EnumAppStatusFilter<"App"> | $Enums.AppStatus
     releaseDate?: DateTimeNullableFilter<"App"> | Date | string | null
     ownerOrgId?: StringFilter<"App"> | string
@@ -96198,6 +96459,32 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type ReviewCreateWithoutAppInput = {
+    id?: string
+    rating: number
+    body?: string | null
+    account: AccountCreateNestedOneWithoutReviewsInput
+    product?: ProductCreateNestedOneWithoutReviewsInput
+  }
+
+  export type ReviewUncheckedCreateWithoutAppInput = {
+    id?: string
+    accountId: string
+    productId?: string | null
+    rating: number
+    body?: string | null
+  }
+
+  export type ReviewCreateOrConnectWithoutAppInput = {
+    where: ReviewWhereUniqueInput
+    create: XOR<ReviewCreateWithoutAppInput, ReviewUncheckedCreateWithoutAppInput>
+  }
+
+  export type ReviewCreateManyAppInputEnvelope = {
+    data: ReviewCreateManyAppInput | ReviewCreateManyAppInput[]
+    skipDuplicates?: boolean
+  }
+
   export type OrgUpsertWithoutAppsInput = {
     update: XOR<OrgUpdateWithoutAppsInput, OrgUncheckedUpdateWithoutAppsInput>
     create: XOR<OrgCreateWithoutAppsInput, OrgUncheckedCreateWithoutAppsInput>
@@ -96431,6 +96718,22 @@ export namespace Prisma {
     endsAt?: DateTimeFilter<"LiveEvent"> | Date | string
   }
 
+  export type ReviewUpsertWithWhereUniqueWithoutAppInput = {
+    where: ReviewWhereUniqueInput
+    update: XOR<ReviewUpdateWithoutAppInput, ReviewUncheckedUpdateWithoutAppInput>
+    create: XOR<ReviewCreateWithoutAppInput, ReviewUncheckedCreateWithoutAppInput>
+  }
+
+  export type ReviewUpdateWithWhereUniqueWithoutAppInput = {
+    where: ReviewWhereUniqueInput
+    data: XOR<ReviewUpdateWithoutAppInput, ReviewUncheckedUpdateWithoutAppInput>
+  }
+
+  export type ReviewUpdateManyWithWhereWithoutAppInput = {
+    where: ReviewScalarWhereInput
+    data: XOR<ReviewUpdateManyMutationInput, ReviewUncheckedUpdateManyWithoutAppInput>
+  }
+
   export type AccountCreateWithoutAccountAppsInput = {
     id?: string
     email: string
@@ -96521,6 +96824,8 @@ export namespace Prisma {
   export type AppCreateWithoutAccountAppsInput = {
     id?: string
     name: string
+    description?: string | null
+    genre?: string | null
     status?: $Enums.AppStatus
     releaseDate?: Date | string | null
     ownerOrg: OrgCreateNestedOneWithoutAppsInput
@@ -96531,11 +96836,14 @@ export namespace Prisma {
     achievementGroups?: AchievementGroupCreateNestedManyWithoutAppInput
     notices?: NoticeCreateNestedManyWithoutAppInput
     liveEvents?: LiveEventCreateNestedManyWithoutAppInput
+    reviews?: ReviewCreateNestedManyWithoutAppInput
   }
 
   export type AppUncheckedCreateWithoutAccountAppsInput = {
     id?: string
     name: string
+    description?: string | null
+    genre?: string | null
     status?: $Enums.AppStatus
     releaseDate?: Date | string | null
     ownerOrgId: string
@@ -96546,6 +96854,7 @@ export namespace Prisma {
     achievementGroups?: AchievementGroupUncheckedCreateNestedManyWithoutAppInput
     notices?: NoticeUncheckedCreateNestedManyWithoutAppInput
     liveEvents?: LiveEventUncheckedCreateNestedManyWithoutAppInput
+    reviews?: ReviewUncheckedCreateNestedManyWithoutAppInput
   }
 
   export type AppCreateOrConnectWithoutAccountAppsInput = {
@@ -96660,6 +96969,8 @@ export namespace Prisma {
   export type AppUpdateWithoutAccountAppsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    genre?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumAppStatusFieldUpdateOperationsInput | $Enums.AppStatus
     releaseDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     ownerOrg?: OrgUpdateOneRequiredWithoutAppsNestedInput
@@ -96670,11 +96981,14 @@ export namespace Prisma {
     achievementGroups?: AchievementGroupUpdateManyWithoutAppNestedInput
     notices?: NoticeUpdateManyWithoutAppNestedInput
     liveEvents?: LiveEventUpdateManyWithoutAppNestedInput
+    reviews?: ReviewUpdateManyWithoutAppNestedInput
   }
 
   export type AppUncheckedUpdateWithoutAccountAppsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    genre?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumAppStatusFieldUpdateOperationsInput | $Enums.AppStatus
     releaseDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     ownerOrgId?: StringFieldUpdateOperationsInput | string
@@ -96685,6 +96999,7 @@ export namespace Prisma {
     achievementGroups?: AchievementGroupUncheckedUpdateManyWithoutAppNestedInput
     notices?: NoticeUncheckedUpdateManyWithoutAppNestedInput
     liveEvents?: LiveEventUncheckedUpdateManyWithoutAppNestedInput
+    reviews?: ReviewUncheckedUpdateManyWithoutAppNestedInput
   }
 
   export type AccountCreateWithoutSessionsInput = {
@@ -98124,6 +98439,8 @@ export namespace Prisma {
   export type AppCreateWithoutProductsInput = {
     id?: string
     name: string
+    description?: string | null
+    genre?: string | null
     status?: $Enums.AppStatus
     releaseDate?: Date | string | null
     ownerOrg: OrgCreateNestedOneWithoutAppsInput
@@ -98134,11 +98451,14 @@ export namespace Prisma {
     achievementGroups?: AchievementGroupCreateNestedManyWithoutAppInput
     notices?: NoticeCreateNestedManyWithoutAppInput
     liveEvents?: LiveEventCreateNestedManyWithoutAppInput
+    reviews?: ReviewCreateNestedManyWithoutAppInput
   }
 
   export type AppUncheckedCreateWithoutProductsInput = {
     id?: string
     name: string
+    description?: string | null
+    genre?: string | null
     status?: $Enums.AppStatus
     releaseDate?: Date | string | null
     ownerOrgId: string
@@ -98149,6 +98469,7 @@ export namespace Prisma {
     achievementGroups?: AchievementGroupUncheckedCreateNestedManyWithoutAppInput
     notices?: NoticeUncheckedCreateNestedManyWithoutAppInput
     liveEvents?: LiveEventUncheckedCreateNestedManyWithoutAppInput
+    reviews?: ReviewUncheckedCreateNestedManyWithoutAppInput
   }
 
   export type AppCreateOrConnectWithoutProductsInput = {
@@ -98244,11 +98565,13 @@ export namespace Prisma {
     rating: number
     body?: string | null
     account: AccountCreateNestedOneWithoutReviewsInput
+    app?: AppCreateNestedOneWithoutReviewsInput
   }
 
   export type ReviewUncheckedCreateWithoutProductInput = {
     id?: string
     accountId: string
+    appId?: string | null
     rating: number
     body?: string | null
   }
@@ -98277,6 +98600,8 @@ export namespace Prisma {
   export type AppUpdateWithoutProductsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    genre?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumAppStatusFieldUpdateOperationsInput | $Enums.AppStatus
     releaseDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     ownerOrg?: OrgUpdateOneRequiredWithoutAppsNestedInput
@@ -98287,11 +98612,14 @@ export namespace Prisma {
     achievementGroups?: AchievementGroupUpdateManyWithoutAppNestedInput
     notices?: NoticeUpdateManyWithoutAppNestedInput
     liveEvents?: LiveEventUpdateManyWithoutAppNestedInput
+    reviews?: ReviewUpdateManyWithoutAppNestedInput
   }
 
   export type AppUncheckedUpdateWithoutProductsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    genre?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumAppStatusFieldUpdateOperationsInput | $Enums.AppStatus
     releaseDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     ownerOrgId?: StringFieldUpdateOperationsInput | string
@@ -98302,6 +98630,7 @@ export namespace Prisma {
     achievementGroups?: AchievementGroupUncheckedUpdateManyWithoutAppNestedInput
     notices?: NoticeUncheckedUpdateManyWithoutAppNestedInput
     liveEvents?: LiveEventUncheckedUpdateManyWithoutAppNestedInput
+    reviews?: ReviewUncheckedUpdateManyWithoutAppNestedInput
   }
 
   export type CategoryUpsertWithoutProductsInput = {
@@ -99272,6 +99601,47 @@ export namespace Prisma {
     create: XOR<ProductCreateWithoutReviewsInput, ProductUncheckedCreateWithoutReviewsInput>
   }
 
+  export type AppCreateWithoutReviewsInput = {
+    id?: string
+    name: string
+    description?: string | null
+    genre?: string | null
+    status?: $Enums.AppStatus
+    releaseDate?: Date | string | null
+    ownerOrg: OrgCreateNestedOneWithoutAppsInput
+    accountApps?: AccountAppCreateNestedManyWithoutAppInput
+    builds?: BuildCreateNestedManyWithoutAppInput
+    products?: ProductCreateNestedManyWithoutAppInput
+    leaderboards?: LeaderboardCreateNestedManyWithoutAppInput
+    gameStatuses?: GameStatusCreateNestedManyWithoutAppInput
+    achievementGroups?: AchievementGroupCreateNestedManyWithoutAppInput
+    notices?: NoticeCreateNestedManyWithoutAppInput
+    liveEvents?: LiveEventCreateNestedManyWithoutAppInput
+  }
+
+  export type AppUncheckedCreateWithoutReviewsInput = {
+    id?: string
+    name: string
+    description?: string | null
+    genre?: string | null
+    status?: $Enums.AppStatus
+    releaseDate?: Date | string | null
+    ownerOrgId: string
+    accountApps?: AccountAppUncheckedCreateNestedManyWithoutAppInput
+    builds?: BuildUncheckedCreateNestedManyWithoutAppInput
+    products?: ProductUncheckedCreateNestedManyWithoutAppInput
+    leaderboards?: LeaderboardUncheckedCreateNestedManyWithoutAppInput
+    gameStatuses?: GameStatusUncheckedCreateNestedManyWithoutAppInput
+    achievementGroups?: AchievementGroupUncheckedCreateNestedManyWithoutAppInput
+    notices?: NoticeUncheckedCreateNestedManyWithoutAppInput
+    liveEvents?: LiveEventUncheckedCreateNestedManyWithoutAppInput
+  }
+
+  export type AppCreateOrConnectWithoutReviewsInput = {
+    where: AppWhereUniqueInput
+    create: XOR<AppCreateWithoutReviewsInput, AppUncheckedCreateWithoutReviewsInput>
+  }
+
   export type AccountUpsertWithoutReviewsInput = {
     update: XOR<AccountUpdateWithoutReviewsInput, AccountUncheckedUpdateWithoutReviewsInput>
     create: XOR<AccountCreateWithoutReviewsInput, AccountUncheckedCreateWithoutReviewsInput>
@@ -99402,6 +99772,53 @@ export namespace Prisma {
     items?: ItemUncheckedUpdateManyWithoutProductNestedInput
     transactions?: TransactionUncheckedUpdateManyWithoutProductNestedInput
     entitlements?: EntitlementUncheckedUpdateManyWithoutProductNestedInput
+  }
+
+  export type AppUpsertWithoutReviewsInput = {
+    update: XOR<AppUpdateWithoutReviewsInput, AppUncheckedUpdateWithoutReviewsInput>
+    create: XOR<AppCreateWithoutReviewsInput, AppUncheckedCreateWithoutReviewsInput>
+    where?: AppWhereInput
+  }
+
+  export type AppUpdateToOneWithWhereWithoutReviewsInput = {
+    where?: AppWhereInput
+    data: XOR<AppUpdateWithoutReviewsInput, AppUncheckedUpdateWithoutReviewsInput>
+  }
+
+  export type AppUpdateWithoutReviewsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    genre?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumAppStatusFieldUpdateOperationsInput | $Enums.AppStatus
+    releaseDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    ownerOrg?: OrgUpdateOneRequiredWithoutAppsNestedInput
+    accountApps?: AccountAppUpdateManyWithoutAppNestedInput
+    builds?: BuildUpdateManyWithoutAppNestedInput
+    products?: ProductUpdateManyWithoutAppNestedInput
+    leaderboards?: LeaderboardUpdateManyWithoutAppNestedInput
+    gameStatuses?: GameStatusUpdateManyWithoutAppNestedInput
+    achievementGroups?: AchievementGroupUpdateManyWithoutAppNestedInput
+    notices?: NoticeUpdateManyWithoutAppNestedInput
+    liveEvents?: LiveEventUpdateManyWithoutAppNestedInput
+  }
+
+  export type AppUncheckedUpdateWithoutReviewsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    genre?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumAppStatusFieldUpdateOperationsInput | $Enums.AppStatus
+    releaseDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    ownerOrgId?: StringFieldUpdateOperationsInput | string
+    accountApps?: AccountAppUncheckedUpdateManyWithoutAppNestedInput
+    builds?: BuildUncheckedUpdateManyWithoutAppNestedInput
+    products?: ProductUncheckedUpdateManyWithoutAppNestedInput
+    leaderboards?: LeaderboardUncheckedUpdateManyWithoutAppNestedInput
+    gameStatuses?: GameStatusUncheckedUpdateManyWithoutAppNestedInput
+    achievementGroups?: AchievementGroupUncheckedUpdateManyWithoutAppNestedInput
+    notices?: NoticeUncheckedUpdateManyWithoutAppNestedInput
+    liveEvents?: LiveEventUncheckedUpdateManyWithoutAppNestedInput
   }
 
   export type DemoParticipationCreateWithoutDemoInput = {
@@ -99993,6 +100410,8 @@ export namespace Prisma {
   export type AppCreateWithoutBuildsInput = {
     id?: string
     name: string
+    description?: string | null
+    genre?: string | null
     status?: $Enums.AppStatus
     releaseDate?: Date | string | null
     ownerOrg: OrgCreateNestedOneWithoutAppsInput
@@ -100003,11 +100422,14 @@ export namespace Prisma {
     achievementGroups?: AchievementGroupCreateNestedManyWithoutAppInput
     notices?: NoticeCreateNestedManyWithoutAppInput
     liveEvents?: LiveEventCreateNestedManyWithoutAppInput
+    reviews?: ReviewCreateNestedManyWithoutAppInput
   }
 
   export type AppUncheckedCreateWithoutBuildsInput = {
     id?: string
     name: string
+    description?: string | null
+    genre?: string | null
     status?: $Enums.AppStatus
     releaseDate?: Date | string | null
     ownerOrgId: string
@@ -100018,6 +100440,7 @@ export namespace Prisma {
     achievementGroups?: AchievementGroupUncheckedCreateNestedManyWithoutAppInput
     notices?: NoticeUncheckedCreateNestedManyWithoutAppInput
     liveEvents?: LiveEventUncheckedCreateNestedManyWithoutAppInput
+    reviews?: ReviewUncheckedCreateNestedManyWithoutAppInput
   }
 
   export type AppCreateOrConnectWithoutBuildsInput = {
@@ -100039,6 +100462,8 @@ export namespace Prisma {
   export type AppUpdateWithoutBuildsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    genre?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumAppStatusFieldUpdateOperationsInput | $Enums.AppStatus
     releaseDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     ownerOrg?: OrgUpdateOneRequiredWithoutAppsNestedInput
@@ -100049,11 +100474,14 @@ export namespace Prisma {
     achievementGroups?: AchievementGroupUpdateManyWithoutAppNestedInput
     notices?: NoticeUpdateManyWithoutAppNestedInput
     liveEvents?: LiveEventUpdateManyWithoutAppNestedInput
+    reviews?: ReviewUpdateManyWithoutAppNestedInput
   }
 
   export type AppUncheckedUpdateWithoutBuildsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    genre?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumAppStatusFieldUpdateOperationsInput | $Enums.AppStatus
     releaseDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     ownerOrgId?: StringFieldUpdateOperationsInput | string
@@ -100064,6 +100492,7 @@ export namespace Prisma {
     achievementGroups?: AchievementGroupUncheckedUpdateManyWithoutAppNestedInput
     notices?: NoticeUncheckedUpdateManyWithoutAppNestedInput
     liveEvents?: LiveEventUncheckedUpdateManyWithoutAppNestedInput
+    reviews?: ReviewUncheckedUpdateManyWithoutAppNestedInput
   }
 
   export type AccountCreateWithoutEntitlementsInput = {
@@ -100681,6 +101110,8 @@ export namespace Prisma {
   export type AppCreateWithoutLeaderboardsInput = {
     id?: string
     name: string
+    description?: string | null
+    genre?: string | null
     status?: $Enums.AppStatus
     releaseDate?: Date | string | null
     ownerOrg: OrgCreateNestedOneWithoutAppsInput
@@ -100691,11 +101122,14 @@ export namespace Prisma {
     achievementGroups?: AchievementGroupCreateNestedManyWithoutAppInput
     notices?: NoticeCreateNestedManyWithoutAppInput
     liveEvents?: LiveEventCreateNestedManyWithoutAppInput
+    reviews?: ReviewCreateNestedManyWithoutAppInput
   }
 
   export type AppUncheckedCreateWithoutLeaderboardsInput = {
     id?: string
     name: string
+    description?: string | null
+    genre?: string | null
     status?: $Enums.AppStatus
     releaseDate?: Date | string | null
     ownerOrgId: string
@@ -100706,6 +101140,7 @@ export namespace Prisma {
     achievementGroups?: AchievementGroupUncheckedCreateNestedManyWithoutAppInput
     notices?: NoticeUncheckedCreateNestedManyWithoutAppInput
     liveEvents?: LiveEventUncheckedCreateNestedManyWithoutAppInput
+    reviews?: ReviewUncheckedCreateNestedManyWithoutAppInput
   }
 
   export type AppCreateOrConnectWithoutLeaderboardsInput = {
@@ -100751,6 +101186,8 @@ export namespace Prisma {
   export type AppUpdateWithoutLeaderboardsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    genre?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumAppStatusFieldUpdateOperationsInput | $Enums.AppStatus
     releaseDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     ownerOrg?: OrgUpdateOneRequiredWithoutAppsNestedInput
@@ -100761,11 +101198,14 @@ export namespace Prisma {
     achievementGroups?: AchievementGroupUpdateManyWithoutAppNestedInput
     notices?: NoticeUpdateManyWithoutAppNestedInput
     liveEvents?: LiveEventUpdateManyWithoutAppNestedInput
+    reviews?: ReviewUpdateManyWithoutAppNestedInput
   }
 
   export type AppUncheckedUpdateWithoutLeaderboardsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    genre?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumAppStatusFieldUpdateOperationsInput | $Enums.AppStatus
     releaseDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     ownerOrgId?: StringFieldUpdateOperationsInput | string
@@ -100776,6 +101216,7 @@ export namespace Prisma {
     achievementGroups?: AchievementGroupUncheckedUpdateManyWithoutAppNestedInput
     notices?: NoticeUncheckedUpdateManyWithoutAppNestedInput
     liveEvents?: LiveEventUncheckedUpdateManyWithoutAppNestedInput
+    reviews?: ReviewUncheckedUpdateManyWithoutAppNestedInput
   }
 
   export type ScoreUpsertWithWhereUniqueWithoutBoardInput = {
@@ -101025,6 +101466,8 @@ export namespace Prisma {
   export type AppCreateWithoutAchievementGroupsInput = {
     id?: string
     name: string
+    description?: string | null
+    genre?: string | null
     status?: $Enums.AppStatus
     releaseDate?: Date | string | null
     ownerOrg: OrgCreateNestedOneWithoutAppsInput
@@ -101035,11 +101478,14 @@ export namespace Prisma {
     gameStatuses?: GameStatusCreateNestedManyWithoutAppInput
     notices?: NoticeCreateNestedManyWithoutAppInput
     liveEvents?: LiveEventCreateNestedManyWithoutAppInput
+    reviews?: ReviewCreateNestedManyWithoutAppInput
   }
 
   export type AppUncheckedCreateWithoutAchievementGroupsInput = {
     id?: string
     name: string
+    description?: string | null
+    genre?: string | null
     status?: $Enums.AppStatus
     releaseDate?: Date | string | null
     ownerOrgId: string
@@ -101050,6 +101496,7 @@ export namespace Prisma {
     gameStatuses?: GameStatusUncheckedCreateNestedManyWithoutAppInput
     notices?: NoticeUncheckedCreateNestedManyWithoutAppInput
     liveEvents?: LiveEventUncheckedCreateNestedManyWithoutAppInput
+    reviews?: ReviewUncheckedCreateNestedManyWithoutAppInput
   }
 
   export type AppCreateOrConnectWithoutAchievementGroupsInput = {
@@ -101093,6 +101540,8 @@ export namespace Prisma {
   export type AppUpdateWithoutAchievementGroupsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    genre?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumAppStatusFieldUpdateOperationsInput | $Enums.AppStatus
     releaseDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     ownerOrg?: OrgUpdateOneRequiredWithoutAppsNestedInput
@@ -101103,11 +101552,14 @@ export namespace Prisma {
     gameStatuses?: GameStatusUpdateManyWithoutAppNestedInput
     notices?: NoticeUpdateManyWithoutAppNestedInput
     liveEvents?: LiveEventUpdateManyWithoutAppNestedInput
+    reviews?: ReviewUpdateManyWithoutAppNestedInput
   }
 
   export type AppUncheckedUpdateWithoutAchievementGroupsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    genre?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumAppStatusFieldUpdateOperationsInput | $Enums.AppStatus
     releaseDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     ownerOrgId?: StringFieldUpdateOperationsInput | string
@@ -101118,6 +101570,7 @@ export namespace Prisma {
     gameStatuses?: GameStatusUncheckedUpdateManyWithoutAppNestedInput
     notices?: NoticeUncheckedUpdateManyWithoutAppNestedInput
     liveEvents?: LiveEventUncheckedUpdateManyWithoutAppNestedInput
+    reviews?: ReviewUncheckedUpdateManyWithoutAppNestedInput
   }
 
   export type AchievementUpsertWithWhereUniqueWithoutGroupInput = {
@@ -101531,6 +101984,8 @@ export namespace Prisma {
   export type AppCreateWithoutGameStatusesInput = {
     id?: string
     name: string
+    description?: string | null
+    genre?: string | null
     status?: $Enums.AppStatus
     releaseDate?: Date | string | null
     ownerOrg: OrgCreateNestedOneWithoutAppsInput
@@ -101541,11 +101996,14 @@ export namespace Prisma {
     achievementGroups?: AchievementGroupCreateNestedManyWithoutAppInput
     notices?: NoticeCreateNestedManyWithoutAppInput
     liveEvents?: LiveEventCreateNestedManyWithoutAppInput
+    reviews?: ReviewCreateNestedManyWithoutAppInput
   }
 
   export type AppUncheckedCreateWithoutGameStatusesInput = {
     id?: string
     name: string
+    description?: string | null
+    genre?: string | null
     status?: $Enums.AppStatus
     releaseDate?: Date | string | null
     ownerOrgId: string
@@ -101556,6 +102014,7 @@ export namespace Prisma {
     achievementGroups?: AchievementGroupUncheckedCreateNestedManyWithoutAppInput
     notices?: NoticeUncheckedCreateNestedManyWithoutAppInput
     liveEvents?: LiveEventUncheckedCreateNestedManyWithoutAppInput
+    reviews?: ReviewUncheckedCreateNestedManyWithoutAppInput
   }
 
   export type AppCreateOrConnectWithoutGameStatusesInput = {
@@ -101670,6 +102129,8 @@ export namespace Prisma {
   export type AppUpdateWithoutGameStatusesInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    genre?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumAppStatusFieldUpdateOperationsInput | $Enums.AppStatus
     releaseDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     ownerOrg?: OrgUpdateOneRequiredWithoutAppsNestedInput
@@ -101680,11 +102141,14 @@ export namespace Prisma {
     achievementGroups?: AchievementGroupUpdateManyWithoutAppNestedInput
     notices?: NoticeUpdateManyWithoutAppNestedInput
     liveEvents?: LiveEventUpdateManyWithoutAppNestedInput
+    reviews?: ReviewUpdateManyWithoutAppNestedInput
   }
 
   export type AppUncheckedUpdateWithoutGameStatusesInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    genre?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumAppStatusFieldUpdateOperationsInput | $Enums.AppStatus
     releaseDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     ownerOrgId?: StringFieldUpdateOperationsInput | string
@@ -101695,6 +102159,7 @@ export namespace Prisma {
     achievementGroups?: AchievementGroupUncheckedUpdateManyWithoutAppNestedInput
     notices?: NoticeUncheckedUpdateManyWithoutAppNestedInput
     liveEvents?: LiveEventUncheckedUpdateManyWithoutAppNestedInput
+    reviews?: ReviewUncheckedUpdateManyWithoutAppNestedInput
   }
 
   export type MetricCreateWithoutAnalyticsInput = {
@@ -102060,6 +102525,8 @@ export namespace Prisma {
   export type AppCreateWithoutNoticesInput = {
     id?: string
     name: string
+    description?: string | null
+    genre?: string | null
     status?: $Enums.AppStatus
     releaseDate?: Date | string | null
     ownerOrg: OrgCreateNestedOneWithoutAppsInput
@@ -102070,11 +102537,14 @@ export namespace Prisma {
     gameStatuses?: GameStatusCreateNestedManyWithoutAppInput
     achievementGroups?: AchievementGroupCreateNestedManyWithoutAppInput
     liveEvents?: LiveEventCreateNestedManyWithoutAppInput
+    reviews?: ReviewCreateNestedManyWithoutAppInput
   }
 
   export type AppUncheckedCreateWithoutNoticesInput = {
     id?: string
     name: string
+    description?: string | null
+    genre?: string | null
     status?: $Enums.AppStatus
     releaseDate?: Date | string | null
     ownerOrgId: string
@@ -102085,6 +102555,7 @@ export namespace Prisma {
     gameStatuses?: GameStatusUncheckedCreateNestedManyWithoutAppInput
     achievementGroups?: AchievementGroupUncheckedCreateNestedManyWithoutAppInput
     liveEvents?: LiveEventUncheckedCreateNestedManyWithoutAppInput
+    reviews?: ReviewUncheckedCreateNestedManyWithoutAppInput
   }
 
   export type AppCreateOrConnectWithoutNoticesInput = {
@@ -102106,6 +102577,8 @@ export namespace Prisma {
   export type AppUpdateWithoutNoticesInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    genre?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumAppStatusFieldUpdateOperationsInput | $Enums.AppStatus
     releaseDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     ownerOrg?: OrgUpdateOneRequiredWithoutAppsNestedInput
@@ -102116,11 +102589,14 @@ export namespace Prisma {
     gameStatuses?: GameStatusUpdateManyWithoutAppNestedInput
     achievementGroups?: AchievementGroupUpdateManyWithoutAppNestedInput
     liveEvents?: LiveEventUpdateManyWithoutAppNestedInput
+    reviews?: ReviewUpdateManyWithoutAppNestedInput
   }
 
   export type AppUncheckedUpdateWithoutNoticesInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    genre?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumAppStatusFieldUpdateOperationsInput | $Enums.AppStatus
     releaseDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     ownerOrgId?: StringFieldUpdateOperationsInput | string
@@ -102131,11 +102607,14 @@ export namespace Prisma {
     gameStatuses?: GameStatusUncheckedUpdateManyWithoutAppNestedInput
     achievementGroups?: AchievementGroupUncheckedUpdateManyWithoutAppNestedInput
     liveEvents?: LiveEventUncheckedUpdateManyWithoutAppNestedInput
+    reviews?: ReviewUncheckedUpdateManyWithoutAppNestedInput
   }
 
   export type AppCreateWithoutLiveEventsInput = {
     id?: string
     name: string
+    description?: string | null
+    genre?: string | null
     status?: $Enums.AppStatus
     releaseDate?: Date | string | null
     ownerOrg: OrgCreateNestedOneWithoutAppsInput
@@ -102146,11 +102625,14 @@ export namespace Prisma {
     gameStatuses?: GameStatusCreateNestedManyWithoutAppInput
     achievementGroups?: AchievementGroupCreateNestedManyWithoutAppInput
     notices?: NoticeCreateNestedManyWithoutAppInput
+    reviews?: ReviewCreateNestedManyWithoutAppInput
   }
 
   export type AppUncheckedCreateWithoutLiveEventsInput = {
     id?: string
     name: string
+    description?: string | null
+    genre?: string | null
     status?: $Enums.AppStatus
     releaseDate?: Date | string | null
     ownerOrgId: string
@@ -102161,6 +102643,7 @@ export namespace Prisma {
     gameStatuses?: GameStatusUncheckedCreateNestedManyWithoutAppInput
     achievementGroups?: AchievementGroupUncheckedCreateNestedManyWithoutAppInput
     notices?: NoticeUncheckedCreateNestedManyWithoutAppInput
+    reviews?: ReviewUncheckedCreateNestedManyWithoutAppInput
   }
 
   export type AppCreateOrConnectWithoutLiveEventsInput = {
@@ -102182,6 +102665,8 @@ export namespace Prisma {
   export type AppUpdateWithoutLiveEventsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    genre?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumAppStatusFieldUpdateOperationsInput | $Enums.AppStatus
     releaseDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     ownerOrg?: OrgUpdateOneRequiredWithoutAppsNestedInput
@@ -102192,11 +102677,14 @@ export namespace Prisma {
     gameStatuses?: GameStatusUpdateManyWithoutAppNestedInput
     achievementGroups?: AchievementGroupUpdateManyWithoutAppNestedInput
     notices?: NoticeUpdateManyWithoutAppNestedInput
+    reviews?: ReviewUpdateManyWithoutAppNestedInput
   }
 
   export type AppUncheckedUpdateWithoutLiveEventsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    genre?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumAppStatusFieldUpdateOperationsInput | $Enums.AppStatus
     releaseDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     ownerOrgId?: StringFieldUpdateOperationsInput | string
@@ -102207,6 +102695,7 @@ export namespace Prisma {
     gameStatuses?: GameStatusUncheckedUpdateManyWithoutAppNestedInput
     achievementGroups?: AchievementGroupUncheckedUpdateManyWithoutAppNestedInput
     notices?: NoticeUncheckedUpdateManyWithoutAppNestedInput
+    reviews?: ReviewUncheckedUpdateManyWithoutAppNestedInput
   }
 
   export type AccountCreateWithoutRemindersInput = {
@@ -105459,7 +105948,8 @@ export namespace Prisma {
 
   export type ReviewCreateManyAccountInput = {
     id?: string
-    productId: string
+    productId?: string | null
+    appId?: string | null
     rating: number
     body?: string | null
   }
@@ -105710,19 +106200,22 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     rating?: IntFieldUpdateOperationsInput | number
     body?: NullableStringFieldUpdateOperationsInput | string | null
-    product?: ProductUpdateOneRequiredWithoutReviewsNestedInput
+    product?: ProductUpdateOneWithoutReviewsNestedInput
+    app?: AppUpdateOneWithoutReviewsNestedInput
   }
 
   export type ReviewUncheckedUpdateWithoutAccountInput = {
     id?: StringFieldUpdateOperationsInput | string
-    productId?: StringFieldUpdateOperationsInput | string
+    productId?: NullableStringFieldUpdateOperationsInput | string | null
+    appId?: NullableStringFieldUpdateOperationsInput | string | null
     rating?: IntFieldUpdateOperationsInput | number
     body?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ReviewUncheckedUpdateManyWithoutAccountInput = {
     id?: StringFieldUpdateOperationsInput | string
-    productId?: StringFieldUpdateOperationsInput | string
+    productId?: NullableStringFieldUpdateOperationsInput | string | null
+    appId?: NullableStringFieldUpdateOperationsInput | string | null
     rating?: IntFieldUpdateOperationsInput | number
     body?: NullableStringFieldUpdateOperationsInput | string | null
   }
@@ -106156,6 +106649,8 @@ export namespace Prisma {
   export type AppCreateManyOwnerOrgInput = {
     id?: string
     name: string
+    description?: string | null
+    genre?: string | null
     status?: $Enums.AppStatus
     releaseDate?: Date | string | null
   }
@@ -106220,6 +106715,8 @@ export namespace Prisma {
   export type AppUpdateWithoutOwnerOrgInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    genre?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumAppStatusFieldUpdateOperationsInput | $Enums.AppStatus
     releaseDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accountApps?: AccountAppUpdateManyWithoutAppNestedInput
@@ -106230,11 +106727,14 @@ export namespace Prisma {
     achievementGroups?: AchievementGroupUpdateManyWithoutAppNestedInput
     notices?: NoticeUpdateManyWithoutAppNestedInput
     liveEvents?: LiveEventUpdateManyWithoutAppNestedInput
+    reviews?: ReviewUpdateManyWithoutAppNestedInput
   }
 
   export type AppUncheckedUpdateWithoutOwnerOrgInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    genre?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumAppStatusFieldUpdateOperationsInput | $Enums.AppStatus
     releaseDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accountApps?: AccountAppUncheckedUpdateManyWithoutAppNestedInput
@@ -106245,11 +106745,14 @@ export namespace Prisma {
     achievementGroups?: AchievementGroupUncheckedUpdateManyWithoutAppNestedInput
     notices?: NoticeUncheckedUpdateManyWithoutAppNestedInput
     liveEvents?: LiveEventUncheckedUpdateManyWithoutAppNestedInput
+    reviews?: ReviewUncheckedUpdateManyWithoutAppNestedInput
   }
 
   export type AppUncheckedUpdateManyWithoutOwnerOrgInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    genre?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumAppStatusFieldUpdateOperationsInput | $Enums.AppStatus
     releaseDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
@@ -106527,6 +107030,14 @@ export namespace Prisma {
     endsAt: Date | string
   }
 
+  export type ReviewCreateManyAppInput = {
+    id?: string
+    accountId: string
+    productId?: string | null
+    rating: number
+    body?: string | null
+  }
+
   export type AccountAppUpdateWithoutAppInput = {
     account?: AccountUpdateOneRequiredWithoutAccountAppsNestedInput
   }
@@ -106701,6 +107212,30 @@ export namespace Prisma {
     endsAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type ReviewUpdateWithoutAppInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    rating?: IntFieldUpdateOperationsInput | number
+    body?: NullableStringFieldUpdateOperationsInput | string | null
+    account?: AccountUpdateOneRequiredWithoutReviewsNestedInput
+    product?: ProductUpdateOneWithoutReviewsNestedInput
+  }
+
+  export type ReviewUncheckedUpdateWithoutAppInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    accountId?: StringFieldUpdateOperationsInput | string
+    productId?: NullableStringFieldUpdateOperationsInput | string | null
+    rating?: IntFieldUpdateOperationsInput | number
+    body?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type ReviewUncheckedUpdateManyWithoutAppInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    accountId?: StringFieldUpdateOperationsInput | string
+    productId?: NullableStringFieldUpdateOperationsInput | string | null
+    rating?: IntFieldUpdateOperationsInput | number
+    body?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
   export type MemberRoleCreateManyMemberInput = {
     roleId: string
   }
@@ -106826,6 +107361,7 @@ export namespace Prisma {
   export type ReviewCreateManyProductInput = {
     id?: string
     accountId: string
+    appId?: string | null
     rating: number
     body?: string | null
   }
@@ -106891,11 +107427,13 @@ export namespace Prisma {
     rating?: IntFieldUpdateOperationsInput | number
     body?: NullableStringFieldUpdateOperationsInput | string | null
     account?: AccountUpdateOneRequiredWithoutReviewsNestedInput
+    app?: AppUpdateOneWithoutReviewsNestedInput
   }
 
   export type ReviewUncheckedUpdateWithoutProductInput = {
     id?: StringFieldUpdateOperationsInput | string
     accountId?: StringFieldUpdateOperationsInput | string
+    appId?: NullableStringFieldUpdateOperationsInput | string | null
     rating?: IntFieldUpdateOperationsInput | number
     body?: NullableStringFieldUpdateOperationsInput | string | null
   }
@@ -106903,6 +107441,7 @@ export namespace Prisma {
   export type ReviewUncheckedUpdateManyWithoutProductInput = {
     id?: StringFieldUpdateOperationsInput | string
     accountId?: StringFieldUpdateOperationsInput | string
+    appId?: NullableStringFieldUpdateOperationsInput | string | null
     rating?: IntFieldUpdateOperationsInput | number
     body?: NullableStringFieldUpdateOperationsInput | string | null
   }

@@ -151,6 +151,8 @@ exports.Prisma.AppServiceScalarFieldEnum = {
 exports.Prisma.AppScalarFieldEnum = {
   id: 'id',
   name: 'name',
+  description: 'description',
+  genre: 'genre',
   status: 'status',
   releaseDate: 'releaseDate',
   ownerOrgId: 'ownerOrgId'
@@ -310,6 +312,7 @@ exports.Prisma.ReviewScalarFieldEnum = {
   id: 'id',
   accountId: 'accountId',
   productId: 'productId',
+  appId: 'appId',
   rating: 'rating',
   body: 'body'
 };

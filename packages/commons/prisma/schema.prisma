@@ -240,6 +240,8 @@ model AppService {
 model App {
   id          String       @id @default(cuid())
   name        String
+  description String?
+  genre       String?
   status      AppStatus    @default(DRAFT)
   releaseDate DateTime?
   ownerOrgId  String
@@ -258,6 +260,7 @@ model App {
   // Cluster 4
   notices    Notice[]
   liveEvents LiveEvent[]
+  reviews    Review[]
 }
 
 model AccountApp {
@@ -458,15 +461,18 @@ model RefundRequest {
 }
 
 model Review {
-  id        String  @id @default(cuid())
+  id        String   @id @default(cuid())
   accountId String
-  account   Account @relation(fields: [accountId], references: [id])
-  productId String
-  product   Product @relation(fields: [productId], references: [id])
+  account   Account  @relation(fields: [accountId], references: [id])
+  productId String?
+  product   Product? @relation(fields: [productId], references: [id])
+  appId     String?
+  app       App?     @relation(fields: [appId], references: [id])
   rating    Int
   body      String?
 
   @@unique([accountId, productId])
+  @@unique([accountId, appId])
 }
 
 model Demo {
