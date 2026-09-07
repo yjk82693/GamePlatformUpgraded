@@ -1,6 +1,7 @@
 import { Router } from "express";
 import {
-  browseShop, viewProduct, viewReviews, purchase, topup,
+  browseShop, browseGames, getLibrary, addToLibrary,
+  viewProduct, viewReviews, purchase, topup,
   verifyReceipt, restorePurchases, writeReview, viewOwnTransactions,
   tryDemo, claimDemoReward, redeemCode,
 } from "@game-platform/player";
@@ -9,12 +10,31 @@ import { requireAuth, type AuthedRequest } from "../middleware/auth.js";
 const router = Router();
 router.use(requireAuth);
 
-router.get("/browse", async (req, res) => {
+// Topup Center — in-game currency/items for games already in the library
+router.get("/browse", async (req: AuthedRequest, res) => {
   const { categoryId, appId } = req.query;
   const filter: { categoryId?: string; appId?: string } = {};
   if (typeof categoryId === "string") filter.categoryId = categoryId;
   if (typeof appId === "string") filter.appId = appId;
-  res.json(await browseShop(filter));
+  res.json(await browseShop(req.accountId!, filter));
+});
+
+// Store — Steam-style game browser
+router.get("/games", async (req: AuthedRequest, res) => {
+  res.json(await browseGames(req.accountId!));
+});
+
+// Library — games explicitly added
+router.get("/library", async (req: AuthedRequest, res) => {
+  res.json(await getLibrary(req.accountId!));
+});
+
+router.post("/library/add", async (req: AuthedRequest, res) => {
+  try {
+    res.json(await addToLibrary(req.accountId!, req.body.appId));
+  } catch (err) {
+    res.status(400).json({ error: (err as Error).message });
+  }
 });
 
 router.get("/products/:id", async (req: AuthedRequest, res) => {
