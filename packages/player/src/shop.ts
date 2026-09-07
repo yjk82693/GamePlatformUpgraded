@@ -197,18 +197,29 @@ export async function handlePaymentFailure(receiptId: string) {
 
 export async function writeReview(
   playerId: string,
-  productId: string,
+  target: { productId: string } | { appId: string },
   rating: number,
   body: string
 ) {
-  const owned = await prisma.entitlement.findUnique({
-    where: { accountId_productId: { accountId: playerId, productId } },
-  });
-  if (!owned) throw new Error("Must own product to review");
   if (rating < 1 || rating > 5) throw new Error("Invalid rating");
+
+  if ("productId" in target) {
+    const owned = await prisma.entitlement.findUnique({
+      where: { accountId_productId: { accountId: playerId, productId: target.productId } },
+    });
+    if (!owned) throw new Error("Must own product to review");
+    return prisma.review.upsert({
+      where: { accountId_productId: { accountId: playerId, productId: target.productId } },
+      create: { accountId: playerId, productId: target.productId, rating, body },
+      update: { rating, body },
+    });
+  }
+
+  const inLibrary = await isInLibrary(playerId, target.appId);
+  if (!inLibrary) throw new Error("Must have this game in your library to review it");
   return prisma.review.upsert({
-    where: { accountId_productId: { accountId: playerId, productId } },
-    create: { accountId: playerId, productId, rating, body },
+    where: { accountId_appId: { accountId: playerId, appId: target.appId } },
+    create: { accountId: playerId, appId: target.appId, rating, body },
     update: { rating, body },
   });
 }
@@ -259,4 +270,55 @@ export async function redeemCode(playerId: string, code: string) {
 
   await prisma.redeemGrant.create({ data: { codeId: rc.id, accountId: playerId } });
   return rc.reward;
+}
+
+// Store detail page: full game info + DLC + reviews + ownership state
+export async function getGameDetail(playerId: string, appId: string) {
+  const app = await prisma.app.findUnique({
+    where: { id: appId },
+    include: {
+      products: { where: { kind: { in: ["GAME", "DLC"] } } },
+    },
+  });
+  if (!app || app.status !== "PUBLISHED") throw new Error("Game not found");
+
+  const gameProduct = app.products.find((p) => p.kind === "GAME") ?? null;
+  const dlc = app.products.filter((p) => p.kind === "DLC");
+  const canAdd = await canAccessGame(playerId, appId);
+  const inLibrary = await isInLibrary(playerId, appId);
+
+  const allProductIds = app.products.map((p) => p.id);
+  const productReviews = allProductIds.length > 0
+    ? await prisma.review.findMany({
+        where: { productId: { in: allProductIds } },
+        orderBy: { id: "desc" },
+      })
+    : [];
+  const appReviews = await prisma.review.findMany({
+    where: { appId },
+    orderBy: { id: "desc" },
+  });
+  const reviews = [...appReviews, ...productReviews];
+
+  return {
+    appId: app.id,
+    name: app.name,
+    description: app.description,
+    genre: app.genre,
+    gameProduct,
+    dlc,
+    isFreeToPlay: !gameProduct,
+    canAdd,
+    inLibrary,
+    reviews,
+  };
+}
+
+export async function removeFromLibrary(playerId: string, appId: string) {
+  await prisma.accountApp.delete({
+    where: { accountId_appId: { accountId: playerId, appId } },
+  }).catch(() => {
+    // already not in library — treat as a no-op success
+  });
+  return { appId, removed: true };
 }
