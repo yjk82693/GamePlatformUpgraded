@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link, Navigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { tokens } from '../theme/tokens'
 import { Button } from '../components/ui'
@@ -7,6 +7,13 @@ export default function HomePage() {
   const { logout, accountType, loading } = useAuth()
 
   if (loading) return <p style={{ textAlign: 'center', marginTop: 80, color: tokens.color.textMuted }}>Loading...</p>
+
+  const isStaff = accountType?.isStaff
+  const isPlayer = accountType?.isPlayer
+
+  if (isPlayer && !isStaff) {
+    return <Navigate to="/player" replace />
+  }
 
   const linkStyle: React.CSSProperties = {
     display: 'inline-block',
@@ -19,9 +26,6 @@ export default function HomePage() {
     fontWeight: 600,
   }
 
-  const isStaff = accountType?.isStaff
-  const isPlayer = accountType?.isPlayer
-
   return (
     <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
       <div style={{ textAlign: 'center', maxWidth: 480 }}>
@@ -29,7 +33,6 @@ export default function HomePage() {
         <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
           {isStaff && <Link to="/distributor" style={linkStyle}>Game Management</Link>}
           {isStaff && <Link to="/coop" style={linkStyle}>Workspace</Link>}
-          {!isStaff && isPlayer && <Link to="/player" style={linkStyle}>Player</Link>}
         </div>
         {!isStaff && !isPlayer && (
           <p style={{ color: tokens.color.textMuted, marginTop: 24 }}>

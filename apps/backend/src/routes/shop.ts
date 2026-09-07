@@ -1,6 +1,6 @@
 import { Router } from "express";
 import {
-  browseShop, browseGames, getLibrary, addToLibrary,
+  browseShop, browseGames, getGameDetail, getLibrary, addToLibrary, removeFromLibrary,
   viewProduct, viewReviews, purchase, topup,
   verifyReceipt, restorePurchases, writeReview, viewOwnTransactions,
   tryDemo, claimDemoReward, redeemCode,
@@ -24,6 +24,14 @@ router.get("/games", async (req: AuthedRequest, res) => {
   res.json(await browseGames(req.accountId!));
 });
 
+router.get("/games/:appId", async (req: AuthedRequest, res) => {
+  try {
+    res.json(await getGameDetail(req.accountId!, req.params.appId as string));
+  } catch (err) {
+    res.status(404).json({ error: (err as Error).message });
+  }
+});
+
 // Library — games explicitly added
 router.get("/library", async (req: AuthedRequest, res) => {
   res.json(await getLibrary(req.accountId!));
@@ -32,6 +40,14 @@ router.get("/library", async (req: AuthedRequest, res) => {
 router.post("/library/add", async (req: AuthedRequest, res) => {
   try {
     res.json(await addToLibrary(req.accountId!, req.body.appId));
+  } catch (err) {
+    res.status(400).json({ error: (err as Error).message });
+  }
+});
+
+router.delete("/library/:appId", async (req: AuthedRequest, res) => {
+  try {
+    res.json(await removeFromLibrary(req.accountId!, req.params.appId as string));
   } catch (err) {
     res.status(400).json({ error: (err as Error).message });
   }
@@ -74,8 +90,9 @@ router.get("/restore", async (req: AuthedRequest, res) => {
 
 router.post("/reviews", async (req: AuthedRequest, res) => {
   try {
-    const { productId, rating, body } = req.body;
-    res.json(await writeReview(req.accountId!, productId, rating, body));
+    const { productId, appId, rating, body } = req.body;
+    const target = productId ? { productId } : { appId };
+    res.json(await writeReview(req.accountId!, target, rating, body));
   } catch (err) {
     res.status(400).json({ error: (err as Error).message });
   }

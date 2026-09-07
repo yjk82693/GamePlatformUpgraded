@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { apiFetch } from '../../lib/api'
 import { Card, Button, Pill } from '../../components/ui'
 import { tokens, gameAccent } from '../../theme/tokens'
@@ -21,6 +22,7 @@ interface Game {
 }
 
 export default function StorePage() {
+  const navigate = useNavigate()
   const [games, setGames] = useState<Game[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -43,7 +45,8 @@ export default function StorePage() {
     }
   }
 
-  async function handleBuy(productId: string, payWith: 'CASH' | 'COIN') {
+  async function handleBuy(e: React.MouseEvent, productId: string, payWith: 'CASH' | 'COIN') {
+    e.stopPropagation()
     setMessage(null)
     try {
       await apiFetch('/player/shop/purchase', {
@@ -57,7 +60,8 @@ export default function StorePage() {
     }
   }
 
-  async function handleAddToLibrary(appId: string) {
+  async function handleAddToLibrary(e: React.MouseEvent, appId: string) {
+    e.stopPropagation()
     setMessage(null)
     try {
       await apiFetch('/player/shop/library/add', {
@@ -84,7 +88,12 @@ export default function StorePage() {
         {games.map((g) => {
           const accent = gameAccent(g.name)
           return (
-            <Card key={g.appId} accent={accent}>
+            <Card
+              key={g.appId}
+              accent={accent}
+              onClick={() => navigate(`/player/store/game/${g.appId}`)}
+              style={{ cursor: 'pointer' }}
+            >
               <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 10 }}>
                 <div style={{ width: 6, height: 22, background: accent, borderRadius: 2 }} />
                 <div style={{ fontWeight: 700, fontSize: 15 }}>{g.name}</div>
@@ -111,19 +120,19 @@ export default function StorePage() {
               {g.inLibrary ? (
                 <Pill tone="success">In Library</Pill>
               ) : g.canAdd ? (
-                <Button variant="primary" onClick={() => handleAddToLibrary(g.appId)}>
+                <Button variant="primary" onClick={(e) => handleAddToLibrary(e, g.appId)}>
                   Add to Library
                 </Button>
               ) : (
                 g.gameProduct && (
                   <div style={{ display: 'flex', gap: 8 }}>
                     {g.gameProduct.priceCents != null && (
-                      <Button variant="primary" onClick={() => handleBuy(g.gameProduct!.id, 'CASH')}>
+                      <Button variant="primary" onClick={(e) => handleBuy(e, g.gameProduct!.id, 'CASH')}>
                         Buy (cash)
                       </Button>
                     )}
                     {g.gameProduct.priceCoins != null && (
-                      <Button variant="secondary" onClick={() => handleBuy(g.gameProduct!.id, 'COIN')}>
+                      <Button variant="secondary" onClick={(e) => handleBuy(e, g.gameProduct!.id, 'COIN')}>
                         Buy (coins)
                       </Button>
                     )}

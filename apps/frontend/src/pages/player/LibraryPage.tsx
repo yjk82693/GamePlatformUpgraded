@@ -57,7 +57,7 @@ export default function LibraryPage() {
                   <div style={{ fontWeight: 700, fontSize: 15 }}>{g.name}</div>
                 </div>
                 <Link
-                  to={`/player/topup?appId=${g.id}`}
+                  to={`/player/store/topup?appId=${g.id}`}
                   style={{ fontSize: 13, color: tokens.color.accentSoft, textDecoration: 'none' }}
                 >
                   Visit Topup Center →
