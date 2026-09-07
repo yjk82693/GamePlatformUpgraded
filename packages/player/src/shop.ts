@@ -3,16 +3,99 @@ import { prisma, needsConsent } from "@game-platform/commons";
 import type { Prisma } from "@game-platform/commons";
 import { creditCoins, debitCoins } from "./wallet.js";
 
-export async function browseShop(filter?: { categoryId?: string; appId?: string }) {
-  return prisma.product.findMany({
+// Whether the purchase requirement for a game is satisfied — free-to-play
+// games (no GAME-kind product) always pass; paid games require owning the
+// GAME product. This is separate from actually being "in the library" —
+// see addToLibrary/getLibrary below.
+async function canAccessGame(playerId: string, appId: string): Promise<boolean> {
+  const gameProduct = await prisma.product.findFirst({ where: { appId, kind: "GAME" } });
+  if (!gameProduct) return true;
+  const entitlement = await prisma.entitlement.findUnique({
+    where: { accountId_productId: { accountId: playerId, productId: gameProduct.id } },
+  });
+  return !!entitlement;
+}
+
+async function isInLibrary(playerId: string, appId: string): Promise<boolean> {
+  const row = await prisma.accountApp.findUnique({
+    where: { accountId_appId: { accountId: playerId, appId } },
+  });
+  return !!row;
+}
+
+// Explicit "add to library" action (simulates a download/install). Free
+// games can be added immediately; paid games require already owning the
+// GAME product first.
+export async function addToLibrary(playerId: string, appId: string) {
+  const app = await prisma.app.findUnique({ where: { id: appId } });
+  if (!app) throw new Error("Game not found");
+
+  const canAccess = await canAccessGame(playerId, appId);
+  if (!canAccess) throw new Error("You must purchase this game before adding it to your library");
+
+  const existing = await isInLibrary(playerId, appId);
+  if (existing) return { appId, alreadyInLibrary: true };
+
+  await prisma.accountApp.create({ data: { accountId: playerId, appId } });
+  return { appId, alreadyInLibrary: false };
+}
+
+// Topup Center: in-game currency/item bundles, only for games already in the player's library
+export async function browseShop(playerId: string, filter?: { categoryId?: string; appId?: string }) {
+  const products = await prisma.product.findMany({
     where: {
       enabled: true,
+      kind: "CONSUMABLE",
       app: { status: "PUBLISHED" },
       ...(filter?.categoryId ? { categoryId: filter.categoryId } : {}),
       ...(filter?.appId ? { appId: filter.appId } : {}),
     },
     include: { app: true },
   });
+
+  const withLibrary = await Promise.all(
+    products.map(async (p) => ({ product: p, inLibrary: await isInLibrary(playerId, p.appId) }))
+  );
+  return withLibrary.filter((o) => o.inLibrary).map((o) => o.product);
+}
+
+// Store: Steam-style game browser — every published app, its GAME/DLC
+// products, whether the purchase requirement is met, and whether it's
+// already been added to the library
+export async function browseGames(playerId: string) {
+  const apps = await prisma.app.findMany({
+    where: { status: "PUBLISHED" },
+    include: {
+      products: { where: { kind: { in: ["GAME", "DLC"] } } },
+    },
+  });
+
+  return Promise.all(
+    apps.map(async (app) => {
+      const gameProduct = app.products.find((p) => p.kind === "GAME") ?? null;
+      const dlc = app.products.filter((p) => p.kind === "DLC");
+      const canAdd = await canAccessGame(playerId, app.id);
+      const inLibrary = await isInLibrary(playerId, app.id);
+      return {
+        appId: app.id,
+        name: app.name,
+        gameProduct,
+        dlc,
+        isFreeToPlay: !gameProduct,
+        canAdd,
+        inLibrary,
+      };
+    })
+  );
+}
+
+// Library: only games explicitly added via addToLibrary
+export async function getLibrary(playerId: string) {
+  const rows = await prisma.accountApp.findMany({
+    where: { accountId: playerId },
+    include: { app: true },
+  });
+  return rows.map((r) => r.app);
 }
 
 export async function viewProduct(viewerId: string, productId: string) {
