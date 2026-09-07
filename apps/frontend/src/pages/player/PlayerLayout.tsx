@@ -3,7 +3,9 @@ import { tokens } from '../../theme/tokens'
 import { Header } from '../../components/ui'
 
 const links = [
-  { to: '/player', label: 'Shop', end: true },
+  { to: '/player', label: 'Library', end: true },
+  { to: '/player/store', label: 'Store' },
+  { to: '/player/topup', label: 'Topup Center' },
   { to: '/player/wallet', label: 'Wallet' },
   { to: '/player/profile', label: 'Profile' },
   { to: '/player/social', label: 'Friends' },

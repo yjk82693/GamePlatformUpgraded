@@ -5,7 +5,9 @@ import { StaffThemeProvider } from './components/admin'
 import LoginPage from './pages/LoginPage'
 import HomePage from './pages/HomePage'
 import PlayerLayout from './pages/player/PlayerLayout'
-import ShopPage from './pages/player/ShopPage'
+import LibraryPage from './pages/player/LibraryPage'
+import StorePage from './pages/player/StorePage'
+import TopupPage from './pages/player/TopupPage'
 import WalletPage from './pages/player/WalletPage'
 import ProfilePage from './pages/player/ProfilePage'
 import SocialPage from './pages/player/SocialPage'
@@ -37,7 +39,9 @@ function App() {
 
         <Route element={<TypeRoute require="isPlayer" />}>
           <Route path="/player" element={<PlayerLayout />}>
-            <Route index element={<ShopPage />} />
+            <Route index element={<LibraryPage />} />
+            <Route path="store" element={<StorePage />} />
+            <Route path="topup" element={<TopupPage />} />
             <Route path="wallet" element={<WalletPage />} />
             <Route path="profile" element={<ProfilePage />} />
             <Route path="social" element={<SocialPage />} />
