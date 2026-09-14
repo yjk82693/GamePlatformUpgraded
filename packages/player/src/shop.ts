@@ -76,14 +76,32 @@ export async function browseGames(playerId: string) {
       const dlc = app.products.filter((p) => p.kind === "DLC");
       const canAdd = await canAccessGame(playerId, app.id);
       const inLibrary = await isInLibrary(playerId, app.id);
+
+      const allProductIds = app.products.map((p) => p.id);
+      const [productReviews, appReviews, leaderboardCount] = await Promise.all([
+        allProductIds.length > 0
+          ? prisma.review.findMany({ where: { productId: { in: allProductIds } } })
+          : Promise.resolve([]),
+        prisma.review.findMany({ where: { appId: app.id } }),
+        prisma.leaderboard.count({ where: { appId: app.id } }),
+      ]);
+      const allReviews = [...productReviews, ...appReviews];
+      const avgRating = allReviews.length > 0
+        ? allReviews.reduce((sum, r) => sum + r.rating, 0) / allReviews.length
+        : null;
+
       return {
         appId: app.id,
         name: app.name,
+        genre: app.genre,
         gameProduct,
         dlc,
         isFreeToPlay: !gameProduct,
         canAdd,
         inLibrary,
+        avgRating,
+        reviewCount: allReviews.length,
+        isMultiplayer: leaderboardCount > 0,
       };
     })
   );
