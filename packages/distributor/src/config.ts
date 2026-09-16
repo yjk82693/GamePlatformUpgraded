@@ -1,36 +1,46 @@
-import { prisma, requirePermission, getMyOrgId } from "@game-platform/commons";
+import { prisma, requirePermission, getMyOrgId, logAction } from "@game-platform/commons";
 
 export async function createBoard(actorId: string, appId: string, name: string) {
   await requirePermission(actorId, "CREATE", "ANALYTICS");
-  return prisma.leaderboard.create({ data: { appId, name } });
+  const board = await prisma.leaderboard.create({ data: { appId, name } });
+  await logAction(actorId, "CREATE", "ANALYTICS", board.id, { appId, name }, true);
+  return board;
 }
 
 export async function configureBoard(actorId: string, boardId: string, data: { name?: string; season?: number }) {
   await requirePermission(actorId, "UPDATE", "ANALYTICS");
-  return prisma.leaderboard.update({ where: { id: boardId }, data });
+  const board = await prisma.leaderboard.update({ where: { id: boardId }, data });
+  await logAction(actorId, "UPDATE", "ANALYTICS", boardId, data, true);
+  return board;
 }
 
 export async function openSeason(actorId: string, boardId: string) {
   await requirePermission(actorId, "UPDATE", "ANALYTICS");
   const board = await prisma.leaderboard.findUnique({ where: { id: boardId } });
   if (!board) throw new Error("Board not found");
-  return prisma.leaderboard.update({
+  const updated = await prisma.leaderboard.update({
     where: { id: boardId },
     data: { season: board.season + 1, closed: false },
   });
+  await logAction(actorId, "UPDATE", "ANALYTICS", boardId, { season: updated.season, closed: false }, true);
+  return updated;
 }
 
 export async function closeSeason(actorId: string, boardId: string) {
   await requirePermission(actorId, "UPDATE", "ANALYTICS");
-  return prisma.leaderboard.update({ where: { id: boardId }, data: { closed: true } });
+  const board = await prisma.leaderboard.update({ where: { id: boardId }, data: { closed: true } });
+  await logAction(actorId, "UPDATE", "ANALYTICS", boardId, { closed: true }, true);
+  return board;
 }
 
 export async function registerTerms(actorId: string, content: string, version: string, effectiveDate: Date) {
   const myOrgId = await getMyOrgId(actorId);
   await requirePermission(actorId, "CREATE", "SETTING", myOrgId ?? undefined);
-  return prisma.terms.create({
+  const terms = await prisma.terms.create({
     data: { content, version, effectiveDate, ...(myOrgId ? { orgId: myOrgId } : {}) },
   });
+  await logAction(actorId, "CREATE", "SETTING", terms.id, { version, effectiveDate }, true);
+  return terms;
 }
 
 export async function activateTerms(actorId: string, version: string) {
@@ -42,19 +52,23 @@ export async function activateTerms(actorId: string, version: string) {
     where: { orgId: myOrgId },
     data: { active: false },
   });
-  return prisma.terms.update({
+  const terms = await prisma.terms.update({
     where: { orgId_version: { orgId: myOrgId, version } },
     data: { active: true },
   });
+  await logAction(actorId, "UPDATE", "SETTING", terms.id, { version, active: true }, true);
+  return terms;
 }
 
 export async function generateCode(actorId: string, reward: any, usesLeft: number, expiry?: Date) {
   const myOrgId = await getMyOrgId(actorId);
   await requirePermission(actorId, "CREATE", "PRODUCT", myOrgId ?? undefined);
   const code = Math.random().toString(36).slice(2, 10).toUpperCase();
-  return prisma.redeemCode.create({
+  const rc = await prisma.redeemCode.create({
     data: { code, reward, usesLeft, ...(expiry ? { expiry } : {}), ...(myOrgId ? { orgId: myOrgId } : {}) },
   });
+  await logAction(actorId, "CREATE", "PRODUCT", rc.id, { code, usesLeft }, true);
+  return rc;
 }
 
 export async function batchGenerate(actorId: string, reward: any, count: number, usesLeft: number, expiry?: Date) {
@@ -69,6 +83,7 @@ export async function batchGenerate(actorId: string, reward: any, count: number,
       })
     );
   }
+  await logAction(actorId, "CREATE", "PRODUCT", codes[0]?.id ?? "batch", { count, usesLeft }, true);
   return codes;
 }
 
@@ -79,7 +94,9 @@ export async function trackRedemptions(actorId: string, codeId: string) {
 
 export async function revokeCode(actorId: string, codeId: string) {
   await requirePermission(actorId, "DELETE", "PRODUCT");
-  return prisma.redeemCode.update({ where: { id: codeId }, data: { usesLeft: 0 } });
+  const rc = await prisma.redeemCode.update({ where: { id: codeId }, data: { usesLeft: 0 } });
+  await logAction(actorId, "DELETE", "PRODUCT", codeId, undefined, true);
+  return rc;
 }
 
 export async function listBoardsForApp(actorId: string, appId: string) {

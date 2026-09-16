@@ -1,4 +1,4 @@
-import { prisma, requirePermission } from "@game-platform/commons";
+import { prisma, requirePermission, logAction } from "@game-platform/commons";
 import type { Prisma } from "@game-platform/commons";
 
 export async function publishBuild(actorId: string, buildId: string) {
@@ -16,15 +16,18 @@ export async function publishBuild(actorId: string, buildId: string) {
 
   const updated = await prisma.build.update({ where: { id: build.id }, data: { published: true } });
   await prisma.app.update({ where: { id: build.appId }, data: { status: "PUBLISHED" } });
+  await logAction(actorId, "PUBLISH", "APP", build.appId, { buildId }, true);
   return updated;
 }
 
 export async function maintenanceMode(actorId: string, appId: string, on: boolean) {
   await requirePermission(actorId, "UPDATE", "APP");
-  return prisma.app.update({
+  const app = await prisma.app.update({
     where: { id: appId },
     data: { status: on ? "MAINTENANCE" : "PUBLISHED" },
   });
+  await logAction(actorId, "UPDATE", "APP", appId, { maintenance: on }, true);
+  return app;
 }
 
 export async function authorNotice(
@@ -35,7 +38,7 @@ export async function authorNotice(
   schedule?: Date
 ) {
   await requirePermission(actorId, "CREATE", "NOTIFICATION_SETTING");
-  return prisma.notice.create({
+  const notice = await prisma.notice.create({
     data: {
       appId,
       content,
@@ -43,6 +46,8 @@ export async function authorNotice(
       ...(schedule ? { schedule } : {}),
     },
   });
+  await logAction(actorId, "CREATE", "NOTIFICATION_SETTING", notice.id, { appId, audience }, true);
+  return notice;
 }
 
 export async function configureLiveEvent(
@@ -53,14 +58,18 @@ export async function configureLiveEvent(
   endsAt: Date
 ) {
   await requirePermission(actorId, "PUBLISH", "APP");
-  return prisma.liveEvent.create({
+  const event = await prisma.liveEvent.create({
     data: { appId, config, startsAt, endsAt },
   });
+  await logAction(actorId, "PUBLISH", "APP", appId, { liveEventId: event.id, startsAt, endsAt }, true);
+  return event;
 }
 
 export async function createBuild(actorId: string, appId: string, version: string, checksum: string) {
   await requirePermission(actorId, "PUBLISH", "APP");
-  return prisma.build.create({ data: { appId, version, checksum } });
+  const build = await prisma.build.create({ data: { appId, version, checksum } });
+  await logAction(actorId, "PUBLISH", "APP", appId, { buildId: build.id, version }, true);
+  return build;
 }
 
 export async function listBuildsForApp(actorId: string, appId: string) {

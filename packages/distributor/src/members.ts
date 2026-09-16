@@ -1,4 +1,4 @@
-import { prisma, requirePermission, getMyOrgId } from "@game-platform/commons";
+import { prisma, requirePermission, getMyOrgId, logAction } from "@game-platform/commons";
 import type { RoleLevel } from "@game-platform/commons";
 
 function generateToken(): string {
@@ -20,7 +20,7 @@ export async function inviteMember(actorId: string, email: string, scope: { leve
   });
   if (existing) return existing;
 
-  return prisma.member.create({
+  const member = await prisma.member.create({
     data: {
       accountId: account.id,
       ...(scope.level === "ORG" ? { orgId: scope.scopeId } : {}),
@@ -28,6 +28,8 @@ export async function inviteMember(actorId: string, email: string, scope: { leve
       ...(scope.level === "SERVICE" ? { appServiceId: scope.scopeId } : {}),
     },
   });
+  await logAction(actorId, "INVITE", "MEMBER", member.id, { email, scope }, true);
+  return member;
 }
 
 export async function grantRole(actorId: string, memberId: string, roleId: string) {
@@ -36,7 +38,9 @@ export async function grantRole(actorId: string, memberId: string, roleId: strin
     where: { memberId_roleId: { memberId, roleId } },
   });
   if (existing) return existing;
-  return prisma.memberRole.create({ data: { memberId, roleId } });
+  const memberRole = await prisma.memberRole.create({ data: { memberId, roleId } });
+  await logAction(actorId, "GRANT_ROLE", "ROLE", roleId, { memberId }, true);
+  return memberRole;
 }
 
 export async function revokeRole(actorId: string, memberId: string, roleId: string) {
@@ -44,6 +48,7 @@ export async function revokeRole(actorId: string, memberId: string, roleId: stri
   await prisma.memberRole.delete({
     where: { memberId_roleId: { memberId, roleId } },
   });
+  await logAction(actorId, "REVOKE_ROLE", "ROLE", roleId, { memberId }, true);
 }
 
 export async function resetMemberPassword(actorId: string, memberAccountId: string) {
@@ -55,6 +60,7 @@ export async function resetMemberPassword(actorId: string, memberAccountId: stri
     where: { id: memberAccountId },
     data: { resetCode: code, resetCodeExpiresAt: new Date(Date.now() + 1000 * 60 * 15) },
   });
+  await logAction(actorId, "RESET_PASSWORD", "MEMBER", memberAccountId, undefined, true);
   return { resetCode: code };
 }
 
@@ -62,11 +68,13 @@ export async function sanctionMember(actorId: string, playerId: string) {
   await requirePermission(actorId, "SUSPEND_MEMBER", "MEMBER");
   await prisma.account.update({ where: { id: playerId }, data: { status: "SUSPENDED" } });
   await prisma.session.deleteMany({ where: { accountId: playerId } });
+  await logAction(actorId, "SUSPEND_MEMBER", "MEMBER", playerId, undefined, true);
 }
 
 export async function unsanctionMember(actorId: string, playerId: string) {
   await requirePermission(actorId, "UNSUSPEND_MEMBER", "MEMBER");
   await prisma.account.update({ where: { id: playerId }, data: { status: "ACTIVE" } });
+  await logAction(actorId, "UNSUSPEND_MEMBER", "MEMBER", playerId, undefined, true);
 }
 
 export async function kickMember(actorId: string, playerId: string, appId: string) {
@@ -74,6 +82,7 @@ export async function kickMember(actorId: string, playerId: string, appId: strin
   await prisma.account.update({ where: { id: playerId }, data: { status: "KICKED" } });
   await prisma.accountApp.deleteMany({ where: { accountId: playerId, appId } });
   await prisma.session.deleteMany({ where: { accountId: playerId } });
+  await logAction(actorId, "REVOKE_MEMBER", "MEMBER", playerId, { appId }, true);
 }
 
 export async function listMembers(actorId: string) {

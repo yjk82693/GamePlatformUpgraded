@@ -1,4 +1,4 @@
-import { prisma, requirePermission, sendMessage, getMyOrgId } from "@game-platform/commons";
+import { prisma, requirePermission, sendMessage, getMyOrgId, logAction } from "@game-platform/commons";
 import type { Prisma } from "@game-platform/commons";
 
 export async function listTickets(actorId: string, filter?: { status?: "OPEN" | "SOLVED" }) {
@@ -30,12 +30,15 @@ export async function claimTicket(actorId: string, threadId: string) {
     create: { threadId, accountId: actorId },
     update: {},
   });
+  await logAction(actorId, "UPDATE", "SETTING", threadId, { claimed: true }, true);
   return prisma.ticketMeta.findUnique({ where: { threadId } });
 }
 
 export async function replyTicket(actorId: string, threadId: string, body: string) {
   await requirePermission(actorId, "UPDATE", "SETTING");
-  return sendMessage(threadId, actorId, body);
+  const msg = await sendMessage(threadId, actorId, body);
+  await logAction(actorId, "UPDATE", "SETTING", threadId, { reply: true }, true);
+  return msg;
 }
 
 export async function markSolved(actorId: string, threadId: string) {
@@ -45,5 +48,6 @@ export async function markSolved(actorId: string, threadId: string) {
     data: { status: "SOLVED" },
   });
   if (result.count === 0) throw new Error("Ticket already solved or not found");
+  await logAction(actorId, "UPDATE", "SETTING", threadId, { status: "SOLVED" }, true);
   return prisma.ticketMeta.findUnique({ where: { threadId } });
 }

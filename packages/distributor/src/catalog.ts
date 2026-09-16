@@ -1,13 +1,15 @@
-import { prisma, requirePermission, getMyOrgId } from "@game-platform/commons";
+import { prisma, requirePermission, getMyOrgId, logAction } from "@game-platform/commons";
 
 export async function createProduct(
   actorId: string,
   data: { appId: string; name: string; priceCents?: number; priceCoins?: number; categoryId?: string }
 ) {
   await requirePermission(actorId, "CREATE", "PRODUCT");
-  return prisma.product.create({
+  const product = await prisma.product.create({
     data: { ...data, enabled: false },
   });
+  await logAction(actorId, "CREATE", "PRODUCT", product.id, data, true);
+  return product;
 }
 
 export async function updateProduct(
@@ -16,34 +18,48 @@ export async function updateProduct(
   data: { name?: string; priceCents?: number; priceCoins?: number; categoryId?: string }
 ) {
   await requirePermission(actorId, "UPDATE", "PRODUCT");
-  return prisma.product.update({ where: { id: productId }, data });
+  const product = await prisma.product.update({ where: { id: productId }, data });
+  await logAction(actorId, "UPDATE", "PRODUCT", productId, data, true);
+  return product;
 }
 
 export async function deleteProduct(actorId: string, productId: string) {
   await requirePermission(actorId, "DELETE", "PRODUCT");
   const owned = await prisma.entitlement.findFirst({ where: { productId } });
+  let result;
   if (owned) {
-    return prisma.product.update({ where: { id: productId }, data: { enabled: false } });
+    result = await prisma.product.update({ where: { id: productId }, data: { enabled: false } });
+  } else {
+    result = await prisma.product.delete({ where: { id: productId } });
   }
-  return prisma.product.delete({ where: { id: productId } });
+  await logAction(actorId, "DELETE", "PRODUCT", productId, undefined, true);
+  return result;
 }
 
 export async function enableItem(actorId: string, productId: string) {
   await requirePermission(actorId, "UPDATE", "PRODUCT");
-  return prisma.product.update({ where: { id: productId }, data: { enabled: true } });
+  const product = await prisma.product.update({ where: { id: productId }, data: { enabled: true } });
+  await logAction(actorId, "UPDATE", "PRODUCT", productId, { enabled: true }, true);
+  return product;
 }
 
 export async function disableItem(actorId: string, productId: string) {
   await requirePermission(actorId, "UPDATE", "PRODUCT");
-  return prisma.product.update({ where: { id: productId }, data: { enabled: false } });
+  const product = await prisma.product.update({ where: { id: productId }, data: { enabled: false } });
+  await logAction(actorId, "UPDATE", "PRODUCT", productId, { enabled: false }, true);
+  return product;
 }
 
 export async function manageCategory(actorId: string, data: { id?: string; name: string }) {
   await requirePermission(actorId, "UPDATE", "CATEGORY");
+  let category;
   if (data.id) {
-    return prisma.category.update({ where: { id: data.id }, data: { name: data.name } });
+    category = await prisma.category.update({ where: { id: data.id }, data: { name: data.name } });
+  } else {
+    category = await prisma.category.create({ data: { name: data.name } });
   }
-  return prisma.category.create({ data: { name: data.name } });
+  await logAction(actorId, "UPDATE", "CATEGORY", category.id, data, true);
+  return category;
 }
 
 export async function listProductsForApp(actorId: string, appId: string) {
