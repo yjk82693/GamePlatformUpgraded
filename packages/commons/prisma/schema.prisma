@@ -201,6 +201,7 @@ model Account {
   documentShares     DocumentShare[]
   rollbackRequests   RollbackRequest[]
   versionComments    VersionComment[]
+  heldCalls          HeldCall[]
 
   authProvider        AuthProvider @default(MANUAL)
   externalId          String?      @unique
@@ -845,4 +846,28 @@ model VersionComment {
   parent          VersionComment? @relation("CommentReplies", fields: [parentId], references: [id])
   replies         VersionComment[] @relation("CommentReplies")
   createdAt       DateTime        @default(now())
+}
+
+enum HeldCallStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+// The core of the delegated-proposer pattern: the AI coordinator never
+// calls a mutating function directly. It only ever creates a HeldCall
+// describing the action it wants taken; a human must approve it before
+// the real function actually runs.
+model HeldCall {
+  id             String         @id @default(cuid())
+  actorId        String
+  actor          Account        @relation(fields: [actorId], references: [id])
+  proposedAction Action
+  targetType     Target
+  targetId       String
+  payload        Json?
+  status         HeldCallStatus @default(PENDING)
+  createdAt      DateTime       @default(now())
+  decidedAt      DateTime?
+  decidedBy      String?
 }
