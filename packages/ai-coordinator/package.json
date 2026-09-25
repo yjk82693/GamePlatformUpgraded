@@ -12,7 +12,8 @@
   "license": "ISC",
   "types": "dist/index.d.ts",
   "dependencies": {
-    "@game-platform/commons": "^1.0.0"
+    "@game-platform/commons": "^1.0.0",
+    "@game-platform/distributor": "^1.0.0"
   },
   "type": "module"
 }
