@@ -202,6 +202,7 @@ model Account {
   rollbackRequests   RollbackRequest[]
   versionComments    VersionComment[]
   heldCalls          HeldCall[]
+  personaRelationships PersonaRelationship[]
 
   authProvider        AuthProvider @default(MANUAL)
   externalId          String?      @unique
@@ -852,6 +853,21 @@ enum HeldCallStatus {
   PENDING
   APPROVED
   REJECTED
+}
+
+// Stage-1 relationship layer for the player companion (Phase 2 design doc §4).
+// One row per (account, persona) bond. repairResilience only ever ratchets up.
+// warmSince/lastHostilityAt drive the dip/repair/stability arc around the base
+// warmth measure (which itself lives outside this table, computed elsewhere).
+model PersonaRelationship {
+  accountId        String
+  personaId        String
+  account          Account   @relation(fields: [accountId], references: [id])
+  repairResilience Int       @default(0)
+  warmSince        DateTime?
+  lastHostilityAt  DateTime?
+
+  @@id([accountId, personaId])
 }
 
 // The core of the delegated-proposer pattern: the AI coordinator never
