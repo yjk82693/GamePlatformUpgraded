@@ -1,23 +1,24 @@
 import { prisma } from "@game-platform/commons";
-import type { Action, Target, Prisma } from "@game-platform/commons";
-import { isActionAllowed } from "./catalog.js";
+import type { Prisma } from "@game-platform/commons";
+import { getCatalogEntry } from "./catalog.js";
 import { getDispatcher } from "./dispatch.js";
 
 export async function proposeAction(
   actorId: string,
-  proposedAction: Action,
-  targetType: Target,
+  operation: string,
   targetId: string,
   payload?: Prisma.InputJsonValue
 ) {
-  if (!isActionAllowed(proposedAction, targetType)) {
-    throw new Error(`AI coordinator is not permitted to propose ${proposedAction} on ${targetType}`);
+  const entry = getCatalogEntry(operation);
+  if (!entry) {
+    throw new Error(`AI coordinator is not permitted to propose operation "${operation}"`);
   }
   return prisma.heldCall.create({
     data: {
       actorId,
-      proposedAction,
-      targetType,
+      operation,
+      proposedAction: entry.action,
+      targetType: entry.targetType,
       targetId,
       ...(payload !== undefined ? { payload } : {}),
     },
@@ -36,9 +37,9 @@ export async function approveHeldCall(approverId: string, heldCallId: string) {
   if (!call) throw new Error("Held call not found");
   if (call.status !== "PENDING") throw new Error("Held call already decided");
 
-  const dispatcher = getDispatcher(call.proposedAction, call.targetType);
+  const dispatcher = getDispatcher(call.operation);
   if (!dispatcher) {
-    throw new Error(`No dispatcher registered for ${call.proposedAction}:${call.targetType}`);
+    throw new Error(`No dispatcher registered for operation "${call.operation}"`);
   }
 
   // Dispatch first. If the real function throws, the HeldCall stays

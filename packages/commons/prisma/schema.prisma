@@ -862,6 +862,7 @@ model HeldCall {
   id             String         @id @default(cuid())
   actorId        String
   actor          Account        @relation(fields: [actorId], references: [id])
+  operation      String
   proposedAction Action
   targetType     Target
   targetId       String
